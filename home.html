@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="home.css">
+    <title>Home page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <header>
+        <div class="navbar">
+            <span class="logo"><a href="#">Treasure Tracker</a></span>
+            <ul class="links">
+                <li><a href="http://127.0.0.1:5500/home.html">Home</a></li>
+                <li><a href="about">About</a></li>
+                <li><a href="contacts">Contacts</a></li>
+                <li><a href="terms&conditions">Terms & Conditions </a></li>
+            </ul>
+            <a href="#" class="action_btn">Sign Up</a>
+            <div class="toogle_btn"><i class="fa-solid fa-bars"></i></div>
+            <div class="dropdown_menu">
+                    <li><a href="http://127.0.0.1:5500/home.html">Home</a></li>
+                    <li><a href="about">About</a></li>
+                    <li><a href="contacts">Contacts</a></li>
+                    <li><a href="terms&conditions">Terms & Conditions </a></li>
+                    <li><a href="#" class="action_btn2">Sign Up</a></li>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+          <div class="whatyoulost">What have you lost?</div>
+          <div class="describetheitem">Describe the item lost in one word</div>
+          <div id="search"> <button id="button"><i class="fas fa-search"></i></button>
+            <input type="text" placeholder="Search Your Lost Item" id="text">
+        </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="backtotop">
+            <a href="http://127.0.0.1:5500/home.html">Back to Top</a>
+        </div>
+      <div class="information">
+        <div class="getusknow"><h4>Get to Know Us</h4>
+        <a href="http://127.0.0.1:5500/home.html">Home</a><br><a href="#">About</a><br><a href="#">Contacts</a><br><a href="#">Term & Conditions</a></p></div>
+          <div class="connectwithus"><h4>Connect with Us</h4>
+          <a href="https://www.facebook.com/profile.php?id=61553392040541">Facebook</a><br><a href="https://www.instagram.com/sameer.sah.9615/">Instagram</a><br><a href="http://www.youtube.com/@Movies_.Gaming">Youtube</a></div>
+          <div class="logoandflag"><h3>Treasure Tracker</h3>
+            <p class="flag"><img src="nepalflag.avif" height="15px"> Nepal</p>
+          </div>
+
+      </div>
+      <div class="ending">Treasure Tracker <i class="fa-regular fa-copyright" style="color: #ffffff;"></i> 2024 | All rights reserved | Conditions of use</div>
+    </footer>
+    <script>
+     const tooglebtn = document.querySelector('.toogle_btn')   
+     const tooglebtnIcon = document.querySelector('.toogle_btn i')
+     const dropDownMenu = document.querySelector('.dropdown_menu')
+
+     tooglebtn.onclick = function (){
+        dropDownMenu.classList.toggle('open')
+        const isOpen = dropDownMenu.classList.contains('open')
+        tooglebtnIcon.classList=isOpen? 
+        "fa-solid fa-xmark":"fa-solid fa-bars"
+     };
+    </script>
+</body>
+
+</html>

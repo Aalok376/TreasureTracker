@@ -1,0 +1,348 @@
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200");
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: "poppins",sans-serif;
+}
+li{
+    list-style: none;
+}
+body{
+    height: 100vh;
+    background:#959C9D;
+}
+
+a{
+    text-decoration: none;
+    color:rgba(255,255,255,7);
+    font-size: 1 rem;
+}
+a:hover{
+    color:orange;
+}
+/* header */
+
+.navbar{
+    display:flex;
+    width:100vw;
+    height: 80px;
+    max-width: 100%;
+    align-items: center;
+    justify-content: space-evenly;
+    background: #131A22;
+}
+
+.navbar .logo{
+    font-size: 1.5rem;
+    font-weight: bold;
+    position: absolute;
+    left:50px;
+}
+.links{
+    display:flex;
+    gap:2rem;
+    position: absolute;
+    right: 200px;
+    font-weight:400;
+
+
+}
+.navbar .toogle_btn{
+    font-size: 1.5rem;
+    color:rgba(255,255,255,7);
+    display:none;
+    cursor:pointer;
+    position: absolute;
+    right: 20px;
+   
+
+}
+.action_btn{
+    background-color: orange;
+    color:rgba(255,255,255,7);
+    border-radius: 20px;
+    font-size: 0.8rem;
+    border:none;
+    outline:none;
+    padding:0.5rem 1rem;
+    font-weight: bold;
+    cursor:pointer;
+    transition:0.2 ease;
+    position:absolute;
+    right: 70px;
+
+}
+.action_btn:hover{
+    scale:1.05;
+    color:rgba(255,255,255,7);
+}
+.action_btn:active{
+    scale:0.95;
+}
+/* dropdown menu */
+.dropdown_menu{
+    display:none;
+    position:absolute;
+    right:2rem;
+    top: 60px;
+    text-decoration: none;
+    width:300px;
+    background:#344050;
+    margin-top: 5px;
+    backdrop-filter:blur(15px);
+    border-radius: 20px;
+    overflow: hidden;
+    height:0;
+    transition: height cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+}
+.dropdown_menu .action_btn2{
+    background-color: orange;
+    color:rgba(255,255,255,7);
+    border-radius: 20px;
+    font-size: 0.8rem;
+    border:none;
+    outline:none;
+    padding:0.5rem 1rem;
+    font-weight: bold;
+    cursor:pointer;
+    transition:0.2 ease;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.dropdown_menu li{
+    padding: 0.7rem;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+
+}
+/* .dropdown_menu{
+    display: block;
+} */
+.dropdown_menu.open{
+    height:auto;
+    display: block;
+}
+
+/* responsive design */
+@media(max-width:750px) {
+    .navbar .links,
+    .navbar .action_btn{
+        display:none;
+    } 
+ 
+    .navbar .toogle_btn{
+        display: block;
+    }
+}
+@media(max-width:450px) {
+ .dropdown_menu{
+    width:unset;
+    left:2rem;
+ }
+}
+@media(min-width:750px) {
+    .dropdown_menu.open{
+      display:none;
+    }
+   }
+
+.information{
+    display:flex;
+    background:#232F3E;
+    height:250px;
+    padding: 30px 40px 40px 15px;
+    justify-content: space-evenly;
+    color:rgba(255,255,255,7);
+
+
+}
+.ending{
+    background:#131A22;
+    color:rgba(255,255,255,7);
+    font-size: small;
+    font-weight:lighter;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    
+}
+.getusknow{
+    display:flex;
+    flex-direction: column; 
+
+}
+
+.connectwithus{
+    display:flex;
+    flex-direction: column;   
+ 
+}
+h4{
+    margin-bottom: 20px;
+}
+.logoandflag{
+    display:flex;
+    flex-direction:column;
+
+}
+h3{
+    margin-bottom: 15px;
+}
+.flag{
+    position: absolute;
+
+    margin-top: 35px;
+}
+.backtotop{
+    height: 60px;
+    background:#344050;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-weight:bold;
+}
+.image{
+display:flex;
+justify-content: center;
+position: relative;
+overflow: hidden;
+width: 100%;
+height: 370vh;
+background: linear-gradient(to top, rgba(0, 4, 29, 0.9), rgba(33, 67, 104, 0) 50%, rgba(0, 4, 29, 0.9));
+
+}
+.imagediv{
+display:flex;
+justify-content: center;
+width: 100vw;
+height:100%;
+filter: blur(3px);
+opacity: 70%;
+z-index: -1;
+animation:expand 3s infinite ease-in-out;
+}
+
+@keyframes expand {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1); /* Expands the image by 10% */
+    }
+    100% {
+      transform: scale(1); /* Shrinks back to the original size */
+    }
+  }
+
+.slogon{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position:absolute;
+    padding:  20px;
+    margin-top:30vh ;
+    font-size:1.7rem;
+    font-weight: 300;
+    color:white;
+    transition:0.4s ease-in;
+    text-align: center;
+
+}
+.biglogo{
+    display:flex;
+    flex-direction: column;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin-top: 37vh;
+    color:rgba(255,255,255,3);
+    font-size: 5.5rem;
+    font-weight: 500;
+transition:0.4s ease-in;
+text-align: center;
+}
+.student{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position:absolute;
+    padding:  20px;
+    margin-top:55vh;
+    font-size:1.5rem;
+    font-weight: 300;
+    color:rgba(255,255,255,7);
+transition:0.4s ease-in;
+text-align: center;
+}
+.introduction{
+    display:flex;
+    flex-direction: column;
+    position:absolute;
+    justify-content: flex-end;
+    color:rgba(255,255,255,0.5);
+    text-align:start;
+    padding:10px; 
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: 300;
+    transition:0.5s ease;
+} 
+@media(max-width:1000px){
+    .biglogo{
+font-size:70px;
+    }
+    .slogon{
+        font-size:20px;
+    }
+    .student{
+        font-size:15px;
+    }
+    .introduction{
+        font-size: 18px;
+    }
+}
+@media(max-width:775px){
+    .biglogo{
+font-size:40px;
+    }
+    .solgon{
+        font-size:15px;
+    }
+    .introduction{
+        font-size: 14px;
+    }
+}
+
+.introduction#info{
+    position:absolute;
+    left:30%;
+    top:85vh;
+}
+.introduction#purpose{
+    position:absolute;
+    right:30%;
+    top:145vh;
+}
+.introduction#features{
+    position:absolute;
+    left:30%;
+    top:200vh;
+}
+.introduction#community{
+    position:absolute;
+    right:30%;
+    top:260vh;
+}
+.introduction#vision{
+    position:absolute;
+    left:30%;
+    top:315vh;
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="contact.css">
+        <title>Contact Us - Treasure Tracker</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    </head>
+    <body>
+        <header>
+            <header>
+                <div class="navbar">
+                    <span class="logo"><a href="#">Treasure Tracker</a></span>
+                    <ul class="links">
+                        <li ><a href="http://127.0.0.1:5500/intropage.html">Home</a></li>
+                        <li><a href="http://127.0.0.1:5500/about.html">About</a></li>
+                        <li><a href="http://127.0.0.1:5500/contact.html">Contacts</a></li>
+                        <li><a href="http://127.0.0.1:5500/termandcondition.html">Terms & Conditions </a></li>
+                    </ul>
+                    <a href="#" class="action_btn">Sign Up</a>
+                    <div class="toogle_btn"><i class="fa-solid fa-bars"></i></div>
+                    <div class="dropdown_menu">
+                            <li><a href="http://127.0.0.1:5500/intropage.html">Home</a></li>
+                            <li><a href="http://127.0.0.1:5500/about.html">About</a></li>
+                            <li><a href="http://127.0.0.1:5500/contact.html">Contacts</a></li>
+                            <li><a href="http://127.0.0.1:5500/termandcondition.html">Terms & Conditions </a></li>
+                            <li><a href="#" class="action_btn2">Sign Up</a></li>
+                    </div>
+                </div>
+        </header>
+    
+        <div class="container">
+            <div class="contact-form">
+                <h2>Get in Touch</h2>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <select id="subject">
+                        <option>General Inquiry</option>
+                        <option>Report Issue</option>
+                        <option>Feedback</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" placeholder="Enter your message"></textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Send Message</button>
+                </div>
+            </div>
+    
+            <div class="contact-details">
+                <div><strong>Phone:</strong> +977-1-5551234</div>
+                <div><strong>Email:</strong> support@treasuretracker.com</div>
+                <div><strong>Address:</strong> Kathmandu University, Nepal</div>
+            </div>
+    
+            <div class="map">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.7796110975875!2d85.32396061506141!3d27.694929482797142!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1903628a1ff1%3A0x1234567890abcdef!2sKathmandu%20University!5e0!3m2!1sen!2snp!4v1674570123456" 
+                    width="100%" 
+                    height="300" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+            </div>
+
+        </div>
+    
+        <footer class="footer">
+            <div class="backtotop">
+                <a href="http://127.0.0.1:5500/contact.html">Back to Top</a>
+            </div>
+          <div class="information">
+            <div class="getusknow"><h4>Get to Know Us</h4>
+            <a href=http://127.0.0.1:5500/intropage.html>Home</a><br><a href="http://127.0.0.1:5500/about.html">About</a><br><a href="http://127.0.0.1:5500/contact.html">Contacts</a><br><a href="http://127.0.0.1:5500/termandcondition.html">Term & Conditions</a></p></div>
+              <div class="connectwithus"><h4>Connect with Us</h4>
+              <a href="https://www.facebook.com/profile.php?id=61553392040541">Facebook</a><br><a href="https://www.instagram.com/sameer.sah.9615/">Instagram</a><br><a href="http://www.youtube.com/@Movies_.Gaming">Youtube</a></div>
+              <div class="logoandflag"><h3>Treasure Tracker</h3>
+                <p class="flag"><img src="nepalflag.avif" height="15px"> Nepal</p>
+              </div>
+    
+          </div>
+          <div class="ending">Treasure Tracker <i class="fa-regular fa-copyright" style="color: #ffffff;"></i> 2024 | All rights reserved | Conditions of use</div>
+        </footer>
+        <script>
+            const tooglebtn = document.querySelector('.toogle_btn')   
+            const tooglebtnIcon = document.querySelector('.toogle_btn i')
+            const dropDownMenu = document.querySelector('.dropdown_menu')
+       
+            tooglebtn.onclick = function (){
+               dropDownMenu.classList.toggle('open')
+               const isOpen = dropDownMenu.classList.contains('open')
+               tooglebtnIcon.classList=isOpen? 
+               "fa-solid fa-xmark":"fa-solid fa-bars"
+            };
+           </script>
+    </body>
+    </html>
+    
