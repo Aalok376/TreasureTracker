@@ -1,2 +1,0 @@
-# TreasureTracker
-A semester project
