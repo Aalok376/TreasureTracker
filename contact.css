@@ -127,7 +127,7 @@ a:hover{
 }
 
 /* responsive design */
-@media(max-width:750px) {
+@media(max-width:900px) {
     .navbar .links,
     .navbar .action_btn{
         display:none;
@@ -143,7 +143,7 @@ a:hover{
     left:2rem;
  }
 }
-@media(min-width:750px) {
+@media(min-width:900px) {
     .dropdown_menu.open{
       display:none;
     }
@@ -154,9 +154,7 @@ a:hover{
     height:250px;
     padding: 30px 40px 40px 15px;
     justify-content: space-evenly;
-    color:rgba(255,255,255,7);
-
-
+    color:rgba(255,255,255,1);
 }
 .ending{
     background:#131A22;
@@ -194,7 +192,7 @@ h3{
 .flag{
     position: absolute;
 
-    margin-top: 35px;
+    margin-top: 41px;
 }
 .backtotop{
     height: 60px;

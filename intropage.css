@@ -95,6 +95,7 @@ a:hover{
     overflow: hidden;
     height:0;
     transition: height cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index:2;
 
 }
 .dropdown_menu .action_btn2{
@@ -128,7 +129,7 @@ a:hover{
 }
 
 /* responsive design */
-@media(max-width:750px) {
+@media(max-width:900px) {
     .navbar .links,
     .navbar .action_btn{
         display:none;
@@ -144,7 +145,7 @@ a:hover{
     left:2rem;
  }
 }
-@media(min-width:750px) {
+@media(min-width:900px) {
     .dropdown_menu.open{
       display:none;
     }
@@ -196,7 +197,7 @@ h3{
 .flag{
     position: absolute;
 
-    margin-top: 35px;
+    margin-top: 41px;
 }
 .backtotop{
     height: 60px;
@@ -212,7 +213,7 @@ justify-content: center;
 position: relative;
 width: 100%;
 height: 170vh;
-background: linear-gradient(to top, rgba(0, 4, 29, 0.9), rgba(33, 67, 104, 0) 50%, rgba(0, 4, 29, 0.9));
+background: linear-gradient(to top, rgba(0, 4, 29, 0.7), rgba(0, 4, 29, 0.7) 50%, rgba(0, 4, 29, 0.7));
 overflow:hidden;
 }
 .imagediv{
@@ -303,7 +304,7 @@ display:flex;
 flex-direction: column;
 position:absolute;
 justify-content: flex-end;
-color:rgba(255,255,255,0.4);
+color:rgba(255,255,255,1);
 right: 50%;
 bottom:5%;
 text-align:start;
@@ -312,12 +313,11 @@ margin:10px;
 /* filter:blur(15px) */
 }
 .welcome{
-    color:rgba(255,255,255,0.4);
+    color:rgba(255,255,255,1);
 
 }
 .introduction{
    font-size: 20px;
-   color:rgba(255,255,255,0.4);
-
+   color:rgba(255,255,255,1);
 }
 
