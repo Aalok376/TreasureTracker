@@ -10,6 +10,10 @@ const termandconditionhtml = readFileSync('./termandcondition.html', 'utf-8');
 const termandconditioncss = readFileSync('./termandcondition.css', 'utf-8');
 const contacthtml = readFileSync('./contact.html', 'utf-8');
 const contactcss = readFileSync('./contact.css', 'utf-8');
+const signuphtml = readFileSync('./signup.html', 'utf-8');
+const signupcss = readFileSync('./signup.css', 'utf-8');
+const loginhtml = readFileSync('./login.html', 'utf-8');
+const logincss = readFileSync('./login.css', 'utf-8');
 
 // Function to serve images
 const serveImage = (imagePath, contentType, res) => {
@@ -56,6 +60,24 @@ const server = http.createServer((req, res) => {
         res.writeHead(200, { 'Content-Type': 'text/css' });
         res.write(contactcss);
         res.end();
+    }
+    else if (req.url === '/signup.html') {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.write(signuphtml);
+        res.end();
+    } else if (req.url === '/signup.css') {
+        res.writeHead(200, { 'Content-Type': 'text/css' });
+        res.write(signupcss);
+        res.end();
+    }
+    else if (req.url === '/login.html') {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.write(loginhtml);
+        res.end();
+    } else if (req.url === '/login.css') {
+        res.writeHead(200, { 'Content-Type': 'text/css' });
+        res.write(logincss);
+        res.end();
     } else if (req.url === '/resources/nepalflag.avif') {
         serveImage('./resources/nepalflag.avif', 'image/avif', res);
     } else if (req.url === '/resources/DALL%C2%B7E%202024-12-12%2013.11.42%20-%20A%20professional%20and%20modern%20background%20image%20for%20a%20lost%20and%20found%20application.%20The%20design%20should%20feature%20elegant%20abstract%20geometric%20shapes,%20subtle%20faded.webp') {
@@ -68,6 +90,6 @@ const server = http.createServer((req, res) => {
 });
 
 // Start the server
-server.listen(5000, () => {
-    console.log('Server is listening on port 5000');
+server.listen(3000, () => {
+    console.log('Server is listening on port 3000');
 });
