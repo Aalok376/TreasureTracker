@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../assets/styles/otp.css">
+  <title>Otp verification page</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+    integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+<body>
+  <header>
+    <header>
+      <div class="navbar">
+        <span class="logo"><a href="#">Treasure Tracker</a></span>
+        <ul class="links">
+          <li><a href="/">Home</a></li>
+          <li><a href="../pages/about.html">About</a></li>
+          <li><a href="../pages/contact.html">Contacts</a></li>
+          <li><a href="../pages/termandcondition.html">Terms & Conditions </a></li>
+        </ul>
+        <a href="../pages/signup.html" class="action_btn">Sign Up</a>
+        <div class="toogle_btn"><i class="fa-solid fa-bars"></i></div>
+        <div class="dropdown_menu">
+          <li><a href="/">Home</a></li>
+          <li><a href="../pages/about.html">About</a></li>
+          <li><a href="../pages/contact.html">Contacts</a></li>
+          <li><a href="../pages/termandcondition.html">Terms & Conditions </a></li>
+          <li><a href="../pages/signup.html" class="action_btn2">Sign Up</a></li>
+        </div>
+      </div>
+    </header>
+
+
+    <div class="otpcontainer">
+      <div class="container">
+        <h1>Verify Your Account</h1>
+        <p>Please enter the OTP sent to your Inbox.</p>
+        <form class="otpverifier">
+          <div class="otp-input">
+            <input type="text" maxlength="1" id="inn1">
+            <input type="text" maxlength="1" id="inn2">
+            <input type="text" maxlength="1" id="inn3">
+            <input type="text" maxlength="1" id="inn4">
+            <input type="text" maxlength="1" id="inn5">
+            <input type="text" maxlength="1" id="inn6">
+          </div>
+          <button type="submit" class="btn">Verify</button>
+          <p id="error-otp" style="color:black;"></p>
+        </form>
+        <p class="resend">Didn't receive the OTP</p>
+        <a href="#" class="footer-link">Resend OTP</a>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="backtotop">
+        <a href="../pages/contact.html">Back to Top</a>
+      </div>
+      <div class="information">
+        <div class="getusknow">
+          <h4>Get to Know Us</h4>
+          <a href="/">Home</a><br><a href="../pages/about.html">About</a><br><a
+            href="../pages/contact.html">Contacts</a><br><a href="../pages/termandcondition.html">Term & Conditions</a>
+          </p>
+        </div>
+        <div class="connectwithus">
+          <h4>Connect with Us</h4>
+          <a href="https://www.facebook.com/profile.php?id=61553392040541">Facebook</a><br><a
+            href="https://www.instagram.com/sameer.sah.9615/">Instagram</a><br><a
+            href="http://www.youtube.com/@Movies_.Gaming">Youtube</a>
+        </div>
+        <div class="logoandflag">
+          <h4>Treasure Tracker</h4>
+          <p class="flag"><img src="../assets/images/nepalflag.avif" height="15px"> Nepal</p>
+        </div>
+
+      </div>
+      <div class="ending">Treasure Tracker <i class="fa-regular fa-copyright" style="color: #ffffff;"></i> 2024 | All
+        rights reserved | Conditions of use</div>
+    </footer>
+    <script>
+      const tooglebtn = document.querySelector('.toogle_btn')
+      const tooglebtnIcon = document.querySelector('.toogle_btn i')
+      const dropDownMenu = document.querySelector('.dropdown_menu')
+
+      tooglebtn.onclick = function () {
+        dropDownMenu.classList.toggle('open')
+        const isOpen = dropDownMenu.classList.contains('open')
+        tooglebtnIcon.classList = isOpen ?
+          "fa-solid fa-xmark" : "fa-solid fa-bars"
+      };
+    </script>
+</body>
+<script src="otp.js"></script>
+
+</html>
