@@ -76,21 +76,6 @@ const login = async (req, res) => {
     }
 }
 
-const profile = async (req, res) => {
-    try {
-        const user = await User.findById(req.user.id);
-
-        if (!user) {
-            return res.status(404).json({ msg: 'User not found' });
-        }
-
-        return res.status(200).json({ user });
-    } catch (error) {
-        console.error('Error fetching profile:', error);
-        return res.status(500).json({ msg: 'Error fetching profile', error });
-    }
-}
-
 const checkToUpdate = async (req, res) => {
     const { password } = req.body;
     if (!password) {
@@ -118,7 +103,7 @@ const checkToUpdate = async (req, res) => {
     }
 }
 
-const update = async (req, res) => {
+const updatePassword = async (req, res) => {
     const { newPassword } = req.body;
 
     if (!newPassword) {
@@ -181,4 +166,4 @@ const logout = async (req, res) => {
 }
 
 
-module.exports = { signup, verify, login, profile, checkToUpdate, update, toDelete, logout }
+module.exports = { signup, verify, login, checkToUpdate, updatePassword, toDelete, logout }
