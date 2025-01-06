@@ -2,14 +2,17 @@ const Post = require('../models/createPost')
 
 const CreatePost = async (req, res) => {
     const userId = req.user.id;
-    const { type, caption, image, category } = req.body
+    const { type, caption,category } = req.body
 
-    if (!type || !caption || !image || !category) {
+    if (!type || !caption || !category || !req.files||req.files.length===0) {
         return res.status(400).json({ success: false, msg: 'Please provide all information' })
     }
 
     try {
-        const post = new Post({ userId, type, caption, image, category })
+
+        const imagePaths=req.files.map((file)=>file.path)
+
+        const post = new Post({ userId, type, caption, image:imagePaths, category })
         await post.save();
         return res.status(200).json({ success: true, msg: 'Post created successfully' })
     }
@@ -23,7 +26,7 @@ const updatePost = async (req, res) => {
     const userId = req.user.id
     const {postId} = req.params
 
-    const { type, caption, image, category } = req.body
+    const { type, caption,category } = req.body
 
     try {
         const postToUpdate = await Post.findOne({ _id: postId, userId })
@@ -34,8 +37,12 @@ const updatePost = async (req, res) => {
 
         postToUpdate.type = type || postToUpdate.type
         postToUpdate.caption = caption || postToUpdate.caption
-        postToUpdate.image = image || postToUpdate.image
         postToUpdate.category = category || postToUpdate.category
+
+        if (req.files && req.files.length > 0) {
+            const newImagePaths = req.files.map((file) => file.path);
+            postToUpdate.image = newImagePaths;
+          }
 
         await postToUpdate.save()
         return res.status(200).json({ success: true, msg: 'Post updated successfully' })

@@ -1,7 +1,7 @@
 const User = require('../models/user.js');
 
 const updateProfilePicture=async (req,res)=>{
-         const {newProfilePicture}=req.body;
+         const newProfilePicture=req.file;
 
          if(!newProfilePicture){
             return res.status(400).json({msg:'Please select a picture.'})
@@ -9,7 +9,7 @@ const updateProfilePicture=async (req,res)=>{
          
          try{
             const userToUpdate=await User.findById(req.user.id)
-            userToUpdate.profilePicture=newProfilePicture;
+            userToUpdate.profilePicture=newProfilePicture.path;
 
             await userToUpdate.save();
             return res.status(200).json({success:true,msg:'Profile picture updated successfully.'})
@@ -35,7 +35,7 @@ const deleteProfilePicture=async(req,res)=>{
 }
 
 const updateCoverPicture=async (req,res)=>{
-   const {newCoverPicture}=req.body;
+   const newCoverPicture=req.file;
 
    if(!newCoverPicture){
       return res.status(400).json({msg:'Please select a picture.'})
@@ -43,7 +43,7 @@ const updateCoverPicture=async (req,res)=>{
    
    try{
       const userToUpdate=await User.findById(req.user.id)
-      userToUpdate.coverPicture=newCoverPicture;
+      userToUpdate.coverPicture=newCoverPicture.path;
 
       await userToUpdate.save();
       return res.status(200).json({success:true,msg:'Cover picture updated successfully.'})
