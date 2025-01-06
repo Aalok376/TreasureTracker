@@ -11,8 +11,20 @@ require('dotenv').config();
 const signup = (otpStore) => {
     return async (req, res) => {
         const { username, password } = req.body;
+
+        const validatePassword = (password) => {
+            const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            return passwordRegex.test(password);
+        };
+
         if (!username || !password) {
             return res.status(400).json({ msg: 'Please provide all data' });
+        }
+        else if (!validatePassword(password)) {
+            return res.status(400).json({
+                success: false,
+                msg: 'Password must be at least 8 characters long and include at least one letter and one number.',
+            });
         }
         else {
             try {
