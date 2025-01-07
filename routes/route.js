@@ -11,6 +11,8 @@ const {updateProfilePicture,deleteProfilePicture,updateCoverPicture,deleteCoverP
 const {CreatePost,updatePost,deletePost}=require('../controllers/post');
 const { getOwnPosts} = require('../controllers/fetchownpost');
 const {getPosts}=require('../controllers/getPosts')
+const {createComment,deleteComment,updateComment,getAllComments,}=require('../controllers/comment')
+const {like,removeLike,getLikes,}=require('../controllers/like')
 
 const otpStore = new Map();
 
@@ -44,5 +46,15 @@ router.delete('/deleteOwnPost/:postId',verifyToken,deletePost)
 
 router.get('/getOwnPosts',verifyToken,getOwnPosts)
 router.get('/getPosts',verifyToken,getPosts)
+
+router.post('/likeapost',verifyToken,like)
+router.delete('/removelike',verifyToken,removeLike)
+router.get('/getalllike',verifyToken,getLikes)
+
+
+router.post('/commentinpost',verifyToken,createComment)
+router.put('/updatecomment',verifyToken,updateComment)
+router.delete('/removecomment',verifyToken,deleteComment)
+router.get('/getallcomment',verifyToken,getAllComments)
 
 module.exports = { router }
