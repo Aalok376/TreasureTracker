@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>profile page</title>
+
+
+</head>
+
+<body>
+    <header>
+        <div class="navbar">
+            <div class="firstnav"> <span class="logo"><a href="#">Treasure Tracker</a></span>
+                <div class="containerforsearch">
+                    <div id="search"> <button id="button"><i class="fas fa-search"></i></button>
+                        <input type="text" placeholder="Search Your Lost Item" id="text">
+
+                    </div>
+                </div>
+                <div class="profilecontainer"> <span class="profile"></span>
+                    <span class="chevron"><i class="fa-solid fa-chevron-down" style="color: #050505;"></i></span>
+                </div>
+            </div>
+            <div class="dropdownmenu">
+                <li><a href="#">Change password</a></li>
+                <li><a href="#">Delete</a></li>
+                <li><a href="#">Logout</a></li>
+            </div>
+    </header>
+
+    <main class="main">
+        <div class="sidemenu">
+            <div class="links">
+                <div><a href="#"><i class="fas fa-home"></i>Home</a></div>
+                <div><a href="#"><i class="fas fa-message"></i>Messages</a></div>
+                <div><a href="#"><i class="fas fa-users"></i>Friends </a></div>
+                <div><a href="#"><i class="fas fa-bell"></i>Notifications</a></div>
+            </div>
+        </div>
+
+        <div class="asidemenu">
+            <div class="containerforphoto">
+                <div class="coverphoto"></div>
+                <div class="profilephoto"></div>
+                <div class="content">
+                  <h2>Sameer Kumar Sah</h2>
+                </div>
+                <div class="edit">
+                  <div class="addpost">
+                    <span><i class="fa-solid fa-plus"></i></span>
+                    <span>Add Post</span>
+                  </div>
+                  <div class="editprofile">
+                    <span><i class="fa-solid fa-pencil"></i></span>
+                    <span>Edit profile</span>
+                  </div>
+                </div>
+        
+              </div>
+            <div class="postcontainer">
+                <div class="identitycontainer">
+                    <div class="profileimageforpost"></div>
+                    <span class="nameforpost">Sameer Kumar Sah</span>
+                    <div id="date-container">
+                        Today's Date: <span id="current-date"></span>
+                    </div>
+                </div>
+                <div class="areaforpost">
+
+                </div>
+                <hr class="custom-line1">
+                <hr class="custom-line2">
+                <div class="likecontainer">
+                    <button class="interactionlike1" onclick="toggleLike(this)"><i class="fa-regular fa-heart"></i>
+                        Like</button>
+                    <button class="interactionlike2" onclick="toggleUnlike(this)"><i class="fa-solid fa-heart"
+                            style="color:black;"></i> Liked</button>
+                    <button class="interactioncomment" onclick="toggleCommentSection(this)"><i
+                            class="fa-regular fa-comment"></i> Comment</button>
+                    <button class="interactionshare"><i class="fa-solid fa-share"></i> Share</button>
+
+                </div>
+
+            </div>
+            <!-- Hidden comment section -->
+            <div class="comment-container"></div>
+        </div>
+        </div>
+    </main>
+
+    <script>
+        const tooglebtn = document.querySelector('.chevron')
+        const tooglebtnIcon = document.querySelector('.chevron i')
+        const dropDownMenu = document.querySelector('.dropdownmenu')
+
+        tooglebtn.onclick = function () {
+            dropDownMenu.classList.toggle('open')
+            const isOpen = dropDownMenu.classList.contains('open')
+            tooglebtnIcon.classList = isOpen ?
+                "fa-solid fa-chevron-up" : "fa-solid fa-chevron-down"
+        };
+        // Get the current date
+        const today = new Date();
+
+        // Format the date (e.g., 'January 11, 2025')
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        const formattedDate = today.toLocaleDateString('en-US', options);
+        // Display the date in the HTML
+        document.getElementById('current-date').textContent = formattedDate;
+
+        function toggleLike(button) {
+            // Hide the 'Like' button
+            button.style.display = 'none';
+
+            // Show the 'Liked' button
+            const likedButton = button.parentElement.querySelector('.interactionlike2');
+            if (likedButton) {
+                likedButton.style.display = 'inline-block';
+            }
+        }
+
+        function toggleUnlike(button) {
+            // Hide the 'Liked' button
+            button.style.display = 'none';
+
+            // Show the 'Like' button
+            const likeButton = button.parentElement.querySelector('.interactionlike1');
+            if (likeButton) {
+                likeButton.style.display = 'inline-block';
+            }
+        }
+        function toggleCommentSection(button) {
+            const commentContainer = document.querySelector('.comment-container'); // Find the comment container
+
+            // Check if a comment section already exists inside the container
+            if (!commentContainer.querySelector('.comment-section')) {
+                // Create the comment section dynamically
+                const commentSection = document.createElement('div');
+                commentSection.className = 'comment-section';
+                commentSection.innerHTML = `
+      <textarea class="comment-box" placeholder="Write a comment..."></textarea>
+      <button class="post-comment-btn">Post</button>
+    `;
+                commentContainer.appendChild(commentSection);
+                commentContainer.style.display = 'block'; // Show the container
+            } else {
+                // Toggle visibility of the comment container
+                commentContainer.style.display =
+                    commentContainer.style.display === 'none' ? 'block' : 'none';
+            }
+        }
+    </script>
+</body>
+
+</html>
