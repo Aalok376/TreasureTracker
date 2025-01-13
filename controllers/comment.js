@@ -46,7 +46,7 @@ const deleteComment = async (req, res) => {
         post.commentCount -= 1;
         await post.save();
 
-        await comment.remove();
+        await comment.deleteOne();
 
         return res.status(200).json({ msg: 'Comment deleted successfully.' });
     } catch (error) {
