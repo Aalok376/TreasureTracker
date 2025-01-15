@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="homepage2.css">
+    <link rel="stylesheet" href="../assets/styles/homepage2.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <title>home page</title>
 
@@ -44,43 +44,44 @@
 
         <div class="asidemenu">
             <div class="createpostdiv">
-                    <!-- Form to create a new post -->
-    <form id="createPostForm" enctype="multipart/form-data">
-        <label for="type">Post Type:</label>
-        <select id="type" name="type" required>
-            <option value="Lost">Lost</option>
-            <option value="Found">Found</option>
-        </select>
-        <br><br>
+                <!-- Form to create a new post -->
+                <form id="createPostForm" enctype="multipart/form-data">
+                    <label for="type">Post Type:</label>
+                    <select id="type" class="ptype" name="type" required>
+                        <option value="Lost">Lost</option>
+                        <option value="Found">Found</option>
+                    </select>
+                    <br><br>
 
-        <label for="caption">Caption:</label>
-        <textarea id="caption" name="caption" required></textarea><br><br>
+                    <label for="caption">Caption:</label>
+                    <textarea id="caption" class="pcaption" name="caption" required></textarea><br><br>
 
-        <label for="category">Category:</label>
-        <select id="category" name="category" required>
-            <option value="ID">ID</option>
-            <option value="Wallets">Wallets</option>
-            <option value="Watches">Watches</option>
-            <option value="Electronics">Electronics</option>
-            <option value="Umbrella">Umbrella</option>
-            <option value="Sport Equipments">Sport Equipments</option>
-            <option value="Clothes">Clothes</option>
-            <option value="Academic Items">Academic Items</option>
-            <option value="Others">Others</option>
-        </select>
-        <br><br>
+                    <label for="category">Category:</label>
+                    <select id="category" class="pcategory" name="category" required>
+                        <option value="ID">ID</option>
+                        <option value="Wallets">Wallets</option>
+                        <option value="Watches">Watches</option>
+                        <option value="Electronics">Electronics</option>
+                        <option value="Umbrella">Umbrella</option>
+                        <option value="Sport Equipments">Sport Equipments</option>
+                        <option value="Clothes">Clothes</option>
+                        <option value="Academic Items">Academic Items</option>
+                        <option value="Others">Others</option>
+                    </select>
+                    <br><br>
 
-        <label for="images">Upload Images:</label>
-        <input type="file" id="images" name="image" multiple accept="image/*" required onchange="previewImages()">
+                    <label for="images">Upload Images:</label>
+                    <input type="file" class="upimages" id="images" name="image" multiple accept="image/*" required
+                        onchange="previewImages()">
 
-        <div id="imagePreview" class="image-preview"></div>
+                    <div id="imagePreview" class="image-preview"></div>
 
-        <button type="submit">Create Post</button>
-    </form>
+                    <button type="submit" class="btn">Create Post</button>
+                </form>
             </div>
             <div class="containerforphoto">
                 <div class="forpost"><input type="text" placeholder="What have you Lost or Found?" class="text"></div>
-              </div>
+            </div>
             <div class="postcontainer">
                 <div class="identitycontainer">
                     <div class="profileimageforpost"></div>
@@ -194,39 +195,40 @@
             }
         }
         function previewImages() {
-    const fileInput = document.getElementById('images');
-    const imagePreviewContainer = document.getElementById('imagePreview');
-    imagePreviewContainer.innerHTML = ''; // Clear previous previews
+            const fileInput = document.getElementById('images');
+            const imagePreviewContainer = document.getElementById('imagePreview');
+            imagePreviewContainer.innerHTML = ''; // Clear previous previews
 
-    const files = fileInput.files;
-    const numberOfImages = files.length;
-    let imageSize = '90px'; // Default size for 1 image
+            const files = fileInput.files;
+            const numberOfImages = files.length;
+            let imageSize = '90px'; // Default size for 1 image
 
-    // Adjust image size based on the number of images
-    if (numberOfImages >22) {
-        imageSize = '45px'; // Smaller size for more images
-    } else if (numberOfImages > 8) {
-        imageSize = '65px'; // Medium size for a few images
-    }
+            // Adjust image size based on the number of images
+            if (numberOfImages > 22) {
+                imageSize = '45px'; // Smaller size for more images
+            } else if (numberOfImages > 8) {
+                imageSize = '65px'; // Medium size for a few images
+            }
 
-    if (files) {
-        Array.from(files).forEach(file => {
-            const reader = new FileReader();
+            if (files) {
+                Array.from(files).forEach(file => {
+                    const reader = new FileReader();
 
-            reader.onload = function (event) {
-                const imgElement = document.createElement('img');
-                imgElement.src = event.target.result; // Set image source to the previewed file
-                imgElement.style.width = imageSize; // Apply dynamic width
-                imgElement.style.height = imageSize; // Apply dynamic height
-                imagePreviewContainer.appendChild(imgElement); // Append to the container
-            };
+                    reader.onload = function (event) {
+                        const imgElement = document.createElement('img');
+                        imgElement.src = event.target.result; // Set image source to the previewed file
+                        imgElement.style.width = imageSize; // Apply dynamic width
+                        imgElement.style.height = imageSize; // Apply dynamic height
+                        imagePreviewContainer.appendChild(imgElement); // Append to the container
+                    };
 
-            reader.readAsDataURL(file); // Read the file as data URL for image preview
-        });
-    }
-}
+                    reader.readAsDataURL(file); // Read the file as data URL for image preview
+                });
+            }
+        }
 
     </script>
 </body>
+<script src="createPost.js"></script>
 
 </html>
