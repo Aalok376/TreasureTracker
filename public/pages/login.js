@@ -18,7 +18,7 @@ login.addEventListener('submit',async(e)=>{
         const data= await response.json();
 
         if(response.status===200){
-            window.location.href="homepage2.html"
+            window.location.href="homepage.html"
         }
         else{
             document.getElementById("error-message").textContent = data.msg
