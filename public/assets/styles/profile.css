@@ -15,6 +15,9 @@ body{
   min-width: 650px;
 
 }
+header{
+  z-index: 2;
+}
 /* General Styling for Navbar */
 .navbar {
 display: flex;
@@ -300,6 +303,49 @@ font-size: 20px;
   background-color: white;
   font-size: 20px;
   }
+  .comment-area{
+    background-color: white;
+    height: auto;
+    max-height: 400px;
+    width:100%;
+    border-radius: 10px;
+    position: relative;
+    display:flex;
+    flex-direction: column;  /*Ensure vertical stacking*/
+    justify-content: flex-start;
+    padding:15px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-bottom: 2rem;
+  
+  }
+  .introareacomment {
+    display:flex;
+    justify-content:flex-start;
+    align-items: center;
+    height: auto;
+    min-height:70px;
+    background-color: #005bb5;
+    padding: 6px;
+    padding-left:30px;
+    width:100%;
+    margin:10px;
+    border-radius: 20px;
+    overflow-y:scroll;
+    
+    
+    }
+  .comment-area .introareacomment .nameincommentarea{
+    font-size: 20px;
+  font-weight: 600;
+  margin-top: 12px;
+  
+  }
+  .introareacomment .profileimageforpost{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  }
   .comment-container{
     background-color:white;
     display: flex;
@@ -353,7 +399,7 @@ font-size: 20px;
       background-color: white; 
       transition:0.3s ease-in;
       margin-bottom: 2rem;
-      z-index: -7;
+      
   }
 .coverphoto{
   position: absolute;
@@ -442,4 +488,68 @@ width:80%;
   justify-content: flex-start;
 }
 
+}
+.information{
+  display:flex;
+  background:#232F3E;
+  height:250px;
+  padding: 30px 40px 40px 15px;
+  justify-content: space-evenly;
+  color:rgba(255,255,255,1);
+}
+.ending{
+  background:#131A22;
+  color:rgba(255,255,255,7);
+  font-size: small;
+  font-weight:lighter;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  
+}
+.getusknow{
+  display:flex;
+  flex-direction: column;
+
+}
+.information a{
+text-decoration: none;
+color:white;
+}
+
+.connectwithus{
+  display:flex;
+  flex-direction: column;   
+
+}
+h4{
+  margin-bottom: 20px;
+}
+.logoandflag{
+  display:flex;
+  flex-direction:column;
+
+}
+h3{
+  margin-bottom: 15px;
+}
+.flag{
+  position: absolute;
+
+  margin-top: 41px;
+}
+.backtotop a{
+  height: 60px;
+  background:#344050;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  font-weight:bold;
+  text-decoration: none;
+  color:white;
+  font-size:20px;
+}
+.footer a:hover{
+color:orange;
 }

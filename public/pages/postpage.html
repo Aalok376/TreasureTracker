@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="postpage.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>post page</title>
+
+
+</head>
+
+<body>
+    <header>
+        <div class="navbar">
+            <div class="firstnav"> <span class="logo"><a href="#">Treasure Tracker</a></span>
+                <div class="containerforsearch">
+                    <div id="search"> <button id="button"><i class="fas fa-search"></i></button>
+                        <input type="text" placeholder="Search Your Lost Item" id="text">
+
+                    </div>
+                </div>
+                <div class="profilecontainer"> <a href="http://127.0.0.1:5500/profile.html" class="profile"></a>
+                    <span class="chevron"><i class="fa-solid fa-chevron-down" style="color: #050505;"></i></span>
+                </div>
+            </div>
+            <div class="dropdownmenu">
+                <li><a href="#">Change password</a></li>
+                <li><a href="http://127.0.0.1:5500/delete.html">Delete</a></li>
+                <li><a href="#">Logout</a></li>
+            </div>
+    </header>
+
+    <main class="main">
+        <div class="sidemenu">
+            <div class="links">
+                <div><a href="http://127.0.0.1:5500/homepage2.html"><i class="fas fa-home"></i>Home</a></div>
+                <div><a href="#"><i class="fas fa-message"></i>Messages</a></div>
+                <div><a href="#"><i class="fas fa-users"></i>Friends </a></div>
+                <div><a href="#"><i class="fas fa-bell"></i>Notifications</a></div>
+            </div>
+        </div>
+    <div class="asidemenu">
+          <!-- Form to create a new post -->
+    <form id="createPostForm" enctype="multipart/form-data">
+        <label for="type">Post Type:</label>
+        <select id="type" name="type" required>
+            <option value="Lost">Lost</option>
+            <option value="Found">Found</option>
+        </select>
+        <br><br>
+
+        <label for="caption">Caption:</label>
+        <textarea id="caption" name="caption" required></textarea><br><br>
+
+        <label for="category">Category:</label>
+        <select id="category" name="category" required>
+            <option value="ID">ID</option>
+            <option value="Wallets">Wallets</option>
+            <option value="Watches">Watches</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Umbrella">Umbrella</option>
+            <option value="Sport Equipments">Sport Equipments</option>
+            <option value="Clothes">Clothes</option>
+            <option value="Academic Items">Academic Items</option>
+            <option value="Others">Others</option>
+        </select>
+        <br><br>
+
+        <label for="images">Upload Images:</label>
+        <input type="file" id="images" name="image" multiple accept="image/*" required onchange="previewImages()">
+
+        <div id="imagePreview" class="image-preview"></div>
+
+        <button class="buttonpost" type="submit">Create Post</button>
+    </form>
+    </div>
+
+       
+    </main>
+    <footer class="footer">
+        <div class="backtotop">
+          <a href="http://127.0.0.1:5500/homepage.html">Back to Top</a>
+        </div>
+        <div class="information">
+          <div class="getusknow">
+            <h4>Get to Know Us</h4>
+            <a href="/">Home</a><br><a href="../pages/about.html">About</a><br><a
+              href="../pages/contact.html">Contacts</a><br><a href="../pages/termandcondition.html">Term & Conditions</a>
+            </p>
+          </div>
+          <div class="connectwithus">
+            <h4>Connect with Us</h4>
+            <a href="https://www.facebook.com/profile.php?id=61553392040541">Facebook</a><br><a
+              href="https://www.instagram.com/sameer.sah.9615/">Instagram</a><br><a
+              href="http://www.youtube.com/@Movies_.Gaming">Youtube</a>
+          </div>
+          <div class="logoandflag">
+            <h4>Treasure Tracker</h4>
+            <p class="flag"><img src="nepalflag.avif" height="15px"> Nepal</p>
+          </div>
+  
+        </div>
+        <div class="ending">Treasure Tracker <i class="fa-regular fa-copyright" style="color: #ffffff;"></i> 2024 | All
+          rights reserved | Conditions of use</div>
+      </footer>
+    <script>
+        const tooglebtn = document.querySelector('.chevron')
+        const tooglebtnIcon = document.querySelector('.chevron i')
+        const dropDownMenu = document.querySelector('.dropdownmenu')
+
+        tooglebtn.onclick = function () {
+            dropDownMenu.classList.toggle('open')
+            const isOpen = dropDownMenu.classList.contains('open')
+            tooglebtnIcon.classList = isOpen ?
+                "fa-solid fa-chevron-up" : "fa-solid fa-chevron-down"
+        };
+    
+        function previewImages() {
+            const fileInput = document.getElementById('images');
+            const imagePreviewContainer = document.getElementById('imagePreview');
+            imagePreviewContainer.innerHTML = ''; // Clear previous previews
+
+            const files = fileInput.files;
+            if (files) {
+                Array.from(files).forEach(file => {
+                    const reader = new FileReader();
+
+                    reader.onload = function (event) {
+                        const imgElement = document.createElement('img');
+                        imgElement.src = event.target.result; // Set image source to the previewed file
+                        imagePreviewContainer.appendChild(imgElement); // Append to the container
+                    }
+
+                    reader.readAsDataURL(file); // Read the file as data URL for image preview
+                });
+            }
+        }
+        function previewImages() {
+    const fileInput = document.getElementById('images');
+    const imagePreviewContainer = document.getElementById('imagePreview');
+    imagePreviewContainer.innerHTML = ''; // Clear previous previews
+
+    const files = fileInput.files;
+    const numberOfImages = files.length;
+    let imageSize = '90px'; // Default size for 1 image
+
+    // Adjust image size based on the number of images
+    if (numberOfImages >36) {
+        imageSize = '45px'; // Smaller size for more images
+    } else if (numberOfImages > 13) {
+        imageSize = '60px'; // Medium size for a few images
+    }
+
+    if (files) {
+        Array.from(files).forEach(file => {
+            const reader = new FileReader();
+
+            reader.onload = function (event) {
+                const imgElement = document.createElement('img');
+                imgElement.src = event.target.result; // Set image source to the previewed file
+                imgElement.style.width = imageSize; // Apply dynamic width
+                imgElement.style.height = imageSize; // Apply dynamic height
+                imagePreviewContainer.appendChild(imgElement); // Append to the container
+            };
+
+            reader.readAsDataURL(file); // Read the file as data URL for image preview
+        });
+    }
+}
+
+    </script>
+</body>
+
+</html>

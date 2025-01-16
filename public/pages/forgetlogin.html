@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="forgetlogin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>forgetlogin page</title>
+
+
+</head>
+
+<body>
+    <header>
+        <div class="navbar">
+            <div class="firstnav"> <span class="logo"><a href="#">Treasure Tracker</a></span>
+                <div class="containerforsearch">
+                    <div id="search"> <button id="button"><i class="fas fa-search"></i></button>
+                        <input type="text" placeholder="Search Your Lost Item" id="text">
+
+                    </div>
+                </div>
+                <div class="profilecontainer"> <a href="http://127.0.0.1:5500/profile.html" class="profile"></a>
+                    <span class="chevron"><i class="fa-solid fa-chevron-down" style="color: #050505;"></i></span>
+                </div>
+            </div>
+            <div class="dropdownmenu">
+                <li><a href="#">Change password</a></li>
+                <li><a href="http://127.0.0.1:5500/delete.html">Delete</a></li>
+                <li><a href="#">Logout</a></li>
+            </div>
+    </header>
+
+    <main class="main">
+        <div class="sidemenu">
+            <div class="links">
+                <div><a href="http://127.0.0.1:5500/homepage.html"><i class="fas fa-home"></i>Home</a></div>
+                <div><a href="#"><i class="fas fa-message"></i>Messages</a></div>
+                <div><a href="#"><i class="fas fa-users"></i>Friends </a></div>
+                <div><a href="#"><i class="fas fa-bell"></i>Notifications</a></div>
+            </div>
+        </div>
+        <div class="asidemenu">
+
+                <div class="signup-card">
+                  <h2>Welcome back</h2>
+                  <p>Join Treasure Tracker and start managing your lost and found items efficiently.</p>
+                  
+                  <form class="signup-form">
+            
+                    <div class="input-group">
+                      <label for="email">Email</label>
+                      <input type="email" id="email" placeholder="Enter your email address" required>
+                    </div>
+            
+                    <button type="submit" class="signup-btn">Continue</button>
+                    <p id="error-message" style="color:black;"></p>
+                  </form>
+            
+                  
+                </div>
+              </div>   
+
+        </div>
+
+
+    </main>
+
+    <footer class="footer">
+        <div class="backtotop">
+            <a href="http://127.0.0.1:5500/changepassword.html">Back to Top</a>
+        </div>
+        <div class="information">
+            <div class="getusknow">
+                <h4>Get to Know Us</h4>
+                <a href="/">Home</a><br><a href="../pages/about.html">About</a><br><a
+                    href="../pages/contact.html">Contacts</a><br><a href="../pages/termandcondition.html">Term &
+                    Conditions</a>
+                </p>
+            </div>
+            <div class="connectwithus">
+                <h4>Connect with Us</h4>
+                <a href="https://www.facebook.com/profile.php?id=61553392040541">Facebook</a><br><a
+                    href="https://www.instagram.com/sameer.sah.9615/">Instagram</a><br><a
+                    href="http://www.youtube.com/@Movies_.Gaming">Youtube</a>
+            </div>
+            <div class="logoandflag">
+                <h4>Treasure Tracker</h4>
+                <p class="flag"><img src="nepalflag.avif" height="15px"> Nepal</p>
+            </div>
+
+        </div>
+        <div class="ending">Treasure Tracker <i class="fa-regular fa-copyright" style="color: #ffffff;"></i> 2024 | All
+            rights reserved | Conditions of use</div>
+    </footer>
+
+    <script>
+        const tooglebtn = document.querySelector('.chevron')
+        const tooglebtnIcon = document.querySelector('.chevron i')
+        const dropDownMenu = document.querySelector('.dropdownmenu')
+
+        tooglebtn.onclick = function () {
+            dropDownMenu.classList.toggle('open')
+            const isOpen = dropDownMenu.classList.contains('open')
+            tooglebtnIcon.classList = isOpen ?
+                "fa-solid fa-chevron-up" : "fa-solid fa-chevron-down"
+        };
+
+
+
+    </script>
+</body>
+
+</html>
