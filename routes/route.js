@@ -13,6 +13,7 @@ const { getOwnPosts} = require('../controllers/fetchownpost');
 const {getPosts}=require('../controllers/getPosts')
 const {createComment,deleteComment,updateComment,getAllComments,}=require('../controllers/comment')
 const {like,removeLike,getLikes,}=require('../controllers/like')
+const {otherProfile, otherPost, commentsOnOtherPosts, likesOnOtherPosts, serveOtherProfile}=require('../controllers/fetchotherprofile')
 
 const otpStore = new Map();
 
@@ -57,4 +58,9 @@ router.put('/updatecomment/:commentId',verifyToken,updateComment)
 router.delete('/removecomment/:commentId',verifyToken,deleteComment)
 router.get('/getallcomment/:postId',verifyToken,getAllComments)
 
+router.get('/getotherprofile/:userId',verifyToken,otherProfile)
+router.get('/userprofile/:userId',verifyToken,serveOtherProfile)
+router.get('/getotherposts/:userId',verifyToken,otherPost )
+router.get('/getotherscomment/:postId',verifyToken,commentsOnOtherPosts)
+router.get('/getotherslike/:postId',verifyToken,likesOnOtherPosts)
 module.exports = { router }

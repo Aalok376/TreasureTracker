@@ -45,17 +45,17 @@
           <!-- Form to create a new post -->
     <form id="createPostForm" enctype="multipart/form-data">
         <label for="type">Post Type:</label>
-        <select id="type" name="type" required>
+        <select id="type" class="ptype" name="type" required>
             <option value="Lost">Lost</option>
             <option value="Found">Found</option>
         </select>
         <br><br>
 
         <label for="caption">Caption:</label>
-        <textarea id="caption" name="caption" required></textarea><br><br>
+        <textarea id="caption" class="pcaption"name="caption" required></textarea><br><br>
 
         <label for="category">Category:</label>
-        <select id="category" name="category" required>
+        <select id="category" class="pcategory" name="category" required>
             <option value="ID">ID</option>
             <option value="Wallets">Wallets</option>
             <option value="Watches">Watches</option>
@@ -69,15 +69,13 @@
         <br><br>
 
         <label for="images">Upload Images:</label>
-        <input type="file" id="images" name="image" multiple accept="image/*" required onchange="previewImages()">
+        <input type="file" class="upimages" id="images" name="image" multiple accept="image/*" required onchange="previewImages()">
 
         <div id="imagePreview" class="image-preview"></div>
 
         <button class="buttonpost" type="submit">Create Post</button>
     </form>
     </div>
-
-       
     </main>
     <footer class="footer">
         <div class="backtotop">
@@ -172,5 +170,5 @@
 
     </script>
 </body>
-
+<script src="createPost.js"></script>
 </html>

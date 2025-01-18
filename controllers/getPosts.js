@@ -8,7 +8,7 @@ const getPosts = async (req, res) => {
             .skip((page - 1) * limit)
             .limit(Number(limit))
             .sort({ createdAt: -1 })
-            .populate('userId','fname lname');
+            .populate('userId','fname lname profilePicture');
 
         return res.status(200).json({ success: true, posts });
     } catch (error) {

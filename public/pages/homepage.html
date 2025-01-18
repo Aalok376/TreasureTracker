@@ -7,8 +7,6 @@
     <link rel="stylesheet" href="../assets/styles/homepage.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <title>home page</title>
-
-
 </head>
 
 <body>
@@ -18,10 +16,10 @@
                 <div class="containerforsearch">
                     <div id="search"> <button id="button"><i class="fas fa-search"></i></button>
                         <input type="text" placeholder="Search Your Lost Item" id="text">
-
                     </div>
                 </div>
-                <div class="profilecontainer"> <a href="profile.html" class="profile"></a>
+                <div class="profilecontainer">
+                    <div class="pp"></div>
                     <span class="chevron"><i class="fa-solid fa-chevron-down" style="color: #050505;"></i></span>
                 </div>
             </div>
@@ -31,7 +29,6 @@
                 <li><a href="#">Logout</a></li>
             </div>
     </header>
-
     <main class="main">
         <div class="sidemenu">
             <div class="links">
@@ -43,99 +40,11 @@
         </div>
 
         <div class="asidemenu">
-
-            <div class="containerforphoto">
-                    <a class="profile two" href="profile.html"></a>
-                    <a class="text" href="postpage.html">What have you Lost or Found?</a>
-            </div>
-            <div class="postcontainer">
-                <div class="identitycontainer">
-                    <a href="profile.html" class="profileimageforpost"></a>
-                    <span class="nameforpost">Sameer Kumar Sah</span>
-                    <div id="date-container">
-                        Today's Date: <span id="current-date"></span>
-                    </div>
-                </div>
-                <div class="areaforpost">
-
-                </div>
-                <hr class="custom-line1">
-                <hr class="custom-line2">
-                <div class="likecontainer">
-                    <button class="interactionlike1" onclick="toggleLike(this)"><i class="fa-regular fa-heart"></i>
-                        Like</button>
-                    <button class="interactionlike2" onclick="toggleUnlike(this)"><i class="fa-solid fa-heart"
-                            style="color:black;"></i> Like</button>
-                    <button class="interactioncomment" onclick="toggleCommentSection(this)"><i
-                            class="fa-regular fa-comment"></i> Comment</button>
-                    <button class="interactionshare"><i class="fa-solid fa-share"></i> Share</button>
-
-                </div>
-
-            </div>
-            <!-- Hidden comment section -->
-            <div class="comment-container">  <div class="comment-area">
-                <div class="introareacomment">
-                    <div class="profile container"><a href="profile.html"
-                            class="profileimageforpost"></a></div>
-                    <div class="commentsectionbypeople">
-                        <p class="nameincommentarea">Sameer Kumar Sah</p>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae magnam, harum porro vel
-                            voluptate possimus! Mollitia amet ipsam officia distinctio omnis. Libero consectetur
-                            pariatur fugiat, quaerat earum debitis ipsam, fugit dolorem dolore veniam deleniti, quod
-                            voluptate ad voluptatibus tenetur assumenda?</p>
-                    </div>
-                </div>
-                <div class="introareacomment">
-                    <div class="profile container"><a href="profile.html"
-                            class="profileimageforpost"></a></div>
-                    <div class="commentsectionbypeople">
-                        <p class="nameincommentarea">Sameer Kumar Sah</p>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae magnam, harum porro vel
-                            voluptate possimus! Mollitia amet ipsam officia distinctio omnis. Libero consectetur
-                            pariatur fugiat, quaerat earum debitis ipsam, fugit dolorem dolore veniam deleniti, quod
-                            voluptate ad voluptatibus tenetur assumenda?</p>
-                    </div>
-                </div>
-                <div class="introareacomment">
-                    <div class="profile container"><a href="profile.html"
-                            class="profileimageforpost"></a></div>
-                    <div class="commentsectionbypeople">
-                        <p class="nameincommentarea">Sameer Kumar Sah</p>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae magnam, harum porro vel
-                            voluptate possimus! Mollitia amet ipsam officia distinctio omnis. Libero consectetur
-                            pariatur fugiat, quaerat earum debitis ipsam, fugit dolorem dolore veniam deleniti, quod
-                            voluptate ad voluptatibus tenetur assumenda?</p>
-                    </div>
-                </div>
-                <div class="introareacomment">
-                    <div class="profile container"><a href="profile.html"
-                            class="profileimageforpost"></a></div>
-                    <div class="commentsectionbypeople">
-                        <p class="nameincommentarea">Sameer Kumar Sah</p>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae magnam, harum porro vel
-                            voluptate possimus! Mollitia amet ipsam officia distinctio omnis. Libero consectetur
-                            pariatur fugiat, quaerat earum debitis ipsam, fugit dolorem dolore veniam deleniti, quod
-                            voluptate ad voluptatibus tenetur assumenda?</p>
-                    </div>
-                </div>
-                <div class="introareacomment">
-                    <div class="profile container"><a href="profile.html"
-                            class="profileimageforpost"></a></div>
-                    <div class="commentsectionbypeople">
-                        <p class="nameincommentarea">Sameer Kumar Sah</p>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae magnam, harum porro vel
-                            voluptate possimus! Mollitia amet ipsam officia distinctio omnis. Libero consectetur
-                            pariatur fugiat, quaerat earum debitis ipsam, fugit dolorem dolore veniam deleniti, quod
-                            voluptate ad voluptatibus tenetur assumenda?</p>
-                    </div>
-                </div>
-            </div></div>
-          
-        </div>
+            <div class="containerforphoto"></div>
+            <div class="containerforpost"></div>
         </div>
     </main>
-  
+
     <script>
         const tooglebtn = document.querySelector('.chevron')
         const tooglebtnIcon = document.querySelector('.chevron i')
@@ -147,112 +56,8 @@
             tooglebtnIcon.classList = isOpen ?
                 "fa-solid fa-chevron-up" : "fa-solid fa-chevron-down"
         };
-        // Get the current date
-        const today = new Date();
-
-        // Format the date (e.g., 'January 11, 2025')
-        const options = { year: 'numeric', month: 'long', day: 'numeric' };
-        const formattedDate = today.toLocaleDateString('en-US', options);
-        // Display the date in the HTML
-        document.getElementById('current-date').textContent = formattedDate;
-
-        function toggleLike(button) {
-            // Hide the 'Like' button
-            button.style.display = 'none';
-
-            // Show the 'Liked' button
-            const likedButton = button.parentElement.querySelector('.interactionlike2');
-            if (likedButton) {
-                likedButton.style.display = 'inline-block';
-            }
-        }
-
-        function toggleUnlike(button) {
-            // Hide the 'Liked' button
-            button.style.display = 'none';
-
-            // Show the 'Like' button
-            const likeButton = button.parentElement.querySelector('.interactionlike1');
-            if (likeButton) {
-                likeButton.style.display = 'inline-block';
-            }
-        }
-        function toggleCommentSection(button) {
-            const commentContainer = document.querySelector('.comment-container'); // Find the comment container
-
-            // Check if a comment section already exists inside the container
-            if (!commentContainer.querySelector('.comment-section')) {
-                // Create the comment section dynamically
-                const commentSection = document.createElement('div');
-                commentSection.className = 'comment-section';
-                commentSection.innerHTML = `
-      <textarea class="comment-box" placeholder="Write a comment..."></textarea>
-      <button class="post-comment-btn">Post</button>
-    `;
-                commentContainer.appendChild(commentSection);
-                commentContainer.style.display = 'block'; // Show the container
-                // commentContainer.appendChild(comment-area);
-                // commentContainer.style.display = 'block';
-            } else {
-                // Toggle visibility of the comment container
-                commentContainer.style.display =
-                    commentContainer.style.display === 'none' ? 'block' : 'none';
-            }
-        }
-        function previewImages() {
-            const fileInput = document.getElementById('images');
-            const imagePreviewContainer = document.getElementById('imagePreview');
-            imagePreviewContainer.innerHTML = ''; // Clear previous previews
-
-            const files = fileInput.files;
-            if (files) {
-                Array.from(files).forEach(file => {
-                    const reader = new FileReader();
-
-                    reader.onload = function (event) {
-                        const imgElement = document.createElement('img');
-                        imgElement.src = event.target.result; // Set image source to the previewed file
-                        imagePreviewContainer.appendChild(imgElement); // Append to the container
-                    }
-
-                    reader.readAsDataURL(file); // Read the file as data URL for image preview
-                });
-            }
-        }
-        function previewImages() {
-            const fileInput = document.getElementById('images');
-            const imagePreviewContainer = document.getElementById('imagePreview');
-            imagePreviewContainer.innerHTML = ''; // Clear previous previews
-
-            const files = fileInput.files;
-            const numberOfImages = files.length;
-            let imageSize = '90px'; // Default size for 1 image
-
-            // Adjust image size based on the number of images
-            if (numberOfImages > 22) {
-                imageSize = '45px'; // Smaller size for more images
-            } else if (numberOfImages > 8) {
-                imageSize = '65px'; // Medium size for a few images
-            }
-
-            if (files) {
-                Array.from(files).forEach(file => {
-                    const reader = new FileReader();
-
-                    reader.onload = function (event) {
-                        const imgElement = document.createElement('img');
-                        imgElement.src = event.target.result; // Set image source to the previewed file
-                        imgElement.style.width = imageSize; // Apply dynamic width
-                        imgElement.style.height = imageSize; // Apply dynamic height
-                        imagePreviewContainer.appendChild(imgElement); // Append to the container
-                    };
-
-                    reader.readAsDataURL(file); // Read the file as data URL for image preview
-                });
-            }
-        }
-
     </script>
 </body>
+<script src="homepage.js"></script>
 
 </html>

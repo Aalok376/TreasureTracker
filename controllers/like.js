@@ -55,7 +55,7 @@ const getLikes = async (req, res) => {
     try {
         // If using the Like model:
         const likes = await Like.find({ postId })
-            .populate('userId', 'fname lname').sort({ createdAt: -1 })
+            .populate('userId', 'fname lname profilePicture').sort({ createdAt: -1 })
             .skip((page - 1) * limit)
             .limit(Number(limit));
 

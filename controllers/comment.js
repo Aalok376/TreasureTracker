@@ -94,7 +94,7 @@ const getAllComments = async (req, res) => {
 
     try {
         const comments = await Comment.find({ postId })
-            .populate('userId', 'fname lname')
+            .populate('userId', 'fname lname profilePicture')
             .sort({ createdAt: -1 })
             .skip((page - 1) * limit)
             .limit(Number(limit));

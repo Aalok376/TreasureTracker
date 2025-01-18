@@ -1,4 +1,4 @@
-const btn = document.querySelector('.btn')
+const btn = document.querySelector('.buttonpost')
 
 btn.addEventListener('click', async (e) => {
     e.preventDefault();
@@ -27,7 +27,7 @@ btn.addEventListener('click', async (e) => {
         })
 
         const result = await response.json()
-        alert(result.msg)
+        window.location.href="homepage.html"
     }
     catch (error) {
         console.log(error)
