@@ -1,0 +1,248 @@
+   <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Chat</title>
+    <script src="/socket.io/socket.io.js"></script>
+
+</head>
+
+<body class="bg-light">
+    <br>
+    <div class="text-center my-4">
+        <img src="/images/<%= user.profilePicture %>" alt="Profile Picture"
+            class="rounded-circle border border-secondary" width="100" height="100">
+    </div>
+    <h4 class="text-center">Welcome, <%= user.name %>
+    </h4>
+
+    <div class="container mt-5">
+        <div class="row">
+            <!-- User list on the left -->
+            <div class="col-md-4">
+                <div class="card shadow p-3">
+                    <h5 class="text-center">
+                        <%= user.role==='admin' ? 'Users' : 'Admins' %>
+                    </h5>
+                    <ul class="list-group">
+                        <% users.forEach(u=> { %>
+                            <li class="list-group-item d-flex align-items-center"
+                                onclick="selectUser('<%= u._id %>', '<%= u.name %>', '<%= u.profilePicture %>')">
+                                <img src="images/<%= u.profilePicture %>" alt="<%= u.name %>'s profile picture"
+                                    class="rounded-circle" width="40" height="40"
+                                    style="object-fit: cover; margin-right: 10px;">
+                                <div>
+                                    <strong>
+                                        <%= u.name %>
+                                    </strong> - <%= u.email %>
+                                </div>
+                            </li>
+                            <% }) %>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Chat area on the right -->
+            <div class="col-md-7">
+                <div class="card shadow p-3">
+                    <h5 class="text-center" id="chat-title">Select a user to chat</h5>
+                    <div id="chat-box" class="border rounded p-3" style="height: 400px; overflow-y: scroll;">
+                        <!-- Chat messages will appear here -->
+                    </div>
+                    <form id="chat-form" class="d-flex align-items-center gap-3 mt-3" onsubmit="sendMessage(event)">
+                        <input type="text" id="message" class="form-control" placeholder="Type a message..." required>
+                        <button type="submit" class="btn btn-primary">Send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div><br>
+    <script>
+        let selectedUserId = '';
+        let selectedUserName = '';
+        let selectedUserProfilePic = '';
+
+        // Function to handle user selection
+        function selectUser(userId, userName, userProfilePic) {
+            selectedUserId = userId;
+            selectedUserName = userName;
+            selectedUserProfilePic = userProfilePic;
+
+            const chatTitle = document.getElementById('chat-title');
+            chatTitle.innerHTML = `
+                <img src="images/${userProfilePic}" alt="${userName}'s profile picture" 
+                     class="rounded-circle" width="40" height="40" 
+                     style="object-fit: cover; margin-right: 10px;">
+                Chat with ${userName}
+            `;
+            document.getElementById('chat-box').innerHTML = ''; // Clear previous messages
+            fetchMessages(userId); // Fetch previous messages
+        }
+
+        // Function to fetch messages for the selected user
+        function fetchMessages(userId) {
+            const loggedInUserId = '<%= user._id %>';
+            const loggedInUserPic = 'images/<%= user.profilePicture %>';
+
+            fetch(`/chat/messages/${userId}`)
+                .then(response => response.json())
+                .then(messages => {
+                    const chatBox = document.getElementById('chat-box');
+                    chatBox.innerHTML = '';
+
+                    if (messages.length === 0) {
+                        chatBox.innerHTML = "<p>No messages yet</p>";
+                    } else {
+                        messages.forEach(msg => {
+                            const isSender = msg.sender_id === loggedInUserId;
+                            const msgDiv = document.createElement('div');
+                            msgDiv.classList.add(
+                                'd-flex',
+                                isSender ? 'justify-content-end' : 'justify-content-start',
+                                'align-items-center',
+                                'mb-3'
+                            );
+
+                            const profilePic = isSender ? loggedInUserPic : `images/${selectedUserProfilePic}`;
+                            const formattedTime = new Date(msg.created_at).toLocaleString(); // Format the timestamp
+
+                            msgDiv.innerHTML = `
+                                ${!isSender ? `<img src="${profilePic}" 
+                                    alt="${selectedUserName}'s profile picture"
+                                    class="rounded-circle" width="30" height="30" style="object-fit: cover; margin-right: 10px;">` : ''}
+                                <div>
+                                     <p style="margin: 0; padding: 10px; background-color: ${isSender ? '#d1e7dd' : '#f0f0f0'}; border-radius: 8px; max-width: 105%; width: fit-content;">
+                                        ${msg.message}
+                                    </p>
+                                    <small style="display: block; text-align: ${isSender ? 'right' : 'left'}; color: #6c757d;">
+                                        ${formattedTime}
+                                    </small>-
+                                </div>
+                                ${isSender ? `<img src="${profilePic}" 
+                                    alt="Your profile picture"
+                                    class="rounded-circle" width="30" height="30" style="object-fit: cover; margin-left: 10px;">` : ''}
+                            `;
+                            chatBox.appendChild(msgDiv);
+                        });
+
+                        chatBox.scrollTop = chatBox.scrollHeight;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching messages:', error);
+                });
+        }
+
+        // Function to send message
+        function sendMessage(event) {
+            event.preventDefault();
+
+            const messageInput = document.getElementById('message');
+            const message = messageInput.value.trim();
+            const sendButton = event.target.querySelector('button[type="submit"]'); // Select the send button
+
+            if (!message) {
+                alert('Message cannot be empty.');
+                return;
+            }
+
+            // Update the button text to "Sending..."
+            sendButton.disabled = true; // Disable the button to prevent multiple clicks
+            sendButton.innerText = 'Sending...';
+
+            // Send the message using fetch
+            fetch('/chat/sendMessage', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    message: message,
+                    receiverId: selectedUserId, // Receiver's ID
+                }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Add the new message to the chat box
+                        fetchMessages(selectedUserId);
+                        messageInput.value = ''; // Clear the input field
+                    } else {
+                        alert('Failed to send message: ' + (data.message || 'Unknown error'));
+                    }
+                })
+                .catch(error => {
+                    console.error('Error sending message:', error);
+                    alert('An error occurred while sending the message.');
+                })
+                .finally(() => {
+                    // Revert the button text to "Send" and enable the button
+                    sendButton.innerText = 'Send';
+                    sendButton.disabled = false;
+                });
+        }
+
+        // Real-time message reception via Socket.io
+        const socket = io();
+
+        socket.on('connect', () => {
+            console.log('Socket connected');
+        });
+
+        socket.on('receiveMessage', (data) => {
+            // Log the received message to check if it works
+            console.log('Received message:', data);
+
+            const { senderId, senderName, message, createdAt, receiverId } = data;
+
+            // Only display the message if the logged-in user is the receiver
+            const loggedInUserId = '<%= user._id %>';  // Get the logged-in user's ID
+            if (receiverId === loggedInUserId) {
+                const chatBox = document.getElementById('chat-box');
+
+                const isSender = senderId === loggedInUserId;
+                const profilePic = isSender ? 'images/<%= user.profilePicture %>' : `images/${selectedUserProfilePic}`;
+                const formattedTime = new Date(createdAt).toLocaleString(); // Format the timestamp
+
+                const msgDiv = document.createElement('div');
+                msgDiv.classList.add(
+                    'd-flex',
+                    isSender ? 'justify-content-end' : 'justify-content-start',
+                    'align-items-center',
+                    'mb-3'
+                );
+
+                msgDiv.innerHTML = `
+            ${!isSender ? `<img src="${profilePic}" 
+                alt="${selectedUserName}'s profile picture"
+                class="rounded-circle" width="30" height="30" style="object-fit: cover; margin-right: 10px;">` : ''}
+            <div>
+                 <p style="margin: 0; padding: 10px; background-color: ${isSender ? '#d1e7dd' : '#f0f0f0'}; border-radius: 8px; max-width: 105%; width: fit-content;">
+                    ${message}
+                </p>
+                <small style="display: block; text-align: ${isSender ? 'right' : 'left'}; color: #6c757d;">
+                    
+                </small>-
+            </div>
+            ${isSender ? `<img src="${profilePic}" 
+                alt="Your profile picture"
+                class="rounded-circle" width="30" height="30" style="object-fit: cover; margin-left: 10px;">` : ''}
+        `;
+                chatBox.appendChild(msgDiv);
+                chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the latest message
+            }
+        });
+
+
+    </script>
+
+</body>
+
+</html>
+
+
+<!-- Script to handle socket connection and display notifications -->
