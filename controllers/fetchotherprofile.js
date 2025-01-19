@@ -5,7 +5,13 @@ const Like = require('../models/likes');
 const path=require('path');
 
 const serveOtherProfile=async(req,res)=>{
-    res.sendFile(path.join(__dirname, '..', 'public','pages', 'userprofile.html'));
+
+    if(req.params.userId===req.user.id){
+        res.sendFile(path.join(__dirname, '..', 'public','pages', 'profile.html'));
+    }
+    else{
+        res.sendFile(path.join(__dirname, '..', 'public','pages', 'userprofile.html'));
+    }
 }
 
 const otherProfile = async (req, res) => {
@@ -16,8 +22,8 @@ const otherProfile = async (req, res) => {
             return res.status(404).json({ success: false, msg: 'User not found' });
         }
 
-        const { fname, lname, profilePicture, contactNumber } = user;
-        return res.status(200).json({ success: true, user: { fname, lname, profilePicture, contactNumber } });
+        const { fname, lname, profilePicture, contactNumber,coverPicture } = user;
+        return res.status(200).json({ success: true, user: { fname, lname, profilePicture, contactNumber,coverPicture } });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ success: false, msg: 'Internal server error' });

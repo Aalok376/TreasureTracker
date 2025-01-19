@@ -65,7 +65,7 @@ const getPost = async () => {
             posthtml.innerHTML = posts.map(post => `
                 <div class="postcontainer" id=${post._id}>
                     <div class="identitycontainer">
-                        <a href="userprofile.html" class="profileimageforpost" style="background-image: url('http://localhost:5000/${post.userId.profilePicture?.replace(/\\/g, '/')}')"></a>
+                         <div class="profileimageforpost" data-user-id="${post.userId._id}"style="background-image: url('http://localhost:5000/${post.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
                         <span class="nameforpost">${post.userId.fname} ${post.userId.lname}</span>
                         <div id="date-container">
                             <span id="current-date">${new Date(post.createdAt).toLocaleDateString()}</span>
@@ -118,6 +118,7 @@ const getPost = async () => {
         console.error("Error fetching posts:", error);
         posthtml.innerHTML = "<p>Error fetching posts. Please try again later.</p>";
     }
+    gotouserprofile(posthtml)
 };
 
 (async () => {
@@ -266,4 +267,16 @@ ownprofile2.addEventListener('click',async(event)=>{
     }
 })
 
+const gotouserprofile=(posthtml)=>{
+    if (posthtml) {
+        posthtml.addEventListener('click', async (event) => {
+            
+            const profileImage = event.target.closest('.profileimageforpost');
+            if (profileImage) {
+                const userId = profileImage.getAttribute("data-user-id");
+                window.location.href = `/api/v1/userprofile/${userId}`;
+            }
+        });
+    }
+}
 

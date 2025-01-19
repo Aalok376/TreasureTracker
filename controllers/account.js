@@ -50,8 +50,10 @@ const signup = (otpStore) => {
 
 const verify = async (req, res) => {
     const { username, fname, lname, password } = req.body;
+    const profilePicture="../assets/images/DALL·E 2025-01-19 21.12.44 - A default profile image featuring a simple and professional design. The image should have a circular border with a neutral gray background and an abst.webp"
+    const coverPicture="../assets/images/DALL·E 2025-01-19 21.13.33 - A default cover image featuring a simple and professional design. The image should have a wide rectangular layout with a neutral gradient background i.webp"
     try {
-        const user = new User({ fname, lname, username, password });
+        const user = new User({ fname, lname, username, password,profilePicture,coverPicture });
         await user.save();
         return res.status(200).json({ success: true, msg: 'User created successfully.' });
     } catch (error) {
