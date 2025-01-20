@@ -29,7 +29,7 @@ const getProfilepic = async () => {
         `).join('');
 
         ownprofile2.innerHTML = profiles.map(profile => `
-            <a href="profile.html" class="profile" style="background-image: url('http://localhost:5000/${profile.user?.profilePicture?.replace(/\\/g, '/')}')"></a>
+            <div class="profile" style="background-image: url('http://localhost:5000/${profile.user?.profilePicture?.replace(/\\/g, '/')}')"></div>
         `).join('');
     } catch (error) {
         console.error("Error fetching profile picture:", error);
@@ -257,4 +257,11 @@ const gotouserprofile=(posthtml)=>{
         });
     }
 }
+
+ownprofile2.addEventListener('click',async(event)=>{
+    const ppbtn=event.target.closest('.profile')
+    if(ppbtn){
+        window.location.href="/pages/profile.html"
+    }
+})
 

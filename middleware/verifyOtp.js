@@ -20,9 +20,10 @@ const verifyOtp = (otpStore) => {
         if (otp !== userInputOtp) {
             return res.status(400).json({ success: false, msg: 'Invalid Otp' })
         }
-
         otpStore.delete(username);
-        next()
+
+        return res.status(200).json({success:true,msg:'Otp verified'})
+        // next()
     }
 }
 

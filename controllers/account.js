@@ -50,10 +50,10 @@ const signup = (otpStore) => {
 
 const verify = async (req, res) => {
     const { username, fname, lname, password } = req.body;
-    const profilePicture="../assets/images/DALL·E 2025-01-19 21.12.44 - A default profile image featuring a simple and professional design. The image should have a circular border with a neutral gray background and an abst.webp"
-    const coverPicture="../assets/images/DALL·E 2025-01-19 21.13.33 - A default cover image featuring a simple and professional design. The image should have a wide rectangular layout with a neutral gradient background i.webp"
+    const profilePicture = "../assets/images/DALL·E 2025-01-19 21.12.44 - A default profile image featuring a simple and professional design. The image should have a circular border with a neutral gray background and an abst.webp"
+    const coverPicture = "../assets/images/DALL·E 2025-01-19 21.13.33 - A default cover image featuring a simple and professional design. The image should have a wide rectangular layout with a neutral gradient background i.webp"
     try {
-        const user = new User({ fname, lname, username, password,profilePicture,coverPicture });
+        const user = new User({ fname, lname, username, password, profilePicture, coverPicture });
         await user.save();
         return res.status(200).json({ success: true, msg: 'User created successfully.' });
     } catch (error) {
@@ -120,8 +120,19 @@ const checkToUpdate = async (req, res) => {
 const updatePassword = async (req, res) => {
     const { newPassword } = req.body;
 
+    const validatePassword = (newPassword) => {
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        return passwordRegex.test(newPassword);
+    };
+
     if (!newPassword) {
-        return res.status(400).json({ msg: 'Please provide a new password.' });
+        return res.status(400).json({ msg: 'Please provide a new Password.' });
+    }
+    else if (!validatePassword(newPassword)) {
+        return res.status(400).json({
+            success: false,
+            msg: 'Password must be at least 8 characters long and include at least one letter and one number.',
+        });
     }
 
     try {
@@ -179,5 +190,66 @@ const logout = async (req, res) => {
     }
 }
 
+const forgotPassword = async (req, res) => {
+    const { newPassword } = req.body;
 
-module.exports = { signup, verify, login, checkToUpdate, updatePassword, toDelete, logout }
+    const validatePassword = (newPassword) => {
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        return passwordRegex.test(newPassword);
+    };
+
+    if (!newPassword) {
+        return res.status(400).json({ msg: 'Please provide a new Password.' });
+    }
+    else if (!validatePassword(newPassword)) {
+        return res.status(400).json({
+            success: false,
+            msg: 'Password must be at least 8 characters long and include at least one letter and one number.',
+        });
+    }
+
+    try {
+        const userToUpdate = await User.findById(req.user.id);
+
+        if (!userToUpdate) {
+            return res.status(404).json({ msg: 'User not found' });
+        }
+
+        userToUpdate.password = newPassword;
+
+        await userToUpdate.save();
+
+        return res.status(200).json({ msg: 'Password updated successfully' });
+    }
+    catch (error) {
+        console.error('Error during updating password:', error);
+        return res.status(500).json({ msg: 'Error updating password', error });
+    }
+}
+
+const sendmailInCaseOfForgot = (otpStore) => {
+    return async (req, res) => {
+        const { username } = req.body;
+
+        try {
+            const existinguser = await User.findOne({ username })
+            if (!existinguser) {
+                return res.status(404).json({ msg: 'User doesnt exists' });
+            }
+
+            const otp = Math.floor(100000 + Math.random() * 900000).toString()
+            sendEmail(username, otp);
+
+            const userId = username;
+            otpStore.set(userId, { otp, expiresAt: Date.now() + 1 * 60 * 1000 });
+            return res.status(200).json({ msg: 'OTP sent to your email. Please verify to complete signup.' });
+        }
+        catch (error) {
+            console.log(error)
+            return res.status(500).json({ error });
+        }
+    }
+}
+
+
+module.exports = { signup, verify, login, checkToUpdate, updatePassword, toDelete, logout, forgotPassword, sendmailInCaseOfForgot }
