@@ -18,6 +18,7 @@ const getProfilepic = async () => {
                 <div class="profilephoto" style="background-image: url('http://localhost:5000/${profile.user?.profilePicture?.replace(/\\/g, '/')}')"></div>
                 <div class="content">
                   <h2>${profile.user.fname} ${profile.user.lname}</h2>
+                  <p id="error-otp" style="color:black;">Contact:${profile.user.contactNumber}</p>
                 </div>
                 <div class="edit">
                   <div class="addpost">
@@ -301,3 +302,13 @@ logoutUser.addEventListener('click', async (e) => {
     }
 })
 
+ownprofile.addEventListener('click',async(event)=>{
+    const addpost=event.target.closest('.addpost')
+    const editprofile=event.target.closest('.editprofile')
+    if(addpost){
+        window.location.href="/pages/postpage.html"
+    }
+    else if(editprofile){
+        window.location.href='/pages/editProfile.html'
+    }
+})

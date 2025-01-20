@@ -26,6 +26,7 @@ const upload=multer({storage:storage,
 })
 
 const multiUpload=upload.array('images',10)
-const singleUpload=upload.single('images')
+const profileSingleUpload=upload.single('newProfilePicture')
+const coverSingleUpload=upload.single('newCoverPicture')
 
-module.exports={multiUpload,singleUpload}
+module.exports={multiUpload,profileSingleUpload,coverSingleUpload}
