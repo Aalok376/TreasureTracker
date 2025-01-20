@@ -14,8 +14,11 @@ const {getPosts}=require('../controllers/getPosts')
 const {createComment,deleteComment,updateComment,getAllComments,}=require('../controllers/comment')
 const {like,removeLike,getLikes,}=require('../controllers/like')
 const {otherProfile, otherPost, commentsOnOtherPosts, likesOnOtherPosts, serveOtherProfile}=require('../controllers/fetchotherprofile')
+const {contact}=require('../controllers/contact')
 
 const otpStore = new Map();
+
+router.post('/contactwithus',contact)
 
 router.post('/signup',signup(otpStore));
 router.post('/verifyOtp',verifyOtp(otpStore),verify)

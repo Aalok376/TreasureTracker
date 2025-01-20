@@ -4,6 +4,10 @@ const ownprofile2 = document.querySelector('.pp');
 
 const userId = window.location.pathname.split('/').pop();
 
+const changepasswordbtn = document.querySelector('.cgp')
+const deleteUser = document.querySelector('.dlu')
+const logoutUser = document.querySelector('.lgu')
+
 const getotherProfilepic = async () => {
     try {
         const response = await fetch(`http://localhost:5000/api/v1/getotherprofile/${userId}`);
@@ -280,3 +284,35 @@ const gotouserprofile=(posthtml)=>{
     }
 }
 
+changepasswordbtn.addEventListener('click', async (e) => {
+    e.preventDefault()
+
+    window.location.href = "/pages/changepassword.html"
+})
+
+deleteUser.addEventListener('click', async (e) => {
+    e.preventDefault()
+
+    window.location.href = "/pages/delete.html"
+})
+
+logoutUser.addEventListener('click', async (e) => {
+    e.preventDefault()
+
+    try {
+
+        const response = await fetch('http://localhost:5000/api/v1/logout')
+
+        const data = await response.json()
+
+        if (response.status === 200) {
+            window.location.href = "/pages/logout.html"
+        }
+        else {
+            alert(data.msg)
+        }
+    } catch (error) {
+        console.error(error)
+        alert('Error logging out!')
+    }
+})

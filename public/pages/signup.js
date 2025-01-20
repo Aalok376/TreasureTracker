@@ -32,6 +32,11 @@ signup.addEventListener('submit', async (e) => {
         const data = await response.json();
 
         if (response.status === 200) {
+            document.querySelector('#email').value=''
+            document.querySelector('#password').value=''
+            document.querySelector('#confirm-password').value=''
+            document.querySelector('#fname').value=''
+            document.querySelector('#lname').value=''
             window.location.href = "otp.html";
         }
         else {
@@ -43,4 +48,3 @@ signup.addEventListener('submit', async (e) => {
     }
 });
 
-    

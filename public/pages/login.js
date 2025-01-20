@@ -1,30 +1,33 @@
-const login=document.querySelector('.signup-container')
+const login = document.querySelector('.signup-container')
 
-login.addEventListener('submit',async(e)=>{
+login.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const username=document.querySelector('#email').value;
-    const password=document.querySelector('#password').value;
+    const username = document.querySelector('#email').value;
+    const password = document.querySelector('#password').value;
 
-    try{
-        const response=await fetch("http://localhost:5000/api/v1/login",{
-            method:"POST",
-            headers:{
-                "Content-Type":"application/json",
+    try {
+        const response = await fetch("http://localhost:5000/api/v1/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
             },
-            body:JSON.stringify({username,password}),
+            body: JSON.stringify({ username, password }),
         });
 
-        const data= await response.json();
+        const data = await response.json();
 
-        if(response.status===200){
-            window.location.href="homepage.html"
+        if (response.status === 200) {
+
+            document.querySelector('#email').value=''
+            document.querySelector('#password').value=''
+            window.location.href = "homepage.html"
         }
-        else{
+        else {
             document.getElementById("error-message").textContent = data.msg
         }
     }
-    catch(error){
+    catch (error) {
         document.getElementById("error-message").textContent = "Server error, please try again later.";
     }
 })
