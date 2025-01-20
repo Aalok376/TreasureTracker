@@ -22,8 +22,7 @@ const verifyOtp = (otpStore) => {
         }
         otpStore.delete(username);
 
-        // return res.status(200).json({success:true,msg:'Otp verified'})
-         next()
+        next()
     }
 }
 

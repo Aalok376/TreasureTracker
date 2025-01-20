@@ -2,116 +2,118 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/styles/delete.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <title>delete page</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../assets/styles/delete.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <title>delete page</title>
 
 
 </head>
 
 <body>
-    <header>
-        <div class="navbar">
-            <div class="firstnav"> <span class="logo"><a href="#">Treasure Tracker</a></span>
-                <div class="containerforsearch">
-                    <div id="search"> <button id="button"><i class="fas fa-search"></i></button>
-                        <input type="text" placeholder="Search Your Lost Item" id="text">
-
-                    </div>
-                </div>
-                <div class="profilecontainer"> <a href="profile.html" class="profile"></a>
-                    <span class="chevron"><i class="fa-solid fa-chevron-down" style="color: #050505;"></i></span>
-                </div>
-            </div>
-            <div class="dropdownmenu">
-                <li><a href="changepassword.html">Change password</a></li>
-                <li><a href="delete.html">Delete</a></li>
-                <li><a href="#">Logout</a></li>
-            </div>
-    </header>
-
-    <main class="main">
-        <div class="sidemenu">
-            <div class="links">
-                <div><a href="homepage.html"><i class="fas fa-home"></i>Home</a></div>
-                <div><a href="#"><i class="fas fa-message"></i>Messages</a></div>
-                <div><a href="#"><i class="fas fa-users"></i>Friends </a></div>
-                <div><a href="#"><i class="fas fa-bell"></i>Notifications</a></div>
-            </div>
-        </div>
-    <div class="asidemenu">
-        <div class="delete-page">
-            <h1>Delete Account</h1>
-            <p>Are you sure you want to permanently delete your account? This action is irreversible.</p>
-        
-            <!-- Account details (optional) -->
-            <div class="account-details">
-              <p><strong>Username:</strong> johndoe123</p>
-              <p><strong>Email:</strong> johndoe@example.com</p>
-            </div>
-        
-            <!-- Confirmation form -->
-            <form action="/delete-account" method="POST" class="confirmation-form">
-              <label for="confirmation-input">
-                To confirm, please Enter Your Password:
-              </label>
-              <input type="text" id="confirmation-input" name="confirmation" placeholder="Enter Your Password" required>
-              
-              <div class="buttons">
-                <button type="submit" class="btn confirm"><i class="fas fa-check-circle"></i> Confirm Delete</button>
-                <button type="button" class="btn cancel" onclick="window.location.href='homepage2.html';">
-                  <i class="fas fa-times-circle"></i> Cancel
-                </button>
-              </div>
-            </form>
+  <header>
+    <div class="navbar">
+      <div class="firstnav"> <span class="logo"><a href="#">Treasure Tracker</a></span>
+        <div class="containerforsearch">
+          <div id="search"> <button id="button"><i class="fas fa-search"></i></button>
+            <input type="text" placeholder="Search Your Lost Item" id="text">
           </div>
+        </div>
+        <div class="profilecontainer">
+          <div class="pp"></div>
+          <span class="chevron"><i class="fa-solid fa-chevron-down" style="color: #050505;"></i></span>
+        </div>
+      </div>
+      <div class="dropdownmenu">
+        <li><a href="changepassword.html">Change password</a></li>
+        <li><a href="delete.html">Delete</a></li>
+        <li><a href="#">Logout</a></li>
+      </div>
+  </header>
+
+  <main class="main">
+    <div class="sidemenu">
+      <div class="links">
+        <div><a href="homepage.html"><i class="fas fa-home"></i>Home</a></div>
+        <div><a href="#"><i class="fas fa-message"></i>Messages</a></div>
+        <div><a href="#"><i class="fas fa-users"></i>Friends </a></div>
+        <div><a href="#"><i class="fas fa-bell"></i>Notifications</a></div>
+      </div>
+    </div>
+    <div class="asidemenu">
+      <div class="delete-page">
+        <h1>Delete Account</h1>
+        <p>Are you sure you want to permanently delete your account? This action is irreversible.</p>
+
+        <!-- Account details (optional) -->
+        <div class="account-details">
+          <p class="userr"><strong>Username:</strong></p>
+          <p class="emaill"><strong>Email:</strong> </p>
+        </div>
+
+        <!-- Confirmation form -->
+        <form action="/delete-account" method="POST" class="confirmation-form">
+          <label for="confirmation-input">
+            To confirm, please Enter Your Password:
+          </label>
+          <input type="text" id="confirmation-input" name="confirmation" placeholder="Enter Your Password" required>
+
+          <div class="buttons">
+            <button type="submit" class="btn confirm" id="btnconfirm"><i class="fas fa-check-circle"></i> Confirm Delete</button>
+            <button type="button" class="btn cancel" id="btncancel">
+              <i class="fas fa-times-circle"></i> Cancel
+            </button>
+          </div>
+          <p id="error-message" style="color:black;"></p>
+        </form>
+      </div>
     </div>
 
-       
-    </main>
-    <footer class="footer">
-        <div class="backtotop">
-          <a href="delete.html">Back to Top</a>
-        </div>
-        <div class="information">
-          <div class="getusknow">
-            <h4>Get to Know Us</h4>
-            <a href="/">Home</a><br><a href="../pages/about.html">About</a><br><a
-              href="../pages/contact.html">Contacts</a><br><a href="../pages/termandcondition.html">Term & Conditions</a>
-            </p>
-          </div>
-          <div class="connectwithus">
-            <h4>Connect with Us</h4>
-            <a href="https://www.facebook.com/profile.php?id=61553392040541">Facebook</a><br><a
-              href="https://www.instagram.com/sameer.sah.9615/">Instagram</a><br><a
-              href="http://www.youtube.com/@Movies_.Gaming">Youtube</a>
-          </div>
-          <div class="logoandflag">
-            <h4>Treasure Tracker</h4>
-            <p class="flag"><img src="nepalflag.avif" height="15px"> Nepal</p>
-          </div>
-  
-        </div>
-        <div class="ending">Treasure Tracker <i class="fa-regular fa-copyright" style="color: #ffffff;"></i> 2024 | All
-          rights reserved | Conditions of use</div>
-      </footer>
-    <script>
-        const tooglebtn = document.querySelector('.chevron')
-        const tooglebtnIcon = document.querySelector('.chevron i')
-        const dropDownMenu = document.querySelector('.dropdownmenu')
 
-        tooglebtn.onclick = function () {
-            dropDownMenu.classList.toggle('open')
-            const isOpen = dropDownMenu.classList.contains('open')
-            tooglebtnIcon.classList = isOpen ?
-                "fa-solid fa-chevron-up" : "fa-solid fa-chevron-down"
-        };
-    
- 
+  </main>
+  <footer class="footer">
+    <div class="backtotop">
+      <a href="delete.html">Back to Top</a>
+    </div>
+    <div class="information">
+      <div class="getusknow">
+        <h4>Get to Know Us</h4>
+        <a href="/">Home</a><br><a href="../pages/about.html">About</a><br><a
+          href="../pages/contact.html">Contacts</a><br><a href="../pages/termandcondition.html">Term & Conditions</a>
+        </p>
+      </div>
+      <div class="connectwithus">
+        <h4>Connect with Us</h4>
+        <a href="https://www.facebook.com/profile.php?id=61553392040541">Facebook</a><br><a
+          href="https://www.instagram.com/sameer.sah.9615/">Instagram</a><br><a
+          href="http://www.youtube.com/@Movies_.Gaming">Youtube</a>
+      </div>
+      <div class="logoandflag">
+        <h4>Treasure Tracker</h4>
+        <p class="flag"><img src="../assets/images/nepalflag.avif" height="15px"> Nepal</p>
+      </div>
 
-    </script>
+    </div>
+    <div class="ending">Treasure Tracker <i class="fa-regular fa-copyright" style="color: #ffffff;"></i> 2024 | All
+      rights reserved | Conditions of use</div>
+  </footer>
+  <script>
+    const tooglebtn = document.querySelector('.chevron')
+    const tooglebtnIcon = document.querySelector('.chevron i')
+    const dropDownMenu = document.querySelector('.dropdownmenu')
+
+    tooglebtn.onclick = function () {
+      dropDownMenu.classList.toggle('open')
+      const isOpen = dropDownMenu.classList.contains('open')
+      tooglebtnIcon.classList = isOpen ?
+        "fa-solid fa-chevron-up" : "fa-solid fa-chevron-down"
+    };
+
+
+
+  </script>
 </body>
+<script src="/pages/delete.js"></script>
 
 </html>

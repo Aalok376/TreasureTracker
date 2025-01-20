@@ -24,7 +24,7 @@ verify.addEventListener('submit', async (e) => {
     }
 
     try {
-        const response = await fetch("http://localhost:5000/api/v1/verifyOtp", {
+        const response = await fetch("http://localhost:5000/api/v1/verifyotptoupdate", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -34,7 +34,7 @@ verify.addEventListener('submit', async (e) => {
 
         const data = await response.json();
         if (response.status === 200) {
-            window.location.href = "homepage.html";
+            window.location.href = "/pages/newpassword.html";
             sessionStorage.clear();
         }
         else {

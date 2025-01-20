@@ -3,6 +3,9 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/user.js');
+const Post = require('../models/createPost.js');
+const Comment = require('../models/comments.js');
+const Like = require('../models/likes.js');
 
 const { sendEmail } = require('../middleware/sendmail');
 
@@ -161,6 +164,8 @@ const toDelete = async (req, res) => {
     }
     try {
         const user = await User.findById(req.user.id);
+        const userId=req.user.id
+        
         if (!user) {
             return res.status(404).json({ msg: 'User not found' });
         }
@@ -170,7 +175,11 @@ const toDelete = async (req, res) => {
             return res.status(401).json({ msg: 'Incorrect password' });
         }
 
+        await Post.deleteMany({ userId });
+        await Comment.deleteMany({userId})
+        await Like.deleteMany({userId})
         await User.findByIdAndDelete(req.user.id);
+        res.clearCookie('token', { httpOnly: true });
 
         return res.status(200).json({ msg: 'User deleted successfully' });
     } catch (error) {
@@ -251,5 +260,9 @@ const sendmailInCaseOfForgot = (otpStore) => {
     }
 }
 
+const dummy=async(req,res)=>{
+    return res.status(200).json({success:true,msg:'Otp verified successfully'})
+}
 
-module.exports = { signup, verify, login, checkToUpdate, updatePassword, toDelete, logout, forgotPassword, sendmailInCaseOfForgot }
+
+module.exports = { signup, verify, login, checkToUpdate, updatePassword, toDelete, logout, forgotPassword, sendmailInCaseOfForgot,dummy }

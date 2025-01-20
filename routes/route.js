@@ -5,7 +5,7 @@ const { verifyToken } = require('../middleware/verifyToken');
 const { verifyOtp } = require('../middleware/verifyOtp');
 const {multiUpload,singleUpload}=require('../middleware/multer')
 
-const {signup,verify,login,checkToUpdate,updatePassword,toDelete,logout, sendmailInCaseOfForgot, forgotPassword}=require('../controllers/account');
+const {signup,verify,login,checkToUpdate,updatePassword,toDelete,logout, sendmailInCaseOfForgot, forgotPassword, dummy}=require('../controllers/account');
 const {profile}=require('../controllers/fetchProfile')
 const {updateProfilePicture,deleteProfilePicture,updateCoverPicture,deleteCoverPicture,updateName,updateContact,deletecontact}=require('../controllers/profilesetup')
 const {CreatePost,updatePost,deletePost}=require('../controllers/post');
@@ -19,13 +19,14 @@ const otpStore = new Map();
 
 router.post('/signup',signup(otpStore));
 router.post('/verifyOtp',verifyOtp(otpStore),verify)
-router.post('/sendmailincaseofforgot',sendmailInCaseOfForgot(otpStore))
-router.put('/verifyotpandupdate',verifyOtp(otpStore),forgotPassword)
 
 router.post('/login',login);
 
 router.put('/check', verifyToken,checkToUpdate);
 router.put('/update', verifyToken,updatePassword);
+router.post('/sendmailincaseofforgot',verifyToken,sendmailInCaseOfForgot(otpStore))
+router.put('/verifyotptoupdate',verifyToken,verifyOtp(otpStore),dummy)
+router.put('/changepassword',verifyToken,forgotPassword)
 
 router.delete('/delete', verifyToken,toDelete);
 
