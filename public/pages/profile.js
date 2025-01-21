@@ -6,12 +6,15 @@ const changepasswordbtn = document.querySelector('.cgp')
 const deleteUser = document.querySelector('.dlu')
 const logoutUser = document.querySelector('.lgu')
 
+let UserIdForPost
+
 const getProfilepic = async () => {
     try {
         const response = await fetch("http://localhost:5000/api/v1/profile");
         const data = await response.json();
 
         const profiles = Array.isArray(data) ? data : [data];
+        UserIdForPost = profiles[0].user._id
 
         ownprofile.innerHTML = profiles.map(profile => `
                 <div class="coverphoto" style="background-image: url('http://localhost:5000/${profile.user?.coverPicture?.replace(/\\/g, '/')}')"></div>
@@ -61,6 +64,9 @@ const getPost = async () => {
                         <div id="date-container">
                             <span id="current-date">${new Date(post.createdAt).toLocaleDateString()}</span>
                         </div>
+                        <span class="dropdownmenu">
+                             
+                        </span>
                     </div>
                     <div class="areaforpost">
                         <div class="post-header">
@@ -71,17 +77,89 @@ const getPost = async () => {
                             <strong>Category:</strong> ${post.category || "Uncategorized"}
                         </div>
                         <div class="post-images">
-                            ${Array.isArray(post.image) && post.image.length > 0
-                    ? post.image.map(img => `
-                                    <img 
-                                        src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
-                                        alt="${post.caption || 'Image'}" 
-                                        class="post-image" 
-                                        height="100" 
-                                        width="100" 
-                                    />`).join('')
-                    : "<p>No images available</p>"
-                }
+                            ${(() => {
+                    if (Array.isArray(post.image)) {
+                        const imagesLength = post.image.length;
+
+                        if (imagesLength === 1) {
+                            return post.image
+                                .map(
+                                    (img) => `
+                                        <div class="divforimage">
+                                          <img 
+                                            src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
+                                            alt="${post.caption || 'Image'}" 
+                                            class="post-image" 
+                                            height="250" 
+                                            width="250" 
+                                          />
+                                        </div>`
+                                )
+                                .join('');
+                        }
+
+                        if (imagesLength === 2) {
+                            return post.image
+                                .map(
+                                    (img) => `
+                                        <div class="divforimage">
+                                          <img 
+                                            src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
+                                            alt="${post.caption || 'Image'}" 
+                                            class="post-image" 
+                                            height="250" 
+                                            width="250" 
+                                          />
+                                        </div>`
+                                )
+                                .join('');
+                        }
+
+                        if (imagesLength === 3) {
+                            return post.image
+                                .map(
+                                    (img) => `
+                                        <div class="divforimage">
+                                          <img 
+                                            src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
+                                            alt="${post.caption || 'Image'}" 
+                                            class="post-image" 
+                                            height="250" 
+                                            width="250" 
+                                          />
+                                        </div>`
+                                )
+                                .join('');
+                        }
+
+                        if (imagesLength >= 4) {
+                            return (
+                                post.image
+                                    .slice(0, 3)
+                                    .map(
+                                        (img) => `
+                                          <div class="divforimage">
+                                            <img 
+                                              src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
+                                              alt="${post.caption || 'Image'}" 
+                                              class="post-image" 
+                                              height="250" 
+                                              width="250" 
+                                            />
+                                          </div>`
+                                    )
+                                    .join('') +
+                                `
+                                    <div class="divforimage">
+                                      <p id="moreimages" style="color:black;">+${imagesLength - 3}</p>
+                                    </div>`
+                            );
+                        }
+                    }
+
+                    return '<p>No images available</p>';
+                })()
+                }                          
                         </div>
                     </div>
                     <hr class="custom-line1">
@@ -150,6 +228,9 @@ commentbtn.addEventListener('click', async (event) => {
 
         const submitbtn = postElement.querySelector('.post-comment-btn')
         const textt = postElement.querySelector('.comment-box')
+        
+        let OwnComments = []
+        let OtherComments = []
 
         submitbtn.addEventListener('click', async (e) => {
             e.preventDefault();
@@ -168,8 +249,18 @@ commentbtn.addEventListener('click', async (event) => {
                      const datas=await fetchComments(postId)
 
                      var comments = Array.isArray(datas.comments) ? datas.comments : [datas.comments]
+                     
+                    OwnComments = []
+                    OtherComments = []
+                    for (let i = 0; i < comments.length; i++) {
+                        if (comments[i].userId._id === UserIdForPost) {
+                            OwnComments.push(comments[i]);
+                        } else {
+                            OtherComments.push(comments[i]);
+                        }
+                    }
 
-                     updateCommentSections(comments,commentArea)
+                     updateCommentSections(OwnComments,OtherComments,commentArea)
 
                      textt.value=''
 
@@ -186,8 +277,16 @@ commentbtn.addEventListener('click', async (event) => {
             const datas = await fetchComments(postId)
 
             var comments = Array.isArray(datas.comments) ? datas.comments : [datas.comments]
+            
+            for (let i = 0; i < comments.length; i++) {
+                if (comments[i].userId._id === UserIdForPost) {
+                    OwnComments.push(comments[i]);
+                } else {
+                    OtherComments.push(comments[i]);
+                }
+            }
 
-            updateCommentSections(comments,commentArea)
+            updateCommentSections(OwnComments,OtherComments,commentArea)
 
         }
         catch (error) {
@@ -221,16 +320,54 @@ const fetchComments = async (postId) => {
     }
 }
 
-const updateCommentSections = async (comments, commentArea) => {
-    if (comments.length > 0) {
-        commentArea.innerHTML = comments.map(comment => ` <div class="introareacomment">
+const updateCommentSections = async (OwnComments,OtherComments, commentArea) => {
+    if (OwnComments.length > 0 && OtherComments.length>0) {
+        return commentArea.innerHTML = OwnComments.map(comment => ` <div class="introareacomment">
+                         <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
+                         <div class="commentsectionbypeople">
+                             <p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
+                             <span class="dropdownmenu">
+                              
+                             </span>
+                             <p>${comment.text}</p>
+                         </div>
+                     </div>`)
+                     +
+                     OtherComments.map(comment => ` <div class="introareacomment">
                         <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
                         <div class="commentsectionbypeople">
                             <p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
+                            <span class="dropdownmenu">
+                             
+                            </span>
                             <p>${comment.text}</p>
                         </div>
                     </div>`)
-    }
+     }
+     else if (OwnComments.length > 0 && OtherComments.length===0) {
+        return commentArea.innerHTML = OwnComments.map(comment => ` <div class="introareacomment">
+                         <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
+                         <div class="commentsectionbypeople">
+                             <p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
+                             <span class="dropdownmenu">
+                              
+                             </span>
+                             <p>${comment.text}</p>
+                         </div>
+                     </div>`)
+        }
+        else if (OwnComments.length === 0 && OtherComments.length>0) {
+            return commentArea.innerHTML = OtherComments.map(comment => ` <div class="introareacomment">
+                             <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
+                             <div class="commentsectionbypeople">
+                                 <p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
+                                 <span class="dropdownmenu">
+                                  
+                                 </span>
+                                 <p>${comment.text}</p>
+                             </div>
+                         </div>`)
+            }
     else {
         commentArea.innerHTML = `<p class="No-comments">No Comments</p>`
     }
@@ -312,3 +449,5 @@ ownprofile.addEventListener('click',async(event)=>{
         window.location.href='/pages/editProfile.html'
     }
 })
+
+
