@@ -57,17 +57,90 @@ const getPost = async () => {
                             <strong>Category:</strong> ${post.category || "Uncategorized"}
                         </div>
                         <div class="post-images">
-                            ${Array.isArray(post.image) && post.image.length > 0
-                    ? post.image.map(img => `
-                                    <img 
-                                        src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
-                                        alt="${post.caption || 'Image'}" 
-                                        class="post-image" 
-                                        height="100" 
-                                        width="100" 
-                                    />`).join('')
-                    : "<p>No images available</p>"
-                }
+                        ${
+                            (() => {
+                              if (Array.isArray(post.image)) {
+                                const imagesLength = post.image.length;
+                          
+                                if (imagesLength === 1) {
+                                  return post.image
+                                    .map(
+                                      (img) => `
+                                        <div class="divforimage">
+                                          <img 
+                                            src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
+                                            alt="${post.caption || 'Image'}" 
+                                            class="post-image" 
+                                            height="250" 
+                                            width="250" 
+                                          />
+                                        </div>`
+                                    )
+                                    .join('');
+                                }
+                          
+                                if (imagesLength === 2) {
+                                  return post.image
+                                    .map(
+                                      (img) => `
+                                        <div class="divforimage">
+                                          <img 
+                                            src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
+                                            alt="${post.caption || 'Image'}" 
+                                            class="post-image" 
+                                            height="250" 
+                                            width="250" 
+                                          />
+                                        </div>`
+                                    )
+                                    .join('');
+                                }
+                          
+                                if (imagesLength === 3) {
+                                  return post.image
+                                    .map(
+                                      (img) => `
+                                        <div class="divforimage">
+                                          <img 
+                                            src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
+                                            alt="${post.caption || 'Image'}" 
+                                            class="post-image" 
+                                            height="250" 
+                                            width="250" 
+                                          />
+                                        </div>`
+                                    )
+                                    .join('');
+                                }
+                          
+                                if (imagesLength >= 4) {
+                                  return (
+                                    post.image
+                                      .slice(0, 3)
+                                      .map(
+                                        (img) => `
+                                          <div class="divforimage">
+                                            <img 
+                                              src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
+                                              alt="${post.caption || 'Image'}" 
+                                              class="post-image" 
+                                              height="250" 
+                                              width="250" 
+                                            />
+                                          </div>`
+                                      )
+                                      .join('') +
+                                    `
+                                    <div class="divforimage">
+                                      <p id="moreimages" style="color:black;">+${imagesLength - 3}</p>
+                                    </div>`
+                                  );
+                                }
+                              }
+                          
+                              return '<p>No images available</p>';
+                            })()
+                          }                          
                         </div>
                     </div>
                     <hr class="custom-line1">
@@ -281,3 +354,13 @@ logoutUser.addEventListener('click', async (e) => {
         alert('Error logging out!')
     }
 })
+
+const sideBar = document.querySelector('.sidemenu')
+const hideSidebar = () => {
+    sideBar.classList.add('disappear')
+    sideBar.classList.remove('appear')
+}
+const openSidebar = () => {
+    sideBar.classList.add('appear')
+    sideBar.classList.remove('disappear')
+}
