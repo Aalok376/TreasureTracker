@@ -276,6 +276,7 @@ const getPost = async () => {
                         </div>
                     </div>
                     <hr class="custom-line1">
+                    <div class="LikeArea" style="height:30px"></div>
                     <hr class="custom-line2">
                     <div class="likecontainer">
                         <button class="interactionlike1"><i class="fa-regular fa-heart"></i>Like</button>
@@ -522,9 +523,6 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
             <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
             <div class="commentsectionbypeople">
                 <p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
-                <span class="dropdownmenu">
-                             
-                </span>
                 <p>${comment.text}</p>
             </div>
         </div>`)
@@ -557,9 +555,6 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
             <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
             <div class="commentsectionbypeople">
                 <p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
-                <span class="dropdownmenu">
-                             
-                </span>
                 <p>${comment.text}</p>
             </div>
         </div>`)
@@ -569,9 +564,6 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
             <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
             <div class="commentsectionbypeople">
                 <p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
-                <span class="dropdownmenu">
-                             
-                </span>
                 <p>${comment.text}</p>
             </div>
         </div>`)
@@ -593,9 +585,6 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
             <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
             <div class="commentsectionbypeople">
                 <p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
-                <span class="dropdownmenu">
-                             
-                </span>
                 <p>${comment.text}</p>
             </div>
         </div>`)

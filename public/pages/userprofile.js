@@ -351,9 +351,6 @@ const updateCommentSections = async (OwnComments,OtherComments, commentArea) => 
                         <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
                         <div class="commentsectionbypeople">
                             <p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
-                            <span class="dropdownmenu">
-                             
-                            </span>
                             <p>${comment.text}</p>
                         </div>
                     </div>`)
@@ -375,9 +372,6 @@ const updateCommentSections = async (OwnComments,OtherComments, commentArea) => 
                              <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
                              <div class="commentsectionbypeople">
                                  <p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
-                                 <span class="dropdownmenu">
-                                  
-                                 </span>
                                  <p>${comment.text}</p>
                              </div>
                          </div>`)
