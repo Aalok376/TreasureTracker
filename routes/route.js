@@ -54,9 +54,9 @@ router.delete('/deleteOwnPost/:postId',verifyToken,deletePost)
 router.get('/getOwnPosts',verifyToken,getOwnPosts)//
 router.get('/getPosts',verifyToken,getPosts)//
 
-router.post('/likeapost/:postId',verifyToken,like)
-router.delete('/removelike/:postId',verifyToken,removeLike)
-router.get('/getalllike/:postId',verifyToken,getLikes)
+router.post('/likeapost/:postId',verifyToken,like)//
+router.delete('/removelike/:postId',verifyToken,removeLike)//
+router.get('/getalllike/:postId',verifyToken,getLikes)//
 
 
 router.post('/commentinpost/:postId',verifyToken,createComment)//

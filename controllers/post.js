@@ -1,4 +1,6 @@
 const Post = require('../models/createPost')
+const Comment = require('../models/comments.js');
+const Like = require('../models/likes.js');
 
 const CreatePost = async (req, res) => {
     const userId = req.user.id;
@@ -63,7 +65,8 @@ const deletePost=async(req,res)=>{
         if(!postToDelete){
             return res.status(404).json({success:false,msg:'Post not found'})
         }
-        
+        await Comment.deleteMany({postId})
+        await Like.deleteMany({postId})
         return res.status(200).json({success:true,msg:'Post deleted successfully'})
     }
     catch(error){

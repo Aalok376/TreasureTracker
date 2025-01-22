@@ -10,27 +10,31 @@ let UserIdForPost
 let ownPosts = []
 let otherPosts = []
 
+let posts = []
+
+//Comments
 const getProfilepic = async () => {
     try {
-        const response = await fetch("http://localhost:5000/api/v1/profile");
-        const data = await response.json();
+        const response = await fetch("http://localhost:5000/api/v1/profile")
+        const data = await response.json()
 
-        const profiles = Array.isArray(data) ? data : [data];
+        const profiles = Array.isArray(data) ? data : [data]
         UserIdForPost = profiles[0].user._id
 
         ownprofile.innerHTML = profiles.map(profile => `
             <a class="profile two" href="profile.html" style="background-image: url('http://localhost:5000/${profile.user?.profilePicture?.replace(/\\/g, '/')}')"></a>
             <a class="text" href="postpage.html">What have you Lost or Found?</a>
-        `).join('');
+        `).join('')
 
         ownprofile2.innerHTML = profiles.map(profile => `
             <a href="profile.html" class="profile" style="background-image: url('http://localhost:5000/${profile.user?.profilePicture?.replace(/\\/g, '/')}')"></a>
-        `).join('');
+        `).join('')
     } catch (error) {
-        console.error("Error fetching profile picture:", error);
+        console.error("Error fetching profile picture:", error)
     }
 };
 
+//Posts....
 const getPost = async () => {
     try {
         const response = await fetch("http://localhost:5000/api/v1/getPosts", {
@@ -40,8 +44,8 @@ const getPost = async () => {
             }
         });
 
-        const data = await response.json();
-        const posts = Array.isArray(data.posts) ? data.posts : [];
+        const data = await response.json()
+        posts = Array.isArray(data.posts) ? data.posts : []
 
         for (let i = 0; i < posts.length; i++) {
             if (posts[i].userId._id === UserIdForPost) {
@@ -50,7 +54,6 @@ const getPost = async () => {
                 otherPosts.push(posts[i]);
             }
         }
-        console.log(ownPosts, otherPosts)
 
         if (ownPosts.length > 0 || otherPosts.length > 0) {
             posthtml.innerHTML = ownPosts.map(post => `
@@ -158,6 +161,7 @@ const getPost = async () => {
                         </div>
                     </div>
                     <hr class="custom-line1">
+                    <div class="LikeArea" style="height:30px"></div>
                     <hr class="custom-line2">
                     <div class="likecontainer">
                         <button class="interactionlike1"><i class="fa-regular fa-heart"></i>Like</button>
@@ -302,42 +306,86 @@ const getPost = async () => {
         posthtml.innerHTML = "<p>Error fetching posts. Please try again later.</p>";
     }
     gotouserprofile(posthtml)
+    updateLikeButtons(posts)
 };
 
 (async () => {
     await getProfilepic();
     await getPost();
-})();
+})()
 
 
+//Comments and like
 const commentbtn = document.querySelector('.containerforpost')
 
 commentbtn.addEventListener('click', async (event) => {
-    const postElement = event.target.closest('.postcontainer');
-    if (!postElement) return;
+    const postElement = event.target.closest('.postcontainer')
+    if (!postElement) return
+    const postId = postElement.id
 
     const commentSection = postElement.querySelector('.comment-container')
 
-    if (event.target.classList.contains('interactionlike1')) {
+    const divforlike = postElement.querySelector('.LikeArea')
 
-        event.target.style.display = 'none';
-        const likedButton = postElement.querySelector('.interactionlike2');
-        if (likedButton) {
-            likedButton.style.display = 'inline-block';
+    if (event.target.classList.contains('interactionlike1')) {
+        try {
+            (async () => {
+                const response = await fetch(`http://localhost:5000/api/v1/likeapost/${postId}`, {
+                    method: "POST"
+                })
+
+                const data = await response.json()
+
+                if (response.status === 200) {
+                    event.target.style.display = 'none';
+                    const likedButton = postElement.querySelector('.interactionlike2');
+                    if (likedButton) {
+                        likedButton.style.display = 'inline-block';
+                    }
+
+                    const datas = await getLikes(postId)
+
+                    const likes = Array.isArray(datas.likes) ? datas.likes : [datas.likes]
+        
+                    updateLikeCount(likes,divforlike)
+                }
+            })()
+        } catch (error) {
+            console.error(error)
         }
+
     }
     else if (event.target.classList.contains('interactionlike2')) {
-        event.target.style.display = 'none';
 
-        const likeButton = postElement.querySelector('.interactionlike1');
-        if (likeButton) {
-            likeButton.style.display = 'inline-block';
+        try {
+            (async () => {
+                const response = await fetch(`http://localhost:5000/api/v1/removelike/${postId}`, {
+                    method: "DELETE"
+                })
+                const data = await response.json()
+
+                if (response.status === 200) {
+                    event.target.style.display = 'none';
+
+                    const likeButton = postElement.querySelector('.interactionlike1');
+                    if (likeButton) {
+                        likeButton.style.display = 'inline-block';
+                    }
+
+                    const datas = await getLikes(postId)
+
+                    const likes = Array.isArray(datas.likes) ? datas.likes : [datas.likes]
+        
+                    updateLikeCount(likes,divforlike)
+                }
+            })()
+        } catch (error) {
+            console.error(error)
         }
     }
     else if (event.target.classList.contains('interactioncomment')) {
         const isVisible = commentSection.style.display === 'flex';
 
-        const postId = postElement.id;
         const commentArea = postElement.querySelector('.comment-area')
 
         const submitbtn = postElement.querySelector('.post-comment-btn')
@@ -352,7 +400,7 @@ commentbtn.addEventListener('click', async (event) => {
             e.preventDefault();
             try {
                 const text = textt.value;
-                const response = await fetch(`http://localhost:5000/api/v1//commentinpost/${postId}`, {
+                const response = await fetch(`http://localhost:5000/api/v1/commentinpost/${postId}`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -423,7 +471,7 @@ commentbtn.addEventListener('click', async (event) => {
                     OtherCommentsOnOtherPost.push(comment);
                 }
             })
-           
+
             updateCommentSections(OwnComments, OtherCommentsOnOwnPost, OtherCommentsOnOtherPost, commentArea)
 
         }
@@ -443,7 +491,7 @@ commentbtn.addEventListener('click', async (event) => {
     }
 })
 
-
+//Fetch all comments of a post
 const fetchComments = async (postId) => {
     try {
         const response = await fetch(`http://localhost:5000/api/v1/getallcomment/${postId}`);
@@ -459,9 +507,24 @@ const fetchComments = async (postId) => {
     }
 }
 
+//Dynamically update LIkeArea Div..
+const updateLikeCount=(likes,divforlike)=> {
+    if (likes.length === 0) {
+        divforlike.textContent = '0 Likes';
+    } else if (likes.length === 1) {
+        divforlike.textContent = `Liked by ${likes[0].userId.fname}`;
+    } else if (likes.length > 1) {
+        divforlike.textContent = `Liked by ${likes[0].userId.fname} and others`;
+    }
+    else{
+        console.log('Post not working')
+    }
+}
+
+//Update comment section 
 const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherCommentsOnOtherPost, commentArea) => {
-    if (OwnComments.length > 0 && OtherCommentsOnOwnPost.length===0 && OtherCommentsOnOtherPost.length===0) {
-       return commentArea.innerHTML = OwnComments.map(comment => ` <div class="introareacomment">
+    if (OwnComments.length > 0 && OtherCommentsOnOwnPost.length === 0 && OtherCommentsOnOtherPost.length === 0) {
+        return commentArea.innerHTML = OwnComments.map(comment => ` <div class="introareacomment">
                         <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
                         <div class="commentsectionbypeople">
                             <p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
@@ -472,8 +535,7 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
                         </div>
                     </div>`)
     }
-    else if(OwnComments.length > 0 && OtherCommentsOnOwnPost.length>0 && OtherCommentsOnOtherPost.length===0)
-    {
+    else if (OwnComments.length > 0 && OtherCommentsOnOwnPost.length > 0 && OtherCommentsOnOtherPost.length === 0) {
         return commentArea.innerHTML = OwnComments.map(comment => ` <div class="introareacomment">
             <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
             <div class="commentsectionbypeople">
@@ -484,8 +546,8 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
                 <p>${comment.text}</p>
             </div>
         </div>`)
-        +
-        OtherCommentsOnOwnPost.map(comment => ` <div class="introareacomment">
+            +
+            OtherCommentsOnOwnPost.map(comment => ` <div class="introareacomment">
             <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
             <div class="commentsectionbypeople">
                 <p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
@@ -496,7 +558,7 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
             </div>
         </div>`)
     }
-    else if(OwnComments.length > 0 && OtherCommentsOnOwnPost.length>0 && OtherCommentsOnOtherPost.length>0){
+    else if (OwnComments.length > 0 && OtherCommentsOnOwnPost.length > 0 && OtherCommentsOnOtherPost.length > 0) {
         return commentArea.innerHTML = OwnComments.map(comment => ` <div class="introareacomment">
             <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
             <div class="commentsectionbypeople">
@@ -507,8 +569,8 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
                 <p>${comment.text}</p>
             </div>
         </div>`)
-        +
-        OtherCommentsOnOwnPost.map(comment => ` <div class="introareacomment">
+            +
+            OtherCommentsOnOwnPost.map(comment => ` <div class="introareacomment">
             <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
             <div class="commentsectionbypeople">
                 <p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
@@ -518,8 +580,8 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
                 <p>${comment.text}</p>
             </div>
         </div>`)
-        +
-        OtherCommentsOnOtherPost.map(comment => ` <div class="introareacomment">
+            +
+            OtherCommentsOnOtherPost.map(comment => ` <div class="introareacomment">
             <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
             <div class="commentsectionbypeople">
                 <p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
@@ -527,7 +589,7 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
             </div>
         </div>`)
     }
-    else if(OwnComments.length === 0 && OtherCommentsOnOwnPost.length>0 && OtherCommentsOnOtherPost.length===0){
+    else if (OwnComments.length === 0 && OtherCommentsOnOwnPost.length > 0 && OtherCommentsOnOtherPost.length === 0) {
         return commentArea.innerHTML = OtherCommentsOnOwnPost.map(comment => ` <div class="introareacomment">
             <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
             <div class="commentsectionbypeople">
@@ -539,7 +601,7 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
             </div>
         </div>`)
     }
-    else if(OwnComments.length ===0 && OtherCommentsOnOwnPost.length>0 && OtherCommentsOnOtherPost.length>0){
+    else if (OwnComments.length === 0 && OtherCommentsOnOwnPost.length > 0 && OtherCommentsOnOtherPost.length > 0) {
         return commentArea.innerHTML = OtherCommentsOnOwnPost.map(comment => ` <div class="introareacomment">
             <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
             <div class="commentsectionbypeople">
@@ -550,8 +612,8 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
                 <p>${comment.text}</p>
             </div>
         </div>`)
-        +
-        OtherCommentsOnOtherPost.map(comment => ` <div class="introareacomment">
+            +
+            OtherCommentsOnOtherPost.map(comment => ` <div class="introareacomment">
             <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
             <div class="commentsectionbypeople">
                 <p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
@@ -559,7 +621,7 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
             </div>
         </div>`)
     }
-    else if(OwnComments.length === 0 && OtherCommentsOnOwnPost.length===0 && OtherCommentsOnOtherPost.length>0){
+    else if (OwnComments.length === 0 && OtherCommentsOnOwnPost.length === 0 && OtherCommentsOnOtherPost.length > 0) {
         return commentArea.innerHTML = OtherCommentsOnOtherPost.map(comment => ` <div class="introareacomment">
             <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
             <div class="commentsectionbypeople">
@@ -567,9 +629,9 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
                 <p>${comment.text}</p>
             </div>
         </div>`)
-      
+
     }
-    else if(OwnComments.length > 0 && OtherCommentsOnOwnPost.length===0 && OtherCommentsOnOtherPost.length>0){
+    else if (OwnComments.length > 0 && OtherCommentsOnOwnPost.length === 0 && OtherCommentsOnOtherPost.length > 0) {
         return commentArea.innerHTML = OwnComments.map(comment => ` <div class="introareacomment">
             <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
             <div class="commentsectionbypeople">
@@ -580,8 +642,8 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
                 <p>${comment.text}</p>
             </div>
         </div>`)
-        +
-        OtherCommentsOnOtherPost.map(comment => ` <div class="introareacomment">
+            +
+            OtherCommentsOnOtherPost.map(comment => ` <div class="introareacomment">
             <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
             <div class="commentsectionbypeople">
                 <p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
@@ -594,6 +656,7 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
     }
 }
 
+//fetching other profile from comment section
 const gotoprofile = (commentArea) => {
     if (commentArea) {
         commentArea.addEventListener('click', async (event) => {
@@ -607,6 +670,7 @@ const gotoprofile = (commentArea) => {
     }
 }
 
+//For going to other profile through post
 const gotouserprofile = (posthtml) => {
     if (posthtml) {
         posthtml.addEventListener('click', async (event) => {
@@ -620,18 +684,21 @@ const gotouserprofile = (posthtml) => {
     }
 }
 
+//event for change password btn
 changepasswordbtn.addEventListener('click', async (e) => {
     e.preventDefault()
 
     window.location.href = "/pages/changepassword.html"
 })
 
+//event for delete btn
 deleteUser.addEventListener('click', async (e) => {
     e.preventDefault()
 
     window.location.href = "/pages/delete.html"
 })
 
+//Event for logout btn
 logoutUser.addEventListener('click', async (e) => {
     e.preventDefault()
 
@@ -652,6 +719,69 @@ logoutUser.addEventListener('click', async (e) => {
         alert('Error logging out!')
     }
 })
+
+//Fetch total likes for a post
+const getLikes = async (postId) => {
+
+    try {
+        const response = await fetch(`http://localhost:5000/api/v1/getalllike/${postId}`)
+        const data = await response.json()
+
+        if (response.status === 200) {
+            return data
+        }
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+//Controls like button in case of reload
+const updateLikeButtons = async (posts) => {
+    try {
+        for (const post of posts) {
+            const postElement = document.getElementById(post._id)
+
+            const postId = post._id
+            const datas = await getLikes(postId)
+
+            const likes = Array.isArray(datas.likes) ? datas.likes : [datas.likes]
+
+            if (postElement) {
+                const likeButton = postElement.querySelector('.interactionlike1')
+                const likedButton = postElement.querySelector('.interactionlike2')
+
+                if (post.isLikedByUser===UserIdForPost) {
+                    likeButton.style.display = 'none'
+                    likedButton.style.display = 'inline-block'
+                } else {
+                    likeButton.style.display = 'inline-block'
+                    likedButton.style.display = 'none'
+                }
+            }
+
+            if (postElement) {
+                const divforlike = postElement.querySelector('.LikeArea')
+
+                if (likes.length === 0) {
+                    divforlike.textContent = '0 Likes'
+                }
+                else if (likes.length === 1) {
+                    divforlike.textContent = `Liked by ${likes[0].userId.fname}`
+                }
+                else if (likes.length > 1) {
+                    divforlike.textContent = `Liked by ${likes[0].userId.fname} and others`
+                }
+            }
+        }
+    } catch (error) {
+        console.error('Error loading posts:', error)
+    }
+}
+
+//To see all the likes...
+const updateLikeAreaSection = () => {
+
+}
 
 const sideBar = document.querySelector('.sidemenu')
 const hideSidebar = () => {
