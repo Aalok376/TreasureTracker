@@ -297,7 +297,7 @@ commentbtn.addEventListener('click', async (event) => {
             e.preventDefault();
             try {
                 const text = textt.value;
-                const response = await fetch(`http://localhost:5000/api/v1//commentinpost/${postId}`, {
+                const response = await fetch(`http://localhost:5000/api/v1/commentinpost/${postId}`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
