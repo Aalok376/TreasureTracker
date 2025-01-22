@@ -56,13 +56,15 @@ const getPost = async () => {
             posthtml.innerHTML = ownPosts.map(post => `
                 <div class="postcontainer" id=${post._id}>
                     <div class="identitycontainer">
-                        <div class="profileimageforpost" data-user-id="${post.userId._id}"style="background-image: url('http://localhost:5000/${post.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
+                   <section class="hello">
+                                           <div class="profileimageforpost" data-user-id="${post.userId._id}"style="background-image: url('http://localhost:5000/${post.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
                         <span class="nameforpost">${post.userId.fname} ${post.userId.lname}</span>
                         <div id="date-container">
                             <span id="current-date">${new Date(post.createdAt).toLocaleDateString()}</span>
                         </div>
-                        <span class="dropdownmenu">
-                             
+                   </section>
+                        <span class="dropdownmenu2">
+                             <span><i class="fa-solid fa-ellipsis fa-2xl"></i><span>
                         </span>
                     </div>
                     <div class="areaforpost">
@@ -87,8 +89,7 @@ const getPost = async () => {
                                             src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
                                             alt="${post.caption || 'Image'}" 
                                             class="post-image" 
-                                            height="250" 
-                                            width="250" 
+                                          
                                           />
                                         </div>`
                                 )
@@ -104,8 +105,7 @@ const getPost = async () => {
                                             src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
                                             alt="${post.caption || 'Image'}" 
                                             class="post-image" 
-                                            height="250" 
-                                            width="250" 
+                                           
                                           />
                                         </div>`
                                 )
@@ -121,8 +121,7 @@ const getPost = async () => {
                                             src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
                                             alt="${post.caption || 'Image'}" 
                                             class="post-image" 
-                                            height="250" 
-                                            width="250" 
+                                           
                                           />
                                         </div>`
                                 )
@@ -140,8 +139,7 @@ const getPost = async () => {
                                               src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
                                               alt="${post.caption || 'Image'}" 
                                               class="post-image" 
-                                              height="250" 
-                                              width="250" 
+                                             
                                             />
                                           </div>`
                                     )
@@ -180,11 +178,13 @@ const getPost = async () => {
                 otherPosts.map(post => `
                 <div class="postcontainer" id=${post._id}>
                     <div class="identitycontainer">
-                        <div class="profileimageforpost" data-user-id="${post.userId._id}"style="background-image: url('http://localhost:5000/${post.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
+                                          <section class="hello">
+                                           <div class="profileimageforpost" data-user-id="${post.userId._id}"style="background-image: url('http://localhost:5000/${post.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
                         <span class="nameforpost">${post.userId.fname} ${post.userId.lname}</span>
                         <div id="date-container">
                             <span id="current-date">${new Date(post.createdAt).toLocaleDateString()}</span>
                         </div>
+                   </section>
                         <span class="dropdownmenu">
                              
                         </span>
