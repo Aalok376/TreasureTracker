@@ -68,7 +68,7 @@ const getPost = async () => {
         });
 
         const data = await response.json();
-        const posts = Array.isArray(data.posts) ? data.posts : [];
+        posts = Array.isArray(data.posts) ? data.posts : [];
 
         if (posts.length > 0) {
             posthtml.innerHTML = posts.map(post => `
@@ -395,9 +395,11 @@ const getLikes = async (postId) => {
 
 //Controls like button in case of reload
 const updateLikeButtons = async (posts) => {
+    console.log(posts)
     try {
         for (const post of posts) {
             const postElement = document.getElementById(post._id)
+            console.log(postElement)
 
             const postId = post._id
             const datas = await getLikes(postId)
@@ -407,8 +409,9 @@ const updateLikeButtons = async (posts) => {
             if (postElement) {
                 const likeButton = postElement.querySelector('.interactionlike1')
                 const likedButton = postElement.querySelector('.interactionlike2')
+                const likedByUser = Array.isArray(post.isLikedByUser) ? post.isLikedByUser : []
 
-                if (post.isLikedByUser===UserIdForPost) {
+                if (likedByUser.includes(UserIdForPost)) {
                     likeButton.style.display = 'none'
                     likedButton.style.display = 'inline-block'
                 } else {
