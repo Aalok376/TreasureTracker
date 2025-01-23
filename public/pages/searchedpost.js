@@ -12,6 +12,8 @@ let otherPosts = []
 
 let posts = []
 
+const searchQuery=sessionStorage.getItem('query')
+
 //Comments
 const getProfilepic = async () => {
     try {
@@ -22,8 +24,7 @@ const getProfilepic = async () => {
         UserIdForPost = profiles[0].user._id
 
         ownprofile.innerHTML = profiles.map(profile => `
-            <a class="profile two" href="profile.html" style="background-image: url('http://localhost:5000/${profile.user?.profilePicture?.replace(/\\/g, '/')}')"></a>
-            <a class="text" href="postpage.html">What have you Lost or Found?</a>
+            <p>Search result for${searchQuery}</p>
         `).join('')
 
         ownprofile2.innerHTML = profiles.map(profile => `
@@ -45,7 +46,9 @@ const getPost = async () => {
         });
 
         const data = await response.json()
-        posts = Array.isArray(data.posts) ? data.posts : []
+        const totalposts = Array.isArray(data.posts) ? data.posts : []
+
+        posts=searchItems(totalposts,searchQuery)
 
         for (let i = 0; i < posts.length; i++) {
             if (posts[i].userId._id === UserIdForPost) {
@@ -308,6 +311,15 @@ const getPost = async () => {
     gotouserprofile(posthtml)
     updateLikeButtons(posts)
 };
+
+const searchItems = (totalposts, searchQuery) => {
+    const query = searchQuery.toLowerCase()
+
+    return totalposts.filter(post => 
+        post.category.toLowerCase().includes(query) || 
+        post.caption.toLowerCase().includes(query)
+    )
+}
 
 (async () => {
     await getProfilepic();
@@ -838,12 +850,12 @@ const openSidebar = () => {
 
 //Event listener for aside-menu
 
-const home = document.querySelector('.homepage')
-const message = document.querySelector('.Messagepage')
-const friends = document.querySelector('.Friends')
-const saved = document.querySelector('.SavedPosts')
+const home=document.querySelector('.homepage')
+const message=document.querySelector('.Messagepage')
+const friends=document.querySelector('.Friends')
+const saved=document.querySelector('.SavedPosts')
 
-home.addEventListener('click', async (e) => {
+home.addEventListener('click',async(e)=>{
     e.preventDefault()
 
     window.location.reload()
@@ -875,9 +887,10 @@ searchInput.addEventListener('keydown', (event) => {
         const query1 = searchInput.value.trim()
         if (query1) {
             sessionStorage.setItem('query',query1)
-            window.location.href="/pages/searchedpost.html"
+            window.location.reload()
             searchInput.value=''
         }
     }
-})
+});
+
 
