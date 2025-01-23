@@ -17,9 +17,10 @@ const like = async (req, res) => {
 
         const post = await Post.findById(postId)
         post.likeCount += 1;
+        post.isLikedByUser = post.isLikedByUser || []
         post.isLikedByUser.push(userId)
         await post.save()
-
+        
         return res.status(200).json({ msg: 'Post liked successfully.' });
     } catch (error) {
         console.log(error);
@@ -40,7 +41,7 @@ const removeLike = async (req, res) => {
 
         const post = await Post.findById(postId);
         post.likeCount -= 1;
-        post.liked=false
+        post.isLikedByUser = post.isLikedByUser.filter(id => id !== userId)
         await post.save();
 
         return res.status(200).json({ msg: 'Post unliked successfully.' });

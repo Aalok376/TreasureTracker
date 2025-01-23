@@ -346,8 +346,8 @@ commentbtn.addEventListener('click', async (event) => {
                     const datas = await getLikes(postId)
 
                     const likes = Array.isArray(datas.likes) ? datas.likes : [datas.likes]
-        
-                    updateLikeCount(likes,divforlike)
+
+                    updateLikeCount(likes, divforlike)
                 }
             })()
         } catch (error) {
@@ -375,8 +375,8 @@ commentbtn.addEventListener('click', async (event) => {
                     const datas = await getLikes(postId)
 
                     const likes = Array.isArray(datas.likes) ? datas.likes : [datas.likes]
-        
-                    updateLikeCount(likes,divforlike)
+
+                    updateLikeCount(likes, divforlike)
                 }
             })()
         } catch (error) {
@@ -508,7 +508,7 @@ const fetchComments = async (postId) => {
 }
 
 //Dynamically update LIkeArea Div..
-const updateLikeCount=(likes,divforlike)=> {
+const updateLikeCount = (likes, divforlike) => {
     if (likes.length === 0) {
         divforlike.textContent = '0 Likes';
     } else if (likes.length === 1) {
@@ -516,7 +516,7 @@ const updateLikeCount=(likes,divforlike)=> {
     } else if (likes.length > 1) {
         divforlike.textContent = `Liked by ${likes[0].userId.fname} and others`;
     }
-    else{
+    else {
         console.log('Post not working')
     }
 }
@@ -749,15 +749,16 @@ const updateLikeButtons = async (posts) => {
             if (postElement) {
                 const likeButton = postElement.querySelector('.interactionlike1')
                 const likedButton = postElement.querySelector('.interactionlike2')
-                 
-                console.log(post.isLikedByUser)
-                // if (post.isLikedByUser===UserIdForPost) {
-                //     likeButton.style.display = 'none'
-                //     likedButton.style.display = 'inline-block'
-                // } else {
-                //     likeButton.style.display = 'inline-block'
-                //     likedButton.style.display = 'none'
-                // }
+
+                const likedByUser = Array.isArray(post.isLikedByUser) ? post.isLikedByUser : []
+
+                if (likedByUser.includes(UserIdForPost)) {
+                    likeButton.style.display = 'none'
+                    likedButton.style.display = 'inline-block'
+                } else {
+                    likeButton.style.display = 'inline-block'
+                    likedButton.style.display = 'none'
+                }
             }
 
             if (postElement) {
