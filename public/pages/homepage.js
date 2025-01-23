@@ -346,8 +346,9 @@ commentbtn.addEventListener('click', async (event) => {
                     const datas = await getLikes(postId)
 
                     const likes = Array.isArray(datas.likes) ? datas.likes : [datas.likes]
+                    const match = likes.find(like => like.userId._id === UserIdForPost)
 
-                    updateLikeCount(likes, divforlike)
+                    updateLikeCount(likes, match, divforlike)
                 }
             })()
         } catch (error) {
@@ -375,8 +376,9 @@ commentbtn.addEventListener('click', async (event) => {
                     const datas = await getLikes(postId)
 
                     const likes = Array.isArray(datas.likes) ? datas.likes : [datas.likes]
+                    const match = likes.find(like => like.userId._id === UserIdForPost)
 
-                    updateLikeCount(likes, divforlike)
+                    updateLikeCount(likes, match, divforlike)
                 }
             })()
         } catch (error) {
@@ -507,20 +509,6 @@ const fetchComments = async (postId) => {
     }
 }
 
-//Dynamically update LIkeArea Div..
-const updateLikeCount = (likes, divforlike) => {
-    if (likes.length === 0) {
-        divforlike.textContent = '0 Likes';
-    } else if (likes.length === 1) {
-        divforlike.textContent = `Liked by ${likes[0].userId.fname}`;
-    } else if (likes.length > 1) {
-        divforlike.textContent = `Liked by ${likes[0].userId.fname} and others`;
-    }
-    else {
-        console.log('Post not working')
-    }
-}
-
 //Update comment section 
 const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherCommentsOnOtherPost, commentArea) => {
     if (OwnComments.length > 0 && OtherCommentsOnOwnPost.length === 0 && OtherCommentsOnOtherPost.length === 0) {
@@ -533,7 +521,7 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
                             </span>
                             <p>${comment.text}</p>
                         </div>
-                    </div>`)
+                    </div>`).join('')
     }
     else if (OwnComments.length > 0 && OtherCommentsOnOwnPost.length > 0 && OtherCommentsOnOtherPost.length === 0) {
         return commentArea.innerHTML = OwnComments.map(comment => ` <div class="introareacomment">
@@ -545,7 +533,7 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
                 </span>
                 <p>${comment.text}</p>
             </div>
-        </div>`)
+        </div>`).join('')
             +
             OtherCommentsOnOwnPost.map(comment => ` <div class="introareacomment">
             <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
@@ -556,7 +544,7 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
                 </span>
                 <p>${comment.text}</p>
             </div>
-        </div>`)
+        </div>`).join('')
     }
     else if (OwnComments.length > 0 && OtherCommentsOnOwnPost.length > 0 && OtherCommentsOnOtherPost.length > 0) {
         return commentArea.innerHTML = OwnComments.map(comment => ` <div class="introareacomment">
@@ -568,7 +556,7 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
                 </span>
                 <p>${comment.text}</p>
             </div>
-        </div>`)
+        </div>`).join('')
             +
             OtherCommentsOnOwnPost.map(comment => ` <div class="introareacomment">
             <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
@@ -579,7 +567,7 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
                 </span>
                 <p>${comment.text}</p>
             </div>
-        </div>`)
+        </div>`).join('')
             +
             OtherCommentsOnOtherPost.map(comment => ` <div class="introareacomment">
             <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
@@ -587,7 +575,7 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
                 <p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
                 <p>${comment.text}</p>
             </div>
-        </div>`)
+        </div>`).join('')
     }
     else if (OwnComments.length === 0 && OtherCommentsOnOwnPost.length > 0 && OtherCommentsOnOtherPost.length === 0) {
         return commentArea.innerHTML = OtherCommentsOnOwnPost.map(comment => ` <div class="introareacomment">
@@ -599,7 +587,7 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
                 </span>
                 <p>${comment.text}</p>
             </div>
-        </div>`)
+        </div>`).join('')
     }
     else if (OwnComments.length === 0 && OtherCommentsOnOwnPost.length > 0 && OtherCommentsOnOtherPost.length > 0) {
         return commentArea.innerHTML = OtherCommentsOnOwnPost.map(comment => ` <div class="introareacomment">
@@ -611,7 +599,7 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
                 </span>
                 <p>${comment.text}</p>
             </div>
-        </div>`)
+        </div>`).join('')
             +
             OtherCommentsOnOtherPost.map(comment => ` <div class="introareacomment">
             <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
@@ -619,7 +607,7 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
                 <p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
                 <p>${comment.text}</p>
             </div>
-        </div>`)
+        </div>`).join('')
     }
     else if (OwnComments.length === 0 && OtherCommentsOnOwnPost.length === 0 && OtherCommentsOnOtherPost.length > 0) {
         return commentArea.innerHTML = OtherCommentsOnOtherPost.map(comment => ` <div class="introareacomment">
@@ -628,7 +616,7 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
                 <p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
                 <p>${comment.text}</p>
             </div>
-        </div>`)
+        </div>`).join('')
 
     }
     else if (OwnComments.length > 0 && OtherCommentsOnOwnPost.length === 0 && OtherCommentsOnOtherPost.length > 0) {
@@ -641,7 +629,7 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
                 </span>
                 <p>${comment.text}</p>
             </div>
-        </div>`)
+        </div>`).join('')
             +
             OtherCommentsOnOtherPost.map(comment => ` <div class="introareacomment">
             <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
@@ -649,7 +637,7 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
                 <p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
                 <p>${comment.text}</p>
             </div>
-        </div>`)
+        </div>`).join('')
     }
     else {
         commentArea.innerHTML = `<p class="No-comments">No Comments</p>`
@@ -735,6 +723,40 @@ const getLikes = async (postId) => {
     }
 }
 
+//Dynamically update LIkeArea Div..
+const updateLikeCount = (likes, match, divforlike) => {
+    if (likes.length === 0) {
+        divforlike.textContent = '0 Likes'
+    }
+    else if (likes.length === 1) {
+        if (match) {
+            divforlike.textContent = `Liked by You`
+        }
+        else {
+            divforlike.textContent = `Liked by ${likes[0].userId.fname}`
+        }
+    }
+    else if (likes.length === 2) {
+        if (match) {
+            divforlike.textContent = `Liked by You and 1 Other`
+        }
+        else {
+            divforlike.textContent = `Liked by ${likes[0].userId.fname} and 1 Other`
+        }
+    }
+    else if (likes.length > 2) {
+        if (match) {
+            divforlike.textContent = `Liked by You and ${likes.length - 1} Other`
+        }
+        else {
+            divforlike.textContent = `Liked by ${likes[0].userId.fname} and ${likes.length - 1} Other`
+        }
+    }
+    else {
+        console.log('Post not working')
+    }
+}
+
 //Controls like button in case of reload
 const updateLikeButtons = async (posts) => {
     try {
@@ -745,6 +767,7 @@ const updateLikeButtons = async (posts) => {
             const datas = await getLikes(postId)
 
             const likes = Array.isArray(datas.likes) ? datas.likes : [datas.likes]
+            const match = likes.find(like => like.userId._id === UserIdForPost)
 
             if (postElement) {
                 const likeButton = postElement.querySelector('.interactionlike1')
@@ -768,10 +791,28 @@ const updateLikeButtons = async (posts) => {
                     divforlike.textContent = '0 Likes'
                 }
                 else if (likes.length === 1) {
-                    divforlike.textContent = `Liked by ${likes[0].userId.fname}`
+                    if (match) {
+                        divforlike.textContent = `Liked by You`
+                    }
+                    else {
+                        divforlike.textContent = `Liked by ${likes[0].userId.fname}`
+                    }
                 }
-                else if (likes.length > 1) {
-                    divforlike.textContent = `Liked by ${likes[0].userId.fname} and others`
+                else if (likes.length === 2) {
+                    if (match) {
+                        divforlike.textContent = `Liked by You and 1 Other`
+                    }
+                    else {
+                        divforlike.textContent = `Liked by ${likes[0].userId.fname} and 1 Other`
+                    }
+                }
+                else if (likes.length > 2) {
+                    if (match) {
+                        divforlike.textContent = `Liked by You and ${likes.length - 1} Other`
+                    }
+                    else {
+                        divforlike.textContent = `Liked by ${likes[0].userId.fname} and ${likes.length - 1} Other`
+                    }
                 }
             }
         }
@@ -794,3 +835,34 @@ const openSidebar = () => {
     sideBar.classList.add('appear')
     sideBar.classList.remove('disappear')
 }
+
+//Event listener for aside-menu
+
+const home=document.querySelector('.homepage')
+const message=document.querySelector('.Messagepage')
+const friends=document.querySelector('.Friends')
+const saved=document.querySelector('.SavedPosts')
+
+home.addEventListener('click',async(e)=>{
+    e.preventDefault()
+
+    window.location.reload()
+})
+// message.addEventListener('click',async(e)=>{
+//     e.preventDefault()
+
+//     window.location.href=""
+// })
+
+// friends.addEventListener('click',async(e)=>{
+//     e.preventDefault()
+
+//     window.location.href=""
+// })
+
+// saved.addEventListener('click',async(e)=>{
+//     e.preventDefault()
+
+//     window.location.href=""
+// })
+

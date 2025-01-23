@@ -96,3 +96,39 @@ function startResetTimer(seconds){
     },1000)
 }
 
+const otpInputs = document.querySelectorAll('.otp-input');
+
+otpInputs.forEach((input, index) => {
+    input.addEventListener('input', (e) => {
+        const value = input.value
+        const nextInput = otpInputs[index + 1]
+
+        if (value && nextInput) {
+            nextInput.focus()
+        }
+    });
+
+    input.addEventListener('keydown', (e) => {
+        const previousInput = otpInputs[index - 1]
+
+        if (e.key === 'Backspace') {
+            if (input.value === '' && previousInput) {
+                previousInput.focus()
+            }
+        }
+    });
+
+    input.addEventListener('paste', (e) => {
+        e.preventDefault()
+        const data = e.clipboardData.getData('text').slice(0, otpInputs.length)
+
+        otpInputs.forEach((input, i) => {
+            input.value = data[i] || ''
+        });
+
+        const lastFilledIndex = data.length - 1
+        if (otpInputs[lastFilledIndex]) {
+            otpInputs[lastFilledIndex].focus()
+        }
+    })
+})
