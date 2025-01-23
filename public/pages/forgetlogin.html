@@ -20,24 +20,43 @@
                         <input type="text" placeholder="Search Your Lost Item" id="text">
                     </div>
                 </div>
-                <div class="profilecontainer">
-                    <div class="pp"></div>
-                    <span class="chevron"><i class="fa-solid fa-chevron-down" style="color: #050505;"></i></span>
-                </div>
+    
             </div>
+            <div class="profilecontainer">
+              <div class="pp"></div>
+              <span class="chevron"><i class="fa-solid fa-chevron-down" style="color: #050505;"></i></span>
+          </div>
             <div class="dropdownmenu">
-                <li><a href="changepassword.html">Change password</a></li>
-                <li><a href="delete.html">Delete</a></li>
-                <li><a href="#">Logout</a></li>
-            </div>
+              <li>
+                  <div class="cgp">Change password</div>
+              </li>
+              <li>
+                  <div class="dlu">Delete</div>
+              </li>
+              <li>
+                  <div class="lgu">Logout</div>
+              </li>
+          </div>
     </header>
     <main class="main">
-        <div class="sidemenu">
-            <div class="links">
-                <div><a href="homepage.html"><i class="fas fa-home"></i>Home</a></div>
-                <div><a href="#"><i class="fas fa-message"></i>Messages</a></div>
-                <div><a href="#"><i class="fas fa-users"></i>Friends </a></div>
-                <div><a href="#"><i class="fas fa-bell"></i>Notifications</a></div>
+        <div class="sidemenubox" style="display: flex;">
+            <div>
+                <div class="sidemenu">
+                    <div style="position: relative;">
+                        <button class="lawda"
+                            style="position: absolute; right: 0; height: 25px; width: 25px; cursor: pointer; border-radius:50%;"
+                            onclick="hideSidebar()">X</button>
+                        <div class="links" style="padding-top: 24px;">
+                            <div class="homepage"><i class="fas fa-home"></i>Home</div>
+                            <div class="Messagepage"><i class="fas fa-message"></i>Messages</div>
+                            <div class="Friends"><i class="fas fa-users"></i>Friends</div>
+                            <div class="SavedPosts"><i class="fa-solid fa-bookmark"></i>Saved</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hamburgermenu">
+                <button onclick="openSidebar()"><i class="fa-solid fa-bars fa-2xl"></i></button>
             </div>
         </div>
         <div class="asidemenu">

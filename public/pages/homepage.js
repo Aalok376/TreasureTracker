@@ -749,14 +749,15 @@ const updateLikeButtons = async (posts) => {
             if (postElement) {
                 const likeButton = postElement.querySelector('.interactionlike1')
                 const likedButton = postElement.querySelector('.interactionlike2')
-
-                if (post.isLikedByUser===UserIdForPost) {
-                    likeButton.style.display = 'none'
-                    likedButton.style.display = 'inline-block'
-                } else {
-                    likeButton.style.display = 'inline-block'
-                    likedButton.style.display = 'none'
-                }
+                 
+                console.log(post.isLikedByUser)
+                // if (post.isLikedByUser===UserIdForPost) {
+                //     likeButton.style.display = 'none'
+                //     likedButton.style.display = 'inline-block'
+                // } else {
+                //     likeButton.style.display = 'inline-block'
+                //     likedButton.style.display = 'none'
+                // }
             }
 
             if (postElement) {

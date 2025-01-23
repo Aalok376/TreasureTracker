@@ -15,10 +15,10 @@ const like = async (req, res) => {
         const like = new Like({ userId, postId });
         await like.save();
 
-        const post = await Post.findById(postId);
+        const post = await Post.findById(postId)
         post.likeCount += 1;
-        post.isLikedByUser=userId
-        await post.save();
+        post.isLikedByUser.push(userId)
+        await post.save()
 
         return res.status(200).json({ msg: 'Post liked successfully.' });
     } catch (error) {

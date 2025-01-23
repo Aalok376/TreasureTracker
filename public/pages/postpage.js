@@ -94,3 +94,13 @@ logoutUser.addEventListener('click', async (e) => {
         alert('Error logging out!')
     }
 })
+
+const sideBar = document.querySelector('.sidemenu')
+const hideSidebar = () => {
+    sideBar.classList.add('disappear')
+    sideBar.classList.remove('appear')
+}
+const openSidebar = () => {
+    sideBar.classList.add('appear')
+    sideBar.classList.remove('disappear')
+}

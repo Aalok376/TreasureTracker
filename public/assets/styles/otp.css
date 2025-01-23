@@ -170,6 +170,11 @@ a:hover{
       display:none;
     }
    }
+   footer{
+    position:absolute;
+    bottom: 0px;
+    width:100vw;
+   }
    .information{
     display:flex;
     background:#232F3E;
@@ -197,11 +202,12 @@ a:hover{
 
 .connectwithus{
     display:flex;
-    flex-direction: column;   
+    flex-direction: column;  
  
 }
-h4{
+h4 {
     margin-bottom: 20px;
+    color:white;
 }
 .logoandflag{
     display:flex;

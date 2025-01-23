@@ -90,3 +90,12 @@ fbutton.addEventListener('click',async(e)=>{
 
     window.location.href="forgetlogin.html"
 })
+const sideBar = document.querySelector('.sidemenu')
+const hideSidebar = () => {
+    sideBar.classList.add('disappear')
+    sideBar.classList.remove('appear')
+}
+const openSidebar = () => {
+    sideBar.classList.add('appear')
+    sideBar.classList.remove('disappear')
+}
