@@ -136,7 +136,7 @@ transform:rotate(180deg);
 
 .sidemenu{
 list-style: none;
-width:200px;
+width:0px;
 height:auto;
 position: fixed;
 background-color:white;
@@ -246,6 +246,7 @@ height:auto;
 width:100%;
  
 }
+
 .postcontainer{
 background-color:white;
 display: flex;
@@ -303,16 +304,47 @@ display: flex;
 align-items: center;
 margin-left: 10px;
 }
-.dropdownmenu2 span{
+.threedot i{
   margin-left: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   top:18px;
-  right:20px;
-
+  right:30px;
 }
+
+.dropdownmenu2{
+  display:none;
+position:absolute;
+top:60px;
+right:25px;
+text-decoration: none;
+width:100px;
+background-color:lightblue;
+margin-top: 5px;
+backdrop-filter:blur(15px);
+border-radius: 20px;
+transform-origin: top; 
+transform: scaleY(0);
+overflow: hidden;
+transition: height cubic-bezier(0.175, 0.885, 0.32, 1.275);
+z-index:8888;
+animation: expand 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+.dropdownmenu2 li{
+  padding: 0.7rem;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 20px;
+  
+  }
+  .open{
+  height:auto;
+  display: block;
+  }
 .areaforpost{
 flex-grow: 1;
 margin:15px;
@@ -330,6 +362,31 @@ font-weight: 300;
   font-size: 20px;
   font-weight: 300; 
 }
+.likepopup{
+  display:none;
+  width:100%;
+  height: auto;
+  background-color: white;
+  position: relative; 
+  z-index: 10; 
+  display: flex;
+
+
+ }
+.likepopup .closeLike{
+  border:none;
+  border-radius:50%;
+  background-color: white;
+  position:relative;
+  top:3px;
+
+}
+.likepopup .crossbutton{
+  display:flex;
+  justify-content: flex-end;
+  align-items: center;
+ 
+}
 .likecontainer{
 display:flex;
 justify-content:space-evenly;
@@ -345,13 +402,17 @@ border:none;
 background-color: white;
 font-size: 20px;
 color: black;
+width:100px;
 }
 .interactionlike2{
 border:none;
 background-color: white;
 font-size: 20px;
 display:none;
+width:100px;
+color:red;
 }
+
 .interactioncomment{
 border:none;
 background-color: white;
@@ -377,7 +438,7 @@ font-size: 20px;
     padding:15px;
     overflow-y: auto;
     overflow-x: hidden;
-    margin-bottom: 2rem;
+
   
   }
   .introareacomment {
@@ -390,8 +451,8 @@ font-size: 20px;
     padding: 6px;
     padding-left:30px;
     width:auto;
-    margin-right:20px;
-    margin-bottom: 16px;
+
+    margin-bottom: 10px;
     border-radius: 20px;
     }
   .comment-area .introareacomment .nameincommentarea{
@@ -424,7 +485,6 @@ position: relative;
     flex-flow: column nowrap;
     position:relative;
     width:100%;
-    margin-bottom: 2rem;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
@@ -441,6 +501,7 @@ position: relative;
     width: 90%;
     padding: 8px;
     margin: 20px;
+    margin-left: 40px;
     border: 1px solid #ccc;
     border-radius: 5px;
     resize: none;
@@ -455,6 +516,7 @@ position: relative;
     border-radius: 5px;
     cursor: pointer;
     margin:20px;
+    margin-left: 40px;
     width: 90%;
   }
   
@@ -481,6 +543,7 @@ position: relative;
     height: 60px;
     width:60px;
     position: relative;
+
   }
 .containerforphoto .text{
   border:none;
@@ -496,6 +559,7 @@ font-size: 25px;
 text-decoration: none;
 color:black;
 padding:10px;
+margin-left: 10px;
 
   
 }
@@ -673,3 +737,9 @@ border-radius: 10px;
   text-align: center;
   border-radius: 4px;
 }
+.LikeArea{
+  position: relative;
+  top:5px;
+  padding-left: 10px;
+}
+

@@ -133,7 +133,7 @@ position: relative;
 
 .sidemenu{
 list-style: none;
-width:200px;
+width:0px;
 height:auto;
 position: fixed;
 background-color:white;
@@ -318,7 +318,8 @@ h1:hover {
 
 /* Form container */
 form {
-  width: 60%; /* Ensures responsiveness */
+  width: 100%; /* Ensures responsiveness */
+  max-width: 1200px;
   height: 720px;
   margin: 90px;
   background: rgba(255, 255, 255, 0.9); /* Clean white background */

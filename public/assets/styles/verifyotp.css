@@ -4,6 +4,17 @@
     box-sizing:border-box;
     font-family: "poppins" sans-serif;
   }
+  li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+    color:rgba(255,255,255,7);
+    font-size: 1 rem;
+}
+a:hover{
+    color:orange;
+}
   body{
     max-width:100vw;
     min-height:100vh;
@@ -123,6 +134,7 @@
     
     .chevron{
     position:relative;
+    
     
     }
     .chevron :active{
@@ -273,101 +285,12 @@
       left: 10px;
     }
   }  
-.edit-profile-container {
-    background: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px 40px;
-    max-width: 600px;
-    width: 100%;
-    margin: 90px;
-}
-h1 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 20px;
-}
-form {
-    display: flex;
-    flex-direction: column;
-}
-label {
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #555;
-}
-#contact,
-#profilepicture,
-#coverpicture,
-#fname,
-#lname
- {
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
-}
-#fname:focus{
-    border-color: #007bff;
-    outline: none;
-}
-#lname:focus{
-    border-color: #007bff;
-    outline: none;
-}
-#contact:focus{
-    border-color: #007bff;
-    outline: none;
-}
-#coverpicture:focus{
-    border-color: #007bff;
-    outline: none;
-}
-#profielpicture:focus{
-    border-color: #007bff;
-    outline: none;
-}
-.file-input {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 15px;
-}
-.image-preview {
-    width: 50%;
-    max-height: 100px;
-    object-fit: cover;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-button.btn {
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-}
-button.btn:hover {
-    background-color: #0056b3;
-}
-.cancel-link {
-    text-align: center;
-    margin-top: 10px;
-}
-.cancel-link a {
-    color: #555;
-    text-decoration: none;
-}
-.cancel-link a:hover {
-    text-decoration: underline;
-}
-footer{
-    z-index:2;
-  }
-  .information{
+  footer{
+    position:absolute;
+    bottom: 0px;
+    width:100vw;
+   }
+   .information{
     display:flex;
     background:#232F3E;
     height:250px;
@@ -388,21 +311,18 @@ footer{
 }
 .getusknow{
     display:flex;
-    flex-direction: column;
+    flex-direction: column; 
 
-}
-.information a{
-  text-decoration: none;
-  color:white;
 }
 
 .connectwithus{
     display:flex;
-    flex-direction: column;   
+    flex-direction: column;  
  
 }
-h4{
+h4 {
     margin-bottom: 20px;
+    color:white;
 }
 .logoandflag{
     display:flex;
@@ -414,20 +334,112 @@ h3{
 }
 .flag{
     position: absolute;
-
     margin-top: 41px;
+    color:white;
 }
-.backtotop a{
+
+.backtotop{
     height: 60px;
     background:#344050;
     display:flex;
     justify-content: center;
     align-items: center;
     font-weight:bold;
-    text-decoration: none;
-    color:white;
-    font-size:20px;
+    font-size: 20px;
 }
-.footer a:hover{
-color:orange;
+.otpcontainer{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding:20px;
+    margin: 90px;
+    backdrop-filter: blur(15px);
+
 }
+.container {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  h1 {
+    font-size: 24px;
+    color: #333333;
+  }
+  p {
+    color: #666666;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  .otp-input {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .otp-input input {
+    width: 40px;
+    height: 50px;
+    font-size: 18px;
+    text-align: center;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+  }
+  .btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .btn:hover {
+    background-color: #0056b3;
+  }
+  .resend {
+    font-size: 12px;
+    color: #666666;
+    cursor: pointer;
+  }
+
+  .footer-link {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #007bff;
+    text-decoration: underline;
+  }
+
+  @media(max-width:450px){
+    .otp-input input {
+        width: 35px;
+        height: 50px;
+        font-size: 18px;
+        text-align: center;
+        border: 1px solid #cccccc;
+        border-radius: 4px;
+        gap:5px;
+      }
+  }
+  @media(max-width:385px){
+    .otp-input input {
+        width: 30px;
+        height: 40px;
+        font-size: 18px;
+        text-align: center;
+        border: 1px solid #cccccc;
+        border-radius: 4px;
+        gap:5px;
+      }
+
+  }
+  footer{
+    z-index: 2;
+  }

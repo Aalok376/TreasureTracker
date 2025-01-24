@@ -133,7 +133,7 @@ position: relative;
 
 .sidemenu{
 list-style: none;
-width:200px;
+width:0px;
 height:auto;
 position: fixed;
 background-color:white;
@@ -280,8 +280,8 @@ border-radius: 12px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px 30px;
-    width: 60%;
-    height: 480px;
+    max-width: 600px;
+    width: 100%;
     text-align: center;
     transition: 0.1s ease-in;
     margin:90px;
@@ -381,13 +381,7 @@ border-radius: 12px;
   
   }
  
-  @media (max-width:1168px){
-    .delete-page {
-      width:90%;
-    }
 
-
-  }
   .information{
     display:flex;
     background:#232F3E;

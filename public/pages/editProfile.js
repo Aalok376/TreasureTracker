@@ -108,3 +108,12 @@ document.querySelector('.cancel-link').addEventListener('click', async (e) => {
 
     window.location.href = '/pages/profile.html'
 })
+const sideBar = document.querySelector('.sidemenu')
+const hideSidebar = () => {
+    sideBar.classList.add('disappear')
+    sideBar.classList.remove('appear')
+}
+const openSidebar = () => {
+    sideBar.classList.add('appear')
+    sideBar.classList.remove('disappear')
+}

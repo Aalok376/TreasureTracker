@@ -62,14 +62,15 @@
             <div class="containerforphoto"></div>
             <div class="containerforpost"></div>
         </div>
+
     </main>
 
     <script>
-        const tooglebtn = document.querySelector('.chevron')
+        const tooglebtn1 = document.querySelector('.chevron')
         const tooglebtnIcon = document.querySelector('.chevron i')
         const dropDownMenu = document.querySelector('.dropdownmenu')
 
-        tooglebtn.onclick = function () {
+        tooglebtn1.onclick = function () {
             dropDownMenu.classList.toggle('open')
             const isOpen = dropDownMenu.classList.contains('open')
             tooglebtnIcon.classList = isOpen ?

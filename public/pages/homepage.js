@@ -35,7 +35,7 @@ const getProfilepic = async () => {
 };
 
 //Posts....
-const getPost = async () => {
+const getPost = async (callback) => {
     try {
         const response = await fetch("http://localhost:5000/api/v1/getPosts", {
             method: "GET",
@@ -66,10 +66,23 @@ const getPost = async () => {
                             <span id="current-date">${new Date(post.createdAt).toLocaleDateString()}</span>
                         </div>
                    </section>
-                        <span class="dropdownmenu2">
-                             <span><i class="fa-solid fa-ellipsis fa-2xl"></i><span>
+                             <span class="spaceforthreedot">
+                             <span class="threedot" ><i class="fa-solid fa-ellipsis fa-2xl"></i><span>
                         </span>
+                          <div class="dropdownmenu2">
+                <li>
+                    <div class="edit">Edit</div>
+                </li>
+                <li>
+                    <div class="deletepost">Delete</div>
+                </li>
+                <li>
+                    <div class="savepost">Save</div>
+                </li>
+            </div>
+
                     </div>
+
                     <div class="areaforpost">
                         <div class="post-header">
                             <p class="post-caption">${post.caption || "No caption provided"}</p>
@@ -163,9 +176,13 @@ const getPost = async () => {
                     <hr class="custom-line1">
                     <div class="LikeArea" style="height:30px"></div>
                     <hr class="custom-line2">
+                         <div class="likepopup">
+                         <div class="crossbutton">
+            <button class="closeLike"><i class="fa-solid fa-x fa-sm" style="color: #000000;"></i></button>
+        </div></div>
                     <div class="likecontainer">
                         <button class="interactionlike1"><i class="fa-regular fa-heart"></i>Like</button>
-                        <button class="interactionlike2"><i class="fa-solid fa-heart"style="color:black;"></i>Like</button>
+                        <button class="interactionlike2"><i class="fa-solid fa-heart" style="color: #fa0000;"></i>Liked</button>
                         <button class="interactioncomment"><i class="fa-regular fa-comment"></i>Comment</button>
                         <button class="interactionshare"><i class="fa-solid fa-share"></i>Share</button>
                     </div>
@@ -189,9 +206,18 @@ const getPost = async () => {
                             <span id="current-date">${new Date(post.createdAt).toLocaleDateString()}</span>
                         </div>
                    </section>
-                        <span class="dropdownmenu">
-                             
+                        <span class="spaceforthreedot">
+                             <span class="threedot"><i class="fa-solid fa-ellipsis fa-2xl"></i><span>
                         </span>
+                          <div class="dropdownmenu2">
+                <li>
+                    <div class="savepostother">Save</div>
+                </li>
+                <li>
+                    <div class="reportpost">Report</div>
+                </li>
+             
+            </div>
                     </div>
                     <div class="areaforpost">
                         <div class="post-header">
@@ -280,11 +306,15 @@ const getPost = async () => {
                         </div>
                     </div>
                     <hr class="custom-line1">
-                    <div class="LikeArea" style="height:30px"></div>
+                    <div class="LikeArea" style="height:30px;"></div>
                     <hr class="custom-line2">
+                      <div class="likepopup">
+                         <div class="crossbutton">
+            <button class="closeLike"><i class="fa-solid fa-x fa-sm" style="color: #000000;"></i></button>
+        </div></div>
                     <div class="likecontainer">
                         <button class="interactionlike1"><i class="fa-regular fa-heart"></i>Like</button>
-                        <button class="interactionlike2"><i class="fa-solid fa-heart"style="color:black;"></i>Like</button>
+                        <button class="interactionlike2"><i class="fa-solid fa-heart"style="color:red;"></i>Liked</button>
                         <button class="interactioncomment"><i class="fa-regular fa-comment"></i>Comment</button>
                         <button class="interactionshare"><i class="fa-solid fa-share"></i>Share</button>
                     </div>
@@ -307,11 +337,12 @@ const getPost = async () => {
     }
     gotouserprofile(posthtml)
     updateLikeButtons(posts)
+    callback()
 };
 
 (async () => {
     await getProfilepic();
-    await getPost();
+    await getPost(callback);
 })()
 
 
@@ -881,3 +912,50 @@ searchInput.addEventListener('keydown', (event) => {
     }
 })
 
+
+
+
+
+// tooglebtn2.onclick = function () {
+//     dropDownMenu2.classList.toggle('open')
+//     const isOpen = dropDownMenu2.classList.contains('open')
+//     tooglebtnIcon2.classList = isOpen ?
+//     "fa-solid fa-x fa-2xl" : "fa-solid fa-ellipsis fa-2xl"
+// };
+
+// togglebtn2.addEventListener('click',()=>{
+//     console.log('suiiiii')
+// })
+
+// console.log(togglebtn2)
+
+const callback = () => {
+   const togglebtn2 = document.querySelector('.threedot')
+   const dropDownMenu2 = document.querySelector('.dropdownmenu2')
+   const tooglebtnIcon2 = document.querySelector('.threedot i')
+   togglebtn2.addEventListener('click',()=>{
+    dropDownMenu2.classList.toggle('open')
+    const isOpen = dropDownMenu2.classList.contains('open')
+    tooglebtnIcon2.classList = isOpen ?
+    "fa-solid fa-x fa-2xl" : "fa-solid fa-ellipsis fa-2xl"
+   })
+
+   const likeArea = document.querySelector('.LikeArea')
+   let clicked = false
+   likeArea.addEventListener('click',()=>{
+    const likepopup = document.querySelector('.likepopup')
+    if(clicked){
+        likepopup.style.display='block'
+        clicked = false
+    }else{
+        likepopup.style.display='none'
+        clicked = true
+    }
+    
+    console.log(clicked)
+   })
+//    const closeLike = document.querySelector('.cross')
+//    closeLike.addEventListener('click',()=>{
+//     console.log('like')
+//    })
+}
