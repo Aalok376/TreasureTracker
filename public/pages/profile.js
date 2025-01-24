@@ -208,7 +208,7 @@ commentbtn.addEventListener('click', async (event) => {
     const postId = postElement.id;
 
     const commentSection = postElement.querySelector('.comment-container')
-    
+
     const divforlike = postElement.querySelector('.LikeArea')
 
     if (event.target.classList.contains('interactionlike1')) {
@@ -276,7 +276,7 @@ commentbtn.addEventListener('click', async (event) => {
 
         const submitbtn = postElement.querySelector('.post-comment-btn')
         const textt = postElement.querySelector('.comment-box')
-        
+
         let OwnComments = []
         let OtherComments = []
 
@@ -294,10 +294,10 @@ commentbtn.addEventListener('click', async (event) => {
                 )
 
                 if (response.status === 200) {
-                     const datas=await fetchComments(postId)
+                    const datas = await fetchComments(postId)
 
-                     var comments = Array.isArray(datas.comments) ? datas.comments : [datas.comments]
-                     
+                    var comments = Array.isArray(datas.comments) ? datas.comments : [datas.comments]
+
                     OwnComments = []
                     OtherComments = []
                     for (let i = 0; i < comments.length; i++) {
@@ -308,12 +308,12 @@ commentbtn.addEventListener('click', async (event) => {
                         }
                     }
 
-                     updateCommentSections(OwnComments,OtherComments,commentArea)
+                    updateCommentSections(OwnComments, OtherComments, commentArea)
 
-                     textt.value=''
+                    textt.value = ''
 
                 }
-                else{
+                else {
                     console.error('Failed to create comment')
                 }
             } catch (error) {
@@ -325,7 +325,7 @@ commentbtn.addEventListener('click', async (event) => {
             const datas = await fetchComments(postId)
 
             var comments = Array.isArray(datas.comments) ? datas.comments : [datas.comments]
-            
+
             for (let i = 0; i < comments.length; i++) {
                 if (comments[i].userId._id === UserIdForPost) {
                     OwnComments.push(comments[i]);
@@ -334,7 +334,7 @@ commentbtn.addEventListener('click', async (event) => {
                 }
             }
 
-            updateCommentSections(OwnComments,OtherComments,commentArea)
+            updateCommentSections(OwnComments, OtherComments, commentArea)
 
         }
         catch (error) {
@@ -486,8 +486,8 @@ const fetchComments = async (postId) => {
     }
 }
 
-const updateCommentSections = async (OwnComments,OtherComments, commentArea) => {
-    if (OwnComments.length > 0 && OtherComments.length>0) {
+const updateCommentSections = async (OwnComments, OtherComments, commentArea) => {
+    if (OwnComments.length > 0 && OtherComments.length > 0) {
         return commentArea.innerHTML = OwnComments.map(comment => ` <div class="introareacomment">
                          <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
                          <div class="commentsectionbypeople">
@@ -498,8 +498,8 @@ const updateCommentSections = async (OwnComments,OtherComments, commentArea) => 
                              <p>${comment.text}</p>
                          </div>
                      </div>`).join('')
-                     +
-                     OtherComments.map(comment => ` <div class="introareacomment">
+            +
+            OtherComments.map(comment => ` <div class="introareacomment">
                         <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
                         <div class="commentsectionbypeople">
                             <p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
@@ -509,8 +509,8 @@ const updateCommentSections = async (OwnComments,OtherComments, commentArea) => 
                             <p>${comment.text}</p>
                         </div>
                     </div>`).join('')
-     }
-     else if (OwnComments.length > 0 && OtherComments.length===0) {
+    }
+    else if (OwnComments.length > 0 && OtherComments.length === 0) {
         return commentArea.innerHTML = OwnComments.map(comment => ` <div class="introareacomment">
                          <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
                          <div class="commentsectionbypeople">
@@ -521,9 +521,9 @@ const updateCommentSections = async (OwnComments,OtherComments, commentArea) => 
                              <p>${comment.text}</p>
                          </div>
                      </div>`).join('')
-        }
-        else if (OwnComments.length === 0 && OtherComments.length>0) {
-            return commentArea.innerHTML = OtherComments.map(comment => ` <div class="introareacomment">
+    }
+    else if (OwnComments.length === 0 && OtherComments.length > 0) {
+        return commentArea.innerHTML = OtherComments.map(comment => ` <div class="introareacomment">
                              <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
                              <div class="commentsectionbypeople">
                                  <p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
@@ -533,16 +533,16 @@ const updateCommentSections = async (OwnComments,OtherComments, commentArea) => 
                                  <p>${comment.text}</p>
                              </div>
                          </div>`).join('')
-            }
+    }
     else {
         commentArea.innerHTML = `<p class="No-comments">No Comments</p>`
     }
 }
 
-const gotoprofile=(commentArea)=>{
+const gotoprofile = (commentArea) => {
     if (commentArea) {
         commentArea.addEventListener('click', async (event) => {
-            
+
             const profileImage = event.target.closest('.profileimageforpost');
             if (profileImage) {
                 const userId = profileImage.getAttribute("data-user-id");
@@ -552,10 +552,10 @@ const gotoprofile=(commentArea)=>{
     }
 }
 
-const gotouserprofile=(posthtml)=>{
+const gotouserprofile = (posthtml) => {
     if (posthtml) {
         posthtml.addEventListener('click', async (event) => {
-            
+
             const profileImage = event.target.closest('.profileimageforpost');
             if (profileImage) {
                 const userId = profileImage.getAttribute("data-user-id");
@@ -565,11 +565,10 @@ const gotouserprofile=(posthtml)=>{
     }
 }
 
-ownprofile2.addEventListener('click',async(event)=>{
-    const ppbtn=event.target.closest('.profile')
-    if(ppbtn){
-        window.location.href="/pages/profile.html"
-    }
+ownprofile2.addEventListener('click', async (event) => {
+    
+    window.location.href = "/pages/profile.html"
+
 })
 
 changepasswordbtn.addEventListener('click', async (e) => {
@@ -605,28 +604,28 @@ logoutUser.addEventListener('click', async (e) => {
     }
 })
 
-ownprofile.addEventListener('click',async(event)=>{
-    const addpost=event.target.closest('.addpost')
-    const editprofile=event.target.closest('.editprofile')
-    if(addpost){
-        window.location.href="/pages/postpage.html"
+ownprofile.addEventListener('click', async (event) => {
+    const addpost = event.target.closest('.addpost')
+    const editprofile = event.target.closest('.editprofile')
+    if (addpost) {
+        window.location.href = "/pages/postpage.html"
     }
-    else if(editprofile){
-        window.location.href='/pages/editProfile.html'
+    else if (editprofile) {
+        window.location.href = '/pages/editProfile.html'
     }
 })
 
 //Event listener for aside-menu
 
-const home=document.querySelector('.homepage')
-const message=document.querySelector('.Messagepage')
-const friends=document.querySelector('.Friends')
-const saved=document.querySelector('.SavedPosts')
+const home = document.querySelector('.homepage')
+const message = document.querySelector('.Messagepage')
+const friends = document.querySelector('.Friends')
+const saved = document.querySelector('.SavedPosts')
 
-home.addEventListener('click',async(e)=>{
+home.addEventListener('click', async (e) => {
     e.preventDefault()
 
-    window.location.href="/pages/homepage.html"
+    window.location.href = "/pages/homepage.html"
 })
 // message.addEventListener('click',async(e)=>{
 //     e.preventDefault()
@@ -647,5 +646,19 @@ home.addEventListener('click',async(e)=>{
 // })
 
 
+//For searching items
+
+const searchInput = document.getElementById('text')
+
+searchInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+        const query1 = searchInput.value.trim()
+        if (query1) {
+            sessionStorage.setItem('query', query1)
+            window.location.href = "/pages/searchedpost.html"
+            searchInput.value = ''
+        }
+    }
+})
 
 

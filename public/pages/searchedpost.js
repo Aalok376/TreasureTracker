@@ -168,7 +168,7 @@ const getPost = async () => {
                     <hr class="custom-line2">
                     <div class="likecontainer">
                         <button class="interactionlike1"><i class="fa-regular fa-heart"></i>Like</button>
-                        <button class="interactionlike2"><i class="fa-solid fa-heart"style="color:black;"></i>Like</button>
+                        <button class="interactionlike2"><i class="fa-solid fa-heart"style="color:red;"></i>Liked</button>
                         <button class="interactioncomment"><i class="fa-regular fa-comment"></i>Comment</button>
                         <button class="interactionshare"><i class="fa-solid fa-share"></i>Share</button>
                     </div>
@@ -287,7 +287,7 @@ const getPost = async () => {
                     <hr class="custom-line2">
                     <div class="likecontainer">
                         <button class="interactionlike1"><i class="fa-regular fa-heart"></i>Like</button>
-                        <button class="interactionlike2"><i class="fa-solid fa-heart"style="color:black;"></i>Like</button>
+                        <button class="interactionlike2"><i class="fa-solid fa-heart"style="color:red;"></i>Liked</button>
                         <button class="interactioncomment"><i class="fa-regular fa-comment"></i>Comment</button>
                         <button class="interactionshare"><i class="fa-solid fa-share"></i>Share</button>
                     </div>

@@ -563,10 +563,9 @@ const gotoprofile = (commentArea) => {
 }
 
 ownprofile2.addEventListener('click', async (event) => {
-    const ppbtn = event.target.closest('.profile')
-    if (ppbtn) {
+    
         window.location.href = "/pages/profile.html"
-    }
+    
 })
 
 const gotouserprofile = (posthtml) => {
@@ -645,5 +644,21 @@ home.addEventListener('click',async(e)=>{
 
 //     window.location.href=""
 // })
+
+
+//For searching items
+
+const searchInput = document.getElementById('text')
+
+searchInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') { 
+        const query1 = searchInput.value.trim()
+        if (query1) {
+            sessionStorage.setItem('query',query1)
+            window.location.href="/pages/searchedpost.html"
+            searchInput.value=''
+        }
+    }
+})
 
 

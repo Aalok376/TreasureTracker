@@ -95,6 +95,21 @@ logoutUser.addEventListener('click', async (e) => {
     }
 })
 
+//For searching items
+
+const searchInput = document.getElementById('text')
+
+searchInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') { 
+        const query1 = searchInput.value.trim()
+        if (query1) {
+            sessionStorage.setItem('query',query1)
+            window.location.href="/pages/searchedpost.html"
+            searchInput.value=''
+        }
+    }
+})
+
 const sideBar = document.querySelector('.sidemenu')
 const hideSidebar = () => {
     sideBar.classList.add('disappear')
@@ -104,3 +119,32 @@ const openSidebar = () => {
     sideBar.classList.add('appear')
     sideBar.classList.remove('disappear')
 }
+
+//Event listener for aside-menu
+const home=document.querySelector('.homepage')
+const message=document.querySelector('.Messagepage')
+const friends=document.querySelector('.Friends')
+const saved=document.querySelector('.SavedPosts')
+
+home.addEventListener('click',async(e)=>{
+    e.preventDefault()
+
+    window.location.href="/pages/homepage.html"
+})
+// message.addEventListener('click',async(e)=>{
+//     e.preventDefault()
+
+//     window.location.href=""
+// })
+
+// friends.addEventListener('click',async(e)=>{
+//     e.preventDefault()
+
+//     window.location.href=""
+// })
+
+// saved.addEventListener('click',async(e)=>{
+//     e.preventDefault()
+
+//     window.location.href=""
+// })
