@@ -5,7 +5,7 @@ const changepasswordbtn = document.querySelector('.cgp')
 const deleteUser = document.querySelector('.dlu')
 const logoutUser = document.querySelector('.lgu')
 
-let redirect=false
+let redirect = false
 
 
 const getProfilepic = async () => {
@@ -13,11 +13,27 @@ const getProfilepic = async () => {
         const response = await fetch("http://localhost:5000/api/v1/profile");
         const data = await response.json();
 
-        const profiles = Array.isArray(data) ? data : [data];
+        const profiles = Array.isArray(data) ? data : [data]
+
+        console.log(profiles)
 
         ownprofile2.innerHTML = profiles.map(profile => `
             <a href="profile.html" class="profile" style="background-image: url('http://localhost:5000/${profile.user?.profilePicture?.replace(/\\/g, '/')}')"></a>
         `).join('');
+
+        document.querySelector('#fname').value = profiles[0].user.fname || ''
+        document.querySelector('#lname').value = profiles[0].user.lname || ''
+        document.querySelector('#contact').value = profiles[0].user.contactNumber || ''
+        if (profiles[0]?.user?.profilePicture) {
+            document.querySelector('#profilePreview').src = `http://localhost:5000/${profiles[0]?.user?.profilePicture.replace(/\\/g, '/')}`
+            document.querySelector('#profilePreview').style.display= 'block'
+        } 
+
+        if (profiles[0].user.coverPicture) {
+            document.querySelector('#coverPreview').src=`http://localhost:5000/${profiles[0].user?.coverPicture?.replace(/\\/g, '/')}`
+            document.querySelector('#coverPreview').style.display= 'block'
+        }
+
     } catch (error) {
         console.error("Error fetching profile picture:", error);
     }
@@ -42,13 +58,13 @@ btn.addEventListener('click', async (e) => {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ newfname,newlname })
+                body: JSON.stringify({ newfname, newlname })
             })
 
             const result = await response.json()
             console.log(result.msg)
             if (response.status === 200) {
-               redirect=true
+                redirect = true
             }
         }
         catch (error) {
@@ -69,7 +85,7 @@ btn.addEventListener('click', async (e) => {
             const result = await response.json()
             console.log(result.msg)
             if (response.status === 200) {
-                redirect=true
+                redirect = true
             }
         }
         catch (error) {
@@ -80,8 +96,8 @@ btn.addEventListener('click', async (e) => {
 
     if (newProfilePicture) {
         try {
-            const profileformData=new FormData()
-            profileformData.append('newProfilePicture',newProfilePicture)
+            const profileformData = new FormData()
+            profileformData.append('newProfilePicture', newProfilePicture)
             const response = await fetch('http://localhost:5000/api/v1/updateProfilePicture', {
                 method: 'PUT',
                 headers: {},
@@ -91,7 +107,7 @@ btn.addEventListener('click', async (e) => {
             const result = await response.json()
             console.log(result.msg)
             if (response.status === 200) {
-                redirect=true
+                redirect = true
             }
         }
         catch (error) {
@@ -102,8 +118,8 @@ btn.addEventListener('click', async (e) => {
 
     if (newCoverPicture) {
         try {
-            const coverformData=new FormData()
-            coverformData.append('newCoverPicture',newCoverPicture)
+            const coverformData = new FormData()
+            coverformData.append('newCoverPicture', newCoverPicture)
             const response = await fetch('http://localhost:5000/api/v1/updateCoverPicture', {
                 method: 'PUT',
                 headers: {},
@@ -113,7 +129,7 @@ btn.addEventListener('click', async (e) => {
             const result = await response.json()
             console.log(result.msg)
             if (response.status === 200) {
-                redirect=true
+                redirect = true
             }
         }
         catch (error) {
@@ -122,8 +138,8 @@ btn.addEventListener('click', async (e) => {
         }
     }
 
-    if(redirect){
-        window.location.href='/pages/profile.html'
+    if (redirect) {
+        window.location.href = '/pages/profile.html'
     }
 })
 
@@ -135,7 +151,7 @@ document.querySelector('.cancel-link').addEventListener('click', async (e) => {
 
 
 ownprofile2.addEventListener('click', async (event) => {
-    
+
     window.location.href = "/pages/profile.html"
 
 })
@@ -176,12 +192,12 @@ logoutUser.addEventListener('click', async (e) => {
 const searchInput = document.getElementById('text')
 
 searchInput.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') { 
+    if (event.key === 'Enter') {
         const query1 = searchInput.value.trim()
         if (query1) {
-            sessionStorage.setItem('query',query1)
-            window.location.href="/pages/searchedpost.html"
-            searchInput.value=''
+            sessionStorage.setItem('query', query1)
+            window.location.href = "/pages/searchedpost.html"
+            searchInput.value = ''
         }
     }
 })
@@ -198,15 +214,15 @@ const openSidebar = () => {
 
 //Event listener for aside-menu
 
-const home=document.querySelector('.homepage')
-const message=document.querySelector('.Messagepage')
-const friends=document.querySelector('.Friends')
-const saved=document.querySelector('.SavedPosts')
+const home = document.querySelector('.homepage')
+const message = document.querySelector('.Messagepage')
+const friends = document.querySelector('.Friends')
+const saved = document.querySelector('.SavedPosts')
 
-home.addEventListener('click',async(e)=>{
+home.addEventListener('click', async (e) => {
     e.preventDefault()
 
-    window.location.href="/pages/homepage.html"
+    window.location.href = "/pages/homepage.html"
 })
 // message.addEventListener('click',async(e)=>{
 //     e.preventDefault()
