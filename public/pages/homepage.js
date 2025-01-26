@@ -35,7 +35,7 @@ const getProfilepic = async () => {
 };
 
 //Posts....
-const getPost = async (callback) => {
+const getPost = async () => {
     try {
         const response = await fetch("http://localhost:5000/api/v1/getPosts", {
             method: "GET",
@@ -59,29 +59,32 @@ const getPost = async (callback) => {
             posthtml.innerHTML = ownPosts.map(post => `
                 <div class="postcontainer" id=${post._id}>
                     <div class="identitycontainer">
-                   <section class="hello">
-                                           <div class="profileimageforpost" data-user-id="${post.userId._id}"style="background-image: url('http://localhost:5000/${post.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
-                        <span class="nameforpost">${post.userId.fname} ${post.userId.lname}</span>
-                        <div id="date-container">
-                            <span id="current-date">${new Date(post.createdAt).toLocaleDateString()}</span>
-                        </div>
-                   </section>
-                             <span class="spaceforthreedot">
-                             <span class="threedot" ><i class="fa-solid fa-ellipsis fa-2xl"></i><span>
-                        </span>
-                          <div class="dropdownmenu2">
-                <li>
-                    <div class="edit">Edit</div>
-                </li>
-                <li>
-                    <div class="deletepost">Delete</div>
-                </li>
-                <li>
-                    <div class="savepost">Save</div>
-                </li>
-            </div>
-
+                        <section class="hello">
+                            <div class="profileimageforpost" data-user-id="${post.userId._id}"
+                                        style="background-image: url('http://localhost:5000/${post.userId.profilePicture?.replace(/\\/g, '/')}')">
+                            </div>
+                            <span class="nameforpost">${post.userId.fname} ${post.userId.lname}</span>
+                            <div id="date-container">
+                                <span id="current-date">${new Date(post.createdAt).toLocaleDateString()}</span>
+                            </div>
+                        </section>
+                    <span class="spaceforthreedot">
+                        <div class="threedot"><i class="fa-solid fa-ellipsis fa-2xl"></i></div>
+                        <div class="threedot2"><i class="fa-solid fa-xmark"></i></div>
+                    </span>
+                    <div class="dropdownmenu2">
+                        <li>
+                            <div class="edit">Edit</div>
+                        </li>
+                        <li>
+                            <div class="deletepost">Delete</div>
+                        </li>
+                        <li>
+                            <div class="savepost">Save</div>
+                        </li>
                     </div>
+                
+                </div>
 
                     <div class="areaforpost">
                         <div class="post-header">
@@ -199,26 +202,29 @@ const getPost = async (callback) => {
                 otherPosts.map(post => `
                 <div class="postcontainer" id=${post._id}>
                     <div class="identitycontainer">
-                                          <section class="hello">
-                                           <div class="profileimageforpost" data-user-id="${post.userId._id}"style="background-image: url('http://localhost:5000/${post.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
-                        <span class="nameforpost">${post.userId.fname} ${post.userId.lname}</span>
-                        <div id="date-container">
-                            <span id="current-date">${new Date(post.createdAt).toLocaleDateString()}</span>
-                        </div>
-                   </section>
+                        <section class="hello">
+                            <div class="profileimageforpost" data-user-id="${post.userId._id}"
+                                        style="background-image: url('http://localhost:5000/${post.userId.profilePicture?.replace(/\\/g, '/')}')">
+                            </div>
+                            <span class="nameforpost">${post.userId.fname} ${post.userId.lname}</span>
+                            <div id="date-container">
+                                <span id="current-date">${new Date(post.createdAt).toLocaleDateString()}</span>
+                            </div>
+                        </section>
                         <span class="spaceforthreedot">
-                             <span class="threedot"><i class="fa-solid fa-ellipsis fa-2xl"></i><span>
+                            <div class="threedot"><i class="fa-solid fa-ellipsis fa-2xl"></i></div>
+                            <div class="threedot2"><i class="fa-solid fa-xmark"></i></div>
                         </span>
-                          <div class="dropdownmenu2">
-                <li>
-                    <div class="savepostother">Save</div>
-                </li>
-                <li>
-                    <div class="reportpost">Report</div>
-                </li>
-             
-            </div>
+                        <div class="dropdownmenu2">
+                            <li>
+                                <div class="savepostother">Save</div>
+                            </li>
+                            <li>
+                                <div class="reportpost">Report</div>
+                            </li>
+                        </div>
                     </div>
+                
                     <div class="areaforpost">
                         <div class="post-header">
                             <p class="post-caption">${post.caption || "No caption provided"}</p>
@@ -337,12 +343,11 @@ const getPost = async (callback) => {
     }
     gotouserprofile(posthtml)
     updateLikeButtons(posts)
-    callback()
 };
 
 (async () => {
-    await getProfilepic();
-    await getPost(callback);
+    await getProfilepic()
+    await getPost()
 })()
 
 
@@ -897,18 +902,46 @@ home.addEventListener('click', async (e) => {
 //     window.location.href=""
 // })
 
-//For searching items
 
+//For searching items
 const searchInput = document.getElementById('text')
 
 searchInput.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') { 
+    if (event.key === 'Enter') {
         const query1 = searchInput.value.trim()
         if (query1) {
-            sessionStorage.setItem('query',query1)
-            window.location.href="/pages/searchedpost.html"
-            searchInput.value=''
+            sessionStorage.setItem('query', query1)
+            window.location.href = "/pages/searchedpost.html"
+            searchInput.value = ''
         }
+    }
+})
+
+//Dropdown menu for posts
+posthtml.addEventListener('click',async(event)=>{
+    const postelement=event.target.closest('.postcontainer')
+
+    const dropDownMenu2 = postelement.querySelector('.dropdownmenu2')
+    const tooglebtnIcon2 = postelement.querySelector('.threedot2 i')
+    const tooglebtnIcon =postelement.querySelector('.threedot i')
+
+    if(event.target.closest('.threedot i')){
+         event.target.style.display='none'
+         tooglebtnIcon2.style.display='inline-block'
+         dropDownMenu2.style.display='block'
+    }
+    else if(event.target.closest('.threedot2 i')){
+        event.target.style.display='none'
+        tooglebtnIcon.style.display='flex'
+        dropDownMenu2.style.display='none'
+    }
+})
+
+posthtml.addEventListener('click',async(event)=>{
+    const postElement=event.target.closest('.postcontainer')
+
+    if(dfg){
+
     }
 })
 
@@ -916,46 +949,37 @@ searchInput.addEventListener('keydown', (event) => {
 
 
 
-// tooglebtn2.onclick = function () {
-//     dropDownMenu2.classList.toggle('open')
-//     const isOpen = dropDownMenu2.classList.contains('open')
-//     tooglebtnIcon2.classList = isOpen ?
-//     "fa-solid fa-x fa-2xl" : "fa-solid fa-ellipsis fa-2xl"
-// };
 
-// togglebtn2.addEventListener('click',()=>{
-//     console.log('suiiiii')
-// })
 
-// console.log(togglebtn2)
 
-const callback = () => {
-   const togglebtn2 = document.querySelector('.threedot')
-   const dropDownMenu2 = document.querySelector('.dropdownmenu2')
-   const tooglebtnIcon2 = document.querySelector('.threedot i')
-   togglebtn2.addEventListener('click',()=>{
-    dropDownMenu2.classList.toggle('open')
-    const isOpen = dropDownMenu2.classList.contains('open')
-    tooglebtnIcon2.classList = isOpen ?
-    "fa-solid fa-x fa-2xl" : "fa-solid fa-ellipsis fa-2xl"
-   })
 
-   const likeArea = document.querySelector('.LikeArea')
-   let clicked = false
-   likeArea.addEventListener('click',()=>{
-    const likepopup = document.querySelector('.likepopup')
-    if(clicked){
-        likepopup.style.display='block'
-        clicked = false
-    }else{
-        likepopup.style.display='none'
-        clicked = true
-    }
-    
-    console.log(clicked)
-   })
-//    const closeLike = document.querySelector('.cross')
-//    closeLike.addEventListener('click',()=>{
-//     console.log('like')
-//    })
-}
+// const callback = () => {
+//     const togglebtn2 = document.querySelector('.threedot')
+//     const dropDownMenu2 = document.querySelector('.dropdownmenu2')
+//     const tooglebtnIcon2 = document.querySelector('.threedot i')
+//     togglebtn2.addEventListener('click', () => {
+//         dropDownMenu2.classList.toggle('open')
+//         const isOpen = dropDownMenu2.classList.contains('open')
+//         tooglebtnIcon2.classList = isOpen ?
+//             "fa-solid fa-x fa-2xl" : "fa-solid fa-ellipsis fa-2xl"
+//     })
+
+//     const likeArea = document.querySelector('.LikeArea')
+//     let clicked = false
+//     likeArea.addEventListener('click', () => {
+//         const likepopup = document.querySelector('.likepopup')
+//         if (clicked) {
+//             likepopup.style.display = 'block'
+//             clicked = false
+//         } else {
+//             likepopup.style.display = 'none'
+//             clicked = true
+//         }
+
+//         console.log(clicked)
+//     })
+//     //    const closeLike = document.querySelector('.cross')
+//     //    closeLike.addEventListener('click',()=>{
+//     //     console.log('like')
+//     //    })
+// }

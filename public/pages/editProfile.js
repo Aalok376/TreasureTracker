@@ -15,8 +15,6 @@ const getProfilepic = async () => {
 
         const profiles = Array.isArray(data) ? data : [data]
 
-        console.log(profiles)
-
         ownprofile2.innerHTML = profiles.map(profile => `
             <a href="profile.html" class="profile" style="background-image: url('http://localhost:5000/${profile.user?.profilePicture?.replace(/\\/g, '/')}')"></a>
         `).join('');

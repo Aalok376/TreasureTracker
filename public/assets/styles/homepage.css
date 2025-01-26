@@ -314,6 +314,16 @@ margin-left: 10px;
   right:30px;
 }
 
+.threedot2 i{
+  margin-left: 20px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top:18px;
+  right:30px;
+}
+
 .dropdownmenu2{
   display:none;
 position:absolute;
