@@ -2,7 +2,7 @@ const posthtml = document.querySelector('.containerforpost');
 const ownprofile = document.querySelector('.containerforphoto');
 const ownprofile2 = document.querySelector('.pp');
 
-const userId = window.location.pathname.split('/').pop();
+const userId = window.location.pathname.split('/').pop()
 
 const changepasswordbtn = document.querySelector('.cgp')
 const deleteUser = document.querySelector('.dlu')
@@ -73,16 +73,29 @@ const getPost = async () => {
         if (posts.length > 0) {
             posthtml.innerHTML = posts.map(post => `
                 <div class="postcontainer" id=${post._id}>
-                    <div class="identitycontainer">
-                         <div class="profileimageforpost" data-user-id="${post.userId._id}"style="background-image: url('http://localhost:5000/${post.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
-                        <span class="nameforpost">${post.userId.fname} ${post.userId.lname}</span>
-                        <div id="date-container">
-                            <span id="current-date">${new Date(post.createdAt).toLocaleDateString()}</span>
+                   <div class="identitycontainer">
+                        <section class="hello">
+                            <div class="profileimageforpost" data-user-id="${post.userId._id}"
+                                        style="background-image: url('http://localhost:5000/${post.userId.profilePicture?.replace(/\\/g, '/')}')">
+                            </div>
+                            <span class="nameforpost">${post.userId.fname} ${post.userId.lname}</span>
+                            <div id="date-container">
+                                <span id="current-date">${new Date(post.createdAt).toLocaleDateString()}</span>
+                            </div>
+                        </section>
+                    <span class="spaceforthreedot">
+                        <div class="threedot"><i class="fa-solid fa-ellipsis fa-2xl"></i></div>
+                        <div class="threedot2"><i class="fa-solid fa-xmark"></i></div>
+                    </span>
+                    <div class="dropdownmenu2">
+                            <li>
+                                <div class="savepostother">Save</div>
+                            </li>
+                            <li>
+                                <div class="reportpost">Report</div>
+                            </li>
                         </div>
-                        <span class="dropdownmenu">
-                             
-                        </span>
-                    </div>
+                </div>
                     <div class="areaforpost">
                         <div class="post-header">
                             <p class="post-caption">${post.caption || "No caption provided"}</p>
@@ -275,7 +288,7 @@ commentbtn.addEventListener('click', async (event) => {
                     const datas = await getLikes(postId)
 
                     const likes = Array.isArray(datas.likes) ? datas.likes : [datas.likes]
-        
+
                     const match = likes.find(like => like.userId._id === UserIdForPost)
 
                     updateLikeCount(likes, match, divforlike)
@@ -323,7 +336,7 @@ commentbtn.addEventListener('click', async (event) => {
                         }
                     }
 
-                    updateCommentSections(OwnComments,OtherComments,commentArea)
+                    updateCommentSections(OwnComments, OtherComments, commentArea)
 
                     textt.value = ''
 
@@ -348,7 +361,7 @@ commentbtn.addEventListener('click', async (event) => {
                 }
             }
 
-            updateCommentSections(OwnComments,OtherComments,commentArea)
+            updateCommentSections(OwnComments, OtherComments, commentArea)
 
         }
         catch (error) {
@@ -502,8 +515,8 @@ const fetchComments = async (postId) => {
     }
 }
 
-const updateCommentSections = async (OwnComments,OtherComments, commentArea) => {
-    if (OwnComments.length > 0 && OtherComments.length>0) {
+const updateCommentSections = async (OwnComments, OtherComments, commentArea) => {
+    if (OwnComments.length > 0 && OtherComments.length > 0) {
         return commentArea.innerHTML = OwnComments.map(comment => ` <div class="introareacomment">
                          <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
                          <div class="commentsectionbypeople">
@@ -514,16 +527,16 @@ const updateCommentSections = async (OwnComments,OtherComments, commentArea) => 
                              <p>${comment.text}</p>
                          </div>
                      </div>`).join('')
-                     +
-                     OtherComments.map(comment => ` <div class="introareacomment">
+            +
+            OtherComments.map(comment => ` <div class="introareacomment">
                         <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
                         <div class="commentsectionbypeople">
                             <p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
                             <p>${comment.text}</p>
                         </div>
                     </div>`).join('')
-     }
-     else if (OwnComments.length > 0 && OtherComments.length===0) {
+    }
+    else if (OwnComments.length > 0 && OtherComments.length === 0) {
         return commentArea.innerHTML = OwnComments.map(comment => ` <div class="introareacomment">
                          <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
                          <div class="commentsectionbypeople">
@@ -534,16 +547,16 @@ const updateCommentSections = async (OwnComments,OtherComments, commentArea) => 
                              <p>${comment.text}</p>
                          </div>
                      </div>`).join('')
-        }
-        else if (OwnComments.length === 0 && OtherComments.length>0) {
-            return commentArea.innerHTML = OtherComments.map(comment => ` <div class="introareacomment">
+    }
+    else if (OwnComments.length === 0 && OtherComments.length > 0) {
+        return commentArea.innerHTML = OtherComments.map(comment => ` <div class="introareacomment">
                              <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
                              <div class="commentsectionbypeople">
                                  <p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
                                  <p>${comment.text}</p>
                              </div>
                          </div>`).join('')
-            }
+    }
     else {
         commentArea.innerHTML = `<p class="No-comments">No Comments</p>`
     }
@@ -563,9 +576,9 @@ const gotoprofile = (commentArea) => {
 }
 
 ownprofile2.addEventListener('click', async (event) => {
-    
-        window.location.href = "/pages/profile.html"
-    
+
+    window.location.href = "/pages/profile.html"
+
 })
 
 const gotouserprofile = (posthtml) => {
@@ -617,15 +630,15 @@ logoutUser.addEventListener('click', async (e) => {
 
 //Event listener for aside-menu
 
-const home=document.querySelector('.homepage')
-const message=document.querySelector('.Messagepage')
-const friends=document.querySelector('.Friends')
-const saved=document.querySelector('.SavedPosts')
+const home = document.querySelector('.homepage')
+const message = document.querySelector('.Messagepage')
+const friends = document.querySelector('.Friends')
+const saved = document.querySelector('.SavedPosts')
 
-home.addEventListener('click',async(e)=>{
+home.addEventListener('click', async (e) => {
     e.preventDefault()
 
-    window.location.href="/pages/homepage.html"
+    window.location.href = "/pages/homepage.html"
 })
 // message.addEventListener('click',async(e)=>{
 //     e.preventDefault()
@@ -651,13 +664,45 @@ home.addEventListener('click',async(e)=>{
 const searchInput = document.getElementById('text')
 
 searchInput.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') { 
+    if (event.key === 'Enter') {
         const query1 = searchInput.value.trim()
         if (query1) {
-            sessionStorage.setItem('query',query1)
-            window.location.href="/pages/searchedpost.html"
-            searchInput.value=''
+            sessionStorage.setItem('query', query1)
+            window.location.href = "/pages/searchedpost.html"
+            searchInput.value = ''
         }
+    }
+})
+
+//Dropdown menu for posts
+posthtml.addEventListener('click', async (event) => {
+    const postelement = event.target.closest('.postcontainer')
+
+    const dropDownMenu2 = postelement.querySelector('.dropdownmenu2')
+    const tooglebtnIcon2 = postelement.querySelector('.threedot2 i')
+    const tooglebtnIcon = postelement.querySelector('.threedot i')
+
+    if (event.target.closest('.threedot i')) {
+        event.target.style.display = 'none'
+        tooglebtnIcon2.style.display = 'inline-block'
+        dropDownMenu2.style.display = 'block'
+    }
+    else if (event.target.closest('.threedot2 i')) {
+        event.target.style.display = 'none'
+        tooglebtnIcon.style.display = 'flex'
+        dropDownMenu2.style.display = 'none'
+    }
+})
+
+posthtml.addEventListener('click', async (event) => {
+    const postElement = event.target.closest('.postcontainer')
+
+    const postId = postElement.id
+    if (event.target.closest('.savepostother')) {
+
+    }
+    else if (event.target.closest('.reportpost')) {
+
     }
 })
 

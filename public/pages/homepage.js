@@ -1,6 +1,6 @@
-const posthtml = document.querySelector('.containerforpost');
-const ownprofile = document.querySelector('.containerforphoto');
-const ownprofile2 = document.querySelector('.pp');
+const posthtml = document.querySelector('.containerforpost')
+const ownprofile = document.querySelector('.containerforphoto')
+const ownprofile2 = document.querySelector('.pp')
 
 const changepasswordbtn = document.querySelector('.cgp')
 const deleteUser = document.querySelector('.dlu')
@@ -701,8 +701,8 @@ const gotouserprofile = (posthtml) => {
 
             const profileImage = event.target.closest('.profileimageforpost');
             if (profileImage) {
-                const userId = profileImage.getAttribute("data-user-id");
-                window.location.href = `/api/v1/userprofile/${userId}`;
+                const userId = profileImage.getAttribute("data-user-id")
+                window.location.href = `/api/v1/userprofile/${userId}`
             }
         });
     }
@@ -918,29 +918,58 @@ searchInput.addEventListener('keydown', (event) => {
 })
 
 //Dropdown menu for posts
-posthtml.addEventListener('click',async(event)=>{
-    const postelement=event.target.closest('.postcontainer')
+posthtml.addEventListener('click', async (event) => {
+    const postelement = event.target.closest('.postcontainer')
 
     const dropDownMenu2 = postelement.querySelector('.dropdownmenu2')
     const tooglebtnIcon2 = postelement.querySelector('.threedot2 i')
-    const tooglebtnIcon =postelement.querySelector('.threedot i')
+    const tooglebtnIcon = postelement.querySelector('.threedot i')
 
-    if(event.target.closest('.threedot i')){
-         event.target.style.display='none'
-         tooglebtnIcon2.style.display='inline-block'
-         dropDownMenu2.style.display='block'
+    if (event.target.closest('.threedot i')) {
+        event.target.style.display = 'none'
+        tooglebtnIcon2.style.display = 'inline-block'
+        dropDownMenu2.style.display = 'block'
     }
-    else if(event.target.closest('.threedot2 i')){
-        event.target.style.display='none'
-        tooglebtnIcon.style.display='flex'
-        dropDownMenu2.style.display='none'
+    else if (event.target.closest('.threedot2 i')) {
+        event.target.style.display = 'none'
+        tooglebtnIcon.style.display = 'flex'
+        dropDownMenu2.style.display = 'none'
     }
 })
 
-posthtml.addEventListener('click',async(event)=>{
-    const postElement=event.target.closest('.postcontainer')
+posthtml.addEventListener('click', async (event) => {
+    const postElement = event.target.closest('.postcontainer')
 
-    if(dfg){
+    const postId = postElement.id
+
+    if (event.target.closest('.edit')) {
+        window.location.href = `/api/v1/editPost/${postId}`
+    }
+    else if (event.target.closest('.deletepost')) {
+        try {
+            (async () => {
+                const response = await fetch(`http://localhost:5000/api/v1/deleteOwnPost/${postId}`, {
+                    method: "DELETE"
+                })
+                const data = await response.json()
+
+                if (response.status === 200) {
+                  alert('Post deleted Successfully')
+                  window.location.reload()
+                }
+            })()
+        } catch (error) {
+            console.error(error)
+        }
+
+    }
+    else if (event.target.closest('.savepost')) {
+
+    }
+    else if (event.target.closest('.savepostother')) {
+
+    }
+    else if (event.target.closest('.reportpost')) {
 
     }
 })

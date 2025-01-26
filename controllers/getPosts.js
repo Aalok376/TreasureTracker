@@ -1,14 +1,10 @@
-const Post=require('../models/createPost')
+const Post = require('../models/createPost')
 
 const getPosts = async (req, res) => {
-    const {page = 1, limit = 10 } = req.query;
-
     try {
         const posts = await Post.find()
-            .skip((page - 1) * limit)
-            .limit(Number(limit))
             .sort({ createdAt: -1 })
-            .populate('userId','fname lname profilePicture');
+            .populate('userId', 'fname lname profilePicture');
 
         return res.status(200).json({ success: true, posts });
     } catch (error) {
@@ -17,4 +13,21 @@ const getPosts = async (req, res) => {
     }
 }
 
-module.exports={getPosts}
+const getSpecificpost = async (req, res) => {
+    const postId = req.params.postId
+    try {
+        const posts = await Post.findById(postId)
+        if (posts) {
+            return res.status(200).json({ success: true, posts })
+        }
+        else {
+            return res.status(404).json({ success: false, msg: 'Post not found' })
+        }
+    }
+    catch (error) {
+        console.log(error)
+        return res.status(500).json({ success: false, msg: 'Internal server error' })
+    }
+}
+
+module.exports = { getPosts, getSpecificpost }

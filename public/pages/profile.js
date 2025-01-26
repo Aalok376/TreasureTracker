@@ -60,15 +60,32 @@ const getPost = async () => {
             posthtml.innerHTML = posts.map(post => `
                 <div class="postcontainer" id=${post._id}>
                     <div class="identitycontainer">
-                        <div class="profileimageforpost" data-user-id="${post.userId._id}"style="background-image: url('http://localhost:5000/${post.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
-                        <span class="nameforpost">${post.userId.fname} ${post.userId.lname}</span>
-                        <div id="date-container">
-                            <span id="current-date">${new Date(post.createdAt).toLocaleDateString()}</span>
-                        </div>
-                        <span class="dropdownmenu">
-                             
-                        </span>
+                        <section class="hello">
+                            <div class="profileimageforpost" data-user-id="${post.userId._id}"
+                                        style="background-image: url('http://localhost:5000/${post.userId.profilePicture?.replace(/\\/g, '/')}')">
+                            </div>
+                            <span class="nameforpost">${post.userId.fname} ${post.userId.lname}</span>
+                            <div id="date-container">
+                                <span id="current-date">${new Date(post.createdAt).toLocaleDateString()}</span>
+                            </div>
+                        </section>
+                    <span class="spaceforthreedot">
+                        <div class="threedot"><i class="fa-solid fa-ellipsis fa-2xl"></i></div>
+                        <div class="threedot2"><i class="fa-solid fa-xmark"></i></div>
+                    </span>
+                    <div class="dropdownmenu2">
+                        <li>
+                            <div class="edit">Edit</div>
+                        </li>
+                        <li>
+                            <div class="deletepost">Delete</div>
+                        </li>
+                        <li>
+                            <div class="savepost">Save</div>
+                        </li>
                     </div>
+                
+                </div>
                     <div class="areaforpost">
                         <div class="post-header">
                             <p class="post-caption">${post.caption || "No caption provided"}</p>
@@ -658,6 +675,57 @@ searchInput.addEventListener('keydown', (event) => {
             window.location.href = "/pages/searchedpost.html"
             searchInput.value = ''
         }
+    }
+})
+
+//Dropdown menu for posts
+posthtml.addEventListener('click', async (event) => {
+    const postelement = event.target.closest('.postcontainer')
+
+    const dropDownMenu2 = postelement.querySelector('.dropdownmenu2')
+    const tooglebtnIcon2 = postelement.querySelector('.threedot2 i')
+    const tooglebtnIcon = postelement.querySelector('.threedot i')
+
+    if (event.target.closest('.threedot i')) {
+        event.target.style.display = 'none'
+        tooglebtnIcon2.style.display = 'inline-block'
+        dropDownMenu2.style.display = 'block'
+    }
+    else if (event.target.closest('.threedot2 i')) {
+        event.target.style.display = 'none'
+        tooglebtnIcon.style.display = 'flex'
+        dropDownMenu2.style.display = 'none'
+    }
+})
+
+posthtml.addEventListener('click', async (event) => {
+    const postElement = event.target.closest('.postcontainer')
+
+    const postId = postElement.id
+
+    if (event.target.closest('.edit')) {
+        window.location.href = `/api/v1/editPost/${postId}`
+    }
+    else if (event.target.closest('.deletepost')) {
+        try {
+            (async () => {
+                const response = await fetch(`http://localhost:5000/api/v1/deleteOwnPost/${postId}`, {
+                    method: "DELETE"
+                })
+                const data = await response.json()
+
+                if (response.status === 200) {
+                  alert('Post deleted Successfully')
+                  window.location.reload()
+                }
+            })()
+        } catch (error) {
+            console.error(error)
+        }
+
+    }
+    else if (event.target.closest('.savepost')) {
+
     }
 })
 

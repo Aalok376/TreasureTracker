@@ -89,13 +89,10 @@ const updateComment = async (req, res) => {
 
 // Get all comments for a post
 const getAllComments = async (req, res) => {
-    const postId = req.params.postId;
-    const { page = 1, limit = 10 } = req.query;
+    const postId = req.params.postId
 
     try {
         const comments = await Comment.find({ postId })
-            .populate('userId', 'fname lname profilePicture')
-            .sort({ createdAt: -1 })
             .skip((page - 1) * limit)
             .limit(Number(limit));
 

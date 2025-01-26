@@ -8,9 +8,9 @@ const { multiUpload, profileSingleUpload, coverSingleUpload } = require('../midd
 const { signup, verify, login, checkToUpdate, updatePassword, toDelete, logout, sendmailInCaseOfForgot, forgotPassword, dummy } = require('../controllers/account');
 const { profile } = require('../controllers/fetchProfile')
 const { updateProfilePicture, deleteProfilePicture, updateCoverPicture, deleteCoverPicture, updateName, updateContact, deletecontact } = require('../controllers/profilesetup')
-const { CreatePost, updatePost, deletePost } = require('../controllers/post');
+const { CreatePost, updatePost, deletePost, servePostpage } = require('../controllers/post');
 const { getOwnPosts } = require('../controllers/fetchownpost');
-const { getPosts } = require('../controllers/getPosts')
+const { getPosts, getSpecificpost } = require('../controllers/getPosts')
 const { createComment, deleteComment, updateComment, getAllComments, } = require('../controllers/comment')
 const { like, removeLike, getLikes, } = require('../controllers/like')
 const { otherProfile, otherPost, serveOtherProfile } = require('../controllers/fetchotherprofile')
@@ -48,11 +48,13 @@ router.put('/updatecontact', verifyToken, updateContact)//
 router.delete('/deleteContact', verifyToken, deletecontact)
 
 router.post('/createPost', verifyToken, multiUpload, CreatePost);//
-router.put('/updateOwnPost/:postId', verifyToken, multiUpload, updatePost)
-router.delete('/deleteOwnPost/:postId', verifyToken, deletePost)
+router.put('/updateOwnPost/:postId', verifyToken, multiUpload, updatePost)//
+router.delete('/deleteOwnPost/:postId', verifyToken, deletePost)//
 
 router.get('/getOwnPosts', verifyToken, getOwnPosts)//
 router.get('/getPosts', verifyToken, getPosts)//
+router.get('/getSpecificpost/:postId',verifyToken,getSpecificpost)//
+router.get('/editPost/:postId',verifyToken,servePostpage)//
 
 router.post('/likeapost/:postId', verifyToken, like)//
 router.delete('/removelike/:postId', verifyToken, removeLike)//
