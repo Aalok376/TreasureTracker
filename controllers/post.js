@@ -1,6 +1,7 @@
 const Post = require('../models/createPost')
 const Comment = require('../models/comments.js')
 const Like = require('../models/likes.js')
+const savedPost=require('../models/savedpost.js')
 const path = require('path')
 
 const servePostpage = async (req, res) => {
@@ -72,6 +73,7 @@ const deletePost = async (req, res) => {
         }
         await Comment.deleteMany({ postId })
         await Like.deleteMany({ postId })
+        await savedPost.deleteMany({postId})
         return res.status(200).json({ success: true, msg: 'Post deleted successfully' })
     }
     catch (error) {

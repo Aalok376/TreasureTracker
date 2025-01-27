@@ -25,11 +25,11 @@ const UserSchema=new mongoose.Schema({
     },
     profilePicture:{
         type:String,
-        default:null,
+        default:"../assets/images/DALL·E 2025-01-19 21.12.44 - A default profile image featuring a simple and professional design. The image should have a circular border with a neutral gray background and an abst.webp",
     },
     coverPicture:{
         type:String,
-        default:null,
+        default:"../assets/images/DALL·E 2025-01-19 21.13.33 - A default cover image featuring a simple and professional design. The image should have a wide rectangular layout with a neutral gradient background i.webp",
     },
     contactNumber:{
         type:String,

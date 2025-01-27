@@ -29,6 +29,10 @@ const postSchema = new mongoose.Schema({
         type: [String],
         default: [],
     },
+    isSavedByUser: {
+        type: [String],
+        default: [],
+    },
     commentCount: {
         type: Number,
         default: 0,

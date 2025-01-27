@@ -89,12 +89,15 @@ const getPost = async () => {
                     </span>
                     <div class="dropdownmenu2">
                             <li>
-                                <div class="savepostother">Save</div>
+                                <div class="savepost"><i class="fa-regular fa-bookmark"></i> Save</div>
                             </li>
                             <li>
-                                <div class="reportpost">Report</div>
+                                <div class="savedpost" style="display: none;"><i class="fa-solid fa-bookmark"></i> Saved</div>
                             </li>
-                        </div>
+                            <li>
+                                <div class="reportpost"><i class="fa-solid fa-flag"></i>Report</div>
+                            </li>
+                    </div>
                 </div>
                     <div class="areaforpost">
                         <div class="post-header">
@@ -218,7 +221,8 @@ const getPost = async () => {
     }
     gotouserprofile(posthtml)
     updateLikeButtons(posts)
-};
+    updateSavedButton(posts)
+}
 
 (async () => {
     await getotherProfilepic();
@@ -652,11 +656,11 @@ home.addEventListener('click', async (e) => {
 //     window.location.href=""
 // })
 
-// saved.addEventListener('click',async(e)=>{
-//     e.preventDefault()
+saved.addEventListener('click',async(e)=>{
+    e.preventDefault()
 
-//     window.location.href=""
-// })
+    window.location.href="/pages/savedPosts.html"
+})
 
 
 //For searching items
@@ -696,14 +700,76 @@ posthtml.addEventListener('click', async (event) => {
 
 posthtml.addEventListener('click', async (event) => {
     const postElement = event.target.closest('.postcontainer')
+    const savebtn = postElement.querySelector('.savepost')
+    const savedbtn = postElement.querySelector('.savedpost')
 
     const postId = postElement.id
-    if (event.target.closest('.savepostother')) {
 
+    if (event.target.closest('.savepost')) {
+            try {
+                (async () => {
+                    const response = await fetch(`http://localhost:5000/api/v1/savePosts/${postId}`, {
+                        method: "POST"
+                    })
+                    const data = await response.json()
+    
+                    if (response.status === 200) {
+                        event.target.closest('.savepost').style.display = 'none'
+                        savedbtn.style.display = 'flex'
+                    }
+                })()
+    
+            } catch (error) {
+                console.error(error)
+            }    
+    }
+    else if (event.target.closest('.savedpost')) {
+
+        try {
+            (async () => {
+                const response = await fetch(`http://localhost:5000/api/v1/unsavePosts/${postId}`, {
+                    method: "DELETE"
+                })
+                const data = await response.json()
+
+                if (response.status === 200) {
+                    event.target.closest('.savedpost').style.display = 'none'
+                    savebtn.style.display = 'flex'
+                }
+            })()
+
+        } catch (error) {
+            console.error(error)
+        }
     }
     else if (event.target.closest('.reportpost')) {
 
     }
 })
+
+const updateSavedButton=async(posts)=>{
+    try {
+        for (const post of posts) {
+            const postElement = document.getElementById(post._id)
+
+            if (postElement) {
+                const saveButton = postElement.querySelector('.savepost')
+                const savedButton = postElement.querySelector('.savedpost')
+
+                const SavedByUser = Array.isArray(post.isSavedByUser) ? post.isSavedByUser : []
+
+                if (SavedByUser.includes(UserIdForPost)) {
+                    saveButton.style.display = 'none'
+                    savedButton.style.display = 'flex'
+                } else {
+                    saveButton.style.display = 'flex'
+                    savedButton.style.display = 'none'
+                }
+            }
+        }
+    } catch (error) {
+        console.error('Error loading posts:', error)
+    }
+}
 
 

@@ -22,8 +22,7 @@ const getProfilepic = async () => {
         UserIdForPost = profiles[0].user._id
 
         ownprofile.innerHTML = profiles.map(profile => `
-            <a class="profile two" href="profile.html" style="background-image: url('http://localhost:5000/${profile.user?.profilePicture?.replace(/\\/g, '/')}')"></a>
-            <a class="text" href="postpage.html">What have you Lost or Found?</a>
+           <h1>Saved Posts</h1>
         `).join('')
 
         ownprofile2.innerHTML = profiles.map(profile => `
@@ -37,7 +36,7 @@ const getProfilepic = async () => {
 //Posts....
 const getPost = async () => {
     try {
-        const response = await fetch("http://localhost:5000/api/v1/getPosts", {
+        const response = await fetch("http://localhost:5000/api/v1//getsavedPosts", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -889,7 +888,7 @@ const saved = document.querySelector('.SavedPosts')
 home.addEventListener('click', async (e) => {
     e.preventDefault()
 
-    window.location.reload()
+    window.location.href = "/pages/homepage.html"
 })
 // message.addEventListener('click',async(e)=>{
 //     e.preventDefault()
@@ -906,7 +905,7 @@ home.addEventListener('click', async (e) => {
 saved.addEventListener('click',async(e)=>{
     e.preventDefault()
 
-    window.location.href="savedPosts.html"
+    window.location.reload()
 })
 
 
@@ -972,22 +971,22 @@ posthtml.addEventListener('click', async (event) => {
         }
     }
     else if (event.target.closest('.savepost')) {
-            try {
-                (async () => {
-                    const response = await fetch(`http://localhost:5000/api/v1/savePosts/${postId}`, {
-                        method: "POST"
-                    })
-                    const data = await response.json()
-    
-                    if (response.status === 200) {
-                        event.target.closest('.savepost').style.display = 'none'
-                        savedbtn.style.display = 'flex'
-                    }
-                })()
-    
-            } catch (error) {
-                console.error(error)
-            }    
+        try {
+            (async () => {
+                const response = await fetch(`http://localhost:5000/api/v1/savePosts/${postId}`, {
+                    method: "POST"
+                })
+                const data = await response.json()
+
+                if (response.status === 200) {
+                    event.target.closest('.savepost').style.display = 'none'
+                    savedbtn.style.display = 'flex'
+                }
+            })()
+
+        } catch (error) {
+            console.error(error)
+        }
     }
     else if (event.target.closest('.savedpost')) {
 
@@ -1013,7 +1012,7 @@ posthtml.addEventListener('click', async (event) => {
     }
 })
 
-const updateSavedButton=async(posts)=>{
+const updateSavedButton = async (posts) => {
     try {
         for (const post of posts) {
             const postElement = document.getElementById(post._id)
@@ -1037,42 +1036,3 @@ const updateSavedButton=async(posts)=>{
         console.error('Error loading posts:', error)
     }
 }
-
-
-
-
-
-
-
-
-
-// const callback = () => {
-//     const togglebtn2 = document.querySelector('.threedot')
-//     const dropDownMenu2 = document.querySelector('.dropdownmenu2')
-//     const tooglebtnIcon2 = document.querySelector('.threedot i')
-//     togglebtn2.addEventListener('click', () => {
-//         dropDownMenu2.classList.toggle('open')
-//         const isOpen = dropDownMenu2.classList.contains('open')
-//         tooglebtnIcon2.classList = isOpen ?
-//             "fa-solid fa-x fa-2xl" : "fa-solid fa-ellipsis fa-2xl"
-//     })
-
-//     const likeArea = document.querySelector('.LikeArea')
-//     let clicked = false
-//     likeArea.addEventListener('click', () => {
-//         const likepopup = document.querySelector('.likepopup')
-//         if (clicked) {
-//             likepopup.style.display = 'block'
-//             clicked = false
-//         } else {
-//             likepopup.style.display = 'none'
-//             clicked = true
-//         }
-
-//         console.log(clicked)
-//     })
-//     //    const closeLike = document.querySelector('.cross')
-//     //    closeLike.addEventListener('click',()=>{
-//     //     console.log('like')
-//     //    })
-// }

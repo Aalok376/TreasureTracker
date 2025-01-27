@@ -62,17 +62,35 @@ const getPost = async () => {
             posthtml.innerHTML = ownPosts.map(post => `
                 <div class="postcontainer" id=${post._id}>
                     <div class="identitycontainer">
-                   <section class="hello">
-                                           <div class="profileimageforpost" data-user-id="${post.userId._id}"style="background-image: url('http://localhost:5000/${post.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
-                        <span class="nameforpost">${post.userId.fname} ${post.userId.lname}</span>
-                        <div id="date-container">
-                            <span id="current-date">${new Date(post.createdAt).toLocaleDateString()}</span>
-                        </div>
-                   </section>
-                        <span class="dropdownmenu2">
-                             <span><i class="fa-solid fa-ellipsis fa-2xl"></i><span>
-                        </span>
+                        <section class="hello">
+                            <div class="profileimageforpost" data-user-id="${post.userId._id}"
+                                        style="background-image: url('http://localhost:5000/${post.userId.profilePicture?.replace(/\\/g, '/')}')">
+                            </div>
+                            <span class="nameforpost">${post.userId.fname} ${post.userId.lname}</span>
+                            <div id="date-container">
+                                <span id="current-date">${new Date(post.createdAt).toLocaleDateString()}</span>
+                            </div>
+                        </section>
+                    <span class="spaceforthreedot">
+                        <div class="threedot"><i class="fa-solid fa-ellipsis fa-2xl"></i></div>
+                        <div class="threedot2"><i class="fa-solid fa-xmark"></i></div>
+                    </span>
+                    <div class="dropdownmenu2">
+                        <li>
+                            <div class="edit"><i class="fa-solid fa-pen"></i> Edit</div>
+                        </li>
+                        <li>
+                            <div class="deletepost"><i class="fa-solid fa-trash"></i> Delete</div>
+                        </li>
+                        <li>
+                            <div class="savepost"><i class="fa-regular fa-bookmark"></i> Save</div>
+                        </li>
+                        <li>
+                           <div class="savedpost" style="display: none;"><i class="fa-solid fa-bookmark"></i> Saved</div>
+                        </li>
                     </div>
+                </div>
+
                     <div class="areaforpost">
                         <div class="post-header">
                             <p class="post-caption">${post.caption || "No caption provided"}</p>
@@ -166,9 +184,13 @@ const getPost = async () => {
                     <hr class="custom-line1">
                     <div class="LikeArea" style="height:30px"></div>
                     <hr class="custom-line2">
+                         <div class="likepopup">
+                         <div class="crossbutton">
+            <button class="closeLike"><i class="fa-solid fa-x fa-sm" style="color: #000000;"></i></button>
+        </div></div>
                     <div class="likecontainer">
                         <button class="interactionlike1"><i class="fa-regular fa-heart"></i>Like</button>
-                        <button class="interactionlike2"><i class="fa-solid fa-heart"style="color:red;"></i>Liked</button>
+                        <button class="interactionlike2"><i class="fa-solid fa-heart" style="color: #fa0000;"></i>Liked</button>
                         <button class="interactioncomment"><i class="fa-regular fa-comment"></i>Comment</button>
                         <button class="interactionshare"><i class="fa-solid fa-share"></i>Share</button>
                     </div>
@@ -185,17 +207,32 @@ const getPost = async () => {
                 otherPosts.map(post => `
                 <div class="postcontainer" id=${post._id}>
                     <div class="identitycontainer">
-                                          <section class="hello">
-                                           <div class="profileimageforpost" data-user-id="${post.userId._id}"style="background-image: url('http://localhost:5000/${post.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
-                        <span class="nameforpost">${post.userId.fname} ${post.userId.lname}</span>
-                        <div id="date-container">
-                            <span id="current-date">${new Date(post.createdAt).toLocaleDateString()}</span>
-                        </div>
-                   </section>
-                        <span class="dropdownmenu">
-                             
+                        <section class="hello">
+                            <div class="profileimageforpost" data-user-id="${post.userId._id}"
+                                        style="background-image: url('http://localhost:5000/${post.userId.profilePicture?.replace(/\\/g, '/')}')">
+                            </div>
+                            <span class="nameforpost">${post.userId.fname} ${post.userId.lname}</span>
+                            <div id="date-container">
+                                <span id="current-date">${new Date(post.createdAt).toLocaleDateString()}</span>
+                            </div>
+                        </section>
+                        <span class="spaceforthreedot">
+                            <div class="threedot"><i class="fa-solid fa-ellipsis fa-2xl"></i></div>
+                            <div class="threedot2"><i class="fa-solid fa-xmark"></i></div>
                         </span>
+                        <div class="dropdownmenu2">
+                            <li>
+                                <div class="savepost"><i class="fa-regular fa-bookmark"></i> Save</div>
+                            </li>
+                            <li>
+                                <div class="savedpost" style="display: none;"><i class="fa-solid fa-bookmark"></i> Saved</div>
+                            </li>
+                            <li>
+                                <div class="reportpost"><i class="fa-solid fa-flag"></i>Report</div>
+                            </li>
+                        </div>
                     </div>
+                
                     <div class="areaforpost">
                         <div class="post-header">
                             <p class="post-caption">${post.caption || "No caption provided"}</p>
@@ -283,8 +320,12 @@ const getPost = async () => {
                         </div>
                     </div>
                     <hr class="custom-line1">
-                    <div class="LikeArea" style="height:30px"></div>
+                    <div class="LikeArea" style="height:30px;"></div>
                     <hr class="custom-line2">
+                      <div class="likepopup">
+                         <div class="crossbutton">
+            <button class="closeLike"><i class="fa-solid fa-x fa-sm" style="color: #000000;"></i></button>
+        </div></div>
                     <div class="likecontainer">
                         <button class="interactionlike1"><i class="fa-regular fa-heart"></i>Like</button>
                         <button class="interactionlike2"><i class="fa-solid fa-heart"style="color:red;"></i>Liked</button>
@@ -310,7 +351,8 @@ const getPost = async () => {
     }
     gotouserprofile(posthtml)
     updateLikeButtons(posts)
-};
+    updateSavedButton(posts)
+}
 
 const searchItems = (totalposts, searchQuery) => {
     const query = searchQuery.toLowerCase()
@@ -891,6 +933,120 @@ searchInput.addEventListener('keydown', (event) => {
             searchInput.value=''
         }
     }
-});
+})
+
+//Dropdown menu for posts
+posthtml.addEventListener('click', async (event) => {
+    const postelement = event.target.closest('.postcontainer')
+
+    const dropDownMenu2 = postelement.querySelector('.dropdownmenu2')
+    const tooglebtnIcon2 = postelement.querySelector('.threedot2 i')
+    const tooglebtnIcon = postelement.querySelector('.threedot i')
+
+    if (event.target.closest('.threedot i')) {
+        event.target.style.display = 'none'
+        tooglebtnIcon2.style.display = 'inline-block'
+        dropDownMenu2.style.display = 'block'
+    }
+    else if (event.target.closest('.threedot2 i')) {
+        event.target.style.display = 'none'
+        tooglebtnIcon.style.display = 'flex'
+        dropDownMenu2.style.display = 'none'
+    }
+})
+
+posthtml.addEventListener('click', async (event) => {
+    const postElement = event.target.closest('.postcontainer')
+    const savebtn = postElement.querySelector('.savepost')
+    const savedbtn = postElement.querySelector('.savedpost')
+
+    const postId = postElement.id
+
+    if (event.target.closest('.edit')) {
+        window.location.href = `/api/v1/editPost/${postId}`
+    }
+    else if (event.target.closest('.deletepost')) {
+        try {
+            (async () => {
+                const response = await fetch(`http://localhost:5000/api/v1/deleteOwnPost/${postId}`, {
+                    method: "DELETE"
+                })
+                const data = await response.json()
+
+                if (response.status === 200) {
+                    alert('Post deleted Successfully')
+                    window.location.reload()
+                }
+            })()
+        } catch (error) {
+            console.error(error)
+        }
+    }
+    else if (event.target.closest('.savepost')) {
+            try {
+                (async () => {
+                    const response = await fetch(`http://localhost:5000/api/v1/savePosts/${postId}`, {
+                        method: "POST"
+                    })
+                    const data = await response.json()
+    
+                    if (response.status === 200) {
+                        event.target.closest('.savepost').style.display = 'none'
+                        savedbtn.style.display = 'flex'
+                    }
+                })()
+    
+            } catch (error) {
+                console.error(error)
+            }    
+    }
+    else if (event.target.closest('.savedpost')) {
+
+        try {
+            (async () => {
+                const response = await fetch(`http://localhost:5000/api/v1/unsavePosts/${postId}`, {
+                    method: "DELETE"
+                })
+                const data = await response.json()
+
+                if (response.status === 200) {
+                    event.target.closest('.savedpost').style.display = 'none'
+                    savebtn.style.display = 'flex'
+                }
+            })()
+
+        } catch (error) {
+            console.error(error)
+        }
+    }
+    else if (event.target.closest('.reportpost')) {
+
+    }
+})
+
+const updateSavedButton=async(posts)=>{
+    try {
+        for (const post of posts) {
+            const postElement = document.getElementById(post._id)
+
+            if (postElement) {
+                const saveButton = postElement.querySelector('.savepost')
+                const savedButton = postElement.querySelector('.savedpost')
+
+                const SavedByUser = Array.isArray(post.isSavedByUser) ? post.isSavedByUser : []
+
+                if (SavedByUser.includes(UserIdForPost)) {
+                    saveButton.style.display = 'none'
+                    savedButton.style.display = 'flex'
+                } else {
+                    saveButton.style.display = 'flex'
+                    savedButton.style.display = 'none'
+                }
+            }
+        }
+    } catch (error) {
+        console.error('Error loading posts:', error)
+    }
+}
 
 

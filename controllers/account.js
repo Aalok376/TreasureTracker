@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/user.js');
-const Post = require('../models/createPost.js');
+const Post = require('../models/createPost.js')
 const Comment = require('../models/comments.js');
 const Like = require('../models/likes.js');
 
@@ -52,11 +52,9 @@ const signup = (otpStore) => {
 }
 
 const verify = async (req, res) => {
-    const { username, fname, lname, password } = req.body;
-    const profilePicture = "../assets/images/DALL·E 2025-01-19 21.12.44 - A default profile image featuring a simple and professional design. The image should have a circular border with a neutral gray background and an abst.webp"
-    const coverPicture = "../assets/images/DALL·E 2025-01-19 21.13.33 - A default cover image featuring a simple and professional design. The image should have a wide rectangular layout with a neutral gradient background i.webp"
+    const { username, fname, lname, password } = req.body
     try {
-        const user = new User({ fname, lname, username, password, profilePicture, coverPicture });
+        const user = new User({ fname, lname, username, password })
         await user.save();
         return res.status(200).json({ success: true, msg: 'User created successfully.' });
     } catch (error) {
