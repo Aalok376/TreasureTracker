@@ -81,9 +81,7 @@ const getPost = async () => {
                         </li>
                         <li>
                             <div class="savepost"><i class="fa-regular fa-bookmark"></i> Save</div>
-                        </li>
-                        <li>
-                           <div class="savedpost" style="display: none;"><i class="fa-solid fa-bookmark"></i> Saved</div>
+                            <div class="savedpost" style="display: none;"><i class="fa-solid fa-bookmark"></i> Saved</div>
                         </li>
                     </div>
                 
@@ -221,9 +219,7 @@ const getPost = async () => {
                         <div class="dropdownmenu2">
                             <li>
                                 <div class="savepost"><i class="fa-regular fa-bookmark"></i> Save</div>
-                            </li>
-                            <li>
-                                <div class="savedpost" style="display: none;"><i class="fa-solid fa-bookmark"></i> Saved</div>
+                                 <div class="savedpost" style="display: none;"><i class="fa-solid fa-bookmark"></i> Saved</div>
                             </li>
                             <li>
                                 <div class="reportpost"><i class="fa-solid fa-flag"></i>Report</div>

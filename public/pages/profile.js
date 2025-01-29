@@ -22,7 +22,10 @@ const getProfilepic = async () => {
                 <div class="profilephoto" style="background-image: url('http://localhost:5000/${profile.user?.profilePicture?.replace(/\\/g, '/')}')"></div>
                 <div class="content">
                   <h2>${profile.user.fname} ${profile.user.lname}</h2>
-                  <p id="error-otp" style="color:black;">Contact:${profile.user.contactNumber}</p>
+                  ${profile.user.contactNumber !== null
+                    ? `<p id="error-otp" style="color: black;">Contact: ${profile.user.contactNumber}</p>`
+                    : ''
+                  }
                 </div>
                 <div class="edit">
                   <div class="addpost">
@@ -34,11 +37,11 @@ const getProfilepic = async () => {
                     <span>Edit profile</span>
                   </div>
                 </div>
-        `).join('');
+        `).join('')
 
         ownprofile2.innerHTML = profiles.map(profile => `
             <div class="profile" style="background-image: url('http://localhost:5000/${profile.user?.profilePicture?.replace(/\\/g, '/')}')"></div>
-        `).join('');
+        `).join('')
     } catch (error) {
         console.error("Error fetching profile picture:", error);
     }
@@ -82,9 +85,7 @@ const getPost = async () => {
                         </li>
                         <li>
                             <div class="savepost"><i class="fa-regular fa-bookmark"></i> Save</div>
-                        </li>
-                        <li>
-                           <div class="savedpost" style="display: none;"><i class="fa-solid fa-bookmark"></i> Saved</div>
+                            <div class="savedpost" style="display: none;"><i class="fa-solid fa-bookmark"></i> Saved</div>
                         </li>
                     </div>
                 
@@ -587,7 +588,7 @@ const gotouserprofile = (posthtml) => {
 }
 
 ownprofile2.addEventListener('click', async (event) => {
-    
+
     window.location.href = "/pages/profile.html"
 
 })
@@ -660,10 +661,10 @@ home.addEventListener('click', async (e) => {
 //     window.location.href=""
 // })
 
-saved.addEventListener('click',async(e)=>{
+saved.addEventListener('click', async (e) => {
     e.preventDefault()
 
-    window.location.href="/pages/savedPosts.html"
+    window.location.href = "/pages/savedPosts.html"
 })
 
 
@@ -730,22 +731,22 @@ posthtml.addEventListener('click', async (event) => {
         }
     }
     else if (event.target.closest('.savepost')) {
-            try {
-                (async () => {
-                    const response = await fetch(`http://localhost:5000/api/v1/savePosts/${postId}`, {
-                        method: "POST"
-                    })
-                    const data = await response.json()
-    
-                    if (response.status === 200) {
-                        event.target.closest('.savepost').style.display = 'none'
-                        savedbtn.style.display = 'flex'
-                    }
-                })()
-    
-            } catch (error) {
-                console.error(error)
-            }    
+        try {
+            (async () => {
+                const response = await fetch(`http://localhost:5000/api/v1/savePosts/${postId}`, {
+                    method: "POST"
+                })
+                const data = await response.json()
+
+                if (response.status === 200) {
+                    event.target.closest('.savepost').style.display = 'none'
+                    savedbtn.style.display = 'flex'
+                }
+            })()
+
+        } catch (error) {
+            console.error(error)
+        }
     }
     else if (event.target.closest('.savedpost')) {
 
@@ -768,7 +769,7 @@ posthtml.addEventListener('click', async (event) => {
     }
 })
 
-const updateSavedButton=async(posts)=>{
+const updateSavedButton = async (posts) => {
     try {
         for (const post of posts) {
             const postElement = document.getElementById(post._id)

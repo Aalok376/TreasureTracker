@@ -90,8 +90,6 @@ const getPost = async () => {
                     <div class="dropdownmenu2">
                             <li>
                                 <div class="savepost"><i class="fa-regular fa-bookmark"></i> Save</div>
-                            </li>
-                            <li>
                                 <div class="savedpost" style="display: none;"><i class="fa-solid fa-bookmark"></i> Saved</div>
                             </li>
                             <li>
