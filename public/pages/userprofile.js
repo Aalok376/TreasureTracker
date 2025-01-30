@@ -67,8 +67,8 @@ const getPost = async () => {
             }
         });
 
-        const data = await response.json();
-        posts = Array.isArray(data.posts) ? data.posts : [];
+        const data = await response.json()
+        posts = Array.isArray(data.posts) ? data.posts : []
 
         if (posts.length > 0) {
             posthtml.innerHTML = posts.map(post => `
@@ -519,43 +519,61 @@ const fetchComments = async (postId) => {
 
 const updateCommentSections = async (OwnComments, OtherComments, commentArea) => {
     if (OwnComments.length > 0 && OtherComments.length > 0) {
-        return commentArea.innerHTML = OwnComments.map(comment => ` <div class="introareacomment">
+        return commentArea.innerHTML = OwnComments.map(comment => `<div class="introareacomment" id="${comment._id}">
                          <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
                          <div class="commentsectionbypeople">
                              <p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
-                             <span class="dropdownmenu">
-                              
-                             </span>
-                             <p>${comment.text}</p>
+                             <span class="cspaceforthreedot">
+                                    <div class="cthreedot"><i class="fa-solid fa-ellipsis fa-2xl"></i></div>
+                                    <div class="cthreedot2"><i class="fa-solid fa-xmark"></i></div>
+                            </span>
+                            <div class="dropdownmenu">
+                                <li>
+                                    <div class="cedit"><i class="fa-solid fa-pen"></i> Edit</div>
+                                </li>
+                                <li>
+                                    <div class="cdelete"><i class="fa-solid fa-trash"></i> Delete</div>
+                                </li>
+                            </div>
+                             <p class="comment-text">${comment.text}</p>
                          </div>
                      </div>`).join('')
             +
-            OtherComments.map(comment => ` <div class="introareacomment">
+            OtherComments.map(comment => `<div class="introareacomment" id="${comment._id}">
                         <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
                         <div class="commentsectionbypeople">
                             <p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
-                            <p>${comment.text}</p>
+                            <p class="comment-text">${comment.text}</p>
                         </div>
                     </div>`).join('')
     }
     else if (OwnComments.length > 0 && OtherComments.length === 0) {
-        return commentArea.innerHTML = OwnComments.map(comment => ` <div class="introareacomment">
+        return commentArea.innerHTML = OwnComments.map(comment => `<div class="introareacomment" id="${comment._id}">
                          <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
                          <div class="commentsectionbypeople">
-                             <p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
-                             <span class="dropdownmenu">
-                              
-                             </span>
-                             <p>${comment.text}</p>
+                            <p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
+                            <span class="cspaceforthreedot">
+                                    <div class="cthreedot"><i class="fa-solid fa-ellipsis fa-2xl"></i></div>
+                                    <div class="cthreedot2"><i class="fa-solid fa-xmark"></i></div>
+                            </span>
+                            <div class="dropdownmenu">
+                                <li>
+                                    <div class="cedit"><i class="fa-solid fa-pen"></i> Edit</div>
+                                </li>
+                                <li>
+                                    <div class="cdelete"><i class="fa-solid fa-trash"></i> Delete</div>
+                                </li>
+                            </div>
+                            <p class="comment-text">${comment.text}</p>
                          </div>
                      </div>`).join('')
     }
     else if (OwnComments.length === 0 && OtherComments.length > 0) {
-        return commentArea.innerHTML = OtherComments.map(comment => ` <div class="introareacomment">
+        return commentArea.innerHTML = OtherComments.map(comment => `<div class="introareacomment" id="${comment._id}">
                              <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
                              <div class="commentsectionbypeople">
                                  <p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
-                                 <p>${comment.text}</p>
+                                 <p class="comment-text">${comment.text}</p>
                              </div>
                          </div>`).join('')
     }
@@ -654,10 +672,10 @@ home.addEventListener('click', async (e) => {
 //     window.location.href=""
 // })
 
-saved.addEventListener('click',async(e)=>{
+saved.addEventListener('click', async (e) => {
     e.preventDefault()
 
-    window.location.href="/pages/savedPosts.html"
+    window.location.href = "/pages/savedPosts.html"
 })
 
 
@@ -704,22 +722,22 @@ posthtml.addEventListener('click', async (event) => {
     const postId = postElement.id
 
     if (event.target.closest('.savepost')) {
-            try {
-                (async () => {
-                    const response = await fetch(`http://localhost:5000/api/v1/savePosts/${postId}`, {
-                        method: "POST"
-                    })
-                    const data = await response.json()
-    
-                    if (response.status === 200) {
-                        event.target.closest('.savepost').style.display = 'none'
-                        savedbtn.style.display = 'flex'
-                    }
-                })()
-    
-            } catch (error) {
-                console.error(error)
-            }    
+        try {
+            (async () => {
+                const response = await fetch(`http://localhost:5000/api/v1/savePosts/${postId}`, {
+                    method: "POST"
+                })
+                const data = await response.json()
+
+                if (response.status === 200) {
+                    event.target.closest('.savepost').style.display = 'none'
+                    savedbtn.style.display = 'flex'
+                }
+            })()
+
+        } catch (error) {
+            console.error(error)
+        }
     }
     else if (event.target.closest('.savedpost')) {
 
@@ -745,7 +763,7 @@ posthtml.addEventListener('click', async (event) => {
     }
 })
 
-const updateSavedButton=async(posts)=>{
+const updateSavedButton = async (posts) => {
     try {
         for (const post of posts) {
             const postElement = document.getElementById(post._id)
@@ -771,3 +789,131 @@ const updateSavedButton=async(posts)=>{
 }
 
 
+//Dropdown menu for comments
+const editComment = async (OwnComments, OtherCommentsOnOwnPost, OtherCommentsOnOtherPost, commentArea, postId) => {
+
+    commentArea.addEventListener('click', async (event) => {
+
+        const specificComment = event.target.closest('.introareacomment')
+
+        const commentId = specificComment.getAttribute('Id')
+
+        const dropDownMenu = specificComment.querySelector('.dropdownmenu')
+        const ctooglebtnIcon2 = specificComment.querySelector('.cthreedot2 i')
+        const ctooglebtnIcon = specificComment.querySelector('.cthreedot i')
+        const commentTextElement = specificComment.querySelector('.comment-text')
+
+        if (event.target.closest('.cthreedot i')) {
+            event.target.style.display = 'none'
+            ctooglebtnIcon2.style.display = 'inline-block'
+            dropDownMenu.style.display = 'block'
+        }
+        else if (event.target.closest('.cthreedot2 i')) {
+            event.target.style.display = 'none'
+            ctooglebtnIcon.style.display = 'flex'
+            dropDownMenu.style.display = 'none'
+        }
+        else if (event.target.closest('.cdelete')) {
+            try {
+                (async () => {
+                    const response = await fetch(`http://localhost:5000/api/v1/removecomment/${commentId}`, {
+                        method: "DELETE"
+                    })
+                    const data = await response.json()
+
+                    if (response.status === 200) {
+                        const datas = await fetchComments(postId)
+
+                        const comments = Array.isArray(datas.comments) ? datas.comments : [datas.comments]
+
+                        OwnComments = []
+                        OtherComments = []
+                        OtherCommentsOnOwnPost = []
+                        OtherCommentsOnOtherPost = []
+                        for (let i = 0; i < comments.length; i++) {
+                            if (comments[i].userId._id === UserIdForPost) {
+                                OwnComments.push(comments[i]);
+                            } else {
+                                OtherComments.push(comments[i]);
+                            }
+                        }
+
+                        const FilteredOwnPost = ownPosts.filter(post => post._id === postId)
+
+                        OtherComments.forEach(comment => {
+                            if (FilteredOwnPost.length > 0 && FilteredOwnPost._id === comment.postId._id) {
+                                OtherCommentsOnOwnPost.push(comment)
+                            } else {
+                                OtherCommentsOnOtherPost.push(comment)
+                            }
+                        })
+
+                        updateCommentSections(OwnComments, OtherCommentsOnOwnPost, OtherCommentsOnOtherPost, commentArea)
+                    }
+                })()
+            } catch (error) {
+                console.error(error)
+            }
+        }
+        else if (event.target.closest('.cedit')) {
+            const input = document.createElement('input')
+            input.type = 'text'
+            input.className = 'edit-input'
+            input.value = commentTextElement.innerText.trim()
+
+            commentTextElement.replaceWith(input)
+            input.focus()
+
+            input.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+
+                    const text = input.value
+                    try {
+                        (async () => {
+                            const response = await fetch(`http://localhost:5000/api/v1/updatecomment/${commentId}`, {
+                                method: "PUT",
+                                headers: {
+                                    "Content-Type": "application/json",
+                                },
+                                body: JSON.stringify({ text }),
+                            })
+                            const data = await response.json()
+
+                            if (response.status === 200) {
+                                const datas = await fetchComments(postId)
+
+                                const comments = Array.isArray(datas.comments) ? datas.comments : [datas.comments]
+
+                                OwnComments = []
+                                OtherComments = []
+                                OtherCommentsOnOwnPost = []
+                                OtherCommentsOnOtherPost = []
+                                for (let i = 0; i < comments.length; i++) {
+                                    if (comments[i].userId._id === UserIdForPost) {
+                                        OwnComments.push(comments[i]);
+                                    } else {
+                                        OtherComments.push(comments[i]);
+                                    }
+                                }
+
+                                const FilteredOwnPost = ownPosts.filter(post => post._id === postId)
+
+                                OtherComments.forEach(comment => {
+                                    if (FilteredOwnPost.length > 0 && FilteredOwnPost._id === comment.postId._id) {
+                                        OtherCommentsOnOwnPost.push(comment)
+                                    } else {
+                                        OtherCommentsOnOtherPost.push(comment)
+                                    }
+                                })
+
+                                updateCommentSections(OwnComments, OtherCommentsOnOwnPost, OtherCommentsOnOtherPost, commentArea)
+                            }
+                        })()
+                    } catch (error) {
+                        console.error(error)
+                    }
+                }
+            })
+        }
+    })
+}

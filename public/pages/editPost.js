@@ -82,14 +82,16 @@ btn.addEventListener('click', async (e) => {
     }
 
     try {
-        const response = await fetch(`http://localhost:5000/api/v1//updateOwnPost/${postId}`, {
+        const response = await fetch(`http://localhost:5000/api/v1/updateOwnPost/${postId}`, {
             method: 'PUT',
             headers: {},
             body: formData
         })
 
         const result = await response.json()
-        window.location.href = "/pages/homepage.html"
+        if (response.status === 200) {
+            window.history.back()
+        }
     }
     catch (error) {
         console.log(error)
@@ -97,7 +99,7 @@ btn.addEventListener('click', async (e) => {
     }
 })
 
-document.querySelector('.cancel').addEventListener('click',async(e)=>{
+document.querySelector('.cancel').addEventListener('click', async (e) => {
     e.preventDefault()
 
     window.history.back()
@@ -184,8 +186,8 @@ home.addEventListener('click', async (e) => {
 //     window.location.href=""
 // })
 
-// saved.addEventListener('click',async(e)=>{
-//     e.preventDefault()
+saved.addEventListener('click',async(e)=>{
+    e.preventDefault()
 
-//     window.location.href=""
-// })
+    window.location.href="/pages/savedPosts.html"
+})
