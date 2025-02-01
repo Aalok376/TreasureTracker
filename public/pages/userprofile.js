@@ -16,7 +16,7 @@ const getotherProfilepic = async () => {
         const response = await fetch(`http://localhost:5000/api/v1/getotherprofile/${userId}`);
         const data = await response.json();
 
-        profiles = Array.isArray(data) ? data : [data];
+        profiles = Array.isArray(data) ? data : [data]
 
         ownprofile.innerHTML = profiles.map(profile => `
                 <div class="coverphoto" style="background-image: url('http://localhost:5000/${profile.user?.coverPicture?.replace(/\\/g, '/')}')"></div>
@@ -25,16 +25,36 @@ const getotherProfilepic = async () => {
                   <h2>${profile.user.fname} ${profile.user.lname}</h2>
                 </div>
                 <div class="edit">
-                  <div class="addfriend">
+                  <div class="addfriend" id=${profile.user._id}>
                     <span><i class="fa-solid fa-plus"></i></span>
                     <span>Add Friend</span>
+                  </div>
+                  <div class="cancel" id=${profile.user._id}>
+                    <span><i class="fa-solid fa-xmark"></i></span>
+                    <span>Cancel</span>
+                  </div>
+                   <div class="friends" id=${profile.user._id}>
+                    <span><i class="fa-solid fa-user-group"></i></span>
+                    <span>Friends</span>
+                  </div>
+                  <div class="confirmfriends" id=${profile.user._id}>
+                    <span><i class="fa-solid fa-user-group"></i></span>
+                    <span>Respond</span>
+                    <div class="dropdownmenu">
+                                <li>
+                                    <div class="confirm"><i class="fa-solid fa-user-group"></i> Confirm</div>
+                                </li>
+                                <li>
+                                    <div class="reject"><i class="fa-solid fa-xmark"></i> Reject</div>
+                                </li>
+                    </div>
                   </div>
                   <div class="message">
                     <span><i class="fa-solid fa-message"></i></span>
                     <span>Message</span>
                   </div>
                 </div>
-        `).join('');
+        `).join('')
 
     } catch (error) {
         console.error("Error fetching profile picture:", error);
@@ -44,9 +64,9 @@ const getotherProfilepic = async () => {
 const ownProfile = async () => {
     try {
         const response = await fetch("http://localhost:5000/api/v1/profile");
-        const data = await response.json();
+        const data = await response.json()
 
-        const profiles = Array.isArray(data) ? data : [data];
+        const profiles = Array.isArray(data) ? data : [data]
 
         UserIdForPost = profiles[0].user._id
 
@@ -223,11 +243,190 @@ const getPost = async () => {
 }
 
 (async () => {
-    await getotherProfilepic();
-    await getPost();
-    await ownProfile();
-})();
+    await getotherProfilepic()
+    await getPost()
+    await ownProfile()
+    await friendStatus()
+})()
 
+ownprofile.addEventListener('click', async (event) => {
+
+    const cancelbtn = ownprofile.querySelector('.cancel')
+    const addbtn = ownprofile.querySelector('.addfriend')
+    const friendbtn = ownprofile.querySelector('.friends')
+
+    if (event.target.closest('.addfriend')) {
+        try {
+
+            const receiverId = event.target.closest('.addfriend').getAttribute('Id')
+
+            const response = await fetch('http://localhost:5000/api/v1/sendfriendrequest', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ receiverId }),
+            })
+
+            if (response.status === 200) {
+                event.target.closest('.addfriend').style.display = 'none'
+                cancelbtn.style.display = 'flex'
+            }
+        } catch (error) {
+            console.error(error)
+        }
+    }
+    else if (event.target.closest('.cancel')) {
+        try {
+
+            const receiverId = event.target.closest('.cancel').getAttribute('Id')
+
+            const response = await fetch('http://localhost:5000/api/v1/cancelrequest', {
+                method: 'DELETE',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ receiverId }),
+            })
+
+            if (response.status === 200) {
+                event.target.closest('.cancel').style.display = 'none'
+                addbtn.style.display = 'flex'
+            }
+        } catch (error) {
+            console.error(error)
+        }
+    }
+    else if (event.target.closest('.friends')) {
+        try {
+
+            const friendId = event.target.closest('.friends').getAttribute('Id')
+
+            const response = await fetch('http://localhost:5000/api/v1/removefriend', {
+                method: 'DELETE',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ friendId }),
+            })
+
+            if (response.status === 200) {
+                event.target.closest('.friends').style.display = 'none'
+                addbtn.style.display = 'flex'
+            }
+        } catch (error) {
+            console.error(error)
+        }
+    }
+    else if (event.target.closest('.confirmfriends')) {
+        const dropDownMenu = event.target.closest('.confirmfriends').querySelector('.dropdownmenu')
+        dropDownMenu.style.display = 'flex'
+
+        const confirmbtnn = dropDownMenu.querySelector('.confirm')
+        const rejectbtnn = dropDownMenu.querySelector('.reject')
+
+        confirmbtnn.addEventListener('click', async (e) => {
+            e.preventDefault()
+
+            try {
+                const receiverId = event.target.closest('.confirmfriends').getAttribute('Id')
+                const status = 'accepted'
+
+                const response = await fetch('http://localhost:5000/api/v1/respondfriendrequest', {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ receiverId, status }),
+                })
+
+                if (response.status === 200) {
+                    event.target.closest('.confirmfriends').style.display = 'none'
+                    friendbtn.style.display = 'flex'
+                }
+            } catch (error) {
+                console.error(error)
+            }
+        })
+        rejectbtnn.addEventListener('click', async (e) => {
+            e.preventDefault()
+
+            try {
+                const receiverId = event.target.closest('.confirmfriends').getAttribute('Id')
+
+                const response = await fetch('http://localhost:5000/api/v1/cancelrequest', {
+                    method: 'DELETE',
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ receiverId }),
+                })
+
+                if (response.status === 200) {
+                    event.target.closest('.confirmfriends').style.display = 'none'
+                    addbtn.style.display = 'flex'
+                }
+            } catch (error) {
+                console.error(error)
+            }
+        })
+
+    }
+    else if (event.target.closest('.message')) {
+
+    }
+})
+
+const friendStatus = async () => {
+    const cancelbtn = ownprofile.querySelector('.cancel')
+    const addbtn = ownprofile.querySelector('.addfriend')
+    const friendbtn = ownprofile.querySelector('.friends')
+    const confirmBtn = ownprofile.querySelector('.confirmfriends')
+
+    const receiverId = addbtn.getAttribute('Id')
+
+    try {
+
+        const response = await fetch('http://localhost:5000/api/v1/getstatusoffriends', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ receiverId }),
+        })
+
+        const data = await response.json()
+
+        if ((data.existingRequest && data.existingRequest.status === 'accepted') || (data.receivedRequest && data.receivedRequest.status === 'accepted')) {
+            cancelbtn.style.display = 'none'
+            addbtn.style.display = 'none'
+            friendbtn.style.display = 'flex'
+            confirmBtn.style.display = 'none'
+        }
+
+        else if (data.status === 'Received' && data.receivedRequest && data.receivedRequest.status === 'pending') {
+            cancelbtn.style.display = 'none'
+            addbtn.style.display = 'none'
+            friendbtn.style.display = 'none'
+            confirmBtn.style.display = 'flex'
+        }
+        else if (data.status === 'No request') {
+            cancelbtn.style.display = 'none'
+            addbtn.style.display = 'flex'
+            friendbtn.style.display = 'none'
+            confirmBtn.style.display = 'none'
+        }
+        else if (data.status === 'Sent' && data.existingRequest && data.existingRequest.status === 'pending') {
+            cancelbtn.style.display = 'flex'
+            addbtn.style.display = 'none'
+            friendbtn.style.display = 'none'
+            confirmBtn.style.display = 'none'
+        }
+    } catch (error) {
+        console.error(error)
+    }
+
+}
 
 const commentbtn = document.querySelector('.containerforpost')
 

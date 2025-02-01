@@ -8,16 +8,17 @@ const { multiUpload, profileSingleUpload, coverSingleUpload } = require('../midd
 const { signup, verify, login, checkToUpdate, updatePassword, toDelete, logout, sendmailInCaseOfForgot, forgotPassword, dummy } = require('../controllers/account')
 const { profile } = require('../controllers/fetchProfile')
 const { updateProfilePicture, deleteProfilePicture, updateCoverPicture, deleteCoverPicture, updateName, updateContact, deletecontact } = require('../controllers/profilesetup')
-const { CreatePost, updatePost, deletePost, servePostpage } = require('../controllers/post');
-const { getOwnPosts } = require('../controllers/fetchownpost');
+const { CreatePost, updatePost, deletePost, servePostpage } = require('../controllers/post')
+const { getOwnPosts } = require('../controllers/fetchownpost')
 const { getPosts, getSpecificpost } = require('../controllers/getPosts')
 const { createComment, deleteComment, updateComment, getAllComments, } = require('../controllers/comment')
 const { like, removeLike, getLikes, } = require('../controllers/like')
 const { otherProfile, otherPost, serveOtherProfile } = require('../controllers/fetchotherprofile')
-const { contact } = require('../controllers/contact');
+const { contact } = require('../controllers/contact')
 const { save, getsavedPost, Unsave } = require('../controllers/savedPost')
+const { sendRequest, responseOfrequest, getRequest, getFriends, unfriend, cancelRequest, getStatusOfFriend } = require('../controllers/friendRequest')
 
-const otpStore = new Map();
+const otpStore = new Map()
 
 router.post('/contactwithus', contact)//
 
@@ -74,5 +75,13 @@ router.get('/getallcomment/:postId', verifyToken, getAllComments)//
 router.get('/getotherprofile/:userId', verifyToken, otherProfile)//
 router.get('/userprofile/:userId', verifyToken, serveOtherProfile)//
 router.get('/getotherposts/:userId', verifyToken, otherPost)//
+
+router.post('/sendfriendrequest', verifyToken, sendRequest)//
+router.post('/respondfriendrequest', verifyToken, responseOfrequest)
+router.post('/getstatusoffriends', verifyToken, getStatusOfFriend)//
+router.get('/getfriendrequest', verifyToken, getRequest)
+router.get('/getfriends', verifyToken, getFriends)
+router.delete('/removefriend', verifyToken, unfriend)
+router.delete('/cancelrequest', verifyToken, cancelRequest)
 
 module.exports = { router }

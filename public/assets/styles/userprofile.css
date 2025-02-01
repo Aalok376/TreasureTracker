@@ -527,6 +527,41 @@
     bottom: 25px;
     left: 20px;
   }
+  .cancel {
+    position: absolute;
+    padding: 10px 20px;
+    background-color: rgba(8, 102, 255, 1.0);
+    color: black;
+    font-weight: bold;
+    border-radius: 10px;
+    bottom: 25px;
+    left: 20px;
+    display: none;
+  }
+
+  .friends {
+    position: absolute;
+    padding: 10px 20px;
+    background-color: rgba(8, 102, 255, 1.0);
+    color: black;
+    font-weight: bold;
+    border-radius: 10px;
+    bottom: 25px;
+    left: 20px;
+    display: none;
+  }
+
+  .confirmfriends {
+    position: absolute;
+    padding: 10px 20px;
+    background-color: rgba(8, 102, 255, 1.0);
+    color: black;
+    font-weight: bold;
+    border-radius: 10px;
+    bottom: 25px;
+    left: 20px;
+    display: none;
+  }
   
   .message {
     position: absolute;

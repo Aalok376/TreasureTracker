@@ -20,8 +20,8 @@ const otherProfile = async (req, res) => {
             return res.status(404).json({ success: false, msg: 'User not found' });
         }
 
-        const { fname, lname, profilePicture, contactNumber,coverPicture } = user;
-        return res.status(200).json({ success: true, user: { fname, lname, profilePicture, contactNumber,coverPicture } });
+        const { fname, lname, profilePicture, contactNumber,coverPicture,_id } = user;
+        return res.status(200).json({ success: true, user: { fname, lname, profilePicture, contactNumber,coverPicture ,_id} });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ success: false, msg: 'Internal server error' });

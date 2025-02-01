@@ -964,11 +964,11 @@ home.addEventListener('click', async (e) => {
 //     window.location.href=""
 // })
 
-// friends.addEventListener('click',async(e)=>{
-//     e.preventDefault()
+friends.addEventListener('click',async(e)=>{
+    e.preventDefault()
 
-//     window.location.href=""
-// })
+    window.location.href="/pages/friends.html"
+})
 
 saved.addEventListener('click', async (e) => {
     e.preventDefault()
