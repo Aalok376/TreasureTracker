@@ -364,6 +364,7 @@ commentbtn.addEventListener('click', async (event) => {
             }
 
             updateCommentSections(OwnComments, OtherComments, commentArea)
+            editComment(OwnComments, OtherComments, commentArea, postId)
 
         }
         catch (error) {
@@ -790,7 +791,7 @@ const updateSavedButton = async (posts) => {
 
 
 //Dropdown menu for comments
-const editComment = async (OwnComments, OtherCommentsOnOwnPost, OtherCommentsOnOtherPost, commentArea, postId) => {
+const editComment = async (OwnComments, OtherComments, commentArea, postId) => {
 
     commentArea.addEventListener('click', async (event) => {
 
@@ -828,8 +829,6 @@ const editComment = async (OwnComments, OtherCommentsOnOwnPost, OtherCommentsOnO
 
                         OwnComments = []
                         OtherComments = []
-                        OtherCommentsOnOwnPost = []
-                        OtherCommentsOnOtherPost = []
                         for (let i = 0; i < comments.length; i++) {
                             if (comments[i].userId._id === UserIdForPost) {
                                 OwnComments.push(comments[i]);
@@ -838,17 +837,7 @@ const editComment = async (OwnComments, OtherCommentsOnOwnPost, OtherCommentsOnO
                             }
                         }
 
-                        const FilteredOwnPost = ownPosts.filter(post => post._id === postId)
-
-                        OtherComments.forEach(comment => {
-                            if (FilteredOwnPost.length > 0 && FilteredOwnPost._id === comment.postId._id) {
-                                OtherCommentsOnOwnPost.push(comment)
-                            } else {
-                                OtherCommentsOnOtherPost.push(comment)
-                            }
-                        })
-
-                        updateCommentSections(OwnComments, OtherCommentsOnOwnPost, OtherCommentsOnOtherPost, commentArea)
+                        updateCommentSections(OwnComments, OtherComments, commentArea)
                     }
                 })()
             } catch (error) {
@@ -886,8 +875,6 @@ const editComment = async (OwnComments, OtherCommentsOnOwnPost, OtherCommentsOnO
 
                                 OwnComments = []
                                 OtherComments = []
-                                OtherCommentsOnOwnPost = []
-                                OtherCommentsOnOtherPost = []
                                 for (let i = 0; i < comments.length; i++) {
                                     if (comments[i].userId._id === UserIdForPost) {
                                         OwnComments.push(comments[i]);
@@ -896,17 +883,7 @@ const editComment = async (OwnComments, OtherCommentsOnOwnPost, OtherCommentsOnO
                                     }
                                 }
 
-                                const FilteredOwnPost = ownPosts.filter(post => post._id === postId)
-
-                                OtherComments.forEach(comment => {
-                                    if (FilteredOwnPost.length > 0 && FilteredOwnPost._id === comment.postId._id) {
-                                        OtherCommentsOnOwnPost.push(comment)
-                                    } else {
-                                        OtherCommentsOnOtherPost.push(comment)
-                                    }
-                                })
-
-                                updateCommentSections(OwnComments, OtherCommentsOnOwnPost, OtherCommentsOnOtherPost, commentArea)
+                                updateCommentSections(OwnComments, OtherComments, commentArea)
                             }
                         })()
                     } catch (error) {

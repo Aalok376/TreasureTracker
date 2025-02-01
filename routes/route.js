@@ -67,7 +67,7 @@ router.get('/getalllike/:postId', verifyToken, getLikes)//
 
 
 router.post('/commentinpost/:postId', verifyToken, createComment)//
-router.put('/updatecomment/:commentId', verifyToken, updateComment)
+router.put('/updatecomment/:commentId', verifyToken, updateComment)//
 router.delete('/removecomment/:commentId', verifyToken, deleteComment)//
 router.get('/getallcomment/:postId', verifyToken, getAllComments)//
 

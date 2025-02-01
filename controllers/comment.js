@@ -38,10 +38,6 @@ const deleteComment = async (req, res) => {
             return res.status(404).json({ msg: 'Comment not found.' });
         }
 
-        if (comment.userId.toString() !== userId) {
-            return res.status(403).json({ msg: 'You are not authorized to delete this comment.' });
-        }
-
         const post = await Post.findById(comment.postId);
         post.commentCount -= 1;
         await post.save();
