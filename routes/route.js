@@ -77,11 +77,11 @@ router.get('/userprofile/:userId', verifyToken, serveOtherProfile)//
 router.get('/getotherposts/:userId', verifyToken, otherPost)//
 
 router.post('/sendfriendrequest', verifyToken, sendRequest)//
-router.post('/respondfriendrequest', verifyToken, responseOfrequest)
+router.post('/respondfriendrequest', verifyToken, responseOfrequest)//
 router.post('/getstatusoffriends', verifyToken, getStatusOfFriend)//
-router.get('/getfriendrequest', verifyToken, getRequest)
-router.get('/getfriends', verifyToken, getFriends)
-router.delete('/removefriend', verifyToken, unfriend)
-router.delete('/cancelrequest', verifyToken, cancelRequest)
+router.get('/getfriendrequest', verifyToken, getRequest)//
+router.get('/getfriends', verifyToken, getFriends)//
+router.delete('/removefriend', verifyToken, unfriend)//
+router.delete('/cancelrequest', verifyToken, cancelRequest)//
 
 module.exports = { router }

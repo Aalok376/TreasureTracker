@@ -39,7 +39,8 @@ body {
     border-radius: 8px 8px 0 0;
 }
 
-.tab:hover, .tab.active {
+.tab:hover,
+.tab.active {
     background: #007bff;
     color: white;
 }
@@ -55,8 +56,15 @@ body {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(5px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* List Container */
@@ -161,6 +169,141 @@ input {
 
 .send-btn:hover {
     background: #0056b3;
+}
+
+.areaforfriend {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    position: relative;
+}
+
+.profileimage {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+}
+
+.peoples {
+    flex: 1;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.namearea {
+    font-size: 16px;
+}
+
+.addfriend {
+    display: none;
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cancelfriend {
+    display: none;
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.confirmfriendrequest {
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Cancel Friend button styling */
+  .cancelfriendrequest {
+    background-color: #f44336;
+    color: white;
+    padding: 5px 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+  }
+
+/* Three-dot menu container */
+.threedotthing {
+    position: relative;
+}
+
+.spaceforthreedot {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.threedot,
+.threedot2 {
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.threedot i,
+.threedot2 i {
+    font-size: 20px;
+}
+
+.dropdownmenu {
+    display: none;
+    position: absolute;
+    right: 10px;
+    top: 40px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    padding: 5px 0;
+    list-style: none;
+}
+
+/* .areaforfriend:hover .dropdownmenu {
+    display: block;
+} */
+
+.dropdownmenu li {
+    padding: 5px 15px;
+    cursor: pointer;
+}
+
+.dropdownmenu li:hover {
+    background: #f0f0f0;
 }
 
 /* Responsive Design */

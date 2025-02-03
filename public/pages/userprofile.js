@@ -805,10 +805,10 @@ const gotouserprofile = (posthtml) => {
     if (posthtml) {
         posthtml.addEventListener('click', async (event) => {
 
-            const profileImage = event.target.closest('.profileimageforpost');
+            const profileImage = event.target.closest('.profileimageforpost')
             if (profileImage) {
-                const userId = profileImage.getAttribute("data-user-id");
-                window.location.href = `/api/v1/userprofile/${userId}`;
+                const userId = profileImage.getAttribute("data-user-id")
+                window.location.href = `/api/v1/userprofile/${userId}`
             }
         });
     }
@@ -866,11 +866,11 @@ home.addEventListener('click', async (e) => {
 //     window.location.href=""
 // })
 
-// friends.addEventListener('click',async(e)=>{
-//     e.preventDefault()
+friends.addEventListener('click',async(e)=>{
+    e.preventDefault()
 
-//     window.location.href=""
-// })
+    window.location.href="/pages/friends.html"
+})
 
 saved.addEventListener('click', async (e) => {
     e.preventDefault()
