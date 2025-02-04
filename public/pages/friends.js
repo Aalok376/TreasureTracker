@@ -57,12 +57,13 @@ const updatefriendList = (friends) => {
     if (friends.length > 0) {
         friendlist.innerHTML = friends.map(friend => `
             <div class="areaforfriend" id="${friend._id}">
+            <div class="peoples">
                 <div class="profileimage" data-user-id="${friend._id}" style="background-image: url('http://localhost:5000/${friend.profilePicture?.replace(/\\/g, '/')}')"></div>
-                <div class="peoples">
                     <p class="namearea">${friend.fname} ${friend.lname}</p>
                     <div class="addfriend" style="display: none;"><i class="fa-solid fa-user-group"></i> Add Friend</div>
                     <div class="cancelfriend" style="display: none;"><i class="fa-solid fa-xmark"></i> Cancel</div>
-                    <div class="threedotthing">
+                    </div>
+                  
                         <span class="spaceforthreedot">
                             <div class="threedot"><i class="fa-solid fa-ellipsis fa-2xl"></i></div>
                             <div class="threedot2"><i class="fa-solid fa-xmark"></i></div>
@@ -74,10 +75,9 @@ const updatefriendList = (friends) => {
                             <li>
                                 <div class="message"><i class="fa-solid fa-message"></i> Message</div>
                             </li>
-                        </div>
+                       
                     </div>
                 </div>
-            </div>
         `).join('')
     }
     else {
@@ -88,14 +88,14 @@ const updatePendingList = (friends) => {
     if (friends.length > 0) {
         pendinglist.innerHTML = friends.map(friend => `
             <div class="areaforfriend" id="${friend._id}">
+            <div class="peoples">
                 <div class="profileimage" data-user-id="${friend.senderId._id}" style="background-image: url('http://localhost:5000/${friend.senderId.profilePicture?.replace(/\\/g, '/')}')"></div>
-                <div class="peoples">
                     <p class="namearea">${friend.senderId.fname} ${friend.senderId.lname}</p>
+                    </div>
                     <div class="forclearing">
                         <div class="confirmfriendrequest"><i class="fa-solid fa-user-group"></i> Confirm</div>
                         <div class="cancelfriendrequest"><i class="fa-solid fa-xmark"></i> Cancel</div>
                     </div>
-                </div>
             </div>
         `).join('')
     }
@@ -237,7 +237,7 @@ pendinglist.addEventListener('click', async (event) => {
 
                 if (response.status === 200) {
                     clearbtn.innerHTML = ''
-                    clearbtn.innerHTML = `<p class="No-requests">You are now friends</p>`
+                    clearbtn.innerHTML = `<div class="No-requests2"><i class="fa-solid fa-message"></i>Message</div>`
                 }
             })()
 
@@ -272,3 +272,13 @@ pendinglist.addEventListener('click', async (event) => {
         window.location.href = `/api/v1/userprofile/${userId}`;
     }
 })
+
+const sideBar = document.querySelector('.sidemenu')
+const hideSidebar = () => {
+    sideBar.classList.add('disappear')
+    sideBar.classList.remove('appear')
+}
+const openSidebar = () => {
+    sideBar.classList.add('appear')
+    sideBar.classList.remove('disappear')
+}

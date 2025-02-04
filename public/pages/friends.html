@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,32 +9,85 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 </head>
+
 <body>
-
-    <div class="container">
-
-        <div class="tabs">
-            <div class="tab active" id="friends-tab">Friends</div>
-            <div class="tab" id="requests-tab">Requests</div>
+    <header>
+        <div class="navbar">
+            <div class="firstnav"> <span class="logo"><a href="#">Treasure Tracker</a></span>
+                <div class="containerforsearch">
+                    <div id="search"> <button id="button"><i class="fas fa-search"></i></button>
+                        <input type="text" placeholder="Search Your Lost Item" id="text">
+                    </div>
+                </div>
+                <div class="profilecontainer">
+                    <div class="pp"></div>
+                    <span class="chevron"><i class="fa-solid fa-chevron-down" style="color: #050505;"></i></span>
+                </div>
+            </div>
+            <div class="dropdownmenu3">
+                <li>
+                    <div class="cgp">Change password</div>
+                </li>
+                <li>
+                    <div class="dlu">Delete</div>
+                </li>
+                <li>
+                    <div class="lgu">Logout</div>
+                </li>
+            </div>
+    </header>
+    <main class="main">
+        <div class="sidemenubox" style="display: flex;">
+            <div>
+                <div class="sidemenu">
+                    <div style="position: relative;">
+                        <button class="lawda"
+                            style="position: absolute; right: 0; height: 25px; width: 25px; cursor: pointer; border-radius:50%;"
+                            onclick="hideSidebar()">X</button>
+                        <div class="links" style="padding-top: 24px;">
+                            <div class="homepage"><i class="fas fa-home"></i>Home</div>
+                            <div class="Messagepage"><i class="fas fa-message"></i>Messages</div>
+                            <div class="Friends"><i class="fas fa-users"></i>Friends</div>
+                            <div class="SavedPosts"><i class="fa-solid fa-bookmark"></i>Saved</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hamburgermenu">
+                <button onclick="openSidebar()"><i class="fa-solid fa-bars fa-2xl"></i></button>
+            </div>
         </div>
+        <div class="asidemenu">
+            <div class="container">
 
-        <div class="section active" id="friends-section">
-            <h2>Friends</h2>
-            <div class="list-container" id="friends-list">
-                
+                <div class="tabs">
+                    <div class="tab active" id="friends-tab">Friends</div>
+                    <div class="tab" id="requests-tab">Requests</div>
+                </div>
+
+                <div class="section active" id="friends-section">
+                    <h2>Friends</h2>
+                    <div class="list-container" id="friends-list">
+
+                    </div>
+                </div>
+
+
+                <div class="section" id="requests-section">
+                    <h2>Pending Requests</h2>
+                    <div class="list-container" id="pending-requests">
+
+                    </div>
+                </div>
+
             </div>
         </div>
 
+    </main>
 
-        <div class="section" id="requests-section">
-            <h2>Pending Requests</h2>
-            <div class="list-container" id="pending-requests">
-               
-            </div>
-        </div>
 
-    </div>
 
     <script src="/pages/friends.js"></script>
 </body>
+
 </html>

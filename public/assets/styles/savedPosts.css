@@ -1,198 +1,245 @@
 *{
-    margin:0;
-    padding: 0;
-    box-sizing:border-box;
-    font-family: "poppins" sans-serif;
-  }
-  body{
-    max-width:100vw;
-    min-height:100vh;
-    color:black;
-    display: flex;
-    flex-flow:column nowrap;
-    justify-content: space-between;
-    background-color:rgba(227, 224, 224,0.5);
-    overflow-x: hidden;
-  
-  
-  }
-  header{
-    z-index: 2;
-  }
-  /* General Styling for Navbar */
-  .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color:white;
-  padding: 10px 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  font-family: Arial, sans-serif;
-  position: fixed;
-  top:0px;
-  width:100%;
-  height:60px;
-  
-  }
-  
-  /* Firstnav Section */
-  .firstnav {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  }
-  
-  .firstnav .logo a {
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-decoration: none;
-  color: #333;
-  display: flex;
-  position: relative;
-  
-  }
-  
-  .containerforsearch {
-  display: flex;
-  position:relative;
-  left:40px;
-  position: relative;
-  }
-  
-  #search {
-  display: flex;
-  align-items: center;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 12px;
-  overflow: hidden;
-  background-color:rgba(227, 224, 224,0.5);
-  position: relative;
-  }
-  
-  #search input[type="text"] {
-  border: none;
-  padding: 5px 10px;
-  outline: none;
-  width: 300px;
-  background-color:rgba(227, 224, 224,0.3);
-  position: relative;
-  transition:0.3s ease-in;
-  }
-  
-  #search button {
-  background-color: transparent;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-  font-size: 1em;
-  position: relative;
-  }
-  
-  #search button i {
-  color: black;
-  position: relative;
-  }
-  .profilecontainer{
-  display:flex;
-  flex-direction: row;
-  width:50px;
-  justify-content:space-evenly;
-  align-items: center;
-  background-color:transparent;
-  position:relative;
-  right:20px;
-  margin-left: 150px; ;
-  
-  }
-  .pp{
-  width:35px;
-  height: 35px;
-  position: relative;
-  position: 10px;
-  display: flex;
-  margin: 5px;
-  }
-  .profile{
-  width: 35px;
-  height:35px;
-  background-color:transparent;
-  /* background-image: url("../images/profile.jpg"); */
-  background-size: cover;
-  background-position: center;
-  border-radius: 50%;
-  position:relative;
-  
-  }
-  
-  .chevron{
-  position:relative;
-  
-  
-  }
-  .chevron :active{
-  transform:rotate(180deg);
-  }
-  
-  .sidemenu{
-  list-style: none;
-  width:0px;
-  height:auto;
-  position: fixed;
-  background-color:white;
-  top:60px;
-  overflow: hidden;
-  bottom: 0;
-  left: 0;
-  z-index: 2;
-  }
-  .lawda:hover{
-    background-color: gray;
-  }
-  .disappear{
-    width: 0;
-    transition: .15s linear;
-  }
-  .appear{
-    width: 200px;
-    transition: .15s linear;
-  }
-  .sidemenubox .hamburgermenu i
-  {
-    position: fixed; 
-    left: 1%; 
-    top: 9%; 
-    text-decoration: none;
-    height: 50px;
-    width:50px;
-  
-  }
-  
-  .links div{
-  text-decoration: none;
-  font-size: larger;
-  padding-left:10px;
-  text-align: center;
+  margin:0;
+  padding: 0;
+  box-sizing:border-box;
+  font-family: "poppins" sans-serif;
+}
+body{
+  max-width:100vw;
+  min-height:100vh;
   color:black;
-  width:200px;
-  height:25px;
-  padding:20px 5px;
-  display:flex;
-  justify-content: start;
-  align-items: center;
-  }
-  .links div:hover{
-  background-color:rgba(227, 224, 224,0.6);
-  border-radius: 12px;
-  }
-  .dropdownmenu{
-  display:none;
-  position:absolute;
-  top:60px;
-  right:25px;
+  display: flex;
+  flex-flow:column nowrap;
+  justify-content: space-between;
+  background-color:rgba(227, 224, 224,0.5);
+  overflow-x: hidden;
+
+
+}
+header{
+  z-index: 2;
+}
+/* General Styling for Navbar */
+.navbar {
+display: flex;
+justify-content: space-between;
+align-items: center;
+background-color:white;
+padding: 10px 20px;
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+font-family: Arial, sans-serif;
+position: fixed;
+top:0px;
+width:100%;
+height:60px;
+
+}
+
+/* Firstnav Section */
+.firstnav {
+display: flex;
+justify-content: space-evenly;
+align-items: center;
+}
+
+.firstnav .logo a {
+font-size: 1.5rem;
+font-weight: bold;
+text-decoration: none;
+color: #333;
+display: flex;
+position: relative;
+
+}
+
+.containerforsearch {
+display: flex;
+position:relative;
+left:40px;
+position: relative;
+}
+
+#search {
+display: flex;
+align-items: center;
+background-color: #fff;
+border: 1px solid #ccc;
+border-radius: 12px;
+overflow: hidden;
+background-color:rgba(227, 224, 224,0.5);
+position: relative;
+}
+
+#search input[type="text"] {
+border: none;
+padding: 5px 10px;
+outline: none;
+width: 300px;
+background-color:rgba(227, 224, 224,0.3);
+position: relative;
+transition:0.3s ease-in;
+}
+
+#search button {
+background-color: transparent;
+border: none;
+padding: 5px 10px;
+cursor: pointer;
+font-size: 1em;
+position: relative;
+}
+
+#search button i {
+color: black;
+position: relative;
+}
+.profilecontainer{
+display:flex;
+flex-direction: row;
+width:50px;
+justify-content:space-evenly;
+align-items: center;
+background-color:transparent;
+position:absolute;
+right:20px;
+
+}
+.pp{
+width:35px;
+height: 35px;
+position: relative;
+position: 10px;
+display: flex;
+margin: 5px;
+}
+.profile{
+width: 35px;
+height:35px;
+background-color:transparent;
+/* background-image: url("../images/profile.jpg"); */
+background-size: cover;
+background-position: center;
+border-radius: 50%;
+position:relative;
+
+}
+
+.chevron{
+position:relative;
+
+
+}
+.chevron :active{
+transform:rotate(180deg);
+}
+
+.sidemenu{
+list-style: none;
+width:0px;
+height:auto;
+position: fixed;
+background-color:white;
+top:60px;
+overflow: hidden;
+bottom: 0;
+left: 0;
+z-index: 2;
+}
+.lawda:hover{
+  background-color: gray;
+}
+.disappear{
+  width: 0;
+  transition: .15s linear;
+}
+.appear{
+  width: 200px;
+  transition: .15s linear;
+}
+.sidemenubox .hamburgermenu i
+{
+  position: fixed; 
+  left: 1%; 
+  top: 9%; 
   text-decoration: none;
-  width:200px;
-  background-color:white;
+  height: 50px;
+  width:50px;
+
+}
+
+.links div{
+text-decoration: none;
+font-size: larger;
+padding-left:10px;
+text-align: center;
+color:black;
+width:200px;
+height:25px;
+padding:20px 5px;
+display:flex;
+justify-content: start;
+align-items: center;
+}
+.links div:hover{
+background-color:rgba(227, 224, 224,0.6);
+border-radius: 12px;
+}
+.dropdownmenu3{
+display:none;
+position:absolute;
+top:60px;
+right:25px;
+text-decoration: none;
+width:200px;
+background-color:white;
+margin-top: 5px;
+backdrop-filter:blur(15px);
+border-radius: 20px;
+transform-origin: top; 
+transform: scaleY(0);
+overflow: hidden;
+transition: height cubic-bezier(0.175, 0.885, 0.32, 1.275);
+z-index:8888;
+animation: expand 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+cursor:pointer;
+}
+
+/* Keyframes for drop-down expand animation */
+@keyframes expand{
+0% {
+  transform: scaleY(0);
+  opacity: 0;
+}
+50% {
+  transform: scaleY(1.1); /* Slightly overshoots for a pop effect */
+  opacity: 1;
+}
+100% {
+  transform: scaleY(1); /* Resets to the original size */
+  opacity: 1;
+}
+}
+.dropdownmenu3 li{
+padding: 0.7rem;
+display:flex;
+align-items: center;
+justify-content: center;
+text-align: center;
+
+}
+.dropdownmenu3.open{
+height:auto;
+display: block;
+}
+
+.dropdownmenu{
+  display:none;
+  position:relative;
+  top:15px;
+  right:5px;
+  text-decoration: none;
+  width:100px;
+  background-color:#e3f2fd;
   margin-top: 5px;
   backdrop-filter:blur(15px);
   border-radius: 20px;
@@ -200,7 +247,6 @@
   transform: scaleY(0);
   overflow: hidden;
   transition: height cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  z-index:8888;
   animation: expand 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
   }
   
@@ -231,322 +277,353 @@
   height:auto;
   display: block;
   }
-  
-  .main{
-  flex-grow:1;
-  display:flex;
-  flex-flow : row nowrap;
-  
-  }
-  .asidemenu{
-  display:flex;
-  flex-flow:column nowrap;
-  align-items: center;
-  height:auto;
-  width:100%;
-   
-  }
-  
-  .postcontainer{
-  background-color:white;
-  display: flex;
-  justify-content: center;
-  flex-flow: column nowrap;
-  position:relative;
-  max-height: auto;
-  width:100%;
-  margin-bottom: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  .containerforpost{
-    display:flex;
-    flex-flow:column nowrap;
-    align-items: center;
-    height:auto;
-    width:50%; 
-  }
-  .identitycontainer{
-  display:flex;
-  justify-content:space-between;
-  position: relative;
-  left:10px;
-  top:10px;
-  }
-  .hello{
-    display: flex;
-    flex-direction: row;
-  }
-  .profileimageforpost{
-  width: 45px;
-  height:45px;
-  background-color:transparent;
-  /* background-image: url("../images/profile.jpg"); */
-  background-size: cover;
-  background-position: center;
-  border-radius: 50%;
-  margin-right: 20px;
-  
-  }
-  .nameforpost{
-  color:black;
-  font-size: 20px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  }
-  #date-container {
-  font-family: Arial, sans-serif;
-  font-size: 15px;
-  color: #333;
-  width: fit-content;
-  display: flex;
-  align-items: center;
-  margin-left: 10px;
-  }
-  .threedot i{
+  .cthreedot i{
     margin-left: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    top:18px;
-    right:30px;
+    top:5px;
+    right:15px;
   }
   
-  .threedot2 i{
+  .cthreedot2 i{
     margin-left: 20px;
     display: none;
     align-items: center;
     justify-content: center;
     position: relative;
-    top:18px;
-    right:30px;
+    top:5px;
+    right:15px;
   }
-  
-  .dropdownmenu2{
-    display:none;
-  position:absolute;
-  top:60px;
-  right:25px;
-  text-decoration: none;
-  width:100px;
-  background-color:lightblue;
-  margin-top: 5px;
-  backdrop-filter:blur(15px);
-  border-radius: 20px;
-  transform-origin: top; 
-  transform: scaleY(0);
-  overflow: hidden;
-  transition: height cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  z-index:8888;
-  animation: expand 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+.sectionforprofile{
+  display: flex;
+  flex-direction: row;
+}
+.placeforcommentandname{
+  display: flex;
+  flex-direction: column;
+}
+  .cspaceforthreedot{
+    position: absolute;
+    right:10px;
   }
-  .dropdownmenu2 li{
-    padding: 0.7rem;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    font-size: 20px;
-    
-    }
-    .open{
-    height:auto;
-    display: block;
-    }
-  .areaforpost{
-  flex-grow: 1;
-  margin:15px;
-  font-size: 20px;
-  }
-  .post-caption{
-    font-size: 25px;
-    font-weight:500;
-  }
-  .post-type{
-  font-size: 20px;
-  font-weight: 300;
-  }
-  .post-category{
-    font-size: 20px;
-    font-weight: 300; 
-  }
-  .likepopup{
-    display:none;
-    width:100%;
-    height: auto;
-    background-color: white;
-    position: relative; 
-    z-index: 10; 
-    display: flex;
-  
-  
-   }
-  .likepopup .closeLike{
-    border:none;
-    border-radius:50%;
-    background-color: white;
-    position:relative;
-    top:3px;
-  
-  }
-  .likepopup .crossbutton{
-    display:flex;
-    justify-content: flex-end;
-    align-items: center;
-   
-  }
-  .likecontainer{
+
+.main{
+flex-grow:1;
+display:flex;
+flex-flow : row nowrap;
+
+}
+.asidemenu{
+display:flex;
+flex-flow:column nowrap;
+align-items: center;
+height:auto;
+width:100%;
+ 
+}
+
+.postcontainer{
+background-color:white;
+display: flex;
+justify-content: center;
+flex-flow: column nowrap;
+position:relative;
+max-height: auto;
+width:100%;
+margin-bottom: 2rem;
+border-radius: 10px;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+}
+.containerforpost{
   display:flex;
-  justify-content:space-evenly;
-  position:relative;
-  font-size: 20px;
-  margin-bottom: 3px;
-  margin-top: 2px;
-  cursor:pointer;
-  }
-  
-  .interactionlike1{
-  border:none;
-  background-color: white;
-  font-size: 20px;
-  color: black;
-  width:100px;
-  }
-  .interactionlike2{
-  border:none;
-  background-color: white;
-  font-size: 20px;
-  display:none;
-  width:100px;
-  color:red;
-  }
-  
-  .interactioncomment{
-  border:none;
-  background-color: white;
-  font-size: 20px;
-  }
-  
-  .interactionshare{
-    border:none;
-    background-color: white;
-    font-size: 20px;
-    }
-  
-    .comment-area{
-      background-color: white;
-      height: auto;
-      max-height: 400px;
-      width:100%;
-      border-radius: 10px;
-      position: relative;
-      display:flex;
-      flex-direction: column;  /*Ensure vertical stacking*/
-      justify-content: flex-start;
-      padding:15px;
-      overflow-y: auto;
-      overflow-x: hidden;
-  
-    
-    }
-    .introareacomment {
-      display:flex;
-      justify-content:flex-start;
-      align-items: center;
-      height: auto;
-      max-height:100px;
-      background-color:rgb(226, 225, 225);
-      padding: 6px;
-      padding-left:30px;
-      width:auto;
-  
-      margin-bottom: 10px;
-      border-radius: 20px;
-      }
-    .comment-area .introareacomment .nameincommentarea{
-      font-size: 20px;
-    font-weight: 600;
-    margin-top: 12px;
-    
-    }
-    .introareacomment .profileimageforpost{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    }
-  /* .comment-area .hello{
-  background-color: red;
-  height: 500px;
-  width:100%;
-  margin-top: 10px;
-  flex-shrink: 1;
-  border:2px solid black;
+  flex-flow:column nowrap;
+  align-items: center;
+  height:auto;
+  width:50%; 
+  transition: 0.1s ease-in;
+}
+.identitycontainer{
+display:flex;
+justify-content:space-between;
+position: relative;
+left:10px;
+top:10px;
+}
+.hello{
+  display: flex;
+  flex-direction: row;
+}
+.profileimageforpost{
+width: 45px;
+height:45px;
+background-color:transparent;
+/* background-image: url("../images/profile.jpg"); */
+background-size: cover;
+background-position: center;
+border-radius: 50%;
+margin-right: 20px;
+
+}
+.nameforpost{
+color:black;
+font-size: 20px;
+font-weight: 600;
+display: flex;
+align-items: center;
+}
+#date-container {
+font-family: Arial, sans-serif;
+font-size: 15px;
+color: #333;
+width: fit-content;
+display: flex;
+align-items: center;
+margin-left: 10px;
+}
+.threedot i{
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
+  top:18px;
+  right:30px;
+}
+
+.threedot2 i{
+  margin-left: 20px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top:18px;
+  right:30px;
+}
+
+.dropdownmenu2{
+  display:none;
+position:absolute;
+top:60px;
+right:25px;
+text-decoration: none;
+width:100px;
+background-color:#e3f2fd;
+margin-top: 5px;
+backdrop-filter:blur(15px);
+border-radius: 20px;
+transform-origin: top; 
+transform: scaleY(0);
+overflow: hidden;
+transition: height cubic-bezier(0.175, 0.885, 0.32, 1.275);
+z-index:8888;
+animation: expand 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+cursor:pointer;
+}
+.dropdownmenu2 li{
+  padding: 0.7rem;
+  display:flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  font-size: 20px;
   
-  } */
+  }
+  .dropdownmenu2 li:hover{
+    color:gray;
+  }
+  .open{
+  height:auto;
+  display: block;
+  }
+
+  .dropdownmenu2 li i{
+    margin-right:4px;
+    margin-top:3px;
+    font-size: 17px;
+  }
+.areaforpost{
+flex-grow: 1;
+margin:15px;
+font-size: 20px;
+}
+.post-caption{
+  font-size: 25px;
+  font-weight:500;
+}
+.post-type{
+font-size: 20px;
+font-weight: 300;
+}
+.post-category{
+  font-size: 20px;
+  font-weight: 300; 
+}
+.likepopup{
+  display:none;
+  width:100%;
+  height: auto;
+  background-color: white;
+  position: relative; 
+  z-index: 10; 
+  display: flex;
+
+
+ }
+.likepopup .closeLike{
+  border:none;
+  border-radius:50%;
+  background-color: white;
+  position:relative;
+  top:3px;
+
+}
+.likepopup .crossbutton{
+  display:flex;
+  justify-content: flex-end;
+  align-items: center;
+ 
+}
+.likecontainer{
+display:flex;
+justify-content:space-evenly;
+position:relative;
+font-size: 20px;
+margin-bottom: 3px;
+margin-top: 2px;
+cursor:pointer;
+}
+
+.interactionlike1{
+border:none;
+background-color: white;
+font-size: 20px;
+color: black;
+width:100px;
+}
+.interactionlike2{
+border:none;
+background-color: white;
+font-size: 20px;
+display:none;
+width:100px;
+color:red;
+}
+
+.interactioncomment{
+border:none;
+background-color: white;
+font-size: 20px;
+}
+
+.interactionshare{
+  border:none;
+  background-color: white;
+  font-size: 20px;
+  }
+
+  .comment-area{
+    background-color: white;
+    height: auto;
+    max-height: 400px;
+    width:100%;
+    border-radius: 10px;
+    position: relative;
+    display:flex;
+    flex-direction: column;  /*Ensure vertical stacking*/
+    justify-content: flex-start;
+    padding:15px;
+    overflow-y: auto;
+    overflow-x: hidden;
+
   
+  }
+  .introareacomment {
+    display:flex;
+    justify-content:space-between;
+    background-color:rgb(226, 225, 225);
+    padding: 6px;
+    padding-left:30px;
+    max-height: fit-content;
+    width:100%;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    }
+  .comment-area .introareacomment .nameincommentarea{
+    font-size: 20px;
+  font-weight: 600;
   
-    .comment-container{
-      background-color:white;
-      display: none;
-      justify-content: center;
-      flex-flow: column nowrap;
-      position:relative;
-      width:100%;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-    .comment-section {
-      margin-top: 10px;
-      padding: 10px;
-      /* border: 1px solid #ccc; */
-      border-radius: 5px;
-      background-color:white;
-      text-align: center;
-    }
-    
-    .comment-box {
-      width: 90%;
-      padding: 8px;
-      margin: 20px;
-      margin-left: 40px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      resize: none;
-      font-size: 14px;
-    }
-    
-    .post-comment-btn {
-      background-color: #018df9;
-      color: #fff;
-      padding: 8px 15px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin:20px;
-      margin-left: 40px;
-      width: 90%;
-    }
-    
-    .post-comment-btn:hover {
-      background-color: #005bb5;
-    }
+  }
+.comment-text{
+  word-wrap: break-word; /* Ensures long words break */
+  white-space: normal; /* Allows text to wrap */
+  overflow-wrap: break-word; /* Alternative for word wrapping */
+  max-width: 100%;
+
+}
+
+  .comment-container{
+    background-color:white;
+    display: none;
+    justify-content: center;
+    flex-flow: column nowrap;
+    position:relative;
+    width:100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .comment-section {
+    margin-top: 10px;
+    padding: 10px;
+    /* border: 1px solid #ccc; */
+    border-radius: 5px;
+    background-color:white;
+    text-align: center;
+  }
+  
+  .comment-box {
+    width: 95%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+    font-size: 14px;
+    margin-left:15px;
+  }
+  
+  .post-comment-btn {
+    background-color: #018df9;
+    color: #fff;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+   margin-top:20px;
+   margin-bottom: 10px;
+   margin-left:15px;
+    width: 95%;
+  }
+  
+  .post-comment-btn:hover {
+    background-color: #005bb5;
+  }
+
   
     .containerforphoto{
         display:flex;
       justify-content: flex-start;
       align-items: center;
         width: 50%;
-        height: 150px;
+        height:auto;
         position:relative;
         border-radius: 10px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         background-color: white; 
         transition:0.1s ease-in;
         margin-bottom: 2rem;
-        padding-left: 35px;
+        padding: 25px;
         margin-top: 80px;
     }
     .containerforphoto .profile.two{
@@ -573,8 +650,18 @@
   
     
   }
-  
-   @media (max-width:750px){
+.extratext{
+  font-size:30px;
+  font-weight: 900;
+  color:black;
+}
+.searchid{
+  font-size: 30px;
+  font-weight: 900;
+  color:blue;
+  margin-left: 5px;
+}
+  @media (max-width:750px){
     #search input[type="text"] {
       width: 250px;
     }
@@ -602,9 +689,28 @@
       left:0px;
     }
   }
-  @media screen and (max-width:600px) {
+  @media screen and (max-width:630px) {
     #search input[type="text"] {
       width: 150px;
+    }
+    .containerforsearch{
+      position: relative;
+      left: 20px;
+      margin: 20px;
+    }
+    
+  }
+  @media(max-width:535px)
+  {
+    .containerforsearch{
+      left: 20px;
+      margin-right:10px;
+    }
+  
+  } 
+  @media(max-width:530px){
+    .containerforsearch{
+      left:-10px;
     }
   }
   .information{
@@ -722,35 +828,68 @@
   background-color: #c82333;
   }
   .divforimage img{
-  border-radius: 10px;
+    border-radius: 10px;
+    }
+    .post-images {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* Two columns */
+      gap: 10px; /* Space between images */
+    }
+    
+    #moreimages {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(0, 0, 0, 0.5); /* Optional background for the "+N" label */
+      color: white;
+      font-size: 1.2em;
+      text-align: center;
+      border-radius: 4px;
+    }
+  
+  .post-images img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 10px;
   }
-  .post-images {
+  
+  /* Layout for different photo counts */
+  .post-images.divforimage1 {
+      grid-template-columns: 1fr;
+  }
+  .divforimage1:nth-child(1) {
+    grid-column: span 2;
+  }
+  .post-images.divforimage2 {
+  
+    grid-template-columns: repeat(2, 1fr);
+    
+  }
+  
+  .post-images.divforimage3 {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Two columns */
-    gap: 10px; /* Space between images */
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
   }
   
-  .divforimage img {
-    width: 100%;
-    height: auto;
-    object-fit: cover; /* Ensures images maintain aspect ratio */
-    border-radius: 4px; /* Optional for rounded corners */
+  .divforimage3:nth-child(3) {
+      grid-column: span 2;
   }
   
-  #moreimages {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(0, 0, 0, 0.5); /* Optional background for the "+N" label */
-    color: white;
-    font-size: 1.2em;
-    text-align: center;
-    border-radius: 4px;
+  .post-images.divforimage4 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, auto);
   }
-  .LikeArea{
-    position: relative;
-    top:5px;
-    padding-left: 10px;
-  }
+  
+  
+    .LikeArea{
+      position: relative;
+      top:5px;
+      padding-left: 10px;
+    }
+    
+    
   
   

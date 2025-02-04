@@ -105,7 +105,7 @@ const getPost = async () => {
                         </section>
                     <span class="spaceforthreedot">
                         <div class="threedot"><i class="fa-solid fa-ellipsis fa-2xl"></i></div>
-                        <div class="threedot2"><i class="fa-solid fa-xmark"></i></div>
+                        <div class="threedot2"><i class="fa-solid fa-xmark fa-2xl"></i></div>
                     </span>
                     <div class="dropdownmenu2">
                             <li>
@@ -126,90 +126,86 @@ const getPost = async () => {
                             <strong>Category:</strong> ${post.category || "Uncategorized"}
                         </div>
                         <div class="post-images">
-                           ${(() => {
-                    if (Array.isArray(post.image)) {
-                        const imagesLength = post.image.length;
+                    ${(() => {
+                if (Array.isArray(post.image)) {
+                    const imagesLength = post.image.length;
 
-                        if (imagesLength === 1) {
-                            return post.image
-                                .map(
-                                    (img) => `
-                                        <div class="divforimage">
-                                          <img 
-                                            src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
-                                            alt="${post.caption || 'Image'}" 
-                                            class="post-image" 
-                                            height="250" 
-                                            width="250" 
-                                          />
-                                        </div>`
-                                )
-                                .join('');
-                        }
+                    if (imagesLength === 1) {
+                        return post.image
+                            .map(
+                                (img) => `
+                                    <div class="divforimage1">
+                                      <img 
+                                        src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
+                                        alt="${post.caption || 'Image'}" 
+                                        class="post-image" 
 
-                        if (imagesLength === 2) {
-                            return post.image
-                                .map(
-                                    (img) => `
-                                        <div class="divforimage">
-                                          <img 
-                                            src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
-                                            alt="${post.caption || 'Image'}" 
-                                            class="post-image" 
-                                            height="250" 
-                                            width="250" 
-                                          />
-                                        </div>`
-                                )
-                                .join('');
-                        }
-
-                        if (imagesLength === 3) {
-                            return post.image
-                                .map(
-                                    (img) => `
-                                        <div class="divforimage">
-                                          <img 
-                                            src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
-                                            alt="${post.caption || 'Image'}" 
-                                            class="post-image" 
-                                            height="250" 
-                                            width="250" 
-                                          />
-                                        </div>`
-                                )
-                                .join('');
-                        }
-
-                        if (imagesLength >= 4) {
-                            return (
-                                post.image
-                                    .slice(0, 3)
-                                    .map(
-                                        (img) => `
-                                          <div class="divforimage">
-                                            <img 
-                                              src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
-                                              alt="${post.caption || 'Image'}" 
-                                              class="post-image" 
-                                              height="250" 
-                                              width="250" 
-                                            />
-                                          </div>`
-                                    )
-                                    .join('') +
-                                `
-                                    <div class="divforimage">
-                                      <p id="moreimages" style="color:black;">+${imagesLength - 3}</p>
+                                      />
                                     </div>`
-                            );
-                        }
+                            )
+                            .join('');
                     }
 
-                    return '<p>No images available</p>';
-                })()
-                }                          
-                        </div>
+                    if (imagesLength === 2) {
+                        return post.image
+                            .map(
+                                (img) => `
+                                    <div class="divforimage2">
+                                      <img 
+                                        src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
+                                        alt="${post.caption || 'Image'}" 
+                                        class="post-image" 
+                                       
+                                      />
+                                    </div>`
+                            )
+                            .join('');
+                    }
+
+                    if (imagesLength === 3) {
+                        return post.image
+                            .map(
+                                (img) => `
+                                    <div class="divforimage3">
+                                      <img 
+                                        src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
+                                        alt="${post.caption || 'Image'}" 
+                                        class="post-image" 
+                                       
+                                      />
+                                    </div>`
+                            )
+                            .join('');
+                    }
+
+                    if (imagesLength >= 4) {
+                        return (
+                            post.image
+                                .slice(0, 3)
+                                .map(
+                                    (img) => `
+                                      <div class="divforimage4">
+                                        <img 
+                                          src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
+                                          alt="${post.caption || 'Image'}" 
+                                          class="post-image" 
+                                         
+                                        />
+                                      </div>`
+                                )
+                                .join('') +
+                            `
+                                <div class="divforimage">
+                                  <p id="moreimages" style="color:black;">+${imagesLength - 3}</p>
+                                </div>`
+                        );
+                    }
+                }
+
+                return '<p>No images available</p>';
+            })()
+            }                          
+                    </div>
                     </div>
                     <hr class="custom-line1">
                     <div class="LikeArea" style="height:30px"></div>
@@ -720,11 +716,14 @@ const fetchComments = async (postId) => {
 const updateCommentSections = async (OwnComments, OtherComments, commentArea) => {
     if (OwnComments.length > 0 && OtherComments.length > 0) {
         return commentArea.innerHTML = OwnComments.map(comment => `<div class="introareacomment" id="${comment._id}">
-                         <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
-                         <div class="commentsectionbypeople">
-                             <p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
-                             <span class="cspaceforthreedot">
-                                    <div class="cthreedot"><i class="fa-solid fa-ellipsis fa-2xl"></i></div>
+                         <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
+
+                            <div class="placeforcommentandname"><p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
+                            <p class="comment-text">${comment.text}</p>
+                            </div>
+                            </div>
+                            <span class="cspaceforthreedot">
+                                    <div class="cthreedot"><i class="fa-solid fa-ellipsis"></i></div>
                                     <div class="cthreedot2"><i class="fa-solid fa-xmark"></i></div>
                             </span>
                             <div class="dropdownmenu">
@@ -735,25 +734,27 @@ const updateCommentSections = async (OwnComments, OtherComments, commentArea) =>
                                     <div class="cdelete"><i class="fa-solid fa-trash"></i> Delete</div>
                                 </li>
                             </div>
-                             <p class="comment-text">${comment.text}</p>
-                         </div>
                      </div>`).join('')
             +
             OtherComments.map(comment => `<div class="introareacomment" id="${comment._id}">
-                        <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
-                        <div class="commentsectionbypeople">
-                            <p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
+                        <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
+
+                            <div class="placeforcommentandname"><p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
                             <p class="comment-text">${comment.text}</p>
-                        </div>
+                            </div>
+                            </div>
                     </div>`).join('')
     }
     else if (OwnComments.length > 0 && OtherComments.length === 0) {
         return commentArea.innerHTML = OwnComments.map(comment => `<div class="introareacomment" id="${comment._id}">
-                         <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
-                         <div class="commentsectionbypeople">
-                            <p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
+                         <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
+
+                            <div class="placeforcommentandname"><p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
+                            <p class="comment-text">${comment.text}</p>
+                            </div>
+                            </div>
                             <span class="cspaceforthreedot">
-                                    <div class="cthreedot"><i class="fa-solid fa-ellipsis fa-2xl"></i></div>
+                                    <div class="cthreedot"><i class="fa-solid fa-ellipsis"></i></div>
                                     <div class="cthreedot2"><i class="fa-solid fa-xmark"></i></div>
                             </span>
                             <div class="dropdownmenu">
@@ -764,17 +765,16 @@ const updateCommentSections = async (OwnComments, OtherComments, commentArea) =>
                                     <div class="cdelete"><i class="fa-solid fa-trash"></i> Delete</div>
                                 </li>
                             </div>
-                            <p class="comment-text">${comment.text}</p>
-                         </div>
                      </div>`).join('')
     }
     else if (OwnComments.length === 0 && OtherComments.length > 0) {
         return commentArea.innerHTML = OtherComments.map(comment => `<div class="introareacomment" id="${comment._id}">
-                             <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
-                             <div class="commentsectionbypeople">
-                                 <p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
-                                 <p class="comment-text">${comment.text}</p>
-                             </div>
+                             <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
+
+                            <div class="placeforcommentandname"><p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
+                            <p class="comment-text">${comment.text}</p>
+                            </div>
+                            </div>
                          </div>`).join('')
     }
     else {
@@ -1092,4 +1092,14 @@ const editComment = async (OwnComments, OtherComments, commentArea, postId) => {
             })
         }
     })
+}
+
+const sideBar = document.querySelector('.sidemenu')
+const hideSidebar = () => {
+    sideBar.classList.add('disappear')
+    sideBar.classList.remove('appear')
+}
+const openSidebar = () => {
+    sideBar.classList.add('appear')
+    sideBar.classList.remove('disappear')
 }
