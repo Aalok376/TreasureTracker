@@ -40,19 +40,19 @@ const getotherProfilepic = async () => {
                   <div class="confirmfriends" id=${profile.user._id}>
                     <span><i class="fa-solid fa-user-group"></i></span>
                     <span>Respond</span>
-                    <div class="dropdownmenu">
+                  </div>
+                  <div class="message">
+                    <span><i class="fa-solid fa-message"></i></span>
+                    <span>Message</span>
+                  </div>
+                </div>
+                <div class="dropdownmenu">
                                 <li>
                                     <div class="confirm"><i class="fa-solid fa-user-group"></i> Confirm</div>
                                 </li>
                                 <li>
                                     <div class="reject"><i class="fa-solid fa-xmark"></i> Reject</div>
                                 </li>
-                    </div>
-                  </div>
-                  <div class="message">
-                    <span><i class="fa-solid fa-message"></i></span>
-                    <span>Message</span>
-                  </div>
                 </div>
         `).join('')
 
@@ -127,13 +127,13 @@ const getPost = async () => {
                         </div>
                         <div class="post-images">
                     ${(() => {
-                if (Array.isArray(post.image)) {
-                    const imagesLength = post.image.length;
+                    if (Array.isArray(post.image)) {
+                        const imagesLength = post.image.length;
 
-                    if (imagesLength === 1) {
-                        return post.image
-                            .map(
-                                (img) => `
+                        if (imagesLength === 1) {
+                            return post.image
+                                .map(
+                                    (img) => `
                                     <div class="divforimage1">
                                       <img 
                                         src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
@@ -142,14 +142,14 @@ const getPost = async () => {
 
                                       />
                                     </div>`
-                            )
-                            .join('');
-                    }
+                                )
+                                .join('');
+                        }
 
-                    if (imagesLength === 2) {
-                        return post.image
-                            .map(
-                                (img) => `
+                        if (imagesLength === 2) {
+                            return post.image
+                                .map(
+                                    (img) => `
                                     <div class="divforimage2">
                                       <img 
                                         src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
@@ -158,14 +158,14 @@ const getPost = async () => {
                                        
                                       />
                                     </div>`
-                            )
-                            .join('');
-                    }
+                                )
+                                .join('');
+                        }
 
-                    if (imagesLength === 3) {
-                        return post.image
-                            .map(
-                                (img) => `
+                        if (imagesLength === 3) {
+                            return post.image
+                                .map(
+                                    (img) => `
                                     <div class="divforimage3">
                                       <img 
                                         src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
@@ -174,16 +174,16 @@ const getPost = async () => {
                                        
                                       />
                                     </div>`
-                            )
-                            .join('');
-                    }
+                                )
+                                .join('');
+                        }
 
-                    if (imagesLength >= 4) {
-                        return (
-                            post.image
-                                .slice(0, 3)
-                                .map(
-                                    (img) => `
+                        if (imagesLength >= 4) {
+                            return (
+                                post.image
+                                    .slice(0, 3)
+                                    .map(
+                                        (img) => `
                                       <div class="divforimage4">
                                         <img 
                                           src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
@@ -192,19 +192,19 @@ const getPost = async () => {
                                          
                                         />
                                       </div>`
-                                )
-                                .join('') +
-                            `
+                                    )
+                                    .join('') +
+                                `
                                 <div class="divforimage">
                                   <p id="moreimages" style="color:black;">+${imagesLength - 3}</p>
                                 </div>`
-                        );
+                            );
+                        }
                     }
-                }
 
-                return '<p>No images available</p>';
-            })()
-            }                          
+                    return '<p>No images available</p>';
+                })()
+                }                          
                     </div>
                     </div>
                     <hr class="custom-line1">
@@ -315,7 +315,7 @@ ownprofile.addEventListener('click', async (event) => {
         }
     }
     else if (event.target.closest('.confirmfriends')) {
-        const dropDownMenu = event.target.closest('.confirmfriends').querySelector('.dropdownmenu')
+        const dropDownMenu = ownprofile.querySelector('dropdownmenu')
         dropDownMenu.style.display = 'flex'
 
         const confirmbtnn = dropDownMenu.querySelector('.confirm')
@@ -392,6 +392,7 @@ const friendStatus = async () => {
         })
 
         const data = await response.json()
+        console.log(data)
 
         if ((data.existingRequest && data.existingRequest.status === 'accepted') || (data.receivedRequest && data.receivedRequest.status === 'accepted')) {
             cancelbtn.style.display = 'none'
@@ -866,10 +867,10 @@ home.addEventListener('click', async (e) => {
 //     window.location.href=""
 // })
 
-friends.addEventListener('click',async(e)=>{
+friends.addEventListener('click', async (e) => {
     e.preventDefault()
 
-    window.location.href="/pages/friends.html"
+    window.location.href = "/pages/friends.html"
 })
 
 saved.addEventListener('click', async (e) => {

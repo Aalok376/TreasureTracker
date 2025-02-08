@@ -6,6 +6,10 @@ const changepasswordbtn = document.querySelector('.cgp')
 const deleteUser = document.querySelector('.dlu')
 const logoutUser = document.querySelector('.lgu')
 
+import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js"
+
+const socket = io("http://localhost:5000")
+
 let UserIdForPost
 let ownPosts = []
 let otherPosts = []
@@ -29,10 +33,13 @@ const getProfilepic = async () => {
         ownprofile2.innerHTML = profiles.map(profile => `
             <a href="profile.html" class="profile" style="background-image: url('http://localhost:5000/${profile.user?.profilePicture?.replace(/\\/g, '/')}')"></a>
         `).join('')
+
+        socket.emit('register',{UserIdForPost})
+        
     } catch (error) {
         console.error("Error fetching profile picture:", error)
     }
-};
+}
 
 //Posts....
 const getPost = async () => {
