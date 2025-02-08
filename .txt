@@ -1,0 +1,13 @@
+messege model
+1.Sender Id === store the id of the sender from mongodb while creating account
+2. receiver Id == store id of receriver in this function while creating account
+3. Message  === store the message that the sender sends
+
+every new message ma new  unique Id will be created by mongodb
+
+
+for login in postman:
+ http://localhost:4001/api/user/login
+
+
+ 
