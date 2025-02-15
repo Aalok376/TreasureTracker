@@ -534,7 +534,7 @@ font-size: 20px;
     border-radius: 10px;
     position: relative;
     display:flex;
-    flex-direction: column;  /*Ensure vertical stacking*/
+    flex-direction: column;
     justify-content: flex-start;
     padding:15px;
     overflow-y: auto;
@@ -687,7 +687,104 @@ font-size: 20px;
   border-radius: 10px;
   bottom: 25px;
   left: 20px;
+  cursor: pointer;
 }
+.cancel{
+  position: absolute;
+  padding: 10px 20px;
+  background-color: rgba(8, 102, 255, 1.0);
+  color: black;
+  font-weight: bold;
+  border-radius: 10px;
+  bottom: 25px;
+  left: 20px;
+  cursor: pointer;
+}
+.cancel i{
+margin-right: 3px;
+}
+.friends{
+  position: absolute;
+  padding: 10px 20px;
+  background-color: rgba(8, 102, 255, 1.0);
+  color: black;
+  font-weight: bold;
+  border-radius: 10px;
+  bottom: 25px;
+  left: 20px;
+  cursor:pointer;
+}
+.friends i{
+margin-right: 3px;
+}
+
+.confirmfriends{
+  position: absolute;
+  padding: 10px 20px;
+  background-color: rgba(8, 102, 255, 1.0);
+  color: black;
+  font-weight: bold;
+  border-radius: 10px;
+  bottom: 25px;
+  left: 20px;
+  cursor:pointer;
+}
+.confirmfriends i{
+margin-right: 3px;
+}
+
+.dropdownmenu5{
+  display:none;
+  position:absolute;
+  flex-direction: column;
+  bottom:-70px;
+  left:20px;
+  height:80px;
+  text-decoration: none;
+  width:110px;
+  background-color:white;
+  margin-top: 5px;
+  backdrop-filter:blur(15px);
+  border-radius: 20px;
+  transform-origin: top; 
+  transform: scaleY(0);
+  overflow: hidden;
+  transition: height cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: expand 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  cursor: pointer;
+  z-index: 444;
+  }
+  
+  /* Keyframes for drop-down expand animation */
+  @keyframes expand{
+  0% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scaleY(1.1); /* Slightly overshoots for a pop effect */
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(1); /* Resets to the original size */
+    opacity: 1;
+  }
+  }
+  .dropdownmenu5 li{
+  padding: 0.7rem;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  
+  }
+  .dropdownmenu5.open{
+  height:auto;
+  display: block;
+  }
+  .reject i{
+    margin-right: 5px;
+    }
 
 .message {
   position: absolute;
@@ -912,5 +1009,3 @@ h3 {
     top:5px;
     padding-left: 10px;
   }
-  
-  
