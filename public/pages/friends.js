@@ -272,13 +272,3 @@ pendinglist.addEventListener('click', async (event) => {
         window.location.href = `/api/v1/userprofile/${userId}`;
     }
 })
-
-const sideBar = document.querySelector('.sidemenu')
-const hideSidebar = () => {
-    sideBar.classList.add('disappear')
-    sideBar.classList.remove('appear')
-}
-const openSidebar = () => {
-    sideBar.classList.add('appear')
-    sideBar.classList.remove('disappear')
-}

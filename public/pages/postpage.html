@@ -20,23 +20,23 @@
                         <input type="text" placeholder="Search Your Lost Item" id="text">
                     </div>
                 </div>
-    
+
             </div>
             <div class="profilecontainer">
-              <div class="pp"></div>
-              <span class="chevron"><i class="fa-solid fa-chevron-down" style="color: #050505;"></i></span>
-          </div>
+                <div class="pp"></div>
+                <span class="chevron"><i class="fa-solid fa-chevron-down" style="color: #050505;"></i></span>
+            </div>
             <div class="dropdownmenu">
-              <li>
-                  <div class="cgp">Change password</div>
-              </li>
-              <li>
-                  <div class="dlu">Delete</div>
-              </li>
-              <li>
-                  <div class="lgu">Logout</div>
-              </li>
-          </div>
+                <li>
+                    <div class="cgp">Change password</div>
+                </li>
+                <li>
+                    <div class="dlu">Delete</div>
+                </li>
+                <li>
+                    <div class="lgu">Logout</div>
+                </li>
+            </div>
     </header>
 
     <main class="main">
@@ -60,68 +60,70 @@
                 <button onclick="openSidebar()"><i class="fa-solid fa-bars fa-2xl"></i></button>
             </div>
         </div>
-    <div class="asidemenu">
-          <!-- Form to create a new post -->
-    <form id="createPostForm" enctype="multipart/form-data">
-        <label for="type">Post Type:</label>
-        <select id="type" class="ptype" name="type" required>
-            <option value="Lost">Lost</option>
-            <option value="Found">Found</option>
-        </select>
-        <br><br>
+        <div class="asidemenu">
+            <!-- Form to create a new post -->
+            <form id="createPostForm" enctype="multipart/form-data">
+                <label for="type">Post Type:</label>
+                <select id="type" class="ptype" name="type" required>
+                    <option value="Lost">Lost</option>
+                    <option value="Found">Found</option>
+                </select>
+                <br><br>
 
-        <label for="caption">Caption:</label>
-        <textarea id="caption" class="pcaption"name="caption" required></textarea><br><br>
+                <label for="caption">Caption:</label>
+                <textarea id="caption" class="pcaption" name="caption" required></textarea><br><br>
 
-        <label for="category">Category:</label>
-        <select id="category" class="pcategory" name="category" required>
-            <option value="ID">ID</option>
-            <option value="Wallets">Wallets</option>
-            <option value="Watches">Watches</option>
-            <option value="Electronics">Electronics</option>
-            <option value="Umbrella">Umbrella</option>
-            <option value="Sport Equipments">Sport Equipments</option>
-            <option value="Clothes">Clothes</option>
-            <option value="Academic Items">Academic Items</option>
-            <option value="Others">Others</option>
-        </select>
-        <br><br>
+                <label for="category">Category:</label>
+                <select id="category" class="pcategory" name="category" required>
+                    <option value="ID">ID</option>
+                    <option value="Wallets">Wallets</option>
+                    <option value="Watches">Watches</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Umbrella">Umbrella</option>
+                    <option value="Sport Equipments">Sport Equipments</option>
+                    <option value="Clothes">Clothes</option>
+                    <option value="Academic Items">Academic Items</option>
+                    <option value="Others">Others</option>
+                </select>
+                <br><br>
 
-        <label for="images">Upload Images:</label>
-        <input type="file" class="upimages" id="images" name="image" multiple accept="image/*" required onchange="previewImages()">
+                <label for="images">Upload Images:</label>
+                <input type="file" class="upimages" id="images" name="image" multiple accept="image/*" required
+                    onchange="previewImages()">
 
-        <div id="imagePreview" class="image-preview"></div>
+                <div id="imagePreview" class="image-preview"></div>
 
-        <button class="buttonpost" type="submit">Create Post</button>
-    </form>
-    </div>
+                <button class="buttonpost" type="submit">Create Post</button>
+            </form>
+        </div>
     </main>
     <footer class="footer">
         <div class="backtotop">
-          <a href="postpage.html">Back to Top</a>
+            <a href="postpage.html">Back to Top</a>
         </div>
         <div class="information">
-          <div class="getusknow">
-            <h4>Get to Know Us</h4>
-            <a href="/">Home</a><br><a href="../pages/about.html">About</a><br><a
-              href="../pages/contact.html">Contacts</a><br><a href="../pages/termandcondition.html">Term & Conditions</a>
-            </p>
-          </div>
-          <div class="connectwithus">
-            <h4>Connect with Us</h4>
-            <a href="https://www.facebook.com/profile.php?id=61553392040541">Facebook</a><br><a
-              href="https://www.instagram.com/sameer.sah.9615/">Instagram</a><br><a
-              href="http://www.youtube.com/@Movies_.Gaming">Youtube</a>
-          </div>
-          <div class="logoandflag">
-            <h4>Treasure Tracker</h4>
-            <p class="flag"><img src="../assets/images/nepalflag.avif" height="15px"> Nepal</p>
-          </div>
-  
+            <div class="getusknow">
+                <h4>Get to Know Us</h4>
+                <a href="/">Home</a><br><a href="../pages/about.html">About</a><br><a
+                    href="../pages/contact.html">Contacts</a><br><a href="../pages/termandcondition.html">Term &
+                    Conditions</a>
+                </p>
+            </div>
+            <div class="connectwithus">
+                <h4>Connect with Us</h4>
+                <a href="https://www.facebook.com/profile.php?id=61553392040541">Facebook</a><br><a
+                    href="https://www.instagram.com/sameer.sah.9615/">Instagram</a><br><a
+                    href="http://www.youtube.com/@Movies_.Gaming">Youtube</a>
+            </div>
+            <div class="logoandflag">
+                <h4>Treasure Tracker</h4>
+                <p class="flag"><img src="../assets/images/nepalflag.avif" height="15px"> Nepal</p>
+            </div>
+
         </div>
         <div class="ending">Treasure Tracker <i class="fa-regular fa-copyright" style="color: #ffffff;"></i> 2024 | All
-          rights reserved | Conditions of use</div>
-      </footer>
+            rights reserved | Conditions of use</div>
+    </footer>
     <script>
         const tooglebtn = document.querySelector('.chevron')
         const tooglebtnIcon = document.querySelector('.chevron i')
@@ -133,61 +135,44 @@
             tooglebtnIcon.classList = isOpen ?
                 "fa-solid fa-chevron-up" : "fa-solid fa-chevron-down"
         };
-    
+
         function previewImages() {
             const fileInput = document.getElementById('images');
             const imagePreviewContainer = document.getElementById('imagePreview');
             imagePreviewContainer.innerHTML = ''; // Clear previous previews
 
             const files = fileInput.files;
-            if (files) {
-                Array.from(files).forEach(file => {
-                    const reader = new FileReader();
+            const numberOfImages = files.length;
+            let imageSize = '90px'; // Default size for 1 image
 
+            // Adjust image size based on the number of images
+            if (numberOfImages > 28) {
+                imageSize = '45px'; // Smaller size for more images
+            } else if (numberOfImages > 10) {
+                imageSize = '60px'; // Medium size for a few images
+            }
+
+            if (files.length > 0) {
+                Array.from(files).forEach((file, index) => {
+                    if (!file.type.startsWith("image/")) return; // Skip non-image files
+
+                    const reader = new FileReader();
                     reader.onload = function (event) {
                         const imgElement = document.createElement('img');
-                        imgElement.src = event.target.result; // Set image source to the previewed file
-                        imagePreviewContainer.appendChild(imgElement); // Append to the container
-                    }
-
-                    reader.readAsDataURL(file); // Read the file as data URL for image preview
+                        imgElement.src = event.target.result;
+                        imgElement.style.width = imageSize;
+                        imgElement.style.height = imageSize;
+                        imgElement.style.margin = '3px';
+                        imagePreviewContainer.appendChild(imgElement);
+                    };
+                    reader.readAsDataURL(file);
                 });
             }
         }
-        function previewImages() {
-    const fileInput = document.getElementById('images');
-    const imagePreviewContainer = document.getElementById('imagePreview');
-    imagePreviewContainer.innerHTML = ''; // Clear previous previews
 
-    const files = fileInput.files;
-    const numberOfImages = files.length;
-    let imageSize = '90px'; // Default size for 1 image
-
-    // Adjust image size based on the number of images
-    if (numberOfImages >28) {
-        imageSize = '45px'; // Smaller size for more images
-    } else if (numberOfImages > 10) {
-        imageSize = '60px'; // Medium size for a few images
-    }
-
-    if (files) {
-        Array.from(files).forEach(file => {
-            const reader = new FileReader();
-
-            reader.onload = function (event) {
-                const imgElement = document.createElement('img');
-                imgElement.src = event.target.result; // Set image source to the previewed file
-                imgElement.style.width = imageSize; // Apply dynamic width
-                imgElement.style.height = imageSize; // Apply dynamic height
-                imagePreviewContainer.appendChild(imgElement); // Append to the container
-            };
-
-            reader.readAsDataURL(file); // Read the file as data URL for image preview
-        });
-    }
-}
 
     </script>
 </body>
 <script src="postpage.js"></script>
+
 </html>

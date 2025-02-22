@@ -28,7 +28,9 @@ const getProfilepic = async () => {
 })()
 
 btn.addEventListener('click', async (e) => {
-    e.preventDefault();
+    e.preventDefault()
+
+    btn.disabled=true
 
     const caption = document.querySelector('.pcaption').value
     const type = document.querySelector('.ptype').value
@@ -59,6 +61,8 @@ btn.addEventListener('click', async (e) => {
     catch (error) {
         console.log(error)
         alert('Error creating post')
+    } finally{
+        btn.disabled=false
     }
 })
 
@@ -137,14 +141,14 @@ home.addEventListener('click',async(e)=>{
 //     window.location.href=""
 // })
 
-// friends.addEventListener('click',async(e)=>{
-//     e.preventDefault()
+friends.addEventListener('click',async(e)=>{
+    e.preventDefault()
 
-//     window.location.href=""
-// })
+    window.location.href="/pages/friends.html"
+})
 
-// saved.addEventListener('click',async(e)=>{
-//     e.preventDefault()
+saved.addEventListener('click',async(e)=>{
+    e.preventDefault()
 
-//     window.location.href=""
-// })
+    window.location.href="/pages/savedPosts.html"
+})

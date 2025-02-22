@@ -72,22 +72,26 @@
                     </div>
                 </div>
 
-
                 <div class="section" id="requests-section">
                     <h2>Pending Requests</h2>
                     <div class="list-container" id="pending-requests">
-
                     </div>
                 </div>
-
             </div>
         </div>
-
     </main>
-
-
-
-    <script src="/pages/friends.js"></script>
+    <script>
+        const sideBar = document.querySelector('.sidemenu')
+        const hideSidebar = () => {
+            sideBar.classList.add('disappear')
+            sideBar.classList.remove('appear')
+        }
+        const openSidebar = () => {
+            sideBar.classList.add('appear')
+            sideBar.classList.remove('disappear')
+        }
+    </script>
 </body>
+<script src="/pages/friends.js"></script>
 
 </html>
