@@ -90,6 +90,17 @@
             sideBar.classList.add('appear')
             sideBar.classList.remove('disappear')
         }
+
+        const tooglebtn1 = document.querySelector('.chevron')
+        const tooglebtnIcon = document.querySelector('.chevron i')
+        const dropDownMenu = document.querySelector('.dropdownmenu3')
+
+        tooglebtn1.onclick = function () {
+            dropDownMenu.classList.toggle('open')
+            const isOpen = dropDownMenu.classList.contains('open')
+            tooglebtnIcon.classList = isOpen ?
+                "fa-solid fa-chevron-up" : "fa-solid fa-chevron-down"
+        }
     </script>
 </body>
 <script src="/pages/friends.js"></script>

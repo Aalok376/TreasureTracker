@@ -329,26 +329,43 @@ const UpdatePosts = (ownPosts, otherPosts) => {
                                 .join('');
                         }
 
-                        if (imagesLength >= 4) {
+                        if (imagesLength === 4) {
+                            return post.image
+                                .map(
+                                    (img) => `
+                                        <div class="divforimage4">
+                                          <img 
+                                            src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
+                                            alt="${post.caption || 'Image'}" 
+                                            class="post-image" 
+                                           
+                                          />
+                                        </div>`
+                                )
+                                .join('');
+                        }
+    
+                        if (imagesLength >= 5) {
                             return (
                                 post.image
                                     .slice(0, 3)
                                     .map(
                                         (img) => `
-                                      <div class="divforimage4">
-                                        <img 
-                                          src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
-                                          alt="${post.caption || 'Image'}" 
-                                          class="post-image" 
-                                         
-                                        />
-                                      </div>`
+                                          <div class="divforimage4">
+                                            <img 
+                                              src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
+                                              alt="${post.caption || 'Image'}" 
+                                              class="post-image" 
+                                             
+                                            />
+                                          </div>`
                                     )
                                     .join('') +
                                 `
-                                <div class="divforimage4">
-                                  <p id="moreimages" style="color:black;">+${imagesLength - 3}</p>
-                                </div>`
+                                  <div class="divforimage4" style="background-image: url('http://localhost:5000/${post.image[3].replace(/\\/g, '/')}');">
+                                  <p id="moreimages" style="color:black;">+${imagesLength - 4}</p>
+                                  </div>
+                                `
                             );
                         }
                     }
@@ -1255,3 +1272,33 @@ const editComment = async (OwnComments, OtherCommentsOnOwnPost, OtherCommentsOnO
         }
     })
 }
+
+const sideBar = document.querySelector('.sidemenu')
+const hideSidebar = () => {
+    sideBar.classList.add('disappear')
+    sideBar.classList.remove('appear')
+}
+const openSidebar = () => {
+    sideBar.classList.add('appear')
+    sideBar.classList.remove('disappear')
+}
+
+const modal=document.querySelector(".modal")
+const openButton=document.querySelector(".hamburgermenu")
+const closeButton=document.querySelector(".closebutton")
+
+modal.addEventListener('click',async(e)=>{
+    e.preventDefault()
+    if (e.target === modal) {
+        modal.close()
+    }
+})
+
+openButton.addEventListener("click",()=>{
+    modal.showModal()
+    document.body.style.overflow = 'hidden'
+})
+closeButton.addEventListener("click",()=>{
+    modal.close()
+    document.body.style.overflow = ''
+})

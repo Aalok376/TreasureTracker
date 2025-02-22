@@ -3,6 +3,83 @@ const requestsTab = document.getElementById("requests-tab")
 const friendsSection = document.getElementById("friends-section")
 const requestsSection = document.getElementById("requests-section")
 
+const ownprofile2 = document.querySelector('.pp')
+
+const getProfilepic = async () => {
+    try {
+        const response = await fetch("http://localhost:5000/api/v1/profile")
+        const data = await response.json()
+
+        const profiles = Array.isArray(data) ? data : [data]
+
+        ownprofile2.innerHTML = profiles.map(profile => `
+            <a href="profile.html" class="profile" style="background-image: url('http://localhost:5000/${profile.user?.profilePicture?.replace(/\\/g, '/')}')"></a>
+        `).join('')
+
+
+    } catch (error) {
+        console.error("Error fetching profile picture:", error)
+    }
+}
+
+(async () => {
+    await getProfilepic()
+})()
+
+const changepasswordbtn = document.querySelector('.cgp')
+const deleteUser = document.querySelector('.dlu')
+const logoutUser = document.querySelector('.lgu')
+
+
+//event for change password btn
+changepasswordbtn.addEventListener('click', async (e) => {
+    e.preventDefault()
+
+    window.location.href = "/pages/changepassword.html"
+})
+
+//event for delete btn
+deleteUser.addEventListener('click', async (e) => {
+    e.preventDefault()
+
+    window.location.href = "/pages/delete.html"
+})
+
+//Event for logout btn
+logoutUser.addEventListener('click', async (e) => {
+    e.preventDefault()
+
+    try {
+
+        const response = await fetch('http://localhost:5000/api/v1/logout')
+
+        const data = await response.json()
+
+        if (response.status === 200) {
+            window.location.href = "/pages/logout.html"
+        }
+        else {
+            alert(data.msg)
+        }
+    } catch (error) {
+        console.error(error)
+        alert('Error logging out!')
+    }
+})
+
+const searchInput = document.getElementById('text')
+
+searchInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+        const query1 = searchInput.value.trim()
+        if (query1) {
+            sessionStorage.setItem('query', query1)
+            window.location.href = "/pages/searchedpost.html"
+            searchInput.value = ''
+        }
+    }
+})
+
 friendsTab.addEventListener("click", async () => {
     friendsTab.classList.add("active")
     requestsTab.classList.remove("active")
@@ -271,4 +348,33 @@ pendinglist.addEventListener('click', async (event) => {
         const userId = receiverId
         window.location.href = `/api/v1/userprofile/${userId}`;
     }
+})
+
+
+const home = document.querySelector('.homepage')
+const message = document.querySelector('.Messagepage')
+const friends = document.querySelector('.Friends')
+const saved = document.querySelector('.SavedPosts')
+
+home.addEventListener('click', async (e) => {
+    e.preventDefault()
+
+    window.location.reload()
+})
+// message.addEventListener('click',async(e)=>{
+//     e.preventDefault()
+
+//     window.location.href=""
+// })
+
+friends.addEventListener('click', async (e) => {
+    e.preventDefault()
+
+    window.location.href = "/pages/friends.html"
+})
+
+saved.addEventListener('click', async (e) => {
+    e.preventDefault()
+
+    window.location.href = "savedPosts.html"
 })

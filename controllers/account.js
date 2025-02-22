@@ -5,7 +5,9 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user.js');
 const Post = require('../models/createPost.js')
 const Comment = require('../models/comments.js');
-const Like = require('../models/likes.js');
+const Like = require('../models/likes.js')
+const Savedpost=require('../models/savedpost.js')
+const FriendRequest = require("../models/friendRequest")
 
 const { sendEmail } = require('../middleware/sendmail');
 
@@ -176,6 +178,13 @@ const toDelete = async (req, res) => {
         await Post.deleteMany({ userId });
         await Comment.deleteMany({userId})
         await Like.deleteMany({userId})
+        await Savedpost.deleteMany({userId})
+        await FriendRequest.deleteMany({
+            $or: [
+                { senderId: userId },
+                { receiverId: userId }
+            ]
+        })
         await User.findByIdAndDelete(req.user.id);
         res.clearCookie('token', { httpOnly: true });
 
