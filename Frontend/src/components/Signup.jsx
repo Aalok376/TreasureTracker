@@ -27,10 +27,10 @@ const Signup = () => {
             alert("Signup Successful! You can login now");
 
             // Store user and token in the auth context
-            setAuthUser({
-                user: response.data.user,
-                token: response.data.token,
-            });
+            // setAuthUser({
+            // user: response.data.user,
+            // token: response.data.token,
+            // });
 
             // Redirect to login page after successful signup
             navigate("/login");
@@ -41,7 +41,7 @@ const Signup = () => {
     };
 
     return (
-        <div className="flex h-screen items-center justify-center bg-gray-100">
+        <div className="min-h-screen w-full flex items-center justify-center bg-gray-200">
             <div className="max-w-md w-full bg-white shadow-lg rounded-lg p-6">
                 <h2 className="text-2xl font-bold text-center mb-4">Treasure Tracker</h2>
                 <h3 className="text-xl text-center mb-6">Create an Account</h3>
@@ -81,9 +81,9 @@ const Signup = () => {
                             type="password"
                             className="w-full border rounded-md p-2"
                             placeholder="Enter your password"
-                            {...register('password', { 
-                                required: "Password is required", 
-                                minLength: { value: 6, message: "Password must be at least 6 characters" } 
+                            {...register('password', {
+                                required: "Password is required",
+                                minLength: { value: 6, message: "Password must be at least 6 characters" }
                             })}
                         />
                         {errors.password && <span className="text-red-600 text-sm">{errors.password.message}</span>}

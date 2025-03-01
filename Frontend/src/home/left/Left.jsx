@@ -1,3 +1,4 @@
+
 import React from "react";
 import Search from "./Search";
 import Users from "./Users";
@@ -15,7 +16,8 @@ function Left() {
   );
 }
 
-export default Left;
+export default Left; 
+
 
 
 

@@ -1,6 +1,5 @@
 
 
-
 import express from 'express';
 import { secureRoute } from '../middleware/secureRoute.js';  
 import { getUserProfile } from '../controller/user.controller.js';  
@@ -18,3 +17,4 @@ router.post("/logout", logout);
 router.get("/getUserProfile", secureRoute, getUserProfile);  
 
 export default router;
+

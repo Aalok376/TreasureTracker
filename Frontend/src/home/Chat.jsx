@@ -1,8 +1,12 @@
+
+import React, { useState } from "react";
 import Left from "./left/Left";
 import Right from "./right/Right";
 import Logout from "./left1/Logout";
 
 const Chat = () => {
+  const [receiverId, setReceiverId] = useState(null);
+
   return (
     <div
       style={{
@@ -13,11 +17,11 @@ const Chat = () => {
         backgroundColor: "#eaeaea",
       }}
     >
-      {/* Left Sidebar */}
+      {/* Left section */}
       <div
         style={{
-          flex: "0.35", // Increased width
-          minWidth: "350px", // Wider min-width
+          flex: "0.35",
+          minWidth: "350px",
           backgroundColor: "#f4f4f4",
           display: "flex",
           flexDirection: "column",
@@ -25,40 +29,42 @@ const Chat = () => {
           padding: "15px",
           borderRight: "2px solid #ddd",
           overflowY: "auto",
-          overflowX: "hidden", // Prevent horizontal scrolling
-          position: "relative", // For positioning logout button properly
+          overflowX: "hidden",
+          position: "relative",
         }}
       >
-        <Left />
-        <div style={{
-          marginTop: "20px",
-          position: 'absolute',
-          bottom: "20px",
-          width: "100%",
-        }}>
+        <Left setReceiverId={setReceiverId} />
+        
+        {/* Logout button */}
+        <div
+          style={{
+            marginTop: "20px",
+            position: "absolute",
+            bottom: "20px",
+            width: "100%",
+          }}
+        >
           <Logout />
         </div>
       </div>
 
-      {/* Right Chat Section */}
+      {/* Right section */}
       <div
         style={{
-          flex: 1, // Uses equal space distribution
+          flex: 1,
           backgroundColor: "#fff",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "space-between", // Ensures spacing
-          alignItems: "stretch", // Makes sure it expands properly
+          justifyContent: "space-between",
+          alignItems: "stretch",
           padding: "20px",
           overflow: "hidden",
         }}
       >
-        <Right />
+        <Right receiverId={receiverId} />
       </div>
     </div>
   );
 };
 
 export default Chat;
-
-

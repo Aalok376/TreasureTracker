@@ -1,4 +1,4 @@
-import React from "react";
+ import React from "react";
 import useGetAllUsers from "../../context/userGetAllUsers.js";
 import User from "./User.jsx";
 
@@ -27,3 +27,4 @@ const Users = () => {
 };
 
 export default Users;
+

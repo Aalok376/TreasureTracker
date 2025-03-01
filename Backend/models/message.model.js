@@ -12,7 +12,7 @@ const messageSchema = mongoose.Schema({
         ref: 'User',
         required: true,
     },
-    message: {
+    text: {
         type: String,
         required: true,
         maxlength: 1000,
@@ -29,8 +29,8 @@ const messageSchema = mongoose.Schema({
 
 
 },
-{
-    timestamps: true, //created and updated time
-});
-const Message = mongoose.model("Message",messageSchema);
+    {
+        timestamps: true, //created and updated time
+    });
+const Message = mongoose.model("Message", messageSchema);
 export default Message;

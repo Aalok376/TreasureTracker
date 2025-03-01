@@ -1,17 +1,19 @@
+
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthProvider';
+import toast from 'react-hot-toast';
 
 export default function Login() {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { login } = useAuth(); // Use the login function from context
+    const { login } = useAuth();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
 
     const onSubmit = async (data) => {
-        setLoading(true); // Set loading state to true when the request starts
+        setLoading(true);
         try {
             const response = await axios.post("http://localhost:4001/api/user/login", {
                 email: data.email,
@@ -19,33 +21,33 @@ export default function Login() {
             }, { withCredentials: true });
 
             console.log("Login response:", response.data);
-            login(response.data.user, response.data.token);  // Save the user and token
-            
-            // Redirect to the home/dashboard page after login
-            navigate('/dashboard'); // Adjust the path as needed
+            login(response.data.user, response.data.token);
+            toast.success("Login Successful!"); // Show toast after successful login
+            navigate('/dashboard'); // Redirect after login
 
         } catch (error) {
-            console.error("Full error object:", error);
             console.error("Login failed:", error.response?.data?.message || "Server error");
-            alert("Login failed: " + (error.response?.data?.message || "Server error"));
+            toast.error(error.response?.data?.message || "Login failed, please try again.");
         } finally {
-            setLoading(false); // Reset the loading state after the request
+            setLoading(false);
         }
     };
 
     return (
-        <div className="flex h-screen items-center justify-center">
-            <form onSubmit={handleSubmit(onSubmit)} className="border px-6 py-4 rounded-md space-y-4 w-95">
+        <div className="min-h-screen w-full flex items-center justify-center bg-gray-200">
+            <form onSubmit={handleSubmit(onSubmit)} 
+                className="bg-white border px-8 py-6 rounded-lg shadow-lg max-w-sm w-full">
+                
                 <h1 className="text-blue-800 font-bold text-3xl text-center">Treasure Tracker</h1>
-                <h2 className="text-xl text-center">
+                <h2 className="text-xl text-center mt-2 text-gray-700">
                     <span className="text-blue-800 font-semibold">Login</span> with your Account
                 </h2>
 
-                {/* Email */}
-                <div>
+               
+                <div className="mt-4">
                     <input
                         type="email"
-                        className="border rounded-md p-2 w-full"
+                        className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
                         placeholder="Email"
                         autoFocus
                         {...register('email', { required: "Email is required" })}
@@ -53,22 +55,22 @@ export default function Login() {
                     {errors.email && <span className="text-red-600 text-sm">{errors.email.message}</span>}
                 </div>
 
-                {/* Password */}
-                <div>
+           
+                <div className="mt-4">
                     <input
                         type="password"
-                        className="border rounded-md p-2 w-full"
+                        className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
                         placeholder="Password"
                         {...register('password', { required: "Password is required" })}
                     />
                     {errors.password && <span className="text-red-600 text-sm">{errors.password.message}</span>}
                 </div>
 
-                {/* Login Button */}
-                <div>
+                
+                <div className="mt-4">
                     <button
                         type="submit"
-                        className="bg-blue-500 text-slate-700 py-2 px-4 rounded-md w-full disabled:opacity-50"
+                        className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-400 hover:bg-blue-700 text-slate py-2 px-4 rounded-md w-full transition duration-200 ease-in-out disabled:opacity-50"
                         disabled={loading}
                     >
                         {loading ? "Logging in..." : "Login"}

@@ -1,45 +1,60 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import Cookies from 'js-cookie';
+
+import React, { createContext, useContext, useState, useEffect } from "react";
+import Cookies from "js-cookie";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const [authUser, setAuthUser] = useState(null);
-    const [loading, setLoading] = useState(true); // Added loading state
+  const [authUser, setAuthUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const jwt = Cookies.get('jwt');
-        const messengerData = localStorage.getItem('messenger');
+  useEffect(() => {
+    const jwt = Cookies.get("jwt");
+    const storedUser = localStorage.getItem("ChatApp");
 
-        if (jwt && messengerData) {
-            try {
-                setAuthUser(JSON.parse(messengerData));
-            } catch (error) {
-                console.error("Failed to parse user data:", error);
-                logout(); // Clear corrupted data
-            }
+    if (jwt && storedUser) {
+      try {
+        const parsedUser = JSON.parse(storedUser);
+        if (parsedUser?._id) {
+          setAuthUser(parsedUser);
+        } else {
+          logout();
         }
-        setLoading(false); // Stop loading once auth check is done
-    }, []);
+      } catch (error) {
+        console.error("❌ Failed to parse user data:", error);
+        logout();
+      }
+    }
+    setLoading(false);
+  }, []);
 
-    const login = (userData, jwt) => {
-        setAuthUser(userData);
-        Cookies.set('jwt', jwt, { expires: 1 });
-        localStorage.setItem('messenger', JSON.stringify(userData));
-    };
+  const login = (userData, jwt) => {
+    if (jwt && userData) {
+      setAuthUser(userData);
+      Cookies.set("jwt", jwt, { expires: 1, secure: false, path: "/", sameSite: "Lax" });
+      localStorage.setItem("ChatApp", JSON.stringify(userData));
+      console.log("✅ User logged in successfully:", userData);
+    }
+  };
 
-    const logout = () => {
-        setAuthUser(null);
-        Cookies.remove('jwt');
-        localStorage.removeItem('messenger');
-    };
+  const logout = () => {
+    setAuthUser(null);
+    Cookies.remove("jwt");
+    localStorage.removeItem("ChatApp");
+    console.log("🚪 User logged out.");
+  };
 
-    // Include setAuthUser in the context value
-    return (
-        <AuthContext.Provider value={{ authUser, setAuthUser, login, logout, loading }}>
-            {children}
-        </AuthContext.Provider>
-    );
+  return (
+    <AuthContext.Provider value={{ authUser, login, logout, loading }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
-export const useAuth = () => useContext(AuthContext);
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+  return context;
+};
