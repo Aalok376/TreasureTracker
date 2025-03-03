@@ -4,6 +4,10 @@ const profile = async (req, res) => {
     try {
         const user = await User.findById(req.user.id);
 
+
+        const userId=req.user.id
+        res.cookie('UserId',userId, { httpOnly: true })
+
         if (!user) {
             return res.status(404).json({ msg: 'User not found' });
         }

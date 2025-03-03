@@ -57,7 +57,6 @@
                 <button onclick="openSidebar()"><i class="fa-solid fa-bars fa-2xl"></i></button>
             </div>
         </div>
-
         <div class="asidemenu">
             <div class="containerforphoto"></div>
             <div class="containerforpost"></div>
@@ -70,7 +69,11 @@
         </div>
     </main>
 
-    <script>
+    <script type="module">
+
+        import socket from "./socket.js"
+        socket.emit('register')
+
         const tooglebtn1 = document.querySelector('.chevron')
         const tooglebtnIcon = document.querySelector('.chevron i')
         const dropDownMenu = document.querySelector('.dropdownmenu3')

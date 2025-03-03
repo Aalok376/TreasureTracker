@@ -6,8 +6,6 @@ const changepasswordbtn = document.querySelector('.cgp')
 const deleteUser = document.querySelector('.dlu')
 const logoutUser = document.querySelector('.lgu')
 
-// import socket from "./socket.js"
-
 let UserIdForPost
 let ownPosts = []
 let otherPosts = []
@@ -31,8 +29,6 @@ const getProfilepic = async () => {
         ownprofile2.innerHTML = profiles.map(profile => `
             <a href="profile.html" class="profile" style="background-image: url('http://localhost:5000/${profile.user?.profilePicture?.replace(/\\/g, '/')}')"></a>
         `).join('')
-
-        // socket.emit('register', { UserIdForPost })
 
     } catch (error) {
         console.error("Error fetching profile picture:", error)
@@ -1185,6 +1181,7 @@ const editComment = async (OwnComments, OtherCommentsOnOwnPost, OtherCommentsOnO
                         OtherComments = []
                         OtherCommentsOnOwnPost = []
                         OtherCommentsOnOtherPost = []
+                        
                         for (let i = 0; i < comments.length; i++) {
                             if (comments[i].userId._id === UserIdForPost) {
                                 OwnComments.push(comments[i]);
@@ -1283,22 +1280,24 @@ const openSidebar = () => {
     sideBar.classList.remove('disappear')
 }
 
-const modal=document.querySelector(".modal")
-const openButton=document.querySelector(".hamburgermenu")
-const closeButton=document.querySelector(".closebutton")
+// const modal=document.querySelector(".modal")
+// const openButton=document.querySelector(".hamburgermenu")
+// const closeButton=document.querySelector(".closebutton")
 
-modal.addEventListener('click',async(e)=>{
-    e.preventDefault()
-    if (e.target === modal) {
-        modal.close()
-    }
-})
+// modal.addEventListener('click',async(e)=>{
+//     e.preventDefault()
+//     if (e.target === modal) {
+//         modal.close()
+//         document.body.style.overflow = ''
+//     }
+// })
 
-openButton.addEventListener("click",()=>{
-    modal.showModal()
-    document.body.style.overflow = 'hidden'
-})
-closeButton.addEventListener("click",()=>{
-    modal.close()
-    document.body.style.overflow = ''
-})
+// openButton.addEventListener("click",()=>{
+//     modal.showModal()
+//     document.body.style.overflow = 'hidden'
+// })
+// closeButton.addEventListener("click",()=>{
+//     modal.close()
+//     document.body.style.overflow = ''
+// })
+
