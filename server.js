@@ -1,7 +1,12 @@
 require('dotenv').config()
 const mongoose=require('mongoose')
+const http = require('http')
+const { app } = require('./app.js')
+const { initializeSocket } = require('./sockett.js')
 
-const {server}=require('./socket.js')
+const server = http.createServer(app)
+
+initializeSocket(server)
 
 mongoose.connect(process.env.MONGO_URI1)
     .then(() => console.log("Connected to DB1"))

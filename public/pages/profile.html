@@ -24,9 +24,15 @@
                 </div>
             </div>
             <div class="dropdownmenu3">
-                <li><div class="cgp">Change password</div></li>
-                <li><div class="dlu">Delete</div></li>
-                <li><div class="lgu">Logout</div></li>
+                <li>
+                    <div class="cgp">Change password</div>
+                </li>
+                <li>
+                    <div class="dlu">Delete</div>
+                </li>
+                <li>
+                    <div class="lgu">Logout</div>
+                </li>
             </div>
     </header>
     <main class="main">
@@ -57,19 +63,26 @@
         </div>
     </main>
 
-    <script>
-        const tooglebtn = document.querySelector('.chevron')
-        const tooglebtnIcon = document.querySelector('.chevron i')
-        const dropDownMenu = document.querySelector('.dropdownmenu3')
-
-        tooglebtn.onclick = function () {
-            dropDownMenu.classList.toggle('open')
-            const isOpen = dropDownMenu.classList.contains('open')
-            tooglebtnIcon.classList = isOpen ?
-                "fa-solid fa-chevron-up" : "fa-solid fa-chevron-down"
-        };
-    </script>
 </body>
 <script src="/pages/profile.js"></script>
+<script type="module">
+    window.addEventListener("DOMContentLoaded", async () => {
+        const { default: socket } = await import("./socket.js")
+        socket.on("privateMessage", (data) => {
+            console.log("New Notification:", data.message)
+        })
+    })
+
+    const tooglebtn1 = document.querySelector('.chevron')
+    const tooglebtnIcon = document.querySelector('.chevron i')
+    const dropDownMenu = document.querySelector('.dropdownmenu3')
+
+    tooglebtn1.onclick = function () {
+        dropDownMenu.classList.toggle('open')
+        const isOpen = dropDownMenu.classList.contains('open')
+        tooglebtnIcon.classList = isOpen ?
+            "fa-solid fa-chevron-up" : "fa-solid fa-chevron-down"
+    }
+</script>
 
 </html>

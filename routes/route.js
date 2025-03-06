@@ -17,6 +17,7 @@ const { otherProfile, otherPost, serveOtherProfile } = require('../controllers/f
 const { contact } = require('../controllers/contact')
 const { save, getsavedPost, Unsave } = require('../controllers/savedPost')
 const { sendRequest, responseOfrequest, getRequest, getFriends, unfriend, cancelRequest, getStatusOfFriend } = require('../controllers/friendRequest')
+const { createNotification } = require('../controllers/notification')
 
 const otpStore = new Map()
 
@@ -83,5 +84,7 @@ router.get('/getfriendrequest', verifyToken, getRequest)//
 router.get('/getfriends', verifyToken, getFriends)//
 router.delete('/removefriend', verifyToken, unfriend)//
 router.delete('/cancelrequest', verifyToken, cancelRequest)//
+
+router.post('/createNotification',verifyToken,createNotification)
 
 module.exports = { router }
