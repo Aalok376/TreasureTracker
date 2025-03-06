@@ -5,6 +5,8 @@ const cookie = require("cookie")
 
 const server = http.createServer(app)
 
+const userIdforIO={}
+
 const io = new Server(server, {
     cors: {
         origin: '*',
@@ -19,12 +21,18 @@ io.on('connection', (socket) => {
     console.log('A user connceted', socket.id)
 
     socket.on('register', () => {
-        console.log(UserId)
+        userIdforIO[UserId]=socket.id
+        console.log(userIdforIO)
     })
-
     socket.on('disconnect', () => {
         console.log('A user disconnected:', socket.id)
-    })
+        const userId = Object.keys(userIdforIO).find(key => userIdforIO[key] === socket.id)
+    
+        if (userId) {
+            delete userIdforIO[userId]
+            console.log(`User ${userId} removed from active sockets`)
+        }
+    })    
 })
 
 module.exports = { server, io }

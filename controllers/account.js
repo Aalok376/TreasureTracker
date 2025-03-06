@@ -6,7 +6,7 @@ const User = require('../models/user.js');
 const Post = require('../models/createPost.js')
 const Comment = require('../models/comments.js');
 const Like = require('../models/likes.js')
-const Savedpost=require('../models/savedpost.js')
+const Savedpost = require('../models/savedpost.js')
 const FriendRequest = require("../models/friendRequest")
 
 const { sendEmail } = require('../middleware/sendmail');
@@ -83,8 +83,12 @@ const login = async (req, res) => {
             }
 
             const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '30d' });
-            res.cookie('token', token, { httpOnly: true });
-            return res.status(200).json({ msg: 'Login successful' });
+            res.cookie('token', token, { httpOnly: true })
+
+            const userId = user._id.toString()
+            res.cookie('UserId', userId, { httpOnly: true })
+
+            return res.status(200).json({ msg: 'Login successful' })
         }
         catch (error) {
             console.error('Error during login:', error);
@@ -164,8 +168,8 @@ const toDelete = async (req, res) => {
     }
     try {
         const user = await User.findById(req.user.id);
-        const userId=req.user.id
-        
+        const userId = req.user.id
+
         if (!user) {
             return res.status(404).json({ msg: 'User not found' });
         }
@@ -176,9 +180,9 @@ const toDelete = async (req, res) => {
         }
 
         await Post.deleteMany({ userId });
-        await Comment.deleteMany({userId})
-        await Like.deleteMany({userId})
-        await Savedpost.deleteMany({userId})
+        await Comment.deleteMany({ userId })
+        await Like.deleteMany({ userId })
+        await Savedpost.deleteMany({ userId })
         await FriendRequest.deleteMany({
             $or: [
                 { senderId: userId },
@@ -197,7 +201,8 @@ const toDelete = async (req, res) => {
 
 const logout = async (req, res) => {
     try {
-        res.clearCookie('token', { httpOnly: true });
+        res.clearCookie('token', { httpOnly: true })
+        res.clearCookie('UserId', { httpOnly: true })
         return res.status(200).json({ msg: 'Logout successfully' });
     }
     catch (error) {
@@ -267,9 +272,9 @@ const sendmailInCaseOfForgot = (otpStore) => {
     }
 }
 
-const dummy=async(req,res)=>{
-    return res.status(200).json({success:true,msg:'Otp verified successfully'})
+const dummy = async (req, res) => {
+    return res.status(200).json({ success: true, msg: 'Otp verified successfully' })
 }
 
 
-module.exports = { signup, verify, login, checkToUpdate, updatePassword, toDelete, logout, forgotPassword, sendmailInCaseOfForgot,dummy }
+module.exports = { signup, verify, login, checkToUpdate, updatePassword, toDelete, logout, forgotPassword, sendmailInCaseOfForgot, dummy }

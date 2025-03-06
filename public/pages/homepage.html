@@ -68,25 +68,24 @@
             </dialog>
         </div>
     </main>
-
-    <script type="module">
-
-        import socket from "./socket.js"
-        socket.emit('register')
-
-        const tooglebtn1 = document.querySelector('.chevron')
-        const tooglebtnIcon = document.querySelector('.chevron i')
-        const dropDownMenu = document.querySelector('.dropdownmenu3')
-
-        tooglebtn1.onclick = function () {
-            dropDownMenu.classList.toggle('open')
-            const isOpen = dropDownMenu.classList.contains('open')
-            tooglebtnIcon.classList = isOpen ?
-                "fa-solid fa-chevron-up" : "fa-solid fa-chevron-down"
-        }
-
-    </script>
 </body>
-<script src="/pages/homepage.js"></script>
+<script src="/pages/homepage.js" defer></script>
+<script type="module">
 
+    window.addEventListener("DOMContentLoaded", async () => {
+        const { default: socket } = await import("./socket.js")
+        socket.emit("register")
+    })
+
+    const tooglebtn1 = document.querySelector('.chevron')
+    const tooglebtnIcon = document.querySelector('.chevron i')
+    const dropDownMenu = document.querySelector('.dropdownmenu3')
+
+    tooglebtn1.onclick = function () {
+        dropDownMenu.classList.toggle('open')
+        const isOpen = dropDownMenu.classList.contains('open')
+        tooglebtnIcon.classList = isOpen ?
+            "fa-solid fa-chevron-up" : "fa-solid fa-chevron-down"
+    }
+</script>
 </html>
