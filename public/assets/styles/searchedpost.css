@@ -156,7 +156,7 @@ z-index: 2;
   width: 200px;
   transition: .15s linear;
 }
-.sidemenubox .hamburgermenu i
+.sidemenubox .hamburgermenu button i
 {
   position: fixed; 
   left: 1%; 

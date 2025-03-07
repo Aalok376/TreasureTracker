@@ -122,100 +122,101 @@ const UpdatePosts = (ownPosts, otherPosts) => {
                     </div>
                                     <div class="post-images">
                     ${(() => {
-                if (Array.isArray(post.image)) {
-                    const imagesLength = post.image.length;
-
-                    if (imagesLength === 1) {
-                        return post.image
-                            .map(
-                                (img) => `
-                                    <div class="divforimage1">
-                                      <img 
-                                        src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
-                                        alt="${post.caption || 'Image'}" 
-                                        class="post-image" 
-
-                                      />
-                                    </div>`
-                            )
-                            .join('');
-                    }
-
-                    if (imagesLength === 2) {
-                        return post.image
-                            .map(
-                                (img) => `
-                                    <div class="divforimage2">
-                                      <img 
-                                        src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
-                                        alt="${post.caption || 'Image'}" 
-                                        class="post-image" 
-                                       
-                                      />
-                                    </div>`
-                            )
-                            .join('');
-                    }
-
-                    if (imagesLength === 3) {
-                        return post.image
-                            .map(
-                                (img) => `
-                                    <div class="divforimage3">
-                                      <img 
-                                        src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
-                                        alt="${post.caption || 'Image'}" 
-                                        class="post-image" 
-                                       
-                                      />
-                                    </div>`
-                            )
-                            .join('');
-                    }
-                    if (imagesLength === 4) {
-                        return post.image
-                            .map(
-                                (img) => `
-                                    <div class="divforimage4">
-                                      <img 
-                                        src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
-                                        alt="${post.caption || 'Image'}" 
-                                        class="post-image" 
-                                       
-                                      />
-                                    </div>`
-                            )
-                            .join('');
-                    }
-
-                    if (imagesLength >= 5) {
-                        return (
-                            post.image
-                                .slice(0, 3)
-                                .map(
-                                    (img) => `
-                                      <div class="divforimage4">
-                                        <img 
-                                          src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
-                                          alt="${post.caption || 'Image'}" 
-                                          class="post-image" 
-                                         
-                                        />
-                                      </div>`
-                                )
-                                .join('') +
-                            `
-                              <div class="divforimage4" style="background-image: url('http://localhost:5000/${post.image[3].replace(/\\/g, '/')}');">
-                              <p id="moreimages" style="color:black;">+${imagesLength - 4}</p>
-                              </div>
-                            `
-                        );
-                    }
-                }
-
-                return '<p>No images available</p>';
-            })()
-            }                          
+                        if (Array.isArray(post.image)) {
+                            const imagesLength = post.image.length;
+        
+                            if (imagesLength === 1) {
+                                return post.image
+                                    .map(
+                                        (img) => `
+                                            <div class="divforimage1">
+                                              <img 
+                                                src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
+                                                alt="${post.caption || 'Image'}" 
+                                                class="post-image" 
+                                                style="width: 100%; height: 400px; background-size: contain; background-position: center;"                                    
+                                              />
+                                            </div>`
+                                    )
+                                    .join('');
+                            }
+        
+                            if (imagesLength === 2) {
+                                return post.image
+                                    .map(
+                                        (img) => `
+                                            <div class="divforimage2">
+                                              <img 
+                                                src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
+                                                alt="${post.caption || 'Image'}" 
+                                                class="post-image" 
+                                                 style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
+                                               
+                                              />
+                                            </div>`
+                                    )
+                                    .join('');
+                            }
+        
+                            if (imagesLength === 3) {
+                                return post.image
+                                    .map(
+                                        (img) => `
+                                            <div class="divforimage3">
+                                              <img 
+                                                src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
+                                                alt="${post.caption || 'Image'}" 
+                                                class="post-image" 
+                                             style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
+                                              />
+                                            </div>`
+                                    )
+                                    .join('');
+                            }
+                            if (imagesLength === 4) {
+                                return post.image
+                                    .map(
+                                        (img) => `
+                                            <div class="divforimage4">
+                                              <img 
+                                                src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
+                                                alt="${post.caption || 'Image'}" 
+                                                class="post-image" 
+                                               style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
+                                              />
+                                            </div>`
+                                    )
+                                    .join('');
+                            }
+        
+                            if (imagesLength >= 5) {
+                                return (
+                                    post.image
+                                        .slice(0, 3)
+                                        .map(
+                                            (img) => `
+                                              <div class="divforimage4">
+                                                <img 
+                                                  src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
+                                                  alt="${post.caption || 'Image'}" 
+                                                  class="post-image" 
+                                           style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
+                                                />
+                                              </div>`
+                                        )
+                                        .join('') +
+                                    `
+                                      <div class="divforimage4" style="background-image: url('http://localhost:5000/${post.image[3].replace(/\\/g, '/')}');">
+                                      <p id="moreimages" style="color:black;">+${imagesLength - 4}</p>
+                                      </div>
+                                    `
+                                );
+                            }
+                        }
+        
+                        return '<p>No images available</p>';
+                    })()
+                    }                                                
                     </div>
                 </div>
                 <hr class="custom-line1">
@@ -274,101 +275,101 @@ const UpdatePosts = (ownPosts, otherPosts) => {
                     </div>
                                        <div class="post-images">
                     ${(() => {
-                    if (Array.isArray(post.image)) {
-                        const imagesLength = post.image.length;
-
-                        if (imagesLength === 1) {
-                            return post.image
-                                .map(
-                                    (img) => `
-                                    <div class="divforimage1">
-                                      <img 
-                                        src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
-                                        alt="${post.caption || 'Image'}" 
-                                        class="post-image" 
-
-                                      />
-                                    </div>`
-                                )
-                                .join('');
-                        }
-
-                        if (imagesLength === 2) {
-                            return post.image
-                                .map(
-                                    (img) => `
-                                    <div class="divforimage2">
-                                      <img 
-                                        src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
-                                        alt="${post.caption || 'Image'}" 
-                                        class="post-image" 
-                                       
-                                      />
-                                    </div>`
-                                )
-                                .join('');
-                        }
-
-                        if (imagesLength === 3) {
-                            return post.image
-                                .map(
-                                    (img) => `
-                                    <div class="divforimage3">
-                                      <img 
-                                        src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
-                                        alt="${post.caption || 'Image'}" 
-                                        class="post-image" 
-                                       
-                                      />
-                                    </div>`
-                                )
-                                .join('');
-                        }
-
-                        if (imagesLength === 4) {
-                            return post.image
-                                .map(
-                                    (img) => `
-                                        <div class="divforimage4">
+                        if (Array.isArray(post.image)) {
+                            const imagesLength = post.image.length;
+    
+                            if (imagesLength === 1) {
+                                return post.image
+                                    .map(
+                                        (img) => `
+                                        <div class="divforimage1">
                                           <img 
                                             src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
                                             alt="${post.caption || 'Image'}" 
                                             class="post-image" 
-                                           
+                                    style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
                                           />
                                         </div>`
-                                )
-                                .join('');
-                        }
+                                    )
+                                    .join('');
+                            }
     
-                        if (imagesLength >= 5) {
-                            return (
-                                post.image
-                                    .slice(0, 3)
+                            if (imagesLength === 2) {
+                                return post.image
                                     .map(
                                         (img) => `
-                                          <div class="divforimage4">
-                                            <img 
-                                              src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
-                                              alt="${post.caption || 'Image'}" 
-                                              class="post-image" 
-                                             
-                                            />
-                                          </div>`
+                                        <div class="divforimage2">
+                                          <img 
+                                            src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
+                                            alt="${post.caption || 'Image'}" 
+                                            class="post-image" 
+                                         style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
+                                          />
+                                        </div>`
                                     )
-                                    .join('') +
-                                `
-                                  <div class="divforimage4" style="background-image: url('http://localhost:5000/${post.image[3].replace(/\\/g, '/')}');">
-                                  <p id="moreimages" style="color:black;">+${imagesLength - 4}</p>
-                                  </div>
-                                `
-                            );
+                                    .join('');
+                            }
+    
+                            if (imagesLength === 3) {
+                                return post.image
+                                    .map(
+                                        (img) => `
+                                        <div class="divforimage3">
+                                          <img 
+                                            src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
+                                            alt="${post.caption || 'Image'}" 
+                                            class="post-image" 
+                                          style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
+                                          />
+                                        </div>`
+                                    )
+                                    .join('');
+                            }
+    
+                            if (imagesLength === 4) {
+                                return post.image
+                                    .map(
+                                        (img) => `
+                                            <div class="divforimage4">
+                                              <img 
+                                                src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
+                                                alt="${post.caption || 'Image'}" 
+                                                class="post-image" 
+                                          style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
+                                              />
+                                            </div>`
+                                    )
+                                    .join('');
+                            }
+        
+                            if (imagesLength >= 5) {
+                                return (
+                                    post.image
+                                        .slice(0, 3)
+                                        .map(
+                                            (img) => `
+                                              <div class="divforimage4">
+                                                <img 
+                                                  src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
+                                                  alt="${post.caption || 'Image'}" 
+                                                  class="post-image" 
+                                           style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
+                                                />
+                                              </div>`
+                                        )
+                                        .join('') +
+                                    `
+                                      <div class="divforimage4" style="background-image: url('http://localhost:5000/${post.image[3].replace(/\\/g, '/')}');">
+                                      <p id="moreimages" style="color:black;">+${imagesLength - 4}</p>
+                                      </div>
+                                    `
+                                );
+                            }
                         }
-                    }
-
-                    return '<p>No images available</p>';
-                })()
-                }                          
+    
+                        return '<p>No images available</p>';
+                    })()
+                    }            
                     </div>
                 </div>
                 <hr class="custom-line1">
