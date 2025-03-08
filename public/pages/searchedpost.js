@@ -950,6 +950,32 @@ const updateLikeButtons = async (posts) => {
                         divforlike.textContent = `Liked by ${likes[0].userId.fname} and ${likes.length - 1} Other`
                     }
                 }
+                divforlike.addEventListener('click', async (e) => {
+                    e.preventDefault()
+
+                    const modal = document.querySelector(".modal")
+                    modal.showModal()
+                    document.body.style.overflow = 'hidden'
+
+                    const closeButton = document.querySelector(".closebutton")
+                    const divareaforlike = document.querySelector(".divareaforlike")
+
+                    modal.addEventListener('click', async (e) => {
+                        e.preventDefault()
+                        if (e.target === modal) {
+                            modal.close()
+                            document.body.style.overflow = ''
+                        }
+                    })
+                    closeButton.addEventListener("click", () => {
+                        modal.close()
+                        document.body.style.overflow = ''
+                    })
+
+                    console.log(likes)
+                    updateLikeAreaSection(likes, divareaforlike)
+                    gotoprofile(divareaforlike)
+                })   
             }
         }
     } catch (error) {
@@ -958,9 +984,16 @@ const updateLikeButtons = async (posts) => {
 }
 
 //To see all the likes...
-const updateLikeAreaSection = () => {
-
+const updateLikeAreaSection = (likes, divareaforlike) => {
+    if (likes.length > 0) {
+        return divareaforlike.innerHTML = likes.map(like => `<div class="introareacomment" id="${like._id}">
+            <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${like.userId._id}" style="background-image: url('http://localhost:5000/${like.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
+            <div class="placeforcommentandname"><p class="nameincommentarea">${like.userId.fname} ${like.userId.lname}</p></div>
+        </div>`
+        ).join('')
+    }
 }
+
 
 const sideBar = document.querySelector('.sidemenu')
 const hideSidebar = () => {
@@ -978,6 +1011,7 @@ const home = document.querySelector('.homepage')
 const message = document.querySelector('.Messagepage')
 const friends = document.querySelector('.Friends')
 const saved = document.querySelector('.SavedPosts')
+const notification=document.querySelector('.Notifications')
 
 home.addEventListener('click', async (e) => {
     e.preventDefault()
@@ -990,16 +1024,22 @@ home.addEventListener('click', async (e) => {
 //     window.location.href=""
 // })
 
-// friends.addEventListener('click',async(e)=>{
-//     e.preventDefault()
+friends.addEventListener('click', async (e) => {
+    e.preventDefault()
 
-//     window.location.href=""
-// })
+    window.location.href = "/pages/friends.html"
+})
 
 saved.addEventListener('click', async (e) => {
     e.preventDefault()
 
-    window.location.href = "/pages/savedPosts.html"
+    window.location.href = "savedPosts.html"
+})
+
+notification.addEventListener('click', async (e) => {
+    e.preventDefault()
+
+    window.location.href = "notification.html"
 })
 
 
