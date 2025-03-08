@@ -65,15 +65,16 @@
 
 </body>
 <script src="/pages/profile.js"></script>
-<script type="module">
+<script type="module" src="/pages/socket.js">
     window.addEventListener("DOMContentLoaded", async () => {
         const { default: socket } = await import("./socket.js")
         socket.on("privateMessage", (data) => {
             console.log("New Notification:", data.message)
         })
     })
-
-    const tooglebtn1 = document.querySelector('.chevron')
+</script>
+<script>
+     const tooglebtn1 = document.querySelector('.chevron')
     const tooglebtnIcon = document.querySelector('.chevron i')
     const dropDownMenu = document.querySelector('.dropdownmenu3')
 

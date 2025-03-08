@@ -122,13 +122,13 @@ const UpdatePosts = (ownPosts, otherPosts) => {
                     </div>
                                     <div class="post-images">
                     ${(() => {
-                        if (Array.isArray(post.image)) {
-                            const imagesLength = post.image.length;
-        
-                            if (imagesLength === 1) {
-                                return post.image
-                                    .map(
-                                        (img) => `
+                if (Array.isArray(post.image)) {
+                    const imagesLength = post.image.length;
+
+                    if (imagesLength === 1) {
+                        return post.image
+                            .map(
+                                (img) => `
                                             <div class="divforimage1">
                                               <img 
                                                 src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
@@ -137,14 +137,14 @@ const UpdatePosts = (ownPosts, otherPosts) => {
                                                 style="width: 100%; height: 400px; background-size: contain; background-position: center;"                                    
                                               />
                                             </div>`
-                                    )
-                                    .join('');
-                            }
-        
-                            if (imagesLength === 2) {
-                                return post.image
-                                    .map(
-                                        (img) => `
+                            )
+                            .join('');
+                    }
+
+                    if (imagesLength === 2) {
+                        return post.image
+                            .map(
+                                (img) => `
                                             <div class="divforimage2">
                                               <img 
                                                 src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
@@ -154,14 +154,14 @@ const UpdatePosts = (ownPosts, otherPosts) => {
                                                
                                               />
                                             </div>`
-                                    )
-                                    .join('');
-                            }
-        
-                            if (imagesLength === 3) {
-                                return post.image
-                                    .map(
-                                        (img) => `
+                            )
+                            .join('');
+                    }
+
+                    if (imagesLength === 3) {
+                        return post.image
+                            .map(
+                                (img) => `
                                             <div class="divforimage3">
                                               <img 
                                                 src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
@@ -170,13 +170,13 @@ const UpdatePosts = (ownPosts, otherPosts) => {
                                              style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
                                               />
                                             </div>`
-                                    )
-                                    .join('');
-                            }
-                            if (imagesLength === 4) {
-                                return post.image
-                                    .map(
-                                        (img) => `
+                            )
+                            .join('');
+                    }
+                    if (imagesLength === 4) {
+                        return post.image
+                            .map(
+                                (img) => `
                                             <div class="divforimage4">
                                               <img 
                                                 src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
@@ -185,16 +185,16 @@ const UpdatePosts = (ownPosts, otherPosts) => {
                                                style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
                                               />
                                             </div>`
-                                    )
-                                    .join('');
-                            }
-        
-                            if (imagesLength >= 5) {
-                                return (
-                                    post.image
-                                        .slice(0, 3)
-                                        .map(
-                                            (img) => `
+                            )
+                            .join('');
+                    }
+
+                    if (imagesLength >= 5) {
+                        return (
+                            post.image
+                                .slice(0, 3)
+                                .map(
+                                    (img) => `
                                               <div class="divforimage4">
                                                 <img 
                                                   src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
@@ -203,20 +203,20 @@ const UpdatePosts = (ownPosts, otherPosts) => {
                                            style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
                                                 />
                                               </div>`
-                                        )
-                                        .join('') +
-                                    `
+                                )
+                                .join('') +
+                            `
                                       <div class="divforimage4" style="background-image: url('http://localhost:5000/${post.image[3].replace(/\\/g, '/')}');">
                                       <p id="moreimages" style="color:black;">+${imagesLength - 4}</p>
                                       </div>
                                     `
-                                );
-                            }
-                        }
-        
-                        return '<p>No images available</p>';
-                    })()
-                    }                                                
+                        );
+                    }
+                }
+
+                return '<p>No images available</p>';
+            })()
+            }                                                
                     </div>
                 </div>
                 <hr class="custom-line1">
@@ -275,13 +275,13 @@ const UpdatePosts = (ownPosts, otherPosts) => {
                     </div>
                                        <div class="post-images">
                     ${(() => {
-                        if (Array.isArray(post.image)) {
-                            const imagesLength = post.image.length;
-    
-                            if (imagesLength === 1) {
-                                return post.image
-                                    .map(
-                                        (img) => `
+                    if (Array.isArray(post.image)) {
+                        const imagesLength = post.image.length;
+
+                        if (imagesLength === 1) {
+                            return post.image
+                                .map(
+                                    (img) => `
                                         <div class="divforimage1">
                                           <img 
                                             src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
@@ -290,14 +290,14 @@ const UpdatePosts = (ownPosts, otherPosts) => {
                                     style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
                                           />
                                         </div>`
-                                    )
-                                    .join('');
-                            }
-    
-                            if (imagesLength === 2) {
-                                return post.image
-                                    .map(
-                                        (img) => `
+                                )
+                                .join('');
+                        }
+
+                        if (imagesLength === 2) {
+                            return post.image
+                                .map(
+                                    (img) => `
                                         <div class="divforimage2">
                                           <img 
                                             src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
@@ -306,14 +306,14 @@ const UpdatePosts = (ownPosts, otherPosts) => {
                                          style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
                                           />
                                         </div>`
-                                    )
-                                    .join('');
-                            }
-    
-                            if (imagesLength === 3) {
-                                return post.image
-                                    .map(
-                                        (img) => `
+                                )
+                                .join('');
+                        }
+
+                        if (imagesLength === 3) {
+                            return post.image
+                                .map(
+                                    (img) => `
                                         <div class="divforimage3">
                                           <img 
                                             src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
@@ -322,14 +322,14 @@ const UpdatePosts = (ownPosts, otherPosts) => {
                                           style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
                                           />
                                         </div>`
-                                    )
-                                    .join('');
-                            }
-    
-                            if (imagesLength === 4) {
-                                return post.image
-                                    .map(
-                                        (img) => `
+                                )
+                                .join('');
+                        }
+
+                        if (imagesLength === 4) {
+                            return post.image
+                                .map(
+                                    (img) => `
                                             <div class="divforimage4">
                                               <img 
                                                 src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
@@ -338,16 +338,16 @@ const UpdatePosts = (ownPosts, otherPosts) => {
                                           style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
                                               />
                                             </div>`
-                                    )
-                                    .join('');
-                            }
-        
-                            if (imagesLength >= 5) {
-                                return (
-                                    post.image
-                                        .slice(0, 3)
-                                        .map(
-                                            (img) => `
+                                )
+                                .join('');
+                        }
+
+                        if (imagesLength >= 5) {
+                            return (
+                                post.image
+                                    .slice(0, 3)
+                                    .map(
+                                        (img) => `
                                               <div class="divforimage4">
                                                 <img 
                                                   src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
@@ -356,20 +356,20 @@ const UpdatePosts = (ownPosts, otherPosts) => {
                                            style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
                                                 />
                                               </div>`
-                                        )
-                                        .join('') +
-                                    `
+                                    )
+                                    .join('') +
+                                `
                                       <div class="divforimage4" style="background-image: url('http://localhost:5000/${post.image[3].replace(/\\/g, '/')}');">
                                       <p id="moreimages" style="color:black;">+${imagesLength - 4}</p>
                                       </div>
                                     `
-                                );
-                            }
+                            );
                         }
-    
-                        return '<p>No images available</p>';
-                    })()
-                    }            
+                    }
+
+                    return '<p>No images available</p>';
+                })()
+                }            
                     </div>
                 </div>
                 <hr class="custom-line1">
@@ -435,7 +435,7 @@ commentbtn.addEventListener('click', async (event) => {
                         headers: {
                             "Content-Type": "application/json",
                         },
-                        body: JSON.stringify({ type:'like',postId}),
+                        body: JSON.stringify({ type: 'like', postId }),
                     })
                 }
             })()
@@ -978,6 +978,33 @@ const updateLikeButtons = async (posts) => {
                         divforlike.textContent = `Liked by ${likes[0].userId.fname} and ${likes.length - 1} Other`
                     }
                 }
+
+                divforlike.addEventListener('click', async (e) => {
+                    e.preventDefault()
+
+                    const modal = document.querySelector(".modal")
+                    modal.showModal()
+                    document.body.style.overflow = 'hidden'
+
+                    const closeButton = document.querySelector(".closebutton")
+                    const divareaforlike = document.querySelector(".divareaforlike")
+
+                    modal.addEventListener('click', async (e) => {
+                        e.preventDefault()
+                        if (e.target === modal) {
+                            modal.close()
+                            document.body.style.overflow = ''
+                        }
+                    })
+                    closeButton.addEventListener("click", () => {
+                        modal.close()
+                        document.body.style.overflow = ''
+                    })
+
+                    console.log(likes)
+                    updateLikeAreaSection(likes, divareaforlike)
+                    gotoprofile(divareaforlike)
+                })   
             }
         }
     } catch (error) {
@@ -986,8 +1013,14 @@ const updateLikeButtons = async (posts) => {
 }
 
 //To see all the likes...
-const updateLikeAreaSection = () => {
-
+const updateLikeAreaSection = (likes, divareaforlike) => {
+    if (likes.length > 0) {
+        return divareaforlike.innerHTML = likes.map(like => `<div class="introareacomment" id="${like._id}">
+            <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${like.userId._id}" style="background-image: url('http://localhost:5000/${like.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
+            <div class="placeforcommentandname"><p class="nameincommentarea">${like.userId.fname} ${like.userId.lname}</p></div>
+        </div>`
+        ).join('')
+    }
 }
 
 //Event listener for aside-menu
@@ -996,6 +1029,7 @@ const home = document.querySelector('.homepage')
 const message = document.querySelector('.Messagepage')
 const friends = document.querySelector('.Friends')
 const saved = document.querySelector('.SavedPosts')
+const notification = document.querySelector('.Notifications')
 
 home.addEventListener('click', async (e) => {
     e.preventDefault()
@@ -1018,6 +1052,12 @@ saved.addEventListener('click', async (e) => {
     e.preventDefault()
 
     window.location.href = "savedPosts.html"
+})
+
+notification.addEventListener('click', async (e) => {
+    e.preventDefault()
+
+    window.location.href = "notification.html"
 })
 
 
@@ -1190,7 +1230,7 @@ const editComment = async (OwnComments, OtherCommentsOnOwnPost, OtherCommentsOnO
                         OtherComments = []
                         OtherCommentsOnOwnPost = []
                         OtherCommentsOnOtherPost = []
-                        
+
                         for (let i = 0; i < comments.length; i++) {
                             if (comments[i].userId._id === UserIdForPost) {
                                 OwnComments.push(comments[i]);

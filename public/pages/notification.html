@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Friends Page</title>
-    <link rel="stylesheet" href="notification.css">
+    <link rel="stylesheet" href="../assets/styles/notification.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 </head>
@@ -49,6 +49,7 @@
                             <div class="Messagepage"><i class="fas fa-message"></i>Messages</div>
                             <div class="Friends"><i class="fas fa-users"></i>Friends</div>
                             <div class="SavedPosts"><i class="fa-solid fa-bookmark"></i>Saved</div>
+                            <div class="Notifications"><i class="fa-solid fa-bell"></i>Notifications</div>
                         </div>
                     </div>
                 </div>
@@ -72,7 +73,7 @@
                     <div class="sectionforprofile">
                         <div class="profileimagefornotification"></div>
                         <div class="placefornotificationandname">
-                      
+
                         </div>
 
                     </div>
@@ -89,20 +90,17 @@
                         </li>
                     </div>
                 </div>
-
             </div>
         </div>
     </main>
-    <script>
-        const sideBar = document.querySelector('.sidemenu')
-        const hideSidebar = () => {
-            sideBar.classList.add('disappear')
-            sideBar.classList.remove('appear')
-        }
-        const openSidebar = () => {
-            sideBar.classList.add('appear')
-            sideBar.classList.remove('disappear')
-        }
+    <script type="module">
+
+        window.addEventListener("DOMContentLoaded", async () => {
+            const { default: socket } = await import("./socket.js")
+            socket.on("privateMessage", (data) => {
+                console.log("New Notification:", data.message)
+            })
+        })
 
         const tooglebtn1 = document.querySelector('.chevron')
         const tooglebtnIcon = document.querySelector('.chevron i')
@@ -116,6 +114,6 @@
         }
     </script>
 </body>
-<script src="notification.js"></script>
+<script src="/pages/notification.js"></script>
 
 </html>

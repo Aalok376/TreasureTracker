@@ -252,7 +252,6 @@ ownprofile.addEventListener('click', async (event) => {
     const addbtn = ownprofile.querySelector('.addfriend')
     const friendbtn = ownprofile.querySelector('.friends')
     const dropDownMenu = ownprofile.querySelector('.dropdownmenu5')
-    console.log(dropDownMenu)
 
     if (event.target.closest('.addfriend')) {
         try {
