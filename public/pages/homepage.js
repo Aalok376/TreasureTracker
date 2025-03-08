@@ -998,11 +998,11 @@ const updateLikeButtons = async (posts) => {
                 divforlike.addEventListener('click', async (e) => {
                     e.preventDefault()
 
-                    const modal = document.querySelector(".modal")
+                    const modal = document.querySelector(".modal1")
                     modal.showModal()
                     document.body.style.overflow = 'hidden'
 
-                    const closeButton = document.querySelector(".closebutton")
+                    const closeButton = document.querySelector(".closebutton1")
                     const divareaforlike = document.querySelector(".divareaforlike")
 
                     modal.addEventListener('click', async (e) => {
@@ -1031,9 +1031,9 @@ const updateLikeButtons = async (posts) => {
 //To see all the likes...
 const updateLikeAreaSection = (likes, divareaforlike) => {
     if (likes.length > 0) {
-        return divareaforlike.innerHTML = likes.map(like => `<div class="introareacomment" id="${like._id}">
-            <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${like.userId._id}" style="background-image: url('http://localhost:5000/${like.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
-            <div class="placeforcommentandname"><p class="nameincommentarea">${like.userId.fname} ${like.userId.lname}</p></div>
+        return divareaforlike.innerHTML = likes.map(like => `<div class="introarealike" id="${like._id}">
+            <div class="sectionforprofileinlike"> <div class="profileimageforpost" data-user-id="${like.userId._id}" style="background-image: url('http://localhost:5000/${like.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
+            <div class="placeforlikeandname"><p class="nameinlikearea">${like.userId.fname} ${like.userId.lname}</p></div>
         </div>`
         ).join('')
     }

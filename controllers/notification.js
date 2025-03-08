@@ -154,7 +154,7 @@ const markAllNotificationsAsRead = async (req, res) => {
         );
 
         if (updatedNotifications.modifiedCount === 0) {
-            return res.status(404).json({ success: false, message: "No unread notifications found" });
+            return res.status(202).json({ success: true, message: "No unread notifications found" })
         }
 
         res.json({ success: true, message: "All notifications marked as read" });

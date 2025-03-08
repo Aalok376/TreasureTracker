@@ -8,7 +8,7 @@ const markallAsread = document.querySelector('.markallasread')
 
 const posthtml = document.querySelector('.notificationarea')
 
-let NOTIFICATION
+let Notificationss
 
 const getProfilepic = async () => {
     try {
@@ -41,6 +41,7 @@ const getNotifications = async () => {
         Notificationss = data.notifications
 
         await UpdateNotifications(Notificationss)
+        await updateNotificationBackgroundColor(Notificationss)
     }
     catch (error) {
         console.log(error)
@@ -62,11 +63,11 @@ const UpdateNotifications = async (Notificationss) => {
                             ${post.senderId.fname} ${post.senderId.lname} ${post.type} your post
                             </div>
                         </div>
+                       
                         <span class="cspaceforthreedot">
                             <div class="cthreedot"><i class="fa-solid fa-ellipsis"></i></div>
                             <div class="cthreedot2"><i class="fa-solid fa-xmark"></i></div>
-                        </span>
-                        <div class="dropdownmenu">
+                             <div class="dropdownmenu">
                             <li>
                                 <div class="cmakeasread"><i class="fa-solid fa-pen"></i> Mark as read</div>
                             </li>
@@ -74,9 +75,19 @@ const UpdateNotifications = async (Notificationss) => {
                                 <div class="cdelete"><i class="fa-solid fa-trash"></i> Delete</div>
                             </li>
                         </div>
+                        </span>
+                       
                     </div>
                 `
         ).join('')
+    }
+}
+const updateNotificationBackgroundColor=async(Notificationss)=>{
+    for(let notifi of Notificationss){
+        const postElement = document.getElementById(notifi._id)
+        if(notifi.isRead===true){
+            postElement.style.backgroundColor='transparent'
+        }
     }
 }
 
@@ -91,12 +102,16 @@ const getele = async () => {
     })
 
     if (response.status === 200) {
+        
         if (notifications.length > 0) {
             notifications.forEach(notification => {
                 notification.style.backgroundColor = 'transparent'
             })
         }
 
+    }
+    else if(response.status===202){
+        return
     }
 }
 
@@ -122,6 +137,8 @@ posthtml.addEventListener('click', async (event) => {
 posthtml.addEventListener('click', async (event) => {
     const postElement = event.target.closest('.notificationcontainer')
     const dropDownMenu2 = postElement.querySelector('.dropdownmenu')
+    const tooglebtnIcon2 = postElement.querySelector('.cthreedot2 i')
+    const tooglebtnIcon = postElement.querySelector('.cthreedot i')
     const notificationId = postElement.id
 
     if (event.target.closest('.cmakeasread')) {
@@ -135,7 +152,10 @@ posthtml.addEventListener('click', async (event) => {
 
         if (response.status === 200) {
             postElement.style.backgroundColor = 'transparent'
+            tooglebtnIcon2.style.display = 'none'
             dropDownMenu2.style.display = 'none'
+            tooglebtnIcon.style.display = 'flex'
+
         }
     }
     else if (event.target.closest('.cdelete')) {
@@ -164,6 +184,7 @@ markallAsread.addEventListener('click', async (e) => {
 
 posthtml.addEventListener('click',async(event)=>{
     const postElement = event.target.closest('.notificationcontainer')
+    const notificationId = postElement.id
 
     if(postElement){
     const postId = postElement.getAttribute("data-user-id")
@@ -171,7 +192,19 @@ posthtml.addEventListener('click',async(event)=>{
     }
 
     if(event.target.closest('.sectionforprofile')){
-        window.location.href='/pages/profile.html'
+
+        const response = await fetch('http://localhost:5000/api/v1/notificationsread', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ notificationId }),
+        })
+
+        if (response.status === 200) {
+            postElement.style.backgroundColor = 'transparent'
+            window.location.href='/pages/profile.html'
+        }
     }
 })
 

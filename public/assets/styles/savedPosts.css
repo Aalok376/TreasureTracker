@@ -34,6 +34,10 @@ width:100%;
 height:60px;
 
 }
+p#moreimages{
+  position:relative;
+  top:50%;
+    }
 
 /* Firstnav Section */
 .firstnav {

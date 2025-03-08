@@ -946,3 +946,70 @@ h3 {
     color: #555; /* Dark gray */
     transition: color 0.3s ease;
   }
+  p#moreimages{
+    position:relative;
+    top:50%;
+      }
+
+      .modal2 {
+        max-height: 60%;
+        width: 60vw;
+        background-color:w;
+        border-radius: 12px;
+        padding: 15px 30px 30px;
+        position:absolute;
+        top: 20%;
+        left:20%;
+        border: none;
+        text-decoration: none;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        transform: scale(0);
+        transition: transform 0.4s ease-in-out;
+        display: block;
+       
+      }
+      dialog[open] {
+        transform: scale(1);
+      }
+      .modal2::backdrop {
+        background-color: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(1px);
+      }
+      .closebutton2 {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: none;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+        color:black; /* Dark gray */
+        transition: color 0.3s ease;
+      }
+      .imageone{
+        height:300px;
+        width:400px;
+        margin:5px;
+        background-color: red;
+      }
+      .divareafornotification{
+        display:grid;
+        grid-template-columns: repeat(2, 1fr); 
+        grid-template-rows: repeat(2, 1fr); 
+      }
+      .deletecoverimage{
+        position: relative;
+        top:15px;
+        left:5px;
+        opacity: 0.7;
+      }
+      .deleteprofileimage{
+        position: relative;
+        top:30px;
+        left:15px;
+        font-size: 12px;
+        opacity: 0.7;
+
+      }

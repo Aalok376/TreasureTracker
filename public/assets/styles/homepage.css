@@ -628,6 +628,25 @@ margin-left: 10px;
     width: 250px;
   }
 }
+.modal1 {
+  max-height: 300px;
+  width: 40vw;
+  background: white;
+  border-radius: 12px;
+  padding: 15px 30px 30px;
+  position:absolute;
+  top: 40%;
+  left:30%;
+  border: none;
+  text-decoration: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transform: scale(0);
+  transition: transform 0.4s ease-in-out;
+  display: block;
+  background-color: #f9f5f5;
+}
 
 @media screen and (max-width:768px)
 {
@@ -642,14 +661,20 @@ width:90%;
   display:flex;
   justify-content: flex-start;
 }
+.modal1{
+  width:50vw;
+left:30%;
+}
 
 }
+
 @media (max-height:800px){
   .sidemenubox .hamburgermenu i{
     position: absolute;
     top:13%;
     left:0px;
   }
+
 }
 @media screen and (max-width:680px) {
   #search input[type="text"] {
@@ -801,11 +826,16 @@ background-color: #c82333;
     display: flex;
     align-items: center;
     justify-content: center;
+    align-content: center;
     background-color: rgba(0, 0, 0, 0.5); /* Optional background for the "+N" label */
     color: white;
     font-size: 1.2em;
     text-align: center;
     border-radius: 4px;
+  }
+  p#moreimages{
+position:relative;
+top:50%;
   }
 
 .post-images img {
@@ -851,30 +881,15 @@ background-color: #c82333;
     padding-left: 10px;
   }
   
-  .modal {
-    height: 400px;
-    width: 500px;
-    background: white;
-    border-radius: 12px;
-    padding: 15px 30px 30px;
-    top: 40%;
-    left: 40%;
-    border: none;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    transform: scale(0);
-    transition: transform 0.4s ease-in-out;
-    display: block;
-  }
+
   dialog[open] {
     transform: scale(1);
   }
-  .modal::backdrop {
+  .modal1::backdrop {
     background-color: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(1px);
   }
-  .closebutton {
+  .closebutton1 {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -882,25 +897,28 @@ background-color: #c82333;
     border: none;
     font-size: 20px;
     cursor: pointer;
-    color: #555; /* Dark gray */
+    color:black; /* Dark gray */
     transition: color 0.3s ease;
   }
 
   .modal2 {
-    height: 400px;
-    width: 500px;
-    background: white;
+    max-height: 300px;
+    width: 20vw;
+    background-color:w;
     border-radius: 12px;
     padding: 15px 30px 30px;
-    top: 40%;
-    left: 40%;
+    position:absolute;
+    top: 10%;
+    left:78%;
     border: none;
+    text-decoration: none;
     align-items: center;
     justify-content: center;
     text-align: center;
     transform: scale(0);
     transition: transform 0.4s ease-in-out;
     display: block;
+   
   }
   dialog[open] {
     transform: scale(1);
@@ -917,8 +935,14 @@ background-color: #c82333;
     border: none;
     font-size: 20px;
     cursor: pointer;
-    color: #555; /* Dark gray */
+    color:black; /* Dark gray */
     transition: color 0.3s ease;
   }
-
+ .sectionforprofileinlike{
+  display:flex;
+  align-items: center;
+  margin:5px;
+  background-color: transparent;
+  font-size: 18px;
+ }
   
