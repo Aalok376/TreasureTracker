@@ -409,6 +409,14 @@ commentbtn.addEventListener('click', async (event) => {
                     const match = likes.find(like => like.userId._id === UserIdForPost)
 
                     updateLikeCount(likes, match, divforlike)
+
+                    const response = await fetch(`http://localhost:5000/api/v1/createNotification`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ type: 'liked', postId }),
+                    })
                 }
             })()
         } catch (error) {
@@ -439,6 +447,15 @@ commentbtn.addEventListener('click', async (event) => {
                     const match = likes.find(like => like.userId._id === UserIdForPost)
 
                     updateLikeCount(likes, match, divforlike)
+
+                    const response = await fetch(`http://localhost:5000/api/v1/deletenotificationforremoval`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ type: 'liked', postId }),
+                    })
+                  
                 }
             })()
         } catch (error) {
@@ -501,6 +518,13 @@ commentbtn.addEventListener('click', async (event) => {
                     updateCommentSections(OwnComments, OtherCommentsOnOwnPost, OtherCommentsOnOtherPost, commentArea)
 
                     textt.value = ''
+                    const response = await fetch(`http://localhost:5000/api/v1/createNotification`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ type: 'commented on', postId }),
+                    })
 
                 }
                 else {

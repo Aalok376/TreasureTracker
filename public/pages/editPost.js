@@ -164,10 +164,12 @@ const openSidebar = () => {
 }
 
 //Event listener for aside-menu
+
 const home = document.querySelector('.homepage')
 const message = document.querySelector('.Messagepage')
 const friends = document.querySelector('.Friends')
 const saved = document.querySelector('.SavedPosts')
+const notification=document.querySelector('.Notifications')
 
 home.addEventListener('click', async (e) => {
     e.preventDefault()
@@ -180,14 +182,20 @@ home.addEventListener('click', async (e) => {
 //     window.location.href=""
 // })
 
-// friends.addEventListener('click',async(e)=>{
-//     e.preventDefault()
-
-//     window.location.href=""
-// })
-
-saved.addEventListener('click',async(e)=>{
+friends.addEventListener('click', async (e) => {
     e.preventDefault()
 
-    window.location.href="/pages/savedPosts.html"
+    window.location.href = "/pages/friends.html"
+})
+
+saved.addEventListener('click', async (e) => {
+    e.preventDefault()
+
+    window.location.href = "savedPosts.html"
+})
+
+notification.addEventListener('click', async (e) => {
+    e.preventDefault()
+
+    window.location.href = "notification.html"
 })

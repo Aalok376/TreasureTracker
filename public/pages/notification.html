@@ -64,18 +64,37 @@
                 <div class="tabs">
                     <div class="tab active" id="Notifications">Notifications</div>
                     <div class="tab" id="tab2">
-                        <div class="markallasread"><i class="fa-solid fa-envelope fa-xl" style="color:black;"></i></div>
-
+                        <div class="markallasread"><i class="fa-solid fa-check" style="color:black;"></i></div>
                     </div>
-
                 </div>
-                <div class="notificationarea">
+                <div class="notificationarea"></div>
+            </div>
+        </div>
+    </main>
+    <script type="module">
+        window.addEventListener("DOMContentLoaded", async () => {
+            const { default: socket } = await import("./socket.js")
+
+            socket.on("privateMessage", (data) => {
+
+                if (data.message === 'removed') {
+                    removeNotificationFromDOM(data.notificationId)
+                }
+                else {
+                    const posthtml = document.querySelector('.notificationarea')
+
+                    console.log(data.notificationId)
+                    const notificationElement = document.createElement('div')
+                    notificationElement.classList.add('notificationcontainer')
+                    notificationElement.id = data.notificationId
+                    notificationElement.setAttribute('data-user-id', data.postId)
+
+                    notificationElement.innerHTML = `
                     <div class="sectionforprofile">
-                        <div class="profileimagefornotification"></div>
+                        <div class="profileimagefornotification" style="background-image: url('http://localhost:5000/${data.senderId.profilePicture?.replace(/\\/g, '/')}')"></div>
                         <div class="placefornotificationandname">
-
+                            ${data.senderId.fname} ${data.senderId.lname} ${data.type} your post
                         </div>
-
                     </div>
                     <span class="cspaceforthreedot">
                         <div class="cthreedot"><i class="fa-solid fa-ellipsis"></i></div>
@@ -83,24 +102,28 @@
                     </span>
                     <div class="dropdownmenu">
                         <li>
-                            <div class="cmakeasread"><i class="fa-solid fa-pen"></i> Make as read</div>
+                            <div class="cmakeasread"><i class="fa-solid fa-pen"></i> Mark as read</div>
                         </li>
                         <li>
                             <div class="cdelete"><i class="fa-solid fa-trash"></i> Delete</div>
                         </li>
                     </div>
-                </div>
-            </div>
-        </div>
-    </main>
-    <script type="module">
+                `
+                    posthtml.prepend(notificationElement)
+                }
 
-        window.addEventListener("DOMContentLoaded", async () => {
-            const { default: socket } = await import("./socket.js")
-            socket.on("privateMessage", (data) => {
-                console.log("New Notification:", data.message)
             })
         })
+
+        const removeNotificationFromDOM=(notificationId)=> {
+            const notificationElement =  document.querySelector(`[id="${notificationId}"]`)
+            if (notificationElement) {
+                notificationElement.remove()
+                console.log(`Notification with ID ${notificationId} removed from DOM`)
+            } else {
+                console.error(`Notification with ID ${notificationId} not found in DOM`)
+            }
+        }
 
         const tooglebtn1 = document.querySelector('.chevron')
         const tooglebtnIcon = document.querySelector('.chevron i')

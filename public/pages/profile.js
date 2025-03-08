@@ -9,6 +9,8 @@ const logoutUser = document.querySelector('.lgu')
 let UserIdForPost
 let posts = []
 
+const postId=sessionStorage.getItem('postId')
+
 const getProfilepic = async () => {
     try {
         const response = await fetch("http://localhost:5000/api/v1/profile");
@@ -71,9 +73,20 @@ const getPost = async () => {
     updateSavedButton(posts)
 }
 
+const scrollToPost = async (postId) => {
+    const postElement = document.querySelector(`[id="${postId}"]`)
+    
+    if (postElement) {
+        postElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        sessionStorage.clear('postId')
+    } else {
+        console.log('Post not found.')
+    }
+}
 (async () => {
     await getProfilepic();
-    await getPost();
+    await getPost()
+    await scrollToPost(postId)
 })()
 
 const UpdatePosts = (posts) => {
@@ -256,6 +269,14 @@ commentbtn.addEventListener('click', async (event) => {
                     const match = likes.find(like => like.userId._id === UserIdForPost)
 
                     updateLikeCount(likes, match, divforlike)
+
+                    const response = await fetch(`http://localhost:5000/api/v1/createNotification`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ type: 'liked', postId }),
+                    })
                 }
             })()
         } catch (error) {
@@ -286,6 +307,14 @@ commentbtn.addEventListener('click', async (event) => {
                     const match = likes.find(like => like.userId._id === UserIdForPost)
 
                     updateLikeCount(likes, match, divforlike)
+
+                    const response = await fetch(`http://localhost:5000/api/v1/deletenotificationforremoval`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ type: 'liked', postId }),
+                    })
                 }
             })()
         } catch (error) {
@@ -334,6 +363,14 @@ commentbtn.addEventListener('click', async (event) => {
                     updateCommentSections(OwnComments, OtherComments, commentArea)
 
                     textt.value = ''
+
+                    const response = await fetch(`http://localhost:5000/api/v1/createNotification`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ type: 'commented on', postId }),
+                    })
 
                 }
                 else {
@@ -983,3 +1020,6 @@ const openSidebar = () => {
     sideBar.classList.add('appear')
     sideBar.classList.remove('disappear')
 }
+
+
+

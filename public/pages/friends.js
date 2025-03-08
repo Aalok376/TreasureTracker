@@ -355,11 +355,12 @@ const home = document.querySelector('.homepage')
 const message = document.querySelector('.Messagepage')
 const friends = document.querySelector('.Friends')
 const saved = document.querySelector('.SavedPosts')
+const notification=document.querySelector('.Notifications')
 
 home.addEventListener('click', async (e) => {
     e.preventDefault()
 
-    window.location.reload()
+    window.location.href = "/pages/homepage.html"
 })
 // message.addEventListener('click',async(e)=>{
 //     e.preventDefault()
@@ -377,4 +378,10 @@ saved.addEventListener('click', async (e) => {
     e.preventDefault()
 
     window.location.href = "savedPosts.html"
+})
+
+notification.addEventListener('click', async (e) => {
+    e.preventDefault()
+
+    window.location.href = "notification.html"
 })

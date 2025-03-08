@@ -4,7 +4,11 @@ const changepasswordbtn = document.querySelector('.cgp')
 const deleteUser = document.querySelector('.dlu')
 const logoutUser = document.querySelector('.lgu')
 
-let UserIdForPost
+const markallAsread = document.querySelector('.markallasread')
+
+const posthtml = document.querySelector('.notificationarea')
+
+let NOTIFICATION
 
 const getProfilepic = async () => {
     try {
@@ -23,9 +27,153 @@ const getProfilepic = async () => {
     }
 }
 
+const getNotifications = async () => {
+    try {
+        const response = await fetch("http://localhost:5000/api/v1/getNotification", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+
+        const data = await response.json()
+
+        Notificationss = data.notifications
+
+        await UpdateNotifications(Notificationss)
+    }
+    catch (error) {
+        console.log(error)
+    }
+}
+
 (async () => {
     await getProfilepic()
+    await getNotifications()
 })()
+
+const UpdateNotifications = async (Notificationss) => {
+    if (Notificationss.length >= 0) {
+        posthtml.innerHTML = Notificationss.map(post => `
+            <div class="notificationcontainer" id=${post._id} data-user-id="${post.postId}">
+                        <div class="sectionforprofile">
+                            <div class="profileimagefornotification" style="background-image: url('http://localhost:5000/${post.senderId.profilePicture?.replace(/\\/g, '/')}')"></div>
+                            <div class="placefornotificationandname">
+                            ${post.senderId.fname} ${post.senderId.lname} ${post.type} your post
+                            </div>
+                        </div>
+                        <span class="cspaceforthreedot">
+                            <div class="cthreedot"><i class="fa-solid fa-ellipsis"></i></div>
+                            <div class="cthreedot2"><i class="fa-solid fa-xmark"></i></div>
+                        </span>
+                        <div class="dropdownmenu">
+                            <li>
+                                <div class="cmakeasread"><i class="fa-solid fa-pen"></i> Mark as read</div>
+                            </li>
+                            <li>
+                                <div class="cdelete"><i class="fa-solid fa-trash"></i> Delete</div>
+                            </li>
+                        </div>
+                    </div>
+                `
+        ).join('')
+    }
+}
+
+const getele = async () => {
+    const notifications = document.querySelectorAll('.notificationcontainer')
+
+    const response = await fetch(`http://localhost:5000/api/v1/notificationsmarkAllAsRead`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+
+    if (response.status === 200) {
+        if (notifications.length > 0) {
+            notifications.forEach(notification => {
+                notification.style.backgroundColor = 'transparent'
+            })
+        }
+
+    }
+}
+
+posthtml.addEventListener('click', async (event) => {
+    const postelement = event.target.closest('.notificationcontainer')
+
+    const dropDownMenu2 = postelement.querySelector('.dropdownmenu')
+    const tooglebtnIcon2 = postelement.querySelector('.cthreedot2 i')
+    const tooglebtnIcon = postelement.querySelector('.cthreedot i')
+
+    if (event.target.closest('.cthreedot i')) {
+        event.target.style.display = 'none'
+        tooglebtnIcon2.style.display = 'flex'
+        dropDownMenu2.style.display = 'block'
+    }
+    else if (event.target.closest('.cthreedot2 i')) {
+        event.target.style.display = 'none'
+        tooglebtnIcon.style.display = 'flex'
+        dropDownMenu2.style.display = 'none'
+    }
+})
+
+posthtml.addEventListener('click', async (event) => {
+    const postElement = event.target.closest('.notificationcontainer')
+    const dropDownMenu2 = postElement.querySelector('.dropdownmenu')
+    const notificationId = postElement.id
+
+    if (event.target.closest('.cmakeasread')) {
+        const response = await fetch(`http://localhost:5000/api/v1/notificationsread`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ notificationId }),
+        })
+
+        if (response.status === 200) {
+            postElement.style.backgroundColor = 'transparent'
+            dropDownMenu2.style.display = 'none'
+        }
+    }
+    else if (event.target.closest('.cdelete')) {
+        try {
+            (async () => {
+                const response = await fetch(`http://localhost:5000/api/v1/deleteNotification/${notificationId}`, {
+                    method: "DELETE"
+                })
+                const data = await response.json()
+
+                if (response.status === 200) {
+                    dropDownMenu2.style.display = 'none'
+                    await getNotifications()
+                }
+            })()
+        } catch (error) {
+            console.error(error)
+        }
+    }
+})
+
+markallAsread.addEventListener('click', async (e) => {
+    await getele()
+}
+)
+
+posthtml.addEventListener('click',async(event)=>{
+    const postElement = event.target.closest('.notificationcontainer')
+
+    if(postElement){
+    const postId = postElement.getAttribute("data-user-id")
+    sessionStorage.setItem('postId',postId)
+    }
+
+    if(event.target.closest('.sectionforprofile')){
+        window.location.href='/pages/profile.html'
+    }
+})
 
 //event for change password btn
 changepasswordbtn.addEventListener('click', async (e) => {
@@ -67,7 +215,7 @@ const home = document.querySelector('.homepage')
 const message = document.querySelector('.Messagepage')
 const friends = document.querySelector('.Friends')
 const saved = document.querySelector('.SavedPosts')
-const notification=document.querySelector('.Notifications')
+const notification = document.querySelector('.Notifications')
 
 home.addEventListener('click', async (e) => {
     e.preventDefault()
