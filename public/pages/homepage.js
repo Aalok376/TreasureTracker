@@ -1345,24 +1345,24 @@ const openSidebar = () => {
     sideBar.classList.remove('disappear')
 }
 
-// const modal=document.querySelector(".modal")
-// const openButton=document.querySelector(".hamburgermenu")
-// const closeButton=document.querySelector(".closebutton")
+const modal2=document.querySelector(".modal2")
+const openButton2=document.querySelector(".hamburgermenu")
+const closeButton2=document.querySelector(".closebutton2")
 
-// modal.addEventListener('click',async(e)=>{
-//     e.preventDefault()
-//     if (e.target === modal) {
-//         modal.close()
-//         document.body.style.overflow = ''
-//     }
-// })
+modal2.addEventListener('click',async(e)=>{
+    e.preventDefault()
+    if (e.target === modal2) {
+        modal2.close()
+        document.body.style.overflow = ''
+    }
+})
 
-// openButton.addEventListener("click",()=>{
-//     modal.showModal()
-//     document.body.style.overflow = 'hidden'
-// })
-// closeButton.addEventListener("click",()=>{
-//     modal.close()
-//     document.body.style.overflow = ''
-// })
+openButton2.addEventListener("click",()=>{
+    modal2.showModal()
+    document.body.style.overflow = 'hidden'
+})
+closeButton2.addEventListener("click",()=>{
+    modal2.close()
+    document.body.style.overflow = ''
+})
 
