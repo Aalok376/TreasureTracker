@@ -1190,15 +1190,14 @@ posthtml.addEventListener('click', async (event) => {
         const tobemapped = document.querySelector('.divareafornotification')
 
         tobemapped.innerHTML = Images.map((img) => `
-            <div class="imageone">
-            <img 
-                src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
-                alt="'Image'" 
-                class="post-image" 
-                style="width: 100%; height: 300px; border:3px solid black; background-size: contain; background-position: center;"   
-                /></div>
-            `)
-
+        <div class="imageone">
+        <img 
+            src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
+            alt="'Image'" 
+            class="post-image" 
+            style="width: 100%; height: 300px; border:3px solid black; background-size: contain; background-position: center;"   
+            /></div>
+        `)
         modal3.showModal()
         document.body.style.overflow = 'hidden'
 

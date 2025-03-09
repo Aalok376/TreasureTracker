@@ -1,0 +1,518 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    max-width: 100vw;
+    min-height: 100vh;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(227, 227, 225, 1);
+    overflow-x: hidden;
+}
+
+/* Main layout */
+.main {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    position: relative;
+}
+
+/* Logo styling */
+.logo {
+    font-size: 25px;
+    padding: 15px;
+    font-weight: bolder;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 3;
+}
+
+/* Sidebar menu styling */
+.sidemenu {
+    display: none;
+    height:calc(100vh - 70px);
+    position: fixed;
+    background-color: rgba(227, 227, 225, 1);
+    top: 65px;
+    bottom: 0;
+    left: 0;
+    z-index: 4;
+    overflow: hidden;
+    transition: width 0.3s ease;
+}
+
+.disappear {
+    width: 0;
+}
+
+.appear {
+    width: 200px;
+    display:block;
+}
+
+/* Close button styling */
+.lawda {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+    border-radius: 50%;
+    border: none;
+    background-color: rgba(227, 227, 225, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.lawda:hover {
+    background-color: rgba(200, 200, 200, 1);
+}
+
+/* Hamburger menu styling */
+.hamburgermenu {
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    z-index: 5;
+}
+
+.hamburgermenu button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.hamburgermenu button i {
+    color: #333;
+}
+
+/* Navigation links styling */
+.links {
+    padding-top: 90px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.links div {
+    text-decoration: none;
+    font-size: 16px;
+    color: #333;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-radius: 10px;
+    margin: 0 10px;
+    transition: background-color 0.2s;
+}
+
+.links div i {
+    width: 20px;
+}
+
+.links div:hover {
+    background-color: rgba(200, 200, 200, 0.6);
+}
+
+/* Main content area */
+.asidemenu {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    padding-top: 60px;
+}
+
+/* Contact container */
+.containerforcontact {
+    background-color: white;
+    position: fixed;
+    height: calc(100vh - 80px);
+    width: 350px;
+    top: 70px;
+    left: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+/* Message container */
+.containerformessage {
+    background-color: white;
+    position: fixed;
+    height: calc(100vh - 80px);
+    width: calc(100% - 390px);
+    top: 70px;
+    left: 390px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+   background-image: url('backgroundimage.jpg'); 
+}
+
+.containerformessage img {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+}
+
+
+
+/* Large screens (desktops) */
+@media (min-width: 1200px) {
+    .containerforcontact {
+        width: 400px;
+    }
+    
+    .containerformessage {
+        left: 440px;
+        width: calc(100% - 460px);
+    }
+}
+
+/* Medium screens (laptops) */
+@media (max-width: 1199px) and (min-width: 993px) {
+    .containerforcontact {
+        width: 350px;
+    }
+    
+    .containerformessage {
+        left: 390px;
+        width: calc(100% - 410px);
+    }
+}
+
+/* Small screens (tablets) */
+@media (max-width: 992px) and (min-width: 769px) {
+    .containerforcontact {
+        width: 300px;
+    }
+    
+    .containerformessage {
+        left: 340px;
+        width: calc(100% - 360px);
+    }
+}
+
+/* Mobile landscape */
+@media (max-width: 768px) and (min-width: 576px) {
+    .logo {
+        width: 100%;
+        text-align: start;
+    }
+    
+    .containerforcontact {
+        width: 40%;
+        left: 10px;
+    }
+    
+    .containerformessage {
+        width: calc(60% - 20px);
+        left: calc(40% + 20px);
+    }
+    
+    .hamburgermenu {
+        left: auto;
+        right: 20px;
+    }
+}
+
+/* Mobile portrait */
+@media (max-width: 575px) {
+    .logo {
+        width: 100%;
+        text-align: start;
+        font-size: 20px;
+    }
+    
+    .containerforcontact {
+        width: 100%;
+        height: calc(40vh - 40px);
+        left: 0;
+        top: 60px;
+        border-radius: 0;
+    }
+    
+    .containerformessage {
+        width: 100%;
+        height: calc(60vh - 40px);
+        left: 0;
+        top: calc(40vh + 20px);
+        border-radius: 0;
+    }
+    
+    .hamburgermenu {
+        top: 15px;
+        right: 10px;
+       
+    }
+    .sidemenu{
+        top: 60px;;
+    }
+    .logo {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    /* Adjust sidemenu for mobile */
+
+    .links div {
+        padding: 15px 30px;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 375px) {
+    .logo {
+        font-size: 18px;
+    }
+    
+    .links div {
+        font-size: 14px;
+    }
+}
+
+/* For devices with height issues */
+@media (max-height: 600px) {
+    .containerforcontact,
+    .containerformessage {
+        height: calc(100vh - 70px);
+        top: 60px;
+    }
+    
+    .links div {
+        padding: 10px 20px;
+    }
+}
+
+/* Handle orientation change */
+@media (orientation: landscape) and (max-height: 500px) {
+    .containerforcontact {
+        height: calc(100vh - 70px);
+    }
+    
+    .containerformessage {
+        height: calc(100vh - 70px);
+    }
+}
+/* Contact container content styling */
+.containerforcontact .chats {
+    padding: 20px;
+    font-size: 22px;
+    font-weight: 600;
+    color:black;
+}
+
+.containerforcontact hr {
+    border: none;
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.2);
+    margin: 0 15px;
+}
+
+.containerforcontact .contact {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.containerforcontact .contact:hover {
+    background-color: rgba(240, 240, 240, 0.8);
+}
+
+.containerforcontact .profileimage {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #ddd;
+    margin-right: 15px;
+    background-size: cover;
+    background-position: center;
+}
+
+.containerforcontact .placeforname {
+    font-size: 18px;
+    font-weight: 500;
+}
+/* Message container navbar styling */
+.containerformessage .navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.containerformessage .navprofileimg {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: #ddd;
+    margin-right: 15px;
+    background-size: cover;
+    background-position: center;
+}
+
+.containerformessage .navplaceforname {
+    font-size: 18px;
+    font-weight: 500;
+    color:black;
+}
+
+/* Message container footer styling */
+.containerformessage footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.containerformessage footer input {
+    flex: 1;
+    height: 45px;
+    border-radius: 25px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 0 20px;
+    font-size: 16px;
+    outline: none;
+    background-color: #f5f5f5;
+}
+
+.containerformessage footer input:focus {
+    border-color: rgba(0, 0, 0, 0.2);
+    background-color: white;
+}
+
+.containerformessage footer .send {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: #f5f5f5;
+    margin-left: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    transform:rotate(45deg);
+}
+
+.containerformessage footer .send:hover {
+    background-color: #e0e0e0;
+}
+
+
+/* Messages from me (right side) */
+.messagefromme {
+    display:flex;
+    max-width: 70%;
+    padding: 12px 15px;
+    background-color: white; 
+    border-radius: 15px 0px 15px 15px;
+    margin: 90px 20px 10px auto; 
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    position: relative;
+    clear: both;
+    float: right;
+    word-wrap: break-word;
+}
+
+/* Messages from the other user (left side) */
+.messagefromuser {
+    display: flex;
+    max-width: 70%;
+    padding: 12px 15px;
+    background-color: white;
+    border-radius: 0px 15px 15px 15px;
+    margin: 10px auto 10px 20px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    position: relative;
+    clear: both;
+    float: left;
+    word-wrap: break-word;
+}
+.threedot{
+    margin-left: 5px;
+}
+/* Base styles for both dropdown menus */
+.dropdownmenu1, .dropdownmenu2 {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    position: relative;
+    display: none; /* Hidden by default */
+    z-index: 100;
+    width: 120px;
+}
+
+/* Position the dropdown for "messagefromme" (right side) */
+.dropdownmenu1 {
+    float:right;
+    right:20px; /* Align with right side of messages */
+    margin-top: -5px; /* Adjust as needed */
+    clear: both;
+}
+
+/* Position the dropdown for "messagefromuser" (left side) */
+.dropdownmenu2 {
+    left: 20px; /* Align with left side of messages */
+    margin-top: -5px; /* Adjust as needed */
+    clear: both;
+}
+
+/* Style for dropdown menu items */
+.edit, .deletemine, .deleteuser, .Report {
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+.deleteuser i{
+    margin:5px;
+}
+
+.edit:hover, .deletemine:hover, .Report:hover {
+    background-color: #f5f5f5;
+}
+
+/* Style for icons inside dropdown items */
+.edit i, .deletemine i, .Report i {
+    margin-right: 8px;
+}
+
+/* Show dropdown when the ellipsis is clicked (you'll need JavaScript for this) */
+.messagefromme:hover .threedot, .messagefromuser:hover .threedot {
+    cursor: pointer;
+}
+
