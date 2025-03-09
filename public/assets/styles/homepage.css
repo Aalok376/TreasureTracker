@@ -881,7 +881,23 @@ top:50%;
     padding-left: 10px;
   }
   
-
+  .modal1 {
+    height: 400px;
+    width: 500px;
+    background: white;
+    border-radius: 12px;
+    padding: 15px 30px 30px;
+    top: 40%;
+    left: 40%;
+    border: none;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transform: scale(0);
+    transition: transform 0.4s ease-in-out;
+    display: block;
+    position:fixed;
+  }
   dialog[open] {
     transform: scale(1);
   }
@@ -907,7 +923,7 @@ top:50%;
     background-color:w;
     border-radius: 12px;
     padding: 15px 30px 30px;
-    position:absolute;
+    position:fixed;
     top: 10%;
     left:78%;
     border: none;
@@ -924,8 +940,7 @@ top:50%;
     transform: scale(1);
   }
   .modal2::backdrop {
-    background-color: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(1px);
+    background-color: 'none'
   }
   .closebutton2 {
     position: absolute;
@@ -945,4 +960,75 @@ top:50%;
   background-color: transparent;
   font-size: 18px;
  }
+
+ .sectionforprofile{
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  padding:2px;
+}
+.profileimagefornotification{
+  display: relative;
+  height: 32px;
+  align-items: center;
+  width:42px;
+  border-radius: 50%;
+  background-size:cover;
+  background-repeat:no-repeat;
+}
+
+.modal3 {
+  max-height: 60%;
+  width: 60vw;
+  background-color: w;
+  border-radius: 12px;
+  padding: 15px 30px 30px;
+  position: fixed;
+  top: 20%;
+  left: 20%;
+  border: none;
+  text-decoration: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transform: scale(0);
+  transition: transform 0.4s ease-in-out;
+  display: block;
+
+}
+
+dialog[open] {
+  transform: scale(1);
+}
+
+.modal3::backdrop {
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(1px);
+}
+
+.closebutton3 {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: black;
+  /* Dark gray */
+  transition: color 0.3s ease;
+}
+
+.imageone {
+  height: 300px;
+  width: 600px;
+  margin: 5px;
+  background-color: red;
+}
+
+.divareafornotification {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
   

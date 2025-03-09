@@ -24,8 +24,8 @@ const deleteProfilePicture=async(req,res)=>{
    try{
       const userToDelete=await User.findById(req.user.id)
 
-      userToDelete.profilePicture=null;
-      await userToDelete.save();
+      userToDelete.profilePicture='../assets/images/DALL·E 2025-01-19 21.12.44 - A default profile image featuring a simple and professional design. The image should have a circular border with a neutral gray background and an abst.webp'
+      await userToDelete.save()
       return res.status(200).json({success:true,msg:'Profile picture deleted successfully'})
    }
    catch(error){
@@ -58,7 +58,7 @@ const deleteCoverPicture=async(req,res)=>{
 try{
 const userToDelete=await User.findById(req.user.id)
 
-userToDelete.coverPicture=null;
+userToDelete.coverPicture='../assets/images/DALL·E 2025-01-19 21.13.33 - A default cover image featuring a simple and professional design. The image should have a wide rectangular layout with a neutral gradient background i.webp';
 await userToDelete.save();
 return res.status(200).json({success:true,msg:'Cover picture deleted successfully'})
 }

@@ -9,7 +9,7 @@ const logoutUser = document.querySelector('.lgu')
 let UserIdForPost
 let posts = []
 
-const postId=sessionStorage.getItem('postId')
+const postId = sessionStorage.getItem('postId')
 
 const getProfilepic = async () => {
     try {
@@ -75,7 +75,7 @@ const getPost = async () => {
 
 const scrollToPost = async (postId) => {
     const postElement = document.querySelector(`[id="${postId}"]`)
-    
+
     if (postElement) {
         postElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
         sessionStorage.clear('postId')
@@ -131,13 +131,13 @@ const UpdatePosts = (posts) => {
                     </div>
                                        <div class="post-images">
                     ${(() => {
-                    if (Array.isArray(post.image)) {
-                        const imagesLength = post.image.length;
+                if (Array.isArray(post.image)) {
+                    const imagesLength = post.image.length;
 
-                        if (imagesLength === 1) {
-                            return post.image
-                                .map(
-                                    (img) => `
+                    if (imagesLength === 1) {
+                        return post.image
+                            .map(
+                                (img) => `
                                         <div class="divforimage1">
                                           <img 
                                             src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
@@ -146,14 +146,14 @@ const UpdatePosts = (posts) => {
                                     style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
                                           />
                                         </div>`
-                                )
-                                .join('');
-                        }
+                            )
+                            .join('');
+                    }
 
-                        if (imagesLength === 2) {
-                            return post.image
-                                .map(
-                                    (img) => `
+                    if (imagesLength === 2) {
+                        return post.image
+                            .map(
+                                (img) => `
                                         <div class="divforimage2">
                                           <img 
                                             src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
@@ -162,14 +162,14 @@ const UpdatePosts = (posts) => {
                                          style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
                                           />
                                         </div>`
-                                )
-                                .join('');
-                        }
+                            )
+                            .join('');
+                    }
 
-                        if (imagesLength === 3) {
-                            return post.image
-                                .map(
-                                    (img) => `
+                    if (imagesLength === 3) {
+                        return post.image
+                            .map(
+                                (img) => `
                                         <div class="divforimage3">
                                           <img 
                                             src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
@@ -178,14 +178,14 @@ const UpdatePosts = (posts) => {
                                           style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
                                           />
                                         </div>`
-                                )
-                                .join('');
-                        }
+                            )
+                            .join('');
+                    }
 
-                        if (imagesLength === 4) {
-                            return post.image
-                                .map(
-                                    (img) => `
+                    if (imagesLength === 4) {
+                        return post.image
+                            .map(
+                                (img) => `
                                             <div class="divforimage4">
                                               <img 
                                                 src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
@@ -194,16 +194,16 @@ const UpdatePosts = (posts) => {
                                           style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
                                               />
                                             </div>`
-                                )
-                                .join('');
-                        }
+                            )
+                            .join('');
+                    }
 
-                        if (imagesLength >= 5) {
-                            return (
-                                post.image
-                                    .slice(0, 3)
-                                    .map(
-                                        (img) => `
+                    if (imagesLength >= 5) {
+                        return (
+                            post.image
+                                .slice(0, 3)
+                                .map(
+                                    (img) => `
                                               <div class="divforimage4">
                                                 <img 
                                                   src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
@@ -212,20 +212,20 @@ const UpdatePosts = (posts) => {
                                            style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
                                                 />
                                               </div>`
-                                    )
-                                    .join('') +
-                                `
+                                )
+                                .join('') +
+                            `
                                       <div class="divforimage4" style="background-image: url('http://localhost:5000/${post.image[3].replace(/\\/g, '/')}');">
                                       <p id="moreimages" style="color:black;">+${imagesLength - 4}</p>
                                       </div>
                                     `
-                            );
-                        }
+                        );
                     }
+                }
 
-                    return '<p>No images available</p>';
-                })()
-                }            
+                return '<p>No images available</p>';
+            })()
+            }            
                     </div>
                 </div>
                 <hr class="custom-line1">
@@ -559,9 +559,9 @@ const updateLikeButtons = async (posts) => {
                     })
 
                     console.log(likes)
-                    updateLikeAreaSection(likes, divareaforlike)
+                    updateLikeAreaSection(postId, divareaforlike)
                     gotoprofile(divareaforlike)
-                })   
+                })
             }
         }
     } catch (error) {
@@ -570,7 +570,11 @@ const updateLikeButtons = async (posts) => {
 }
 
 //To see all the likes...
-const updateLikeAreaSection = (likes, divareaforlike) => {
+const updateLikeAreaSection = async(postId, divareaforlike) => {
+
+    const datas = await getLikes(postId)
+
+    const likes = Array.isArray(datas.likes) ? datas.likes : [datas.likes]
     if (likes.length > 0) {
         return divareaforlike.innerHTML = likes.map(like => `<div class="introareacomment" id="${like._id}">
             <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${like.userId._id}" style="background-image: url('http://localhost:5000/${like.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
@@ -752,11 +756,48 @@ logoutUser.addEventListener('click', async (e) => {
 ownprofile.addEventListener('click', async (event) => {
     const addpost = event.target.closest('.addpost')
     const editprofile = event.target.closest('.editprofile')
+    const deletepp = event.target.closest('.deleteprofileimage')
+    const deletecp = event.target.closest('.deletecoverimage')
+
     if (addpost) {
         window.location.href = "/pages/postpage.html"
     }
     else if (editprofile) {
         window.location.href = '/pages/editProfile.html'
+    }
+    else if (deletepp) {
+        try {
+            (async () => {
+                const response = await fetch(`http://localhost:5000/api/v1/deleteProfilePicture`, {
+                    method: "DELETE"
+                })
+                const data = await response.json()
+
+                if (response.status === 200) {
+                    window.location.reload()
+                }
+            })()
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+    else if (deletecp) {
+        try {
+            (async () => {
+                const response = await fetch(`http://localhost:5000/api/v1/deleteCoverPicture`, {
+                    method: "DELETE"
+                })
+                const data = await response.json()
+
+                if (response.status === 200) {
+                    window.location.reload()
+                }
+            })()
+        }
+        catch (error) {
+            console.log(error)
+        }
     }
 })
 
@@ -766,7 +807,7 @@ const home = document.querySelector('.homepage')
 const message = document.querySelector('.Messagepage')
 const friends = document.querySelector('.Friends')
 const saved = document.querySelector('.SavedPosts')
-const notification=document.querySelector('.Notifications')
+const notification = document.querySelector('.Notifications')
 
 home.addEventListener('click', async (e) => {
     e.preventDefault()
@@ -895,6 +936,41 @@ posthtml.addEventListener('click', async (event) => {
         } catch (error) {
             console.error(error)
         }
+    }
+    else if (event.target.closest('.divforimage1') || event.target.closest('.divforimage2') || event.target.closest('.divforimage3') || event.target.closest('.divforimage4')) {
+
+        const specificPost = posts.filter(post => post._id === postId)
+        const Images = specificPost[0].image
+
+        const modal3 = document.querySelector(".modal3")
+        const closeButton3 = document.querySelector(".closebutton3")
+        const tobemapped=document.querySelector('.divareafornotification')
+
+        tobemapped.innerHTML=Images.map((img)=>`
+            <div class="imageone">
+            <img 
+                src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
+                alt="'Image'" 
+                class="post-image" 
+                style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
+                /></div>
+            `)
+
+        modal3.showModal()
+        document.body.style.overflow = 'hidden'
+
+        modal3.addEventListener('click', async (e) => {
+            e.preventDefault()
+            if (e.target === modal3) {
+                modal3.close()
+                document.body.style.overflow = ''
+            }
+        })
+
+        closeButton3.addEventListener("click", () => {
+            modal3.close()
+            document.body.style.overflow = ''
+        })
     }
 })
 
@@ -1038,26 +1114,6 @@ const openSidebar = () => {
     sideBar.classList.remove('disappear')
 }
 
-const modal2=document.querySelector(".modal2")
-const openButton2=document.querySelector(".hamburgermenu")
-const closeButton2=document.querySelector(".closebutton2")
-
-modal2.addEventListener('click',async(e)=>{
-    e.preventDefault()
-    if (e.target === modal2) {
-        modal2.close()
-        document.body.style.overflow = ''
-    }
-})
-
-openButton2.addEventListener("click",()=>{
-    modal2.showModal()
-    document.body.style.overflow = 'hidden'
-})
-closeButton2.addEventListener("click",()=>{
-    modal2.close()
-    document.body.style.overflow = ''
-})
 
 
 

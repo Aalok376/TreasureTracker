@@ -40,10 +40,10 @@ router.get('/profile', verifyToken, profile);//
 router.get('/logout', verifyToken, logout);//
 
 router.put('/updateProfilePicture', verifyToken, profileSingleUpload, updateProfilePicture)//
-router.delete('/deleteProfilePicture', verifyToken, deleteProfilePicture)
+router.delete('/deleteProfilePicture', verifyToken, deleteProfilePicture)//
 
 router.put('/updateCoverPicture', verifyToken, coverSingleUpload, updateCoverPicture)//
-router.delete('/deleteCoverPicture', verifyToken, deleteCoverPicture)
+router.delete('/deleteCoverPicture', verifyToken, deleteCoverPicture)//
 
 router.put('/updatename', verifyToken, updateName)//
 
@@ -85,11 +85,11 @@ router.get('/getfriends', verifyToken, getFriends)//
 router.delete('/removefriend', verifyToken, unfriend)//
 router.delete('/cancelrequest', verifyToken, cancelRequest)//
 
-router.post('/createNotification',verifyToken,createNotification)
-router.get('/getNotification',verifyToken,getNotifications)
-router.delete('/deleteNotification/:notificationId',verifyToken,deleteNotification)
-router.post("/notificationsread", verifyToken,markNotificationAsRead)
-router.post("/notificationsmarkAllAsRead",verifyToken, markAllNotificationsAsRead)
-router.post("/deletenotificationforremoval",verifyToken, deleteNotificationForRemoval)
+router.post('/createNotification',verifyToken,createNotification)//
+router.get('/getNotification',verifyToken,getNotifications)//
+router.delete('/deleteNotification/:notificationId',verifyToken,deleteNotification)//
+router.post("/notificationsread", verifyToken,markNotificationAsRead)//
+router.post("/notificationsmarkAllAsRead",verifyToken, markAllNotificationsAsRead)//
+router.post("/deletenotificationforremoval",verifyToken, deleteNotificationForRemoval)//
 
 module.exports = { router }

@@ -751,7 +751,7 @@ const updateLikeButtons = async (posts) => {
                     })
 
                     console.log(likes)
-                    updateLikeAreaSection(likes, divareaforlike)
+                    updateLikeAreaSection(postId, divareaforlike)
                     gotoprofile(divareaforlike)
                 })   
             }
@@ -762,7 +762,11 @@ const updateLikeButtons = async (posts) => {
 }
 
 //To see all the likes...
-const updateLikeAreaSection = (likes, divareaforlike) => {
+const updateLikeAreaSection = async(postId, divareaforlike) => {
+
+    const datas = await getLikes(postId)
+
+    const likes = Array.isArray(datas.likes) ? datas.likes : [datas.likes]
     if (likes.length > 0) {
         return divareaforlike.innerHTML = likes.map(like => `<div class="introareacomment" id="${like._id}">
             <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${like.userId._id}" style="background-image: url('http://localhost:5000/${like.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
@@ -1041,8 +1045,40 @@ posthtml.addEventListener('click', async (event) => {
             console.error(error)
         }
     }
-    else if (event.target.closest('.reportpost')) {
+    else if (event.target.closest('.divforimage1') || event.target.closest('.divforimage2') || event.target.closest('.divforimage3') || event.target.closest('.divforimage4')) {
 
+        const specificPost = posts.filter(post => post._id === postId)
+        const Images = specificPost[0].image
+
+        const modal3 = document.querySelector(".modal3")
+        const closeButton3 = document.querySelector(".closebutton3")
+        const tobemapped=document.querySelector('.divareafornotification')
+
+        tobemapped.innerHTML=Images.map((img)=>`
+            <div class="imageone">
+            <img 
+                src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
+                alt="'Image'" 
+                class="post-image" 
+                style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
+                /></div>
+            `)
+
+        modal3.showModal()
+        document.body.style.overflow = 'hidden'
+
+        modal3.addEventListener('click', async (e) => {
+            e.preventDefault()
+            if (e.target === modal3) {
+                modal3.close()
+                document.body.style.overflow = ''
+            }
+        })
+
+        closeButton3.addEventListener("click", () => {
+            modal3.close()
+            document.body.style.overflow = ''
+        })
     }
 })
 

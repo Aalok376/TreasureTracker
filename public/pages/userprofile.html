@@ -70,6 +70,23 @@
                 <div class="divareaforlike"></div>
             </dialog>
         </div>
+        <div class="dialog2">
+            <dialog class="modal2" id="modal2">
+                <button type="button" class="closebutton2">x</button>
+                <br>
+                <hr>
+                <div class="divareafornotification1"></div>
+            </dialog>
+        </div>
+        <div class="dialog3">
+            <dialog class="modal3" id="modal3">
+                <button type="button" class="closebutton3">x</button>
+                <br>
+                <hr>
+                <div class="divareafornotification">
+                </div>
+            </dialog>
+        </div>
     </main>
 
 </body>
@@ -78,7 +95,38 @@
     window.addEventListener("DOMContentLoaded", async () => {
         const { default: socket } = await import("./socket.js")
         socket.on("privateMessage", (data) => {
-            console.log("New Notification:", data.message)
+            const notifisite = document.querySelector('.divareafornotification1')
+            const modal2 = document.querySelector(".modal2")
+            const closeButton2 = document.querySelector(".closebutton2")
+
+            if (data.message === 'removed') {
+                modal2.close()
+            }
+            else{
+                modal2.showModal()
+                notifisite.innerHTML=`  <div class="sectionforprofile">
+                        <div class="profileimagefornotification" style="background-image: url('http://localhost:5000/${data.senderId.profilePicture?.replace(/\\/g, '/')}')"></div>
+                        <div class="placefornotificationandname">
+                            ${data.senderId.fname} ${data.senderId.lname} ${data.type} your post
+                        </div>
+                    </div>`
+            }
+
+            modal2.addEventListener('click', async (e) => {
+                e.preventDefault()
+                if (e.target === modal2) {
+                    modal2.close()
+                    notifisite.innerHTML=``
+                }
+            })
+            closeButton2.addEventListener("click", () => {
+                notifisite.innerHTML=``
+                modal2.close()
+            })
+
+            notifisite.addEventListener('click',async(e)=>{
+                window.location.href='/pages/notification.html'
+            })
         })
     })
 </script>
