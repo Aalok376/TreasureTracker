@@ -167,7 +167,7 @@ const UpdatePosts = (ownPosts, otherPosts) => {
                                                 src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
                                                 alt="${post.caption || 'Image'}" 
                                                 class="post-image" 
-                                             style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
+                                             style="width: 100%; height: 300px; background-size: contain; background-position: center;"   
                                               />
                                             </div>`
                             )
@@ -182,7 +182,7 @@ const UpdatePosts = (ownPosts, otherPosts) => {
                                                 src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
                                                 alt="${post.caption || 'Image'}" 
                                                 class="post-image" 
-                                               style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
+                                               style="width: 100%; height: 300px; background-size: contain; background-position: center;"   
                                               />
                                             </div>`
                             )
@@ -200,7 +200,7 @@ const UpdatePosts = (ownPosts, otherPosts) => {
                                                   src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
                                                   alt="${post.caption || 'Image'}" 
                                                   class="post-image" 
-                                           style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
+                                           style="width: 100%; height: 300px; background-size: contain; background-position: center;"   
                                                 />
                                               </div>`
                                 )
@@ -1195,7 +1195,7 @@ posthtml.addEventListener('click', async (event) => {
                 src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
                 alt="'Image'" 
                 class="post-image" 
-                style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
+                style="width: 100%; height: 300px; border:3px solid black; background-size: contain; background-position: center;"   
                 /></div>
             `)
 

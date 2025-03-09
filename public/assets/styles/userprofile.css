@@ -40,7 +40,7 @@ header {
 
 p#moreimages {
   position: relative;
-  top: 50%;
+  height:100%;
 }
 
 /* Firstnav Section */
@@ -898,6 +898,25 @@ p#moreimages {
     width: 250px;
   }
 }
+.modal1 {
+  max-height: 300px;
+  width: 30vw;
+  background: white;
+  border-radius: 12px;
+  padding: 15px 30px 30px;
+  position:fixed;
+  top: 40%;
+  left:35%;
+  border: none;
+  text-decoration: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transform: scale(0);
+  transition: transform 0.4s ease-in-out;
+  display: block;
+  background-color: white;
+}
 
 @media screen and (max-width:768px) {
 
@@ -913,6 +932,10 @@ p#moreimages {
   .firstnav {
     display: flex;
     justify-content: flex-start;
+  }
+  .modal1{
+    width:50vw;
+  left:30%;
   }
 
 }
@@ -1034,7 +1057,7 @@ h3 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   /* Two columns */
-  gap: 10px;
+  gap: 5px;
   /* Space between images */
 }
 
@@ -1049,6 +1072,7 @@ h3 {
   text-align: center;
   border-radius: 4px;
 }
+
 
 .post-images img {
   width: 100%;
@@ -1095,22 +1119,7 @@ h3 {
   padding-left: 10px;
 }
 
-.modal {
-  height: 400px;
-  width: 500px;
-  background: white;
-  border-radius: 12px;
-  padding: 15px 30px 30px;
-  top: 40%;
-  left: 40%;
-  border: none;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  transform: scale(0);
-  transition: transform 0.4s ease-in-out;
-  display: block;
-}
+
 
 dialog[open] {
   transform: scale(1);
@@ -1121,7 +1130,7 @@ dialog[open] {
   backdrop-filter: blur(1px);
 }
 
-.closebutton {
+.closebutton1 {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -1136,13 +1145,13 @@ dialog[open] {
 
 .modal2 {
   max-height: 300px;
-  width: 20vw;
-  background-color: w;
+  width: 23vw;
+  background-color:w;
   border-radius: 12px;
   padding: 15px 30px 30px;
-  position: fixed;
+  position:fixed;
   top: 10%;
-  left: 78%;
+  left:76%;
   border: none;
   text-decoration: none;
   align-items: center;
@@ -1177,13 +1186,12 @@ dialog[open] {
 
 .modal3 {
   max-height: 60%;
-  width: 60vw;
-  background-color: w;
+  width: 50vw;
   border-radius: 12px;
-  padding: 15px 30px 30px;
+  padding: 5px 30px 30px;
   position: fixed;
   top: 20%;
-  left: 20%;
+  left: 25%;
   border: none;
   text-decoration: none;
   align-items: center;
@@ -1193,6 +1201,7 @@ dialog[open] {
   transition: transform 0.4s ease-in-out;
   display: block;
 
+
 }
 
 dialog[open] {
@@ -1200,7 +1209,7 @@ dialog[open] {
 }
 
 .modal3::backdrop {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(0, 0, 0,0.7);
   backdrop-filter: blur(1px);
 }
 
@@ -1243,19 +1252,21 @@ dialog[open] {
   flex-direction: row;
   position: relative;
   padding: 2px;
+  text-align: center;
 }
 
 .profileimagefornotification {
-  display: relative;
-  height: 32px;
-  align-items: center;
-  width: 42px;
-  border-radius: 50%;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-p#moreimages {
   position: relative;
-  top: 50%;
+  height: 35px;
+  align-items: center;
+  width:38px;
+  border-radius: 50%;
+  background-size:cover;
+  background-repeat:no-repeat;
+  margin-right:4px;
+}
+.placefornotificationandname{
+  display: flex;
+  align-items: center;
+  font-size: 18px;
 }

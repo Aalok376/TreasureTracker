@@ -175,7 +175,7 @@ const UpdatePosts = (posts) => {
                                             src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
                                             alt="${post.caption || 'Image'}" 
                                             class="post-image" 
-                                          style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
+                                          style="width: 100%; height: 300px; background-size: contain; background-position: center;"   
                                           />
                                         </div>`
                             )
@@ -191,7 +191,7 @@ const UpdatePosts = (posts) => {
                                                 src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
                                                 alt="${post.caption || 'Image'}" 
                                                 class="post-image" 
-                                          style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
+                                          style="width: 100%; height: 300px; background-size: contain; background-position: center;"   
                                               />
                                             </div>`
                             )
@@ -209,7 +209,7 @@ const UpdatePosts = (posts) => {
                                                   src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
                                                   alt="${post.caption || 'Image'}" 
                                                   class="post-image" 
-                                           style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
+                                           style="width: 100%; height: 300px; background-size: contain; background-position: center;"   
                                                 />
                                               </div>`
                                 )
@@ -539,11 +539,11 @@ const updateLikeButtons = async (posts) => {
                 divforlike.addEventListener('click', async (e) => {
                     e.preventDefault()
 
-                    const modal = document.querySelector(".modal")
+                    const modal = document.querySelector(".modal1")
                     modal.showModal()
                     document.body.style.overflow = 'hidden'
 
-                    const closeButton = document.querySelector(".closebutton")
+                    const closeButton = document.querySelector(".closebutton1")
                     const divareaforlike = document.querySelector(".divareaforlike")
 
                     modal.addEventListener('click', async (e) => {
@@ -576,9 +576,9 @@ const updateLikeAreaSection = async(postId, divareaforlike) => {
 
     const likes = Array.isArray(datas.likes) ? datas.likes : [datas.likes]
     if (likes.length > 0) {
-        return divareaforlike.innerHTML = likes.map(like => `<div class="introareacomment" id="${like._id}">
-            <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${like.userId._id}" style="background-image: url('http://localhost:5000/${like.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
-            <div class="placeforcommentandname"><p class="nameincommentarea">${like.userId.fname} ${like.userId.lname}</p></div>
+        return divareaforlike.innerHTML = likes.map(like => `<div class="introarealike" id="${like._id}">
+            <div class="sectionforprofileinlike"> <div class="profileimageforpost" data-user-id="${like.userId._id}" style="background-image: url('http://localhost:5000/${like.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
+            <div class="placeforlikeandname"><p class="nameinlikearea">${like.userId.fname} ${like.userId.lname}</p></div>
         </div>`
         ).join('')
     }
@@ -946,15 +946,15 @@ posthtml.addEventListener('click', async (event) => {
         const closeButton3 = document.querySelector(".closebutton3")
         const tobemapped=document.querySelector('.divareafornotification')
 
-        tobemapped.innerHTML=Images.map((img)=>`
-            <div class="imageone">
-            <img 
-                src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
-                alt="'Image'" 
-                class="post-image" 
-                style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
-                /></div>
-            `)
+        tobemapped.innerHTML = Images.map((img) => `
+        <div class="imageone">
+        <img 
+            src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
+            alt="'Image'" 
+            class="post-image" 
+            style="width: 100%; height: 300px; border:3px solid black; background-size: contain; background-position: center;"   
+            /></div>
+        `)
 
         modal3.showModal()
         document.body.style.overflow = 'hidden'

@@ -630,13 +630,13 @@ margin-left: 10px;
 }
 .modal1 {
   max-height: 300px;
-  width: 40vw;
+  width: 30vw;
   background: white;
   border-radius: 12px;
   padding: 15px 30px 30px;
-  position:absolute;
+  position:fixed;
   top: 40%;
-  left:30%;
+  left:35%;
   border: none;
   text-decoration: none;
   align-items: center;
@@ -819,7 +819,7 @@ background-color: #c82333;
   .post-images {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* Two columns */
-    gap: 10px; /* Space between images */
+    gap: 5px; /* Space between images */
   }
   
   #moreimages {
@@ -835,7 +835,7 @@ background-color: #c82333;
   }
   p#moreimages{
 position:relative;
-top:50%;
+height:100%;
   }
 
 .post-images img {
@@ -881,23 +881,7 @@ top:50%;
     padding-left: 10px;
   }
   
-  .modal1 {
-    height: 400px;
-    width: 500px;
-    background: white;
-    border-radius: 12px;
-    padding: 15px 30px 30px;
-    top: 40%;
-    left: 40%;
-    border: none;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    transform: scale(0);
-    transition: transform 0.4s ease-in-out;
-    display: block;
-    position:fixed;
-  }
+
   dialog[open] {
     transform: scale(1);
   }
@@ -919,13 +903,13 @@ top:50%;
 
   .modal2 {
     max-height: 300px;
-    width: 20vw;
+    width: 23vw;
     background-color:w;
     border-radius: 12px;
     padding: 15px 30px 30px;
     position:fixed;
     top: 10%;
-    left:78%;
+    left:76%;
     border: none;
     text-decoration: none;
     align-items: center;
@@ -966,26 +950,33 @@ top:50%;
   flex-direction: row;
   position: relative;
   padding:2px;
+  text-align: center;
 }
 .profileimagefornotification{
-  display: relative;
-  height: 32px;
+  position: relative;
+  height: 35px;
   align-items: center;
-  width:42px;
+  width:38px;
   border-radius: 50%;
   background-size:cover;
   background-repeat:no-repeat;
+  margin-right:2px;
+}
+.placefornotificationandname{
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  margin-left:-1px;
 }
 
 .modal3 {
   max-height: 60%;
-  width: 60vw;
-  background-color: w;
+  width: 50vw;
   border-radius: 12px;
-  padding: 15px 30px 30px;
+  padding: 5px 30px 30px;
   position: fixed;
   top: 20%;
-  left: 20%;
+  left: 25%;
   border: none;
   text-decoration: none;
   align-items: center;
@@ -1002,7 +993,7 @@ dialog[open] {
 }
 
 .modal3::backdrop {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(0, 0, 0,0.7);
   backdrop-filter: blur(1px);
 }
 
@@ -1019,16 +1010,4 @@ dialog[open] {
   transition: color 0.3s ease;
 }
 
-.imageone {
-  height: 300px;
-  width: 600px;
-  margin: 5px;
-  background-color: red;
-}
-
-.divareafornotification {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-}
   
