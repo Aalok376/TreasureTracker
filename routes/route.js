@@ -18,6 +18,7 @@ const { contact } = require('../controllers/contact')
 const { save, getsavedPost, Unsave } = require('../controllers/savedPost')
 const { sendRequest, responseOfrequest, getRequest, getFriends, unfriend, cancelRequest, getStatusOfFriend } = require('../controllers/friendRequest')
 const { createNotification, getNotifications, deleteNotification ,markNotificationAsRead,markAllNotificationsAsRead, deleteNotificationForRemoval} = require('../controllers/notification')
+const { CreateMessage, GetMessage, removeMessage, editMessage } = require('../controllers/messages')
 
 const otpStore = new Map()
 
@@ -91,5 +92,10 @@ router.delete('/deleteNotification/:notificationId',verifyToken,deleteNotificati
 router.post("/notificationsread", verifyToken,markNotificationAsRead)//
 router.post("/notificationsmarkAllAsRead",verifyToken, markAllNotificationsAsRead)//
 router.post("/deletenotificationforremoval",verifyToken, deleteNotificationForRemoval)//
+
+router.post('/sendMessage',verifyToken,CreateMessage)
+router.get('/getMessage/:senderId/:receiverId',verifyToken,GetMessage)
+router.delete('/removeMessage/:conversationId/:messageId',verifyToken,removeMessage)
+router.put('/editMessage',verifyToken,editMessage)
 
 module.exports = { router }
