@@ -1,7 +1,7 @@
 const { Server } = require('socket.io')
 const cookie = require("cookie")
 const SocketModel = require('./models/sockets.js')
-const Conversation = require("../models/message")
+const Conversation = require("./models/message.js")
 
 let io
 
