@@ -91,9 +91,9 @@
 
 </body>
 <script src="/pages/userprofile.js"></script>
-<script type="module" src="/pages/socket.js">
+<script type="module">
     window.addEventListener("DOMContentLoaded", async () => {
-        const { default: socket } = await import("./socket.js")
+        const { default: socket } = await import("/pages/socket.js")
         socket.on("privateMessage", (data) => {
             const notifisite = document.querySelector('.divareafornotification1')
             const modal2 = document.querySelector(".modal2")

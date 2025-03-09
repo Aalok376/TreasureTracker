@@ -91,47 +91,51 @@
 
 </body>
 <script src="/pages/profile.js"></script>
-<script type="module" src="/pages/socket.js">
+<script type="module">
     window.addEventListener("DOMContentLoaded", async () => {
-        const { default: socket } = await import("./socket.js")
+        const { default: socket } = await import("/pages/socket.js")
         socket.on("privateMessage", (data) => {
-            const notifisite = document.querySelector('.divareafornotification1')
-            const modal2 = document.querySelector(".modal2")
-            const closeButton2 = document.querySelector(".closebutton2")
+            getNOtificationss(data)
+        })
+    })
 
-            if (data.message === 'removed') {
-                modal2.close()
-            }
-            else{
-                modal2.showModal()
-                notifisite.innerHTML=`  <div class="sectionforprofile">
+    const getNOtificationss = (data) => {
+        const notifisite = document.querySelector('.divareafornotification1')
+        const modal2 = document.querySelector(".modal2")
+        const closeButton2 = document.querySelector(".closebutton2")
+
+        if (data.message === 'removed') {
+            modal2.close()
+        }
+        else {
+            modal2.showModal()
+            notifisite.innerHTML = `  <div class="sectionforprofile">
                         <div class="profileimagefornotification" style="background-image: url('http://localhost:5000/${data.senderId.profilePicture?.replace(/\\/g, '/')}')"></div>
                         <div class="placefornotificationandname">
                             ${data.senderId.fname} ${data.senderId.lname} ${data.type} your post
                         </div>
                     </div>`
-            }
+        }
 
-            modal2.addEventListener('click', async (e) => {
-                e.preventDefault()
-                if (e.target === modal2) {
-                    modal2.close()
-                    notifisite.innerHTML=``
-                }
-            })
-            closeButton2.addEventListener("click", () => {
-                notifisite.innerHTML=``
+        modal2.addEventListener('click', async (e) => {
+            e.preventDefault()
+            if (e.target === modal2) {
                 modal2.close()
-            })
-
-            notifisite.addEventListener('click',async(e)=>{
-                window.location.href='/pages/notification.html'
-            })
+                notifisite.innerHTML = ``
+            }
         })
-    })
+        closeButton2.addEventListener("click", () => {
+            notifisite.innerHTML = ``
+            modal2.close()
+        })
+
+        notifisite.addEventListener('click', async (e) => {
+            window.location.href = '/pages/notification.html'
+        })
+    }
 </script>
 <script>
-     const tooglebtn1 = document.querySelector('.chevron')
+    const tooglebtn1 = document.querySelector('.chevron')
     const tooglebtnIcon = document.querySelector('.chevron i')
     const dropDownMenu = document.querySelector('.dropdownmenu3')
 
