@@ -1,3 +1,0 @@
-deekshya321 password
-username deekshya
-mongodb+srv://deekshya:<db_password>@cluster0.usx4j.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
