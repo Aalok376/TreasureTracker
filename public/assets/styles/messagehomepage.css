@@ -163,7 +163,6 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: all 0.3s ease;
-   background-image: url('backgroundimage.jpg'); 
 }
 
 .containerformessage img {
@@ -365,6 +364,7 @@ body {
     padding: 0 20px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    z-index: 9999;
 }
 
 .containerformessage .navprofileimg {
@@ -431,86 +431,141 @@ body {
     background-color: #e0e0e0;
 }
 
-
-/* Messages from me (right side) */
-.messagefromme {
-    display:flex;
-    max-width: 70%;
-    padding: 12px 15px;
-    background-color: white; 
-    border-radius: 15px 0px 15px 15px;
-    margin: 90px 20px 10px auto; 
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-    position: relative;
-    clear: both;
-    float: right;
-    word-wrap: break-word;
-}
-
-/* Messages from the other user (left side) */
-.messagefromuser {
+  /* Message mapping container */
+.messagemapping {
     display: flex;
+    flex-direction: column;
+    padding: 15px;
+    height: calc(100vh - 110px); /* Adjust based on your navbar and footer heights */
+    overflow-y: auto;
+    background-color: #e5ded8; /* WhatsApp-like chat background */
+  }
+  
+  /* Base message styles */
+  .messagefromuser, .messagefromme {
     max-width: 70%;
-    padding: 12px 15px;
-    background-color: white;
-    border-radius: 0px 15px 15px 15px;
-    margin: 10px auto 10px 20px;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-    position: relative;
-    clear: both;
-    float: left;
-    word-wrap: break-word;
-}
-.threedot{
-    margin-left: 5px;
-}
-.messagefromme .threedot{
-    margin-right: 5px;
-}
-/* Base styles for both dropdown menus */
-.dropdownmenu1 {
-    background-color: white;
+    padding: 10px 15px;
+    margin-bottom: 12px;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     position: relative;
-    z-index: 100;
-    width: 120px;
-}
-
-/* Position the dropdown for "messagefromme" (right side) */
-.dropdownmenu1 {
-    float:right;
-    right:20px; /* Align with right side of messages */
-    margin-top: -5px; /* Adjust as needed */
+    top:70px;
+    word-wrap: break-word;
+    line-height: 1.4;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* User messages */
+  .messagefromuser {
+    align-self: flex-start;
+    background-color: white;
+    border-top-left-radius: 0; /* Creates speech bubble effect */
     clear: both;
-    bottom: 60px;
-}
 
-/* Position the dropdown for "messagefromuser" (left side) */
-
-/* Style for dropdown menu items */
-.edit, .deletemine, .deleteuser, .Report {
-    padding: 8px 12px;
-    cursor: pointer;
-    font-size: 14px;
+  }
+  
+  /* My messages */
+  .messagefromme {
+    align-self: flex-end;
+    background-color: #dcf8c6; /* WhatsApp green */
+    border-top-right-radius: 0; /* Creates speech bubble effect */
+    clear: both;
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+  }
+  
+  /* Three dots menu icon */
+  .threedot, .threedoti {
+    position: relative;
+    align-self: flex-start;
+    width: 24px;
+    height: 24px;
     display: flex;
     align-items: center;
-}
-.deleteuser i{
-    margin:5px;
-}
-
-.edit:hover, .deletemine:hover, .Report:hover {
-    background-color: #f5f5f5;
-}
-
-/* Style for icons inside dropdown items */
-.edit i, .deletemine i, .Report i {
-    margin-right: 8px;
-}
-
-/* Show dropdown when the ellipsis is clicked (you'll need JavaScript for this) */
-.messagefromme:hover .threedot, .messagefromuser:hover .threedot {
+    justify-content: center;
     cursor: pointer;
-}
-
+    opacity: 0.7;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+  }
+  
+  .threedot:hover, .threedoti:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    opacity: 1;
+  }
+  
+  /* Dropdown menu */
+  .dropdownmenu1 {
+    position: absolute;
+    top: 30px;
+    right: 5px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    min-width: 120px;
+  }
+  
+  /* Dropdown menu options */
+  .edit, .deletemine {
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .edit:hover, .deletemine:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .edit i, .deletemine i {
+    margin-right: 8px;
+    font-size: 14px;
+  }
+  
+  /* Time or status indicator (optional - can be added) */
+  .message-time {
+    font-size: 11px;
+    color: #8c8c8c;
+    text-align: right;
+    margin-top: 4px;
+  }
+  
+  /* Message bubble tails (optional - for more polish) */
+  .messagefromuser:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -10px;
+    border: 5px solid transparent;
+    border-top-color: white;
+    border-right-color: white;
+  }
+  
+  .messagefromme:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -10px;
+    border: 5px solid transparent;
+    border-top-color: #dcf8c6;
+    border-left-color: #dcf8c6;
+  }
+  
+  /* Animation for dropdown */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .dropdownmenu1 {
+    animation: fadeIn 0.2s ease-out;
+  }
+  
+  /* Mobile responsiveness */
+  @media (max-width: 600px) {
+    .messagefromuser, .messagefromme {
+      max-width: 85%;
+    }
+  }
