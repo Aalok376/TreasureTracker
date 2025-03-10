@@ -8,6 +8,8 @@ const Comment = require('../models/comments.js');
 const Like = require('../models/likes.js')
 const Savedpost = require('../models/savedpost.js')
 const FriendRequest = require("../models/friendRequest")
+const Conversation = require("../models/message")
+const Notification = require('../models/notification')
 
 const { sendEmail } = require('../middleware/sendmail');
 
@@ -189,6 +191,15 @@ const toDelete = async (req, res) => {
                 { receiverId: userId }
             ]
         })
+        await Notification.deleteMany({
+            $or: [
+                { senderId: userId },
+                { receiverId: userId }
+            ]
+        })
+        await Conversation.deleteMany({
+            participants: { $in: [userId] }
+        })        
         await User.findByIdAndDelete(req.user.id);
         res.clearCookie('token', { httpOnly: true });
 

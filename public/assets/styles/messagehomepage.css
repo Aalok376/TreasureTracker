@@ -357,7 +357,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 70px;
+    height: 60px;
     background-color: white;
     display: flex;
     align-items: center;
@@ -389,13 +389,15 @@ body {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 70px;
+    height: 60px; /* Increased height slightly for better spacing */
     background-color: white;
     display: flex;
     align-items: center;
     padding: 0 20px;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
+    z-index: 10; /* Added z-index to ensure footer stays on top */
 }
+
 
 .containerformessage footer input {
     flex: 1;
@@ -430,17 +432,16 @@ body {
 .containerformessage footer .send:hover {
     background-color: #e0e0e0;
 }
-
-  /* Message mapping container */
 .messagemapping {
     display: flex;
     flex-direction: column;
     padding: 15px;
-    height: calc(100vh - 110px); /* Adjust based on your navbar and footer heights */
+    height: calc(100vh - 180px); /* Adjusted to account for navbar (60px) + footer (60px) + padding */
+    margin-top: 60px; /* Added to account for navbar height */
+    margin-bottom: 60px; /* Added to prevent overlap with footer */
     overflow-y: auto;
-    background-color: #e5ded8; /* WhatsApp-like chat background */
-  }
-  
+    background-color: #e5ded8;
+}
   /* Base message styles */
   .messagefromuser, .messagefromme {
     max-width: 70%;
@@ -448,7 +449,6 @@ body {
     margin-bottom: 12px;
     border-radius: 8px;
     position: relative;
-    top:70px;
     word-wrap: break-word;
     line-height: 1.4;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
@@ -569,3 +569,7 @@ body {
       max-width: 85%;
     }
   }
+  /* Ensure the last message has enough bottom margin */
+.messagefromuser:last-child, .messagefromme:last-child {
+    margin-bottom: 20px;
+}
