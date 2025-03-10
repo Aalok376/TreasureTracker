@@ -255,11 +255,11 @@ home.addEventListener('click', async (e) => {
 
     window.location.href = "homepage.html"
 })
-// message.addEventListener('click',async(e)=>{
-//     e.preventDefault()
+message.addEventListener('click',async(e)=>{
+    e.preventDefault()
 
-//     window.location.href=""
-// })
+    window.location.href="/pages/messagehomepage.html"
+})
 
 friends.addEventListener('click', async (e) => {
     e.preventDefault()
