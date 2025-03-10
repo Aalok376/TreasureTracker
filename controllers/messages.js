@@ -172,7 +172,7 @@ const removeMessage = async (req, res) => {
 
         const socketId = await getSocketIdByUserId(receiverId)
         if (socketId) {
-            getIo().to(socketId).emit("textMessage", {
+            getIo().to(socketId).emit("detetedMessage", {
                 messageId,
                 conversationId,
                 message: 'removed'
@@ -209,7 +209,7 @@ const editMessage = async (req, res) => {
 
         const socketId = await getSocketIdByUserId(receiverId)
         if (socketId) {
-            getIo().to(socketId).emit("textMessage", {
+            getIo().to(socketId).emit("editedMessage", {
                 messageId,
                 conversationId,
                 newMessageText,

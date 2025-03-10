@@ -16,6 +16,9 @@ footer.innerHTML = `<input class="inputvalue" type="text" placeholder="Type a me
 
 let userId
 
+let socketVar = false
+let conversationId
+
 const getConversations = async () => {
     try {
 
@@ -70,38 +73,40 @@ const setConversations = async (data) => {
 }
 
 conversations.addEventListener('click', async (event) => {
-
     const convo = event.target.closest('.contact')
+    if (!convo) return
 
-    const conversationId = convo.id
+    conversationId = convo.id
 
-    if (event.target.closest('.contact')) {
-        try {
-            const response = await fetch(`http://localhost:5000/api/v1/getMessage/${conversationId}`)
+    let messageId
 
-            const data = await response.json()
+    try {
+        messagemapping.innerHTML = ''
 
-            userId = data.userId
-            const participants = data.conversation.participants
-            const Messages = data.conversation.messages
+        const response = await fetch(`http://localhost:5000/api/v1/getMessage/${conversationId}`)
+        const data = await response.json()
 
-            const otherParticipant = participants.find(participant => participant._id.toString() !== userId)
+        userId = data.userId
+        const participants = data.conversation.participants
+        const Messages = data.conversation.messages
 
-            footer.id = `${otherParticipant._id}`
+        const otherParticipant = participants.find(participant => participant._id.toString() !== userId)
 
-            messageContainer.appendChild(navbar)
-            messageContainer.appendChild(messagemapping)
-            messageContainer.appendChild(footer)
+        footer.id = `${otherParticipant._id}`
 
-            await getHeaderOfmessage(otherParticipant)
+        if (!messageContainer.contains(navbar)) messageContainer.appendChild(navbar)
+        if (!messageContainer.contains(messagemapping)) messageContainer.appendChild(messagemapping)
+        if (!messageContainer.contains(footer)) messageContainer.appendChild(footer)
 
-            Messages.forEach(message => setMessages(message))
+        await getHeaderOfmessage(otherParticipant)
 
-        } catch (error) {
-            console.log(error)
-        }
+        Messages.forEach(message => setMessages(message, messageId, conversationId))
+
+        socketVar = true
+    } catch (error) {
+        console.log(error)
     }
-})
+});
 
 const getHeaderOfmessage = async (otherParticipant) => {
     const messageHeader = messageContainer.querySelector('.navbar')
@@ -112,45 +117,49 @@ const getHeaderOfmessage = async (otherParticipant) => {
     `
 }
 
-const setMessages = async (message, messageId) => {
+const setMessages = async (message, messageId, conversationId) => {
     const isMyMessage = message.senderId === userId
 
     const messageDiv = document.createElement("div")
     messageDiv.classList.add(isMyMessage ? "messagefromme" : "messagefromuser")
-    messageDiv.id = message._id || messageId
+    messageDiv.id = messageId
+    if (message._id) {
+        messageDiv.id = message._id
+    }
+    else {
+        messageDiv.id = messageId
+    }
 
     messageDiv.innerHTML = `
         ${isMyMessage ? `<div class="threedot" id="dot1">
             <i class="fa-solid fa-ellipsis" style="color: #000000;"></i></div>
             <div class="threedoti" id="dot2" style="display: none;">
             <i class="fa-solid fa-xmark" style="color: #000000;"></i></div>` : ""}
-        ${message.message}
+         <span class="message-text">${message.message}</span>
     `
 
     messagemapping.appendChild(messageDiv)
 
     if (isMyMessage) {
-        appendDropdownMenu(messageDiv, "dropdownmenu1", message, messageId)
+        appendDropdownMenu(messageDiv, "dropdownmenu1", message, messageId, conversationId)
     }
 
     messagemapping.scrollTop = messagemapping.scrollHeight
 }
 
-const appendDropdownMenu = (parent, menuClass, message, messageId) => {
+const appendDropdownMenu = (parent, menuClass, message, messageId, conversationId) => {
     const menu = document.createElement("div")
     menu.classList.add(menuClass)
     menu.style.display = "none"
 
     const msgId = message?.["_id"] || messageId
 
-    console.log(msgId)
-
     if (menuClass === "dropdownmenu1") {
         menu.innerHTML = `
             <div class="edit" id="${msgId}">
                 <i class="fa-solid fa-pen" style="color: #000000;"></i> Edit
             </div>
-            <div class="deletemine" id="${msgId}">
+            <div class="deletemine" id="${conversationId}">
                 <i class="fa-solid fa-trash" style="color: #000000;"></i> Delete
             </div>
         `
@@ -165,6 +174,12 @@ messagemapping.addEventListener('click', async (event) => {
     const crossdot = messagediv.querySelector('.threedoti')
     const dropdown1 = messagediv.querySelector('.dropdownmenu1')
 
+    const messageText = messagediv.querySelector('.message-text')
+    const originalText = messageText.textContent
+
+    const editbtn = messagediv.querySelector('.edit')
+    const deletebtn = messagediv.querySelector('.deletemine')
+
     if (event.target.closest('.threedot')) {
         dropdown1.style.display = 'flex'
         threeDot.style.display = 'none'
@@ -175,13 +190,111 @@ messagemapping.addEventListener('click', async (event) => {
         threeDot.style.display = 'flex'
         crossdot.style.display = 'none'
     }
+    else if (event.target.closest('.edit')) {
+
+        dropdown1.style.display = 'none'
+        threeDot.style.display = 'none'
+        crossdot.style.display = 'none'
+
+        const messageId = editbtn.id
+        const conversationId = deletebtn.id
+
+        const inputField = document.createElement("input")
+        inputField.type = "text"
+        inputField.value = originalText
+        inputField.classList.add("edit-input")
+
+        messageText.innerHTML = ""
+        messageText.appendChild(inputField)
+
+        inputField.focus()
+
+        inputField.addEventListener("keydown", async (event) => {
+            if (event.key === "Enter") {
+                const newMessageText = inputField.value.trim()
+
+                if (!newMessageText) {
+                    messageText.innerHTML = originalText
+                    threeDot.style.display = 'flex'
+                }
+
+                const key = await editMessage(messageId, conversationId, newMessageText)
+
+                if (key) {
+                    messageText.innerHTML = newMessageText
+                    threeDot.style.display = 'flex'
+                }
+                else {
+                    messageText.innerHTML = originalText
+                    threeDot.style.display = 'flex'
+                }
+            }
+        })
+
+    }
+    else if (event.target.closest('.deletemine')) {
+
+        const messageId = editbtn.id
+        const conversationId = deletebtn.id
+
+        const data = await deleteMessage(messageId, conversationId)
+
+        if (data) {
+            messagediv.remove()
+        }
+        else {
+            dropdown1.style.display = 'none'
+            threeDot.style.display = 'flex'
+            crossdot.style.display = 'none'
+        }
+
+    }
 })
+
+const editMessage = async (messageId, conversationId, newMessageText) => {
+
+    try {
+        const response = await fetch(`http://localhost:5000/api/v1/editMessage`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ messageId, conversationId, newMessageText }),
+        })
+        const data = await response.json()
+
+        if (response.status === 200) {
+            return true
+        }
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+const deleteMessage = async (messageId, conversationId) => {
+
+    try {
+        const response = await fetch(`http://localhost:5000/api/v1/removeMessage/${conversationId}/${messageId}`, {
+            method: "DELETE",
+
+        })
+        const data = await response.json()
+
+        if (response.status === 200) {
+            return true
+        }
+    } catch (error) {
+        console.error(error)
+    }
+}
 
 
 const sendBtn = footer.querySelector('.send').addEventListener('click', async () => {
 
     const message = footer.querySelector('.inputvalue').value
     const receiverId = footer.id
+
+    console.log(conversationId)
 
     const { data } = await createConversations(receiverId, message)
 
@@ -192,7 +305,7 @@ const sendBtn = footer.querySelector('.send').addEventListener('click', async ()
     const Message = data.newMessage
     const messageId = data.messageId
 
-    setMessages(Message, messageId)
+    setMessages(Message, messageId, conversationId)
 
 })
 
@@ -204,18 +317,51 @@ socket.on("textMessage", (data) => {
 
 })
 
+socket.on("editedMessage", (data) => {
+    if (socketVar) {
+        const messageId = data.messageId
+
+        const messageDiv = document.getElementById(messageId)
+        if (messageDiv) {
+            const messageText = messageDiv.querySelector('.message-text')
+            if (messageText) {
+                messageText.innerHTML = data.newMessageText
+                console.log(`Message ${messageId} updated from UI`);
+            }
+        } else {
+            console.log("Message element not found in DOM");
+        }
+    }
+
+})
+
+socket.on("detetedMessage", (data) => {
+    if (socketVar) {
+        const messageId = data.messageId
+
+        const messageDiv = document.getElementById(messageId);
+
+        if (messageDiv) {
+            messageDiv.remove()
+            console.log(`Message ${messageId} removed from UI`);
+        } else {
+            console.log("Message element not found in DOM");
+        }
+    }
+})
+
 const home = document.querySelector('.homepage')
 const message = document.querySelector('.Messagepage')
 const friends = document.querySelector('.Friends')
 const saved = document.querySelector('.SavedPosts')
-const notification=document.querySelector('.Notifications')
+const notification = document.querySelector('.Notifications')
 
 home.addEventListener('click', async (e) => {
     e.preventDefault()
 
     window.location.href = "/pages/homepage.html"
 })
-message.addEventListener('click',async(e)=>{
+message.addEventListener('click', async (e) => {
     e.preventDefault()
 
     window.location.reload()
@@ -238,5 +384,4 @@ notification.addEventListener('click', async (e) => {
 
     window.location.href = "notification.html"
 })
-
 
