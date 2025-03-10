@@ -359,6 +359,7 @@ ownprofile.addEventListener('click', async (event) => {
                     event.target.closest('.confirmfriends').style.display = 'none'
                     dropDownMenu.style.display = 'none'
                     friendbtn.style.display = 'flex'
+                    createConversations(receiverId)
                 }
             } catch (error) {
                 console.error(error)
@@ -392,6 +393,24 @@ ownprofile.addEventListener('click', async (event) => {
 
     }
 })
+
+
+const createConversations = async (receiverId) => {
+    try {
+        const response = await fetch(`http://localhost:5000/api/v1/createConversations`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ receiverId }),
+        })
+        const data = await response.json()
+
+        return { data }
+    } catch (error) {
+        console.error(error)
+    }
+}
 
 const friendStatus = async () => {
     const cancelbtn = ownprofile.querySelector('.cancel')

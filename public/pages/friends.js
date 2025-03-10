@@ -211,6 +211,10 @@ friendlist.addEventListener('click', async (event) => {
 
     const friendId = friendbtn.id
 
+    const tooglebtnIcon = friendbtn.querySelector('.threedot i')
+    const tooglebtnIcon2 = friendbtn.querySelector('.threedot2 i')
+    const dropDownMenu2 = friendbtn.querySelector('.dropdownmenu')
+
     if (event.target.closest('.unfriend')) {
         try {
             (async () => {
@@ -224,7 +228,9 @@ friendlist.addEventListener('click', async (event) => {
                 const data = await response.json()
 
                 if (response.status === 200) {
-                    event.target.closest('.threedotthing').style.display = 'none'
+                    tooglebtnIcon.style.display = 'none'
+                    tooglebtnIcon2.style.display = 'none'
+                    dropDownMenu2.style.display = 'none'
                     addfriendbtn.style.display = 'flex'
                 }
             })()
@@ -315,6 +321,9 @@ pendinglist.addEventListener('click', async (event) => {
                 if (response.status === 200) {
                     clearbtn.innerHTML = ''
                     clearbtn.innerHTML = `<div class="No-requests2"><i class="fa-solid fa-message"></i>Message</div>`
+
+                    console.log(receiverId)
+                    createConversations(receiverId)
                 }
             })()
 
@@ -350,7 +359,6 @@ pendinglist.addEventListener('click', async (event) => {
     }
 })
 
-
 const home = document.querySelector('.homepage')
 const message = document.querySelector('.Messagepage')
 const friends = document.querySelector('.Friends')
@@ -385,3 +393,19 @@ notification.addEventListener('click', async (e) => {
 
     window.location.href = "notification.html"
 })
+
+const createConversations = async (receiverId) => {
+    try {
+        const response = await fetch(`http://localhost:5000/api/v1/createConversations`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ receiverId }),
+        })
+        const data = await response.json()
+
+    } catch (error) {
+        console.error(error)
+    }
+}
