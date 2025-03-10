@@ -149,9 +149,6 @@ const updatefriendList = (friends) => {
                             <li>
                                 <div class="unfriend"><i class="fas fa-user-times"></i> Unfriend</div>
                             </li>
-                            <li>
-                                <div class="message"><i class="fa-solid fa-message"></i> Message</div>
-                            </li>
                        
                     </div>
                 </div>
@@ -205,7 +202,6 @@ friendlist.addEventListener('click', async (event) => {
     const addfriendbtn = friendbtn.querySelector('.addfriend')
     const cancelfriendbtn = friendbtn.querySelector('.cancelfriend')
     const profilebtn = friendbtn.querySelector('.profileimage')
-    const messagebtn = friendbtn.querySelector('.message')
 
     const userId = profilebtn.getAttribute('data-user-id')
 

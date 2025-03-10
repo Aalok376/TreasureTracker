@@ -226,7 +226,6 @@ const UpdatePosts = (ownPosts, otherPosts) => {
                     <button class="interactionlike1"><i class="fa-regular fa-heart"></i>Like</button>
                     <button class="interactionlike2"><i class="fa-solid fa-heart" style="color: #fa0000;"></i>Liked</button>
                     <button class="interactioncomment"><i class="fa-regular fa-comment"></i>Comment</button>
-                    <button class="interactionshare"><i class="fa-solid fa-share"></i>Share</button>
                 </div>
                 <div class="comment-container">
                     <div class="comment-area">
@@ -258,9 +257,6 @@ const UpdatePosts = (ownPosts, otherPosts) => {
                         <li>
                             <div class="savepost"><i class="fa-regular fa-bookmark"></i> Save</div>
                              <div class="savedpost" style="display: none;"><i class="fa-solid fa-bookmark"></i> Saved</div>
-                        </li>
-                        <li>
-                            <div class="reportpost"><i class="fa-solid fa-flag"></i>Report</div>
                         </li>
                     </div>
                 </div>
@@ -379,7 +375,6 @@ const UpdatePosts = (ownPosts, otherPosts) => {
                     <button class="interactionlike1"><i class="fa-regular fa-heart"></i>Like</button>
                     <button class="interactionlike2"><i class="fa-solid fa-heart"style="color:red;"></i>Liked</button>
                     <button class="interactioncomment"><i class="fa-regular fa-comment"></i>Comment</button>
-                    <button class="interactionshare"><i class="fa-solid fa-share"></i>Share</button>
                 </div>
                 <div class="comment-container">
                     <div class="comment-area">

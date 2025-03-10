@@ -40,9 +40,8 @@ const getotherProfilepic = async () => {
                   <div class="confirmfriends" id=${profile.user._id}>
                     <span><i class="fa-solid fa-user-group"></i></span>
                     <span>Respond</span>
-                   
                   </div>
-                  <div class="message">
+                  <div class="message" id=${profile.user._id}>
                     <span><i class="fa-solid fa-message"></i></span>
                     <span>Message</span>
                   </div>
@@ -112,9 +111,6 @@ const getPost = async () => {
                             <li>
                                 <div class="savepost"><i class="fa-regular fa-bookmark"></i> Save</div>
                                 <div class="savedpost" style="display: none;"><i class="fa-solid fa-bookmark"></i> Saved</div>
-                            </li>
-                            <li>
-                                <div class="reportpost"><i class="fa-solid fa-flag"></i>Report</div>
                             </li>
                     </div>
                 </div>
@@ -232,7 +228,6 @@ const getPost = async () => {
                         <button class="interactionlike1"><i class="fa-regular fa-heart"></i> Like</button>
                         <button class="interactionlike2"><i class="fa-solid fa-heart"style="color:red;"></i> Liked</button>
                         <button class="interactioncomment"><i class="fa-regular fa-comment"></i> Comment</button>
-                        <button class="interactionshare"><i class="fa-solid fa-share"></i> Share</button>
                     </div>
                     <div class="comment-container">
                         <div class="comment-area">
@@ -269,6 +264,7 @@ ownprofile.addEventListener('click', async (event) => {
     const addbtn = ownprofile.querySelector('.addfriend')
     const friendbtn = ownprofile.querySelector('.friends')
     const dropDownMenu = ownprofile.querySelector('.dropdownmenu5')
+    const message=ownprofile.querySelector('.message')
 
     if (event.target.closest('.addfriend')) {
         try {
@@ -390,6 +386,13 @@ ownprofile.addEventListener('click', async (event) => {
 
     }
     else if (event.target.closest('.message')) {
+
+        const receiverId = event.target.closest('.message').getAttribute('Id')
+        const {data}=await createConversations(receiverId)
+
+        if(data){
+            window.location.href='/pages/messagehomepage.html'
+        }
 
     }
 })

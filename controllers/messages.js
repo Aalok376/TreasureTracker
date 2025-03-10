@@ -20,7 +20,7 @@ const getConversatons = async (req, res) => {
 
         const conversations = await Conversation.find({
             participants: { $in: [userId] }
-        }).populate('participants', 'fname lname profilePicture')
+        }).populate('participants', 'fname lname profilePicture').sort({ updatedAt: -1 })
 
         const formattedConversations = conversations.map(convo => {
             const otherParticipant = convo.participants.find(participant => participant._id.toString() !== userId)

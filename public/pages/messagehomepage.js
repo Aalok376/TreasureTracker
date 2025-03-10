@@ -307,6 +307,8 @@ const sendBtn = footer.querySelector('.send').addEventListener('click', async ()
 
     setMessages(Message, messageId, conversationId)
 
+    await getConversations()
+
 })
 
 socket.on("textMessage", (data) => {
