@@ -17,8 +17,8 @@ const { otherProfile, otherPost, serveOtherProfile } = require('../controllers/f
 const { contact } = require('../controllers/contact')
 const { save, getsavedPost, Unsave } = require('../controllers/savedPost')
 const { sendRequest, responseOfrequest, getRequest, getFriends, unfriend, cancelRequest, getStatusOfFriend } = require('../controllers/friendRequest')
-const { createNotification, getNotifications, deleteNotification ,markNotificationAsRead,markAllNotificationsAsRead, deleteNotificationForRemoval} = require('../controllers/notification')
-const { CreateMessage, GetMessage, removeMessage, editMessage } = require('../controllers/messages')
+const { createNotification, getNotifications, deleteNotification, markNotificationAsRead, markAllNotificationsAsRead, deleteNotificationForRemoval } = require('../controllers/notification')
+const { CreateMessage, GetMessage, removeMessage, editMessage, createConversation, getConversatons } = require('../controllers/messages')
 
 const otpStore = new Map()
 
@@ -86,16 +86,18 @@ router.get('/getfriends', verifyToken, getFriends)//
 router.delete('/removefriend', verifyToken, unfriend)//
 router.delete('/cancelrequest', verifyToken, cancelRequest)//
 
-router.post('/createNotification',verifyToken,createNotification)//
-router.get('/getNotification',verifyToken,getNotifications)//
-router.delete('/deleteNotification/:notificationId',verifyToken,deleteNotification)//
-router.post("/notificationsread", verifyToken,markNotificationAsRead)//
-router.post("/notificationsmarkAllAsRead",verifyToken, markAllNotificationsAsRead)//
-router.post("/deletenotificationforremoval",verifyToken, deleteNotificationForRemoval)//
+router.post('/createNotification', verifyToken, createNotification)//
+router.get('/getNotification', verifyToken, getNotifications)//
+router.delete('/deleteNotification/:notificationId', verifyToken, deleteNotification)//
+router.post("/notificationsread", verifyToken, markNotificationAsRead)//
+router.post("/notificationsmarkAllAsRead", verifyToken, markAllNotificationsAsRead)//
+router.post("/deletenotificationforremoval", verifyToken, deleteNotificationForRemoval)//
 
-router.post('/sendMessage',verifyToken,CreateMessage)
-router.get('/getMessage/:senderId/:receiverId',verifyToken,GetMessage)
-router.delete('/removeMessage/:conversationId/:messageId',verifyToken,removeMessage)
-router.put('/editMessage',verifyToken,editMessage)
+router.post('/sendMessage', verifyToken, CreateMessage)//
+router.get('/getMessage/:conversationId', verifyToken, GetMessage)//
+router.delete('/removeMessage/:conversationId/:messageId', verifyToken, removeMessage)
+router.put('/editMessage', verifyToken, editMessage)
+router.get('/getConversations', verifyToken, getConversatons)//
+router.post('/createConversations', verifyToken, createConversation)//
 
 module.exports = { router }

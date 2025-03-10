@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="messagehomepage.css">
+    <link rel="stylesheet" href="../assets/styles/messagehomepage.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <title>messagehomepage</title>
 </head>
@@ -38,29 +38,12 @@
             <div class="containerforcontact">
                 <div class="chats">Chats</div>
                 <hr>
-                <div class="contact"><div class="profileimage"></div>
-            <div class="placeforname">Sameer sah</div></div>
+                <div class="formappingofchat">
+
+                </div>
             </div>
             <div class="containerformessage">
-                <div class="navbar">
-                    <div class="navprofileimg"></div>
-                    <div class="navplaceforname">Sameer sah</div>
-                </div>
-                <div class="messagefromme">hello aalok<div class="threedot"><i class="fa-solid fa-ellipsis" style="color: #000000;"></i></div></div>
-                <div class="dropdownmenu1">
-                    <div class="edit"><i class="fa-solid fa-pen" style="color: #000000;"></i>Edit</div>
-                    <div class="deletemine"><i class="fa-solid fa-trash" style="color: #000000;"></i>Delete</div>
-                </div>
-                <div class="messagefromuser">hi sameer<div class="threedot"><i class="fa-solid fa-ellipsis" style="color: #000000;"></i></div></div>
-                <div class="dropdownmenu2">
-                    <div class="deleteuser"><i class="fa-solid fa-trash" style="color: #000000;"></i>Delete</div>
-                    <div class="Report"><i class="fa-solid fa-triangle-exclamation"></i>Report</div>
-                </div>
-                <footer>
-                    <input type="text" placeholder="Type a message">
-                    <div class="send"><i class="fa-solid fa-paper-plane fa-2xl" style="color: #000000;"></i></div>
-                    
-                </footer>
+                
             </div>
         </div>
     </main>
@@ -75,47 +58,9 @@
         sideBar.classList.add('appear')
         sideBar.classList.remove('disappear')
     }
-    document.addEventListener('DOMContentLoaded', function() {
-    // Add click event listeners to the three-dot icons
-    const threeDots = document.querySelectorAll('.threedot');
-    
-    threeDots.forEach(dot => {
-        dot.addEventListener('click', function(e) {
-            e.stopPropagation(); // Prevent event from bubbling up
-            
-            // Find the parent message element
-            const parentMessage = this.closest('.messagefromme, .messagefromuser');
-            
-            // Determine which dropdown to toggle
-            let dropdown;
-            if (parentMessage.classList.contains('messagefromme')) {
-                dropdown = document.querySelector('.dropdownmenu1');
-            } else {
-                dropdown = document.querySelector('.dropdownmenu2');
-            }
-            
-            // Toggle the dropdown
-            if (dropdown.style.display === 'block') {
-                dropdown.style.display = 'none';
-            } else {
-                // Hide all dropdowns first
-                document.querySelectorAll('.dropdownmenu1, .dropdownmenu2').forEach(menu => {
-                    menu.style.display = 'none';
-                });
-                
-                // Show the selected dropdown
-                dropdown.style.display = 'block';
-            }
-        });
-    });
-    
-    // Close dropdowns when clicking elsewhere on the document
-    document.addEventListener('click', function() {
-        document.querySelectorAll('.dropdownmenu1, .dropdownmenu2').forEach(menu => {
-            menu.style.display = 'none';
-        });
-    });
-});
+  
 </script>
+
+<script type="module" src="/pages/messagehomepage.js"></script>
 
 </html>

@@ -464,13 +464,15 @@ body {
 .threedot{
     margin-left: 5px;
 }
+.messagefromme .threedot{
+    margin-right: 5px;
+}
 /* Base styles for both dropdown menus */
-.dropdownmenu1, .dropdownmenu2 {
+.dropdownmenu1 {
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     position: relative;
-    display: none; /* Hidden by default */
     z-index: 100;
     width: 120px;
 }
@@ -481,14 +483,10 @@ body {
     right:20px; /* Align with right side of messages */
     margin-top: -5px; /* Adjust as needed */
     clear: both;
+    bottom: 60px;
 }
 
 /* Position the dropdown for "messagefromuser" (left side) */
-.dropdownmenu2 {
-    left: 20px; /* Align with left side of messages */
-    margin-top: -5px; /* Adjust as needed */
-    clear: both;
-}
 
 /* Style for dropdown menu items */
 .edit, .deletemine, .deleteuser, .Report {
