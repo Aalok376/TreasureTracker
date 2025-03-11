@@ -8,7 +8,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser())
 
-app.use(express.static(path.join(__dirname,'./docs')))
+app.use(express.static(path.join(__dirname,'./public')))
 app.use('/uploads',express.static(path.join(__dirname,'./uploads')))
 
 app.use('/api/v1',router)
