@@ -15,19 +15,19 @@ let posts = []
 //Comments
 const getProfilepic = async () => {
     try {
-        const response = await fetch("https://treasure-tracker-pi.vercel.app/api/v1/profile")
+        const response = await fetch("https://treasuretracker.onrender.com/api/v1/profile")
         const data = await response.json()
 
         const profiles = Array.isArray(data) ? data : [data]
         UserIdForPost = profiles[0].user._id
 
         ownprofile.innerHTML = profiles.map(profile => `
-            <a class="profile two" href="profile.html" style="background-image: url('https://treasure-tracker-pi.vercel.app/${profile.user?.profilePicture?.replace(/\\/g, '/')}')"></a>
+            <a class="profile two" href="profile.html" style="background-image: url('https://treasuretracker.onrender.com/${profile.user?.profilePicture?.replace(/\\/g, '/')}')"></a>
             <a class="text" href="postpage.html">What have you Lost or Found?</a>
         `).join('')
 
         ownprofile2.innerHTML = profiles.map(profile => `
-            <a href="profile.html" class="profile" style="background-image: url('https://treasure-tracker-pi.vercel.app/${profile.user?.profilePicture?.replace(/\\/g, '/')}')"></a>
+            <a href="profile.html" class="profile" style="background-image: url('https://treasuretracker.onrender.com/${profile.user?.profilePicture?.replace(/\\/g, '/')}')"></a>
         `).join('')
 
     } catch (error) {
@@ -38,7 +38,7 @@ const getProfilepic = async () => {
 //Posts....
 const getPost = async () => {
     try {
-        const response = await fetch("https://treasure-tracker-pi.vercel.app/api/v1/getPosts", {
+        const response = await fetch("https://treasuretracker.onrender.com/api/v1/getPosts", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -86,7 +86,7 @@ const UpdatePosts = (ownPosts, otherPosts) => {
                 <div class="identitycontainer">
                     <section class="hello">
                         <div class="profileimageforpost" data-user-id="${post.userId._id}"
-                                    style="background-image: url('https://treasure-tracker-pi.vercel.app/${post.userId.profilePicture?.replace(/\\/g, '/')}')">
+                                    style="background-image: url('https://treasuretracker.onrender.com/${post.userId.profilePicture?.replace(/\\/g, '/')}')">
                         </div>
                         <span class="nameforpost">${post.userId.fname} ${post.userId.lname}</span>
                         <div id="date-container">
@@ -131,7 +131,7 @@ const UpdatePosts = (ownPosts, otherPosts) => {
                                 (img) => `
                                             <div class="divforimage1">
                                               <img 
-                                                src="https://treasure-tracker-pi.vercel.app/${img.replace(/\\/g, '/')}" 
+                                                src="https://treasuretracker.onrender.com/${img.replace(/\\/g, '/')}" 
                                                 alt="${post.caption || 'Image'}" 
                                                 class="post-image" 
                                                 style="width: 100%; height: 400px; background-size: contain; background-position: center;"                                    
@@ -147,7 +147,7 @@ const UpdatePosts = (ownPosts, otherPosts) => {
                                 (img) => `
                                             <div class="divforimage2">
                                               <img 
-                                                src="https://treasure-tracker-pi.vercel.app/${img.replace(/\\/g, '/')}" 
+                                                src="https://treasuretracker.onrender.com/${img.replace(/\\/g, '/')}" 
                                                 alt="${post.caption || 'Image'}" 
                                                 class="post-image" 
                                                  style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
@@ -164,7 +164,7 @@ const UpdatePosts = (ownPosts, otherPosts) => {
                                 (img) => `
                                             <div class="divforimage3">
                                               <img 
-                                                src="https://treasure-tracker-pi.vercel.app/${img.replace(/\\/g, '/')}" 
+                                                src="https://treasuretracker.onrender.com/${img.replace(/\\/g, '/')}" 
                                                 alt="${post.caption || 'Image'}" 
                                                 class="post-image" 
                                              style="width: 100%; height: 300px; background-size: contain; background-position: center;"   
@@ -179,7 +179,7 @@ const UpdatePosts = (ownPosts, otherPosts) => {
                                 (img) => `
                                             <div class="divforimage4">
                                               <img 
-                                                src="https://treasure-tracker-pi.vercel.app/${img.replace(/\\/g, '/')}" 
+                                                src="https://treasuretracker.onrender.com/${img.replace(/\\/g, '/')}" 
                                                 alt="${post.caption || 'Image'}" 
                                                 class="post-image" 
                                                style="width: 100%; height: 300px; background-size: contain; background-position: center;"   
@@ -197,7 +197,7 @@ const UpdatePosts = (ownPosts, otherPosts) => {
                                     (img) => `
                                               <div class="divforimage4">
                                                 <img 
-                                                  src="https://treasure-tracker-pi.vercel.app/${img.replace(/\\/g, '/')}" 
+                                                  src="https://treasuretracker.onrender.com/${img.replace(/\\/g, '/')}" 
                                                   alt="${post.caption || 'Image'}" 
                                                   class="post-image" 
                                            style="width: 100%; height: 300px; background-size: contain; background-position: center;"   
@@ -206,7 +206,7 @@ const UpdatePosts = (ownPosts, otherPosts) => {
                                 )
                                 .join('') +
                             `
-                                      <div class="divforimage4" style="background-image: url('https://treasure-tracker-pi.vercel.app/${post.image[3].replace(/\\/g, '/')}');">
+                                      <div class="divforimage4" style="background-image: url('https://treasuretracker.onrender.com/${post.image[3].replace(/\\/g, '/')}');">
                                       <p id="moreimages" style="color:black;">+${imagesLength - 4}</p>
                                       </div>
                                     `
@@ -242,7 +242,7 @@ const UpdatePosts = (ownPosts, otherPosts) => {
                 <div class="identitycontainer">
                     <section class="hello">
                         <div class="profileimageforpost" data-user-id="${post.userId._id}"
-                                    style="background-image: url('https://treasure-tracker-pi.vercel.app/${post.userId.profilePicture?.replace(/\\/g, '/')}')">
+                                    style="background-image: url('https://treasuretracker.onrender.com/${post.userId.profilePicture?.replace(/\\/g, '/')}')">
                         </div>
                         <span class="nameforpost">${post.userId.fname} ${post.userId.lname}</span>
                         <div id="date-container">
@@ -280,7 +280,7 @@ const UpdatePosts = (ownPosts, otherPosts) => {
                                     (img) => `
                                         <div class="divforimage1">
                                           <img 
-                                            src="https://treasure-tracker-pi.vercel.app/${img.replace(/\\/g, '/')}" 
+                                            src="https://treasuretracker.onrender.com/${img.replace(/\\/g, '/')}" 
                                             alt="${post.caption || 'Image'}" 
                                             class="post-image" 
                                     style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
@@ -296,7 +296,7 @@ const UpdatePosts = (ownPosts, otherPosts) => {
                                     (img) => `
                                         <div class="divforimage2">
                                           <img 
-                                            src="https://treasure-tracker-pi.vercel.app/${img.replace(/\\/g, '/')}" 
+                                            src="https://treasuretracker.onrender.com/${img.replace(/\\/g, '/')}" 
                                             alt="${post.caption || 'Image'}" 
                                             class="post-image" 
                                          style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
@@ -312,7 +312,7 @@ const UpdatePosts = (ownPosts, otherPosts) => {
                                     (img) => `
                                         <div class="divforimage3">
                                           <img 
-                                            src="https://treasure-tracker-pi.vercel.app/${img.replace(/\\/g, '/')}" 
+                                            src="https://treasuretracker.onrender.com/${img.replace(/\\/g, '/')}" 
                                             alt="${post.caption || 'Image'}" 
                                             class="post-image" 
                                           style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
@@ -328,7 +328,7 @@ const UpdatePosts = (ownPosts, otherPosts) => {
                                     (img) => `
                                             <div class="divforimage4">
                                               <img 
-                                                src="https://treasure-tracker-pi.vercel.app/${img.replace(/\\/g, '/')}" 
+                                                src="https://treasuretracker.onrender.com/${img.replace(/\\/g, '/')}" 
                                                 alt="${post.caption || 'Image'}" 
                                                 class="post-image" 
                                           style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
@@ -346,7 +346,7 @@ const UpdatePosts = (ownPosts, otherPosts) => {
                                         (img) => `
                                               <div class="divforimage4">
                                                 <img 
-                                                  src="https://treasure-tracker-pi.vercel.app/${img.replace(/\\/g, '/')}" 
+                                                  src="https://treasuretracker.onrender.com/${img.replace(/\\/g, '/')}" 
                                                   alt="${post.caption || 'Image'}" 
                                                   class="post-image" 
                                            style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
@@ -355,7 +355,7 @@ const UpdatePosts = (ownPosts, otherPosts) => {
                                     )
                                     .join('') +
                                 `
-                                      <div class="divforimage4" style="background-image: url('https://treasure-tracker-pi.vercel.app/${post.image[3].replace(/\\/g, '/')}');">
+                                      <div class="divforimage4" style="background-image: url('https://treasuretracker.onrender.com/${post.image[3].replace(/\\/g, '/')}');">
                                       <p id="moreimages" style="color:black;">+${imagesLength - 4}</p>
                                       </div>
                                     `
@@ -405,7 +405,7 @@ commentbtn.addEventListener('click', async (event) => {
     if (event.target.classList.contains('interactionlike1')) {
         try {
             (async () => {
-                const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/likeapost/${postId}`, {
+                const response = await fetch(`https://treasuretracker.onrender.com/api/v1/likeapost/${postId}`, {
                     method: "POST"
                 })
 
@@ -425,7 +425,7 @@ commentbtn.addEventListener('click', async (event) => {
 
                     updateLikeCount(likes, match, divforlike)
 
-                    const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/createNotification`, {
+                    const response = await fetch(`https://treasuretracker.onrender.com/api/v1/createNotification`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
@@ -443,7 +443,7 @@ commentbtn.addEventListener('click', async (event) => {
 
         try {
             (async () => {
-                const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/removelike/${postId}`, {
+                const response = await fetch(`https://treasuretracker.onrender.com/api/v1/removelike/${postId}`, {
                     method: "DELETE"
                 })
                 const data = await response.json()
@@ -463,7 +463,7 @@ commentbtn.addEventListener('click', async (event) => {
 
                     updateLikeCount(likes, match, divforlike)
 
-                    const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/deletenotificationforremoval`, {
+                    const response = await fetch(`https://treasuretracker.onrender.com/api/v1/deletenotificationforremoval`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
@@ -493,7 +493,7 @@ commentbtn.addEventListener('click', async (event) => {
             e.preventDefault();
             try {
                 const text = textt.value;
-                const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/commentinpost/${postId}`, {
+                const response = await fetch(`https://treasuretracker.onrender.com/api/v1/commentinpost/${postId}`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -533,7 +533,7 @@ commentbtn.addEventListener('click', async (event) => {
 
                     textt.value = ''
 
-                    const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/createNotification`, {
+                    const response = await fetch(`https://treasuretracker.onrender.com/api/v1/createNotification`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
@@ -596,7 +596,7 @@ commentbtn.addEventListener('click', async (event) => {
 //Fetch all comments of a post
 const fetchComments = async (postId) => {
     try {
-        const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/getallcomment/${postId}`);
+        const response = await fetch(`https://treasuretracker.onrender.com/api/v1/getallcomment/${postId}`);
         if (response.ok) {
             return await response.json();
         } else {
@@ -614,7 +614,7 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
     if (OwnComments.length > 0 && OtherCommentsOnOwnPost.length === 0 && OtherCommentsOnOtherPost.length === 0) {
         return commentArea.innerHTML = OwnComments.map(comment => ` <div class="introareacomment" id="${comment._id}">
                        <div class="sectionforprofile">
-                            <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('https://treasure-tracker-pi.vercel.app/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
+                            <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('https://treasuretracker.onrender.com/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
                             <div class="placeforcommentandname"><p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
                             <div class="comment-text">${comment.text}</div>
                             </div>
@@ -637,7 +637,7 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
     }
     else if (OwnComments.length > 0 && OtherCommentsOnOwnPost.length > 0 && OtherCommentsOnOtherPost.length === 0) {
         return commentArea.innerHTML = OwnComments.map(comment => `<div class="introareacomment" id="${comment._id}">
-                     <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('https://treasure-tracker-pi.vercel.app/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
+                     <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('https://treasuretracker.onrender.com/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
 
                             <div class="placeforcommentandname"><p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
                             <p class="comment-text">${comment.text}</p>
@@ -658,7 +658,7 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
         </div>`).join('')
             +
             OtherCommentsOnOwnPost.map(comment => `<div class="introareacomment" id="${comment._id}">
-                   <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('https://treasure-tracker-pi.vercel.app/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
+                   <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('https://treasuretracker.onrender.com/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
 
                             <div class="placeforcommentandname"><p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
                             <p class="comment-text">${comment.text}</p>
@@ -677,7 +677,7 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
     }
     else if (OwnComments.length > 0 && OtherCommentsOnOwnPost.length > 0 && OtherCommentsOnOtherPost.length > 0) {
         return commentArea.innerHTML = OwnComments.map(comment => `<div class="introareacomment" id="${comment._id}">
-                   <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('https://treasure-tracker-pi.vercel.app/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
+                   <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('https://treasuretracker.onrender.com/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
 
                             <div class="placeforcommentandname"><p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
                             <p class="comment-text">${comment.text}</p>
@@ -698,7 +698,7 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
         </div>`).join('')
             +
             OtherCommentsOnOwnPost.map(comment => `<div class="introareacomment" id="${comment._id}">
-                   <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('https://treasure-tracker-pi.vercel.app/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
+                   <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('https://treasuretracker.onrender.com/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
 
                             <div class="placeforcommentandname"><p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
                             <p class="comment-text">${comment.text}</p>
@@ -716,7 +716,7 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
         </div>`).join('')
             +
             OtherCommentsOnOtherPost.map(comment => `<div class="introareacomment" id="${comment._id}">
-         <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('https://treasure-tracker-pi.vercel.app/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
+         <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('https://treasuretracker.onrender.com/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
 
                             <div class="placeforcommentandname"><p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
                             <p class="comment-text">${comment.text}</p>
@@ -727,7 +727,7 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
     }
     else if (OwnComments.length === 0 && OtherCommentsOnOwnPost.length > 0 && OtherCommentsOnOtherPost.length === 0) {
         return commentArea.innerHTML = OtherCommentsOnOwnPost.map(comment => `<div class="introareacomment" id="${comment._id}">
-                    <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('https://treasure-tracker-pi.vercel.app/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
+                    <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('https://treasuretracker.onrender.com/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
 
                             <div class="placeforcommentandname"><p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
                             <p class="comment-text">${comment.text}</p>
@@ -746,7 +746,7 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
     }
     else if (OwnComments.length === 0 && OtherCommentsOnOwnPost.length > 0 && OtherCommentsOnOtherPost.length > 0) {
         return commentArea.innerHTML = OtherCommentsOnOwnPost.map(comment => `<div class="introareacomment" id="${comment._id}">
-                 <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('https://treasure-tracker-pi.vercel.app/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
+                 <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('https://treasuretracker.onrender.com/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
 
                             <div class="placeforcommentandname"><p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
                             <p class="comment-text">${comment.text}</p>
@@ -764,7 +764,7 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
         </div>`).join('')
             +
             OtherCommentsOnOtherPost.map(comment => `<div class="introareacomment" id="${comment._id}">
-             <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('https://treasure-tracker-pi.vercel.app/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
+             <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('https://treasuretracker.onrender.com/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
 
                             <div class="placeforcommentandname"><p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
                             <p class="comment-text">${comment.text}</p>
@@ -774,7 +774,7 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
     }
     else if (OwnComments.length === 0 && OtherCommentsOnOwnPost.length === 0 && OtherCommentsOnOtherPost.length > 0) {
         return commentArea.innerHTML = OtherCommentsOnOtherPost.map(comment => `<div class="introareacomment" id="${comment._id}">
-            <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('https://treasure-tracker-pi.vercel.app/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
+            <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('https://treasuretracker.onrender.com/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
 
                             <div class="placeforcommentandname"><p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
                             <p class="comment-text">${comment.text}</p>
@@ -785,7 +785,7 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
     }
     else if (OwnComments.length > 0 && OtherCommentsOnOwnPost.length === 0 && OtherCommentsOnOtherPost.length > 0) {
         return commentArea.innerHTML = OwnComments.map(comment => `<div class="introareacomment" id="${comment._id}">
-         <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('https://treasure-tracker-pi.vercel.app/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
+         <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('https://treasuretracker.onrender.com/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
 
                             <div class="placeforcommentandname"><p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
                             <p class="comment-text">${comment.text}</p>
@@ -806,7 +806,7 @@ const updateCommentSections = async (OwnComments, OtherCommentsOnOwnPost, OtherC
         </div>`).join('')
             +
             OtherCommentsOnOtherPost.map(comment => `<div class="introareacomment" id="${comment._id}">
-             <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('https://treasure-tracker-pi.vercel.app/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
+             <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('https://treasuretracker.onrender.com/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
 
                             <div class="placeforcommentandname"><p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
                             <p class="comment-text">${comment.text}</p>
@@ -867,7 +867,7 @@ logoutUser.addEventListener('click', async (e) => {
 
     try {
 
-        const response = await fetch('https://treasure-tracker-pi.vercel.app/api/v1/logout')
+        const response = await fetch('https://treasuretracker.onrender.com/api/v1/logout')
 
         const data = await response.json()
 
@@ -887,7 +887,7 @@ logoutUser.addEventListener('click', async (e) => {
 const getLikes = async (postId) => {
 
     try {
-        const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/getalllike/${postId}`)
+        const response = await fetch(`https://treasuretracker.onrender.com/api/v1/getalllike/${postId}`)
         const data = await response.json()
 
         if (response.status === 200) {
@@ -1032,7 +1032,7 @@ const updateLikeAreaSection = async(postId, divareaforlike) => {
 
     if (likes.length > 0) {
         return divareaforlike.innerHTML = likes.map(like => `<div class="introarealike" id="${like._id}">
-            <div class="sectionforprofileinlike"> <div class="profileimageforpost" data-user-id="${like.userId._id}" style="background-image: url('https://treasure-tracker-pi.vercel.app/${like.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
+            <div class="sectionforprofileinlike"> <div class="profileimageforpost" data-user-id="${like.userId._id}" style="background-image: url('https://treasuretracker.onrender.com/${like.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
             <div class="placeforlikeandname"><p class="nameinlikearea">${like.userId.fname} ${like.userId.lname}</p></div>
         </div>`
         ).join('')
@@ -1124,7 +1124,7 @@ posthtml.addEventListener('click', async (event) => {
     else if (event.target.closest('.deletepost')) {
         try {
             (async () => {
-                const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/deleteOwnPost/${postId}`, {
+                const response = await fetch(`https://treasuretracker.onrender.com/api/v1/deleteOwnPost/${postId}`, {
                     method: "DELETE"
                 })
                 const data = await response.json()
@@ -1141,7 +1141,7 @@ posthtml.addEventListener('click', async (event) => {
     else if (event.target.closest('.savepost')) {
         try {
             (async () => {
-                const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/savePosts/${postId}`, {
+                const response = await fetch(`https://treasuretracker.onrender.com/api/v1/savePosts/${postId}`, {
                     method: "POST"
                 })
                 const data = await response.json()
@@ -1160,7 +1160,7 @@ posthtml.addEventListener('click', async (event) => {
 
         try {
             (async () => {
-                const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/unsavePosts/${postId}`, {
+                const response = await fetch(`https://treasuretracker.onrender.com/api/v1/unsavePosts/${postId}`, {
                     method: "DELETE"
                 })
                 const data = await response.json()
@@ -1187,7 +1187,7 @@ posthtml.addEventListener('click', async (event) => {
         tobemapped.innerHTML = Images.map((img) => `
         <div class="imageone">
         <img 
-            src="https://treasure-tracker-pi.vercel.app/${img.replace(/\\/g, '/')}" 
+            src="https://treasuretracker.onrender.com/${img.replace(/\\/g, '/')}" 
             alt="'Image'" 
             class="post-image" 
             style="width: 100%; height: 300px; border:3px solid black; background-size: contain; background-position: center;"   
@@ -1263,7 +1263,7 @@ const editComment = async (OwnComments, OtherCommentsOnOwnPost, OtherCommentsOnO
         else if (event.target.closest('.cdelete')) {
             try {
                 (async () => {
-                    const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/removecomment/${commentId}`, {
+                    const response = await fetch(`https://treasuretracker.onrender.com/api/v1/removecomment/${commentId}`, {
                         method: "DELETE"
                     })
                     const data = await response.json()
@@ -1318,7 +1318,7 @@ const editComment = async (OwnComments, OtherCommentsOnOwnPost, OtherCommentsOnO
                     const text = input.value
                     try {
                         (async () => {
-                            const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/updatecomment/${commentId}`, {
+                            const response = await fetch(`https://treasuretracker.onrender.com/api/v1/updatecomment/${commentId}`, {
                                 method: "PUT",
                                 headers: {
                                     "Content-Type": "application/json",
