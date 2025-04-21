@@ -110,7 +110,7 @@
         else {
             modal2.showModal()
             notifisite.innerHTML = `  <div class="sectionforprofile">
-                        <div class="profileimagefornotification" style="background-image: url('http://localhost:5000/${data.senderId.profilePicture?.replace(/\\/g, '/')}')"></div>
+                        <div class="profileimagefornotification" style="background-image: url('https://treasure-tracker-pi.vercel.app/${data.senderId.profilePicture?.replace(/\\/g, '/')}')"></div>
                         <div class="placefornotificationandname">
                             ${data.senderId.fname} ${data.senderId.lname} ${data.type} your post
                         </div>

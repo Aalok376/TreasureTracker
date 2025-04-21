@@ -10,25 +10,25 @@ let redirect = false
 
 const getProfilepic = async () => {
     try {
-        const response = await fetch("http://localhost:5000/api/v1/profile");
+        const response = await fetch("https://treasure-tracker-pi.vercel.app/api/v1/profile");
         const data = await response.json();
 
         const profiles = Array.isArray(data) ? data : [data]
 
         ownprofile2.innerHTML = profiles.map(profile => `
-            <a href="profile.html" class="profile" style="background-image: url('http://localhost:5000/${profile.user?.profilePicture?.replace(/\\/g, '/')}')"></a>
+            <a href="profile.html" class="profile" style="background-image: url('https://treasure-tracker-pi.vercel.app/${profile.user?.profilePicture?.replace(/\\/g, '/')}')"></a>
         `).join('');
 
         document.querySelector('#fname').value = profiles[0].user.fname || ''
         document.querySelector('#lname').value = profiles[0].user.lname || ''
         document.querySelector('#contact').value = profiles[0].user.contactNumber || ''
         if (profiles[0]?.user?.profilePicture) {
-            document.querySelector('#profilePreview').src = `http://localhost:5000/${profiles[0]?.user?.profilePicture.replace(/\\/g, '/')}`
+            document.querySelector('#profilePreview').src = `https://treasure-tracker-pi.vercel.app/${profiles[0]?.user?.profilePicture.replace(/\\/g, '/')}`
             document.querySelector('#profilePreview').style.display= 'block'
         } 
 
         if (profiles[0].user.coverPicture) {
-            document.querySelector('#coverPreview').src=`http://localhost:5000/${profiles[0].user?.coverPicture?.replace(/\\/g, '/')}`
+            document.querySelector('#coverPreview').src=`https://treasure-tracker-pi.vercel.app/${profiles[0].user?.coverPicture?.replace(/\\/g, '/')}`
             document.querySelector('#coverPreview').style.display= 'block'
         }
 
@@ -51,7 +51,7 @@ btn.addEventListener('click', async (e) => {
 
     if (newfname && newlname) {
         try {
-            const response = await fetch('http://localhost:5000/api/v1/updatename', {
+            const response = await fetch('https://treasure-tracker-pi.vercel.app/api/v1/updatename', {
                 method: 'PUT',
                 headers: {
                     "Content-Type": "application/json"
@@ -73,7 +73,7 @@ btn.addEventListener('click', async (e) => {
 
     if (newContact) {
         try {
-            const response = await fetch('http://localhost:5000/api/v1/updatecontact', {
+            const response = await fetch('https://treasure-tracker-pi.vercel.app/api/v1/updatecontact', {
                 method: 'PUT',
                 headers: {
                     "Content-Type": "application/json"
@@ -96,7 +96,7 @@ btn.addEventListener('click', async (e) => {
         try {
             const profileformData = new FormData()
             profileformData.append('newProfilePicture', newProfilePicture)
-            const response = await fetch('http://localhost:5000/api/v1/updateProfilePicture', {
+            const response = await fetch('https://treasure-tracker-pi.vercel.app/api/v1/updateProfilePicture', {
                 method: 'PUT',
                 headers: {},
                 body: profileformData
@@ -118,7 +118,7 @@ btn.addEventListener('click', async (e) => {
         try {
             const coverformData = new FormData()
             coverformData.append('newCoverPicture', newCoverPicture)
-            const response = await fetch('http://localhost:5000/api/v1/updateCoverPicture', {
+            const response = await fetch('https://treasure-tracker-pi.vercel.app/api/v1/updateCoverPicture', {
                 method: 'PUT',
                 headers: {},
                 body: coverformData
@@ -171,7 +171,7 @@ logoutUser.addEventListener('click', async (e) => {
 
     try {
 
-        const response = await fetch('http://localhost:5000/api/v1/logout')
+        const response = await fetch('https://treasure-tracker-pi.vercel.app/api/v1/logout')
 
         const data = await response.json()
 

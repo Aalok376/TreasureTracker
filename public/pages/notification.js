@@ -12,14 +12,14 @@ let Notificationss
 
 const getProfilepic = async () => {
     try {
-        const response = await fetch("http://localhost:5000/api/v1/profile")
+        const response = await fetch("https://treasure-tracker-pi.vercel.app/api/v1/profile")
         const data = await response.json()
 
         const profiles = Array.isArray(data) ? data : [data]
         UserIdForPost = profiles[0].user._id
 
         ownprofile2.innerHTML = profiles.map(profile => `
-            <a href="profile.html" class="profile" style="background-image: url('http://localhost:5000/${profile.user?.profilePicture?.replace(/\\/g, '/')}')"></a>
+            <a href="profile.html" class="profile" style="background-image: url('https://treasure-tracker-pi.vercel.app/${profile.user?.profilePicture?.replace(/\\/g, '/')}')"></a>
         `).join('')
 
     } catch (error) {
@@ -29,7 +29,7 @@ const getProfilepic = async () => {
 
 const getNotifications = async () => {
     try {
-        const response = await fetch("http://localhost:5000/api/v1/getNotification", {
+        const response = await fetch("https://treasure-tracker-pi.vercel.app/api/v1/getNotification", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -58,7 +58,7 @@ const UpdateNotifications = async (Notificationss) => {
         posthtml.innerHTML = Notificationss.map(post => `
             <div class="notificationcontainer" id=${post._id} data-user-id="${post.postId}">
                         <div class="sectionforprofile">
-                            <div class="profileimagefornotification" style="background-image: url('http://localhost:5000/${post.senderId.profilePicture?.replace(/\\/g, '/')}')"></div>
+                            <div class="profileimagefornotification" style="background-image: url('https://treasure-tracker-pi.vercel.app/${post.senderId.profilePicture?.replace(/\\/g, '/')}')"></div>
                             <div class="placefornotificationandname">
                             ${post.senderId.fname} ${post.senderId.lname} ${post.type} your post
                             </div>
@@ -94,7 +94,7 @@ const updateNotificationBackgroundColor=async(Notificationss)=>{
 const getele = async () => {
     const notifications = document.querySelectorAll('.notificationcontainer')
 
-    const response = await fetch(`http://localhost:5000/api/v1/notificationsmarkAllAsRead`, {
+    const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/notificationsmarkAllAsRead`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -142,7 +142,7 @@ posthtml.addEventListener('click', async (event) => {
     const notificationId = postElement.id
 
     if (event.target.closest('.cmakeasread')) {
-        const response = await fetch(`http://localhost:5000/api/v1/notificationsread`, {
+        const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/notificationsread`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -161,7 +161,7 @@ posthtml.addEventListener('click', async (event) => {
     else if (event.target.closest('.cdelete')) {
         try {
             (async () => {
-                const response = await fetch(`http://localhost:5000/api/v1/deleteNotification/${notificationId}`, {
+                const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/deleteNotification/${notificationId}`, {
                     method: "DELETE"
                 })
                 const data = await response.json()
@@ -193,7 +193,7 @@ posthtml.addEventListener('click',async(event)=>{
 
     if(event.target.closest('.sectionforprofile')){
 
-        const response = await fetch('http://localhost:5000/api/v1/notificationsread', {
+        const response = await fetch('https://treasure-tracker-pi.vercel.app/api/v1/notificationsread', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -228,7 +228,7 @@ logoutUser.addEventListener('click', async (e) => {
 
     try {
 
-        const response = await fetch('http://localhost:5000/api/v1/logout')
+        const response = await fetch('https://treasure-tracker-pi.vercel.app/api/v1/logout')
 
         const data = await response.json()
 

@@ -13,15 +13,15 @@ const postId = sessionStorage.getItem('postId')
 
 const getProfilepic = async () => {
     try {
-        const response = await fetch("http://localhost:5000/api/v1/profile");
+        const response = await fetch("https://treasure-tracker-pi.vercel.app/api/v1/profile");
         const data = await response.json();
 
         const profiles = Array.isArray(data) ? data : [data];
         UserIdForPost = profiles[0].user._id
 
         ownprofile.innerHTML = profiles.map(profile => `
-                <div class="coverphoto" style="background-image: url('http://localhost:5000/${profile.user?.coverPicture?.replace(/\\/g, '/')}')"><div class="deletecoverimage"><i class="fa-solid fa-trash fa-2xl" style="color: #000000;"></i> </div></div>
-                <div class="profilephoto" style="background-image: url('http://localhost:5000/${profile.user?.profilePicture?.replace(/\\/g, '/')}')"><div class="deleteprofileimage"><i class="fa-solid fa-trash fa-xl" style="color: #000000;"></i> </div></div>
+                <div class="coverphoto" style="background-image: url('https://treasure-tracker-pi.vercel.app/${profile.user?.coverPicture?.replace(/\\/g, '/')}')"><div class="deletecoverimage"><i class="fa-solid fa-trash fa-2xl" style="color: #000000;"></i> </div></div>
+                <div class="profilephoto" style="background-image: url('https://treasure-tracker-pi.vercel.app/${profile.user?.profilePicture?.replace(/\\/g, '/')}')"><div class="deleteprofileimage"><i class="fa-solid fa-trash fa-xl" style="color: #000000;"></i> </div></div>
                 <div class="content">
                 <h2>${profile.user.fname} ${profile.user.lname}</h2>
                 ${profile.user.contactNumber !== null
@@ -42,7 +42,7 @@ const getProfilepic = async () => {
         `).join('')
 
         ownprofile2.innerHTML = profiles.map(profile => `
-            <div class="profile" style="background-image: url('http://localhost:5000/${profile.user?.profilePicture?.replace(/\\/g, '/')}')"></div>
+            <div class="profile" style="background-image: url('https://treasure-tracker-pi.vercel.app/${profile.user?.profilePicture?.replace(/\\/g, '/')}')"></div>
         `).join('')
     } catch (error) {
         console.error("Error fetching profile picture:", error);
@@ -51,7 +51,7 @@ const getProfilepic = async () => {
 
 const getPost = async () => {
     try {
-        const response = await fetch("http://localhost:5000/api/v1/getOwnPosts", {
+        const response = await fetch("https://treasure-tracker-pi.vercel.app/api/v1/getOwnPosts", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -96,7 +96,7 @@ const UpdatePosts = (posts) => {
                 <div class="identitycontainer">
                     <section class="hello">
                         <div class="profileimageforpost" data-user-id="${post.userId._id}"
-                                    style="background-image: url('http://localhost:5000/${post.userId.profilePicture?.replace(/\\/g, '/')}')">
+                                    style="background-image: url('https://treasure-tracker-pi.vercel.app/${post.userId.profilePicture?.replace(/\\/g, '/')}')">
                         </div>
                         <span class="nameforpost">${post.userId.fname} ${post.userId.lname}</span>
                         <div id="date-container">
@@ -140,7 +140,7 @@ const UpdatePosts = (posts) => {
                                 (img) => `
                                         <div class="divforimage1">
                                           <img 
-                                            src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
+                                            src="https://treasure-tracker-pi.vercel.app/${img.replace(/\\/g, '/')}" 
                                             alt="${post.caption || 'Image'}" 
                                             class="post-image" 
                                     style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
@@ -156,7 +156,7 @@ const UpdatePosts = (posts) => {
                                 (img) => `
                                         <div class="divforimage2">
                                           <img 
-                                            src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
+                                            src="https://treasure-tracker-pi.vercel.app/${img.replace(/\\/g, '/')}" 
                                             alt="${post.caption || 'Image'}" 
                                             class="post-image" 
                                          style="width: 100%; height: 400px; background-size: contain; background-position: center;"   
@@ -172,7 +172,7 @@ const UpdatePosts = (posts) => {
                                 (img) => `
                                         <div class="divforimage3">
                                           <img 
-                                            src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
+                                            src="https://treasure-tracker-pi.vercel.app/${img.replace(/\\/g, '/')}" 
                                             alt="${post.caption || 'Image'}" 
                                             class="post-image" 
                                           style="width: 100%; height: 300px; background-size: contain; background-position: center;"   
@@ -188,7 +188,7 @@ const UpdatePosts = (posts) => {
                                 (img) => `
                                             <div class="divforimage4">
                                               <img 
-                                                src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
+                                                src="https://treasure-tracker-pi.vercel.app/${img.replace(/\\/g, '/')}" 
                                                 alt="${post.caption || 'Image'}" 
                                                 class="post-image" 
                                           style="width: 100%; height: 300px; background-size: contain; background-position: center;"   
@@ -206,7 +206,7 @@ const UpdatePosts = (posts) => {
                                     (img) => `
                                               <div class="divforimage4">
                                                 <img 
-                                                  src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
+                                                  src="https://treasure-tracker-pi.vercel.app/${img.replace(/\\/g, '/')}" 
                                                   alt="${post.caption || 'Image'}" 
                                                   class="post-image" 
                                            style="width: 100%; height: 300px; background-size: contain; background-position: center;"   
@@ -215,7 +215,7 @@ const UpdatePosts = (posts) => {
                                 )
                                 .join('') +
                             `
-                                      <div class="divforimage4" style="background-image: url('http://localhost:5000/${post.image[3].replace(/\\/g, '/')}');">
+                                      <div class="divforimage4" style="background-image: url('https://treasure-tracker-pi.vercel.app/${post.image[3].replace(/\\/g, '/')}');">
                                       <p id="moreimages" style="color:black;">+${imagesLength - 4}</p>
                                       </div>
                                     `
@@ -266,7 +266,7 @@ commentbtn.addEventListener('click', async (event) => {
     if (event.target.classList.contains('interactionlike1')) {
         try {
             (async () => {
-                const response = await fetch(`http://localhost:5000/api/v1/likeapost/${postId}`, {
+                const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/likeapost/${postId}`, {
                     method: "POST"
                 })
 
@@ -286,7 +286,7 @@ commentbtn.addEventListener('click', async (event) => {
 
                     updateLikeCount(likes, match, divforlike)
 
-                    const response = await fetch(`http://localhost:5000/api/v1/createNotification`, {
+                    const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/createNotification`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
@@ -304,7 +304,7 @@ commentbtn.addEventListener('click', async (event) => {
 
         try {
             (async () => {
-                const response = await fetch(`http://localhost:5000/api/v1/removelike/${postId}`, {
+                const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/removelike/${postId}`, {
                     method: "DELETE"
                 })
                 const data = await response.json()
@@ -324,7 +324,7 @@ commentbtn.addEventListener('click', async (event) => {
 
                     updateLikeCount(likes, match, divforlike)
 
-                    const response = await fetch(`http://localhost:5000/api/v1/deletenotificationforremoval`, {
+                    const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/deletenotificationforremoval`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
@@ -352,7 +352,7 @@ commentbtn.addEventListener('click', async (event) => {
             e.preventDefault();
             try {
                 const text = textt.value;
-                const response = await fetch(`http://localhost:5000/api/v1/commentinpost/${postId}`, {
+                const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/commentinpost/${postId}`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -380,7 +380,7 @@ commentbtn.addEventListener('click', async (event) => {
 
                     textt.value = ''
 
-                    const response = await fetch(`http://localhost:5000/api/v1/createNotification`, {
+                    const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/createNotification`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
@@ -467,7 +467,7 @@ const updateLikeCount = (likes, match, divforlike) => {
 const getLikes = async (postId) => {
 
     try {
-        const response = await fetch(`http://localhost:5000/api/v1/getalllike/${postId}`)
+        const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/getalllike/${postId}`)
         const data = await response.json()
 
         if (response.status === 200) {
@@ -576,7 +576,7 @@ const updateLikeAreaSection = async(postId, divareaforlike) => {
     const likes = Array.isArray(datas.likes) ? datas.likes : [datas.likes]
     if (likes.length > 0) {
         return divareaforlike.innerHTML = likes.map(like => `<div class="introarealike" id="${like._id}">
-            <div class="sectionforprofileinlike"> <div class="profileimageforpost" data-user-id="${like.userId._id}" style="background-image: url('http://localhost:5000/${like.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
+            <div class="sectionforprofileinlike"> <div class="profileimageforpost" data-user-id="${like.userId._id}" style="background-image: url('https://treasure-tracker-pi.vercel.app/${like.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
             <div class="placeforlikeandname"><p class="nameinlikearea">${like.userId.fname} ${like.userId.lname}</p></div>
         </div>`
         ).join('')
@@ -587,7 +587,7 @@ const updateLikeAreaSection = async(postId, divareaforlike) => {
 //Comments....
 const fetchComments = async (postId) => {
     try {
-        const response = await fetch(`http://localhost:5000/api/v1/getallcomment/${postId}`);
+        const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/getallcomment/${postId}`);
         if (response.ok) {
             return await response.json();
         } else {
@@ -603,7 +603,7 @@ const fetchComments = async (postId) => {
 const updateCommentSections = async (OwnComments, OtherComments, commentArea) => {
     if (OwnComments.length > 0 && OtherComments.length > 0) {
         return commentArea.innerHTML = OwnComments.map(comment => ` <div class="introareacomment" id="${comment._id}">
-                          <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
+                          <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('https://treasure-tracker-pi.vercel.app/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
 
                             <div class="placeforcommentandname"><p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
                             <p class="comment-text">${comment.text}</p>
@@ -624,7 +624,7 @@ const updateCommentSections = async (OwnComments, OtherComments, commentArea) =>
                      </div>`).join('')
             +
             OtherComments.map(comment => ` <div class="introareacomment" id="${comment._id}">
-                         <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
+                         <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('https://treasure-tracker-pi.vercel.app/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
 
                             <div class="placeforcommentandname"><p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
                             <p class="comment-text">${comment.text}</p>
@@ -643,7 +643,7 @@ const updateCommentSections = async (OwnComments, OtherComments, commentArea) =>
     }
     else if (OwnComments.length > 0 && OtherComments.length === 0) {
         return commentArea.innerHTML = OwnComments.map(comment => `<div class="introareacomment" id="${comment._id}">
-                         <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
+                         <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('https://treasure-tracker-pi.vercel.app/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
 
                             <div class="placeforcommentandname"><p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
                             <p class="comment-text">${comment.text}</p>
@@ -665,7 +665,7 @@ const updateCommentSections = async (OwnComments, OtherComments, commentArea) =>
     }
     else if (OwnComments.length === 0 && OtherComments.length > 0) {
         return commentArea.innerHTML = OtherComments.map(comment => ` <div class="introareacomment" id="${comment._id}">
-                             <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('http://localhost:5000/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
+                             <div class="sectionforprofile"> <div class="profileimageforpost" data-user-id="${comment.userId._id}" style="background-image: url('https://treasure-tracker-pi.vercel.app/${comment.userId.profilePicture?.replace(/\\/g, '/')}')"></div>
 
                             <div class="placeforcommentandname"><p class="nameincommentarea">${comment.userId.fname} ${comment.userId.lname}</p>
                             <p class="comment-text">${comment.text}</p>
@@ -736,7 +736,7 @@ logoutUser.addEventListener('click', async (e) => {
 
     try {
 
-        const response = await fetch('http://localhost:5000/api/v1/logout')
+        const response = await fetch('https://treasure-tracker-pi.vercel.app/api/v1/logout')
 
         const data = await response.json()
 
@@ -767,7 +767,7 @@ ownprofile.addEventListener('click', async (event) => {
     else if (deletepp) {
         try {
             (async () => {
-                const response = await fetch(`http://localhost:5000/api/v1/deleteProfilePicture`, {
+                const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/deleteProfilePicture`, {
                     method: "DELETE"
                 })
                 const data = await response.json()
@@ -784,7 +784,7 @@ ownprofile.addEventListener('click', async (event) => {
     else if (deletecp) {
         try {
             (async () => {
-                const response = await fetch(`http://localhost:5000/api/v1/deleteCoverPicture`, {
+                const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/deleteCoverPicture`, {
                     method: "DELETE"
                 })
                 const data = await response.json()
@@ -885,7 +885,7 @@ posthtml.addEventListener('click', async (event) => {
     else if (event.target.closest('.deletepost')) {
         try {
             (async () => {
-                const response = await fetch(`http://localhost:5000/api/v1/deleteOwnPost/${postId}`, {
+                const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/deleteOwnPost/${postId}`, {
                     method: "DELETE"
                 })
                 const data = await response.json()
@@ -902,7 +902,7 @@ posthtml.addEventListener('click', async (event) => {
     else if (event.target.closest('.savepost')) {
         try {
             (async () => {
-                const response = await fetch(`http://localhost:5000/api/v1/savePosts/${postId}`, {
+                const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/savePosts/${postId}`, {
                     method: "POST"
                 })
                 const data = await response.json()
@@ -921,7 +921,7 @@ posthtml.addEventListener('click', async (event) => {
 
         try {
             (async () => {
-                const response = await fetch(`http://localhost:5000/api/v1/unsavePosts/${postId}`, {
+                const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/unsavePosts/${postId}`, {
                     method: "DELETE"
                 })
                 const data = await response.json()
@@ -948,7 +948,7 @@ posthtml.addEventListener('click', async (event) => {
         tobemapped.innerHTML = Images.map((img) => `
         <div class="imageone">
         <img 
-            src="http://localhost:5000/${img.replace(/\\/g, '/')}" 
+            src="https://treasure-tracker-pi.vercel.app/${img.replace(/\\/g, '/')}" 
             alt="'Image'" 
             class="post-image" 
             style="width: 100%; height: 300px; border:3px solid black; background-size: contain; background-position: center;"   
@@ -1025,7 +1025,7 @@ const editComment = async (OwnComments, OtherComments, commentArea, postId) => {
         else if (event.target.closest('.cdelete')) {
             try {
                 (async () => {
-                    const response = await fetch(`http://localhost:5000/api/v1/removecomment/${commentId}`, {
+                    const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/removecomment/${commentId}`, {
                         method: "DELETE"
                     })
                     const data = await response.json()
@@ -1067,7 +1067,7 @@ const editComment = async (OwnComments, OtherComments, commentArea, postId) => {
                     const text = input.value
                     try {
                         (async () => {
-                            const response = await fetch(`http://localhost:5000/api/v1/updatecomment/${commentId}`, {
+                            const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/updatecomment/${commentId}`, {
                                 method: "PUT",
                                 headers: {
                                     "Content-Type": "application/json",
