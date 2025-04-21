@@ -7,7 +7,7 @@ login.addEventListener('submit', async (e) => {
     const password = document.querySelector('#password').value;
 
     try {
-        const response = await fetch("https://treasure-tracker-pi.vercel.app/api/v1/login", {
+        const response = await fetch("https://treasuretracker.onrender.com/api/v1/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
