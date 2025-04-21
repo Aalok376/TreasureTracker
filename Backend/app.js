@@ -6,10 +6,7 @@ const {router}=require('./routes/route')
 const cors = require('cors')
 
 app.use(express.json())
-app.use(cors(
-  origin: ['https://treasure-tracker-pi.vercel.app'],
-  credentials: true
-))
+app.use(cors())
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser())
 
