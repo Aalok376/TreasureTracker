@@ -1,6 +1,6 @@
 import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
 
-const socket = io("https://treasure-tracker-pi.vercel.app", {
+const socket = io("https://treasuretracker.onrender.com", {
   reconnection: true,
   reconnectionAttempts: 20,
   reconnectionDelay: 500,
