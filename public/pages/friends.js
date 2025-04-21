@@ -7,13 +7,13 @@ const ownprofile2 = document.querySelector('.pp')
 
 const getProfilepic = async () => {
     try {
-        const response = await fetch("https://treasure-tracker-pi.vercel.app/api/v1/profile")
+        const response = await fetch("https://treasuretracker.onrender.com/api/v1/profile")
         const data = await response.json()
 
         const profiles = Array.isArray(data) ? data : [data]
 
         ownprofile2.innerHTML = profiles.map(profile => `
-            <a href="profile.html" class="profile" style="background-image: url('https://treasure-tracker-pi.vercel.app/${profile.user?.profilePicture?.replace(/\\/g, '/')}')"></a>
+            <a href="profile.html" class="profile" style="background-image: url('https://treasuretracker.onrender.com/${profile.user?.profilePicture?.replace(/\\/g, '/')}')"></a>
         `).join('')
 
 
@@ -51,7 +51,7 @@ logoutUser.addEventListener('click', async (e) => {
 
     try {
 
-        const response = await fetch('https://treasure-tracker-pi.vercel.app/api/v1/logout')
+        const response = await fetch('https://treasuretracker.onrender.com/api/v1/logout')
 
         const data = await response.json()
 
@@ -101,7 +101,7 @@ const pendinglist = document.getElementById('pending-requests')
 
 const getFriendlist = async () => {
     try {
-        const response = await fetch('https://treasure-tracker-pi.vercel.app/api/v1/getfriends')
+        const response = await fetch('https://treasuretracker.onrender.com/api/v1/getfriends')
 
         const data = await response.json()
 
@@ -114,7 +114,7 @@ const getFriendlist = async () => {
 
 const getPendingRequest = async () => {
     try {
-        const response = await fetch('https://treasure-tracker-pi.vercel.app/api/v1/getfriendrequest')
+        const response = await fetch('https://treasuretracker.onrender.com/api/v1/getfriendrequest')
 
         const data = await response.json()
 
@@ -135,7 +135,7 @@ const updatefriendList = (friends) => {
         friendlist.innerHTML = friends.map(friend => `
             <div class="areaforfriend" id="${friend._id}">
             <div class="peoples">
-                <div class="profileimage" data-user-id="${friend._id}" style="background-image: url('https://treasure-tracker-pi.vercel.app/${friend.profilePicture?.replace(/\\/g, '/')}')"></div>
+                <div class="profileimage" data-user-id="${friend._id}" style="background-image: url('https://treasuretracker.onrender.com/${friend.profilePicture?.replace(/\\/g, '/')}')"></div>
                     <p class="namearea">${friend.fname} ${friend.lname}</p>
                     <div class="addfriend" style="display: none;"><i class="fa-solid fa-user-group"></i> Add Friend</div>
                     <div class="cancelfriend" style="display: none;"><i class="fa-solid fa-xmark"></i> Cancel</div>
@@ -163,7 +163,7 @@ const updatePendingList = (friends) => {
         pendinglist.innerHTML = friends.map(friend => `
             <div class="areaforfriend" id="${friend._id}">
             <div class="peoples">
-                <div class="profileimage" data-user-id="${friend.senderId._id}" style="background-image: url('https://treasure-tracker-pi.vercel.app/${friend.senderId.profilePicture?.replace(/\\/g, '/')}')"></div>
+                <div class="profileimage" data-user-id="${friend.senderId._id}" style="background-image: url('https://treasuretracker.onrender.com/${friend.senderId.profilePicture?.replace(/\\/g, '/')}')"></div>
                     <p class="namearea">${friend.senderId.fname} ${friend.senderId.lname}</p>
                     </div>
                     <div class="forclearing">
@@ -214,7 +214,7 @@ friendlist.addEventListener('click', async (event) => {
     if (event.target.closest('.unfriend')) {
         try {
             (async () => {
-                const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/removefriend`, {
+                const response = await fetch(`https://treasuretracker.onrender.com/api/v1/removefriend`, {
                     method: "DELETE",
                     headers: {
                         "Content-Type": "application/json"
@@ -239,7 +239,7 @@ friendlist.addEventListener('click', async (event) => {
         const receiverId = friendId
         try {
             (async () => {
-                const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/sendfriendrequest`, {
+                const response = await fetch(`https://treasuretracker.onrender.com/api/v1/sendfriendrequest`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -262,7 +262,7 @@ friendlist.addEventListener('click', async (event) => {
         const receiverId = friendId
         try {
             (async () => {
-                const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/cancelrequest`, {
+                const response = await fetch(`https://treasuretracker.onrender.com/api/v1/cancelrequest`, {
                     method: "DELETE",
                     headers: {
                         "Content-Type": "application/json"
@@ -305,7 +305,7 @@ pendinglist.addEventListener('click', async (event) => {
     if (event.target.closest('.confirmfriendrequest')) {
         try {
             (async () => {
-                const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/respondfriendrequest`, {
+                const response = await fetch(`https://treasuretracker.onrender.com/api/v1/respondfriendrequest`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -330,7 +330,7 @@ pendinglist.addEventListener('click', async (event) => {
     else if (event.target.closest('.cancelfriendrequest')) {
         try {
             (async () => {
-                const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/cancelrequest`, {
+                const response = await fetch(`https://treasuretracker.onrender.com/api/v1/cancelrequest`, {
                     method: "DELETE",
                     headers: {
                         "Content-Type": "application/json"
@@ -392,7 +392,7 @@ notification.addEventListener('click', async (e) => {
 
 const createConversations = async (receiverId) => {
     try {
-        const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/createConversations`, {
+        const response = await fetch(`https://treasuretracker.onrender.com/api/v1/createConversations`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

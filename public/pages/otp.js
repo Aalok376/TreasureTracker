@@ -27,7 +27,7 @@ verify.addEventListener('submit', async (e) => {
     }
 
     try {
-        const response = await fetch("https://treasure-tracker-pi.vercel.app/api/v1/verifyOtp", {
+        const response = await fetch("https://treasuretracker.onrender.com/api/v1/verifyOtp", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -57,7 +57,7 @@ resend.addEventListener('click',async(e)=>{
     startResetTimer(60);
 
     try{
-        const response=await fetch("https://treasure-tracker-pi.vercel.app/api/v1/signup",{
+        const response=await fetch("https://treasuretracker.onrender.com/api/v1/signup",{
             method:"POST",
             headers:{
                 "Content-Type":"application/json",

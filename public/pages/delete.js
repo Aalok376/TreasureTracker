@@ -8,7 +8,7 @@ const cancelbtn = document.querySelector('#btncancel')
 
 const getProfilepic = async () => {
     try {
-        const response = await fetch("https://treasure-tracker-pi.vercel.app/api/v1/profile");
+        const response = await fetch("https://treasuretracker.onrender.com/api/v1/profile");
         const data = await response.json();
 
         const profiles = Array.isArray(data) ? data : [data];
@@ -16,7 +16,7 @@ const getProfilepic = async () => {
         document.querySelector('.userr').textContent = 'Username: ' + profiles[0].user.fname + ' ' + profiles[0].user.lname
 
         ownprofile2.innerHTML = profiles.map(profile => `
-            <a href="profile.html" class="profile" style="background-image: url('https://treasure-tracker-pi.vercel.app/${profile.user?.profilePicture?.replace(/\\/g, '/')}')"></a>
+            <a href="profile.html" class="profile" style="background-image: url('https://treasuretracker.onrender.com/${profile.user?.profilePicture?.replace(/\\/g, '/')}')"></a>
         `).join('');
     } catch (error) {
         console.error("Error fetching profile picture:", error);
@@ -37,7 +37,7 @@ continuebtn.addEventListener('click',async(e)=>{
     const password=document.querySelector('#confirmation-input').value
 
     try {
-        const response = await fetch("https://treasure-tracker-pi.vercel.app/api/v1/delete", {
+        const response = await fetch("https://treasuretracker.onrender.com/api/v1/delete", {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -83,7 +83,7 @@ logoutUser.addEventListener('click', async (e) => {
 
     try {
 
-        const response = await fetch('https://treasure-tracker-pi.vercel.app/api/v1/logout')
+        const response = await fetch('https://treasuretracker.onrender.com/api/v1/logout')
 
         const data = await response.json()
 

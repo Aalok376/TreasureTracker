@@ -14,7 +14,7 @@ messagebtn.addEventListener('click',async(e)=>{
     }
 
     try {
-        const response = await fetch("https://treasure-tracker-pi.vercel.app/api/v1/contactwithus", {
+        const response = await fetch("https://treasuretracker.onrender.com/api/v1/contactwithus", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

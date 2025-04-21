@@ -22,7 +22,7 @@ let conversationId
 const getConversations = async () => {
     try {
 
-        const response = await fetch('https://treasure-tracker-pi.vercel.app/api/v1/getConversations')
+        const response = await fetch('https://treasuretracker.onrender.com/api/v1/getConversations')
 
         const data = await response.json()
         console.log(data)
@@ -35,7 +35,7 @@ const getConversations = async () => {
 
 const createConversations = async (receiverId, message) => {
     try {
-        const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/sendMessage`, {
+        const response = await fetch(`https://treasuretracker.onrender.com/api/v1/sendMessage`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -61,7 +61,7 @@ const setConversations = async (data) => {
         if (data.length > 0) {
             conversations.innerHTML = data.map(dat => `
             <div class="contact" id=${dat._id}>    
-                <div class="profileimage" style="background-image: url('https://treasure-tracker-pi.vercel.app/${dat.otherParticipant?.profilePicture?.replace(/\\/g, '/')}')"></div>
+                <div class="profileimage" style="background-image: url('https://treasuretracker.onrender.com/${dat.otherParticipant?.profilePicture?.replace(/\\/g, '/')}')"></div>
                 <div class="placeforname">${dat.otherParticipant?.fname} ${dat.otherParticipant?.lname}</div>
             </div>
             `).join(' ')
@@ -83,7 +83,7 @@ conversations.addEventListener('click', async (event) => {
     try {
         messagemapping.innerHTML = ''
 
-        const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/getMessage/${conversationId}`)
+        const response = await fetch(`https://treasuretracker.onrender.com/api/v1/getMessage/${conversationId}`)
         const data = await response.json()
 
         userId = data.userId
@@ -112,7 +112,7 @@ const getHeaderOfmessage = async (otherParticipant) => {
     const messageHeader = messageContainer.querySelector('.navbar')
 
     messageHeader.innerHTML = `
-        <div class="navprofileimg" id=${otherParticipant._id} style="background-image: url('https://treasure-tracker-pi.vercel.app/${otherParticipant?.profilePicture?.replace(/\\/g, '/')}')"></div>
+        <div class="navprofileimg" id=${otherParticipant._id} style="background-image: url('https://treasuretracker.onrender.com/${otherParticipant?.profilePicture?.replace(/\\/g, '/')}')"></div>
         <div class="navplaceforname">${otherParticipant?.fname} ${otherParticipant?.lname}</div>
     `
 }
@@ -254,7 +254,7 @@ messagemapping.addEventListener('click', async (event) => {
 const editMessage = async (messageId, conversationId, newMessageText) => {
 
     try {
-        const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/editMessage`, {
+        const response = await fetch(`https://treasuretracker.onrender.com/api/v1/editMessage`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -274,7 +274,7 @@ const editMessage = async (messageId, conversationId, newMessageText) => {
 const deleteMessage = async (messageId, conversationId) => {
 
     try {
-        const response = await fetch(`https://treasure-tracker-pi.vercel.app/api/v1/removeMessage/${conversationId}/${messageId}`, {
+        const response = await fetch(`https://treasuretracker.onrender.com/api/v1/removeMessage/${conversationId}/${messageId}`, {
             method: "DELETE",
 
         })

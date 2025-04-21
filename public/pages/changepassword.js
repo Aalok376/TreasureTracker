@@ -13,13 +13,13 @@ const logoutUser = document.querySelector('.lgu')
 
 const getProfilepic = async () => {
     try {
-        const response = await fetch("https://treasure-tracker-pi.vercel.app/api/v1/profile");
+        const response = await fetch("https://treasuretracker.onrender.com/api/v1/profile");
         const data = await response.json();
 
         const profiles = Array.isArray(data) ? data : [data];
 
         ownprofile2.innerHTML = profiles.map(profile => `
-            <a href="profile.html" class="profile" style="background-image: url('https://treasure-tracker-pi.vercel.app/${profile.user?.profilePicture?.replace(/\\/g, '/')}')"></a>
+            <a href="profile.html" class="profile" style="background-image: url('https://treasuretracker.onrender.com/${profile.user?.profilePicture?.replace(/\\/g, '/')}')"></a>
         `).join('');
     } catch (error) {
         console.error("Error fetching profile picture:", error);
@@ -42,7 +42,7 @@ cbutton.addEventListener('click', async (e) => {
     }
 
     try {
-        const response = await fetch("https://treasure-tracker-pi.vercel.app/api/v1/check", {
+        const response = await fetch("https://treasuretracker.onrender.com/api/v1/check", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -54,7 +54,7 @@ cbutton.addEventListener('click', async (e) => {
 
         if (response.status === 200) {
             try {
-                const response = await fetch("https://treasure-tracker-pi.vercel.app/api/v1/update", {
+                const response = await fetch("https://treasuretracker.onrender.com/api/v1/update", {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
@@ -117,7 +117,7 @@ logoutUser.addEventListener('click', async (e) => {
 
     try {
 
-        const response = await fetch('https://treasure-tracker-pi.vercel.app/api/v1/logout')
+        const response = await fetch('https://treasuretracker.onrender.com/api/v1/logout')
 
         const data = await response.json()
 

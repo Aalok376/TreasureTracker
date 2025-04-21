@@ -14,13 +14,13 @@ startResetTimer(60)
 
 const getProfilepic = async () => {
     try {
-        const response = await fetch("http://localhost:5000/api/v1/profile");
+        const response = await fetch("https://treasuretracker.onrender.com/api/v1/profile");
         const data = await response.json();
 
         const profiles = Array.isArray(data) ? data : [data];
 
         ownprofile2.innerHTML = profiles.map(profile => `
-            <a href="profile.html" class="profile" style="background-image: url('http://localhost:5000/${profile.user?.profilePicture?.replace(/\\/g, '/')}')"></a>
+            <a href="profile.html" class="profile" style="background-image: url('https://treasuretracker.onrender.com/${profile.user?.profilePicture?.replace(/\\/g, '/')}')"></a>
         `).join('');
     } catch (error) {
         console.error("Error fetching profile picture:", error);
@@ -47,7 +47,7 @@ verify.addEventListener('submit', async (e) => {
     }
 
     try {
-        const response = await fetch("http://localhost:5000/api/v1/verifyotptoupdate", {
+        const response = await fetch("https://treasuretracker.onrender.com/api/v1/verifyotptoupdate", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -76,7 +76,7 @@ resend.addEventListener('click',async(e)=>{
     startResetTimer(60);
 
     try{
-        const response=await fetch("http://localhost:5000/api/v1/signup",{
+        const response=await fetch("https://treasuretracker.onrender.com/api/v1/signup",{
             method:"POST",
             headers:{
                 "Content-Type":"application/json",
@@ -138,7 +138,7 @@ logoutUser.addEventListener('click', async (e) => {
 
     try {
 
-        const response = await fetch('http://localhost:5000/api/v1/logout')
+        const response = await fetch('https://treasuretracker.onrender.com/api/v1/logout')
 
         const data = await response.json()
 
