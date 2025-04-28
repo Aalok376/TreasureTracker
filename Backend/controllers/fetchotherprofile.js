@@ -5,10 +5,10 @@ const path=require('path');
 const serveOtherProfile=async(req,res)=>{
 
     if(req.params.userId===req.user.id){
-        res.sendFile(path.join(__dirname, '..', 'public','pages', 'profile.html'));
+        res.sendFile(path.join(__dirname, '..','..','public','pages', 'profile.html'));
     }
     else{
-        res.sendFile(path.join(__dirname, '..', 'public','pages', 'userprofile.html'));
+        res.sendFile(path.join(__dirname, '..','..','public','pages', 'userprofile.html'));
     }
 }
 
